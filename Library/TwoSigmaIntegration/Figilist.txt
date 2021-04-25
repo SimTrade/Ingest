@@ -1,0 +1,5211 @@
+[ {
+  "instrumentId" : "BBG006Q0HY77",
+  "name" : "CITIZENS FINANCIAL GROUP",
+  "ticker" : "CFG",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG005C4XHR3",
+  "name" : "ELEMENT SOLUTIONS INC",
+  "ticker" : "ESI",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BR37X2",
+  "name" : "PROGRESSIVE CORP",
+  "ticker" : "PGR",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG001D8R5D0",
+  "name" : "XYLEM INC",
+  "ticker" : "XYL",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BLBVN4",
+  "name" : "BOOKING HOLDINGS INC",
+  "ticker" : "BKNG",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000Q0SZJ2",
+  "name" : "LOGMEIN INC",
+  "ticker" : "LOGM",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000CTQBF3",
+  "name" : "STARBUCKS CORP",
+  "ticker" : "SBUX",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000KKVD81",
+  "name" : "LENNAR CORP - B SHS",
+  "ticker" : "LEN.B",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BH0FR6",
+  "name" : "SEATTLE GENETICS INC",
+  "ticker" : "SGEN",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000QCCGH7",
+  "name" : "COLUMBIA PROPERTY TRUST INC",
+  "ticker" : "CXP",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BL8804",
+  "name" : "HOST HOTELS & RESORTS INC",
+  "ticker" : "HST",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG004MN1R41",
+  "name" : "NAVIENT CORP",
+  "ticker" : "NAVI",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG001NDW1Z7",
+  "name" : "NUTANIX INC - A",
+  "ticker" : "NTNX",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG003PHHZT1",
+  "name" : "MODERNA INC",
+  "ticker" : "MRNA",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BPNP00",
+  "name" : "MAXIM INTEGRATED PRODUCTS",
+  "ticker" : "MXIM",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000QY3XZ2",
+  "name" : "EXPEDIA GROUP INC",
+  "ticker" : "EXPE",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000CGC9C4",
+  "name" : "ISHARES RUSSELL 2000 ETF",
+  "ticker" : "IWM",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000C2VBB0",
+  "name" : "PTC INC",
+  "ticker" : "PTC",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BF0K17",
+  "name" : "CATERPILLAR INC",
+  "ticker" : "CAT",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG001HRFJG4",
+  "name" : "ZENDESK INC",
+  "ticker" : "ZEN",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG002832GV8",
+  "name" : "PBF ENERGY INC-CLASS A",
+  "ticker" : "PBF",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000PXZFW2",
+  "name" : "WESTLAKE CHEMICAL CORP",
+  "ticker" : "WLK",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BW8S60",
+  "name" : "UNITED TECHNOLOGIES CORP",
+  "ticker" : "UTX",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000C2V3D6",
+  "name" : "AGILENT TECHNOLOGIES INC",
+  "ticker" : "A",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000J094P3",
+  "name" : "RINGCENTRAL INC-CLASS A",
+  "ticker" : "RNG",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000FVXD63",
+  "name" : "RANGE RESOURCES CORP",
+  "ticker" : "RRC",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000N746D6",
+  "name" : "E*TRADE FINANCIAL CORP",
+  "ticker" : "ETFC",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BJSBJ0",
+  "name" : "NEXTERA ENERGY INC",
+  "ticker" : "NEE",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BBCDZ2",
+  "name" : "ROCKWELL AUTOMATION INC",
+  "ticker" : "ROK",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000DKCC19",
+  "name" : "TYSON FOODS INC-CL A",
+  "ticker" : "TSN",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BGD7W6",
+  "name" : "MARRIOTT INTERNATIONAL -CL A",
+  "ticker" : "MAR",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000CL1FG7",
+  "name" : "BRUKER CORP",
+  "ticker" : "BRKR",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BZJQL8",
+  "name" : "INTEGRA LIFESCIENCES HOLDING",
+  "ticker" : "IART",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000GJS7C1",
+  "name" : "NEUROCRINE BIOSCIENCES INC",
+  "ticker" : "NBIX",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BSLZY7",
+  "name" : "SCHWAB (CHARLES) CORP",
+  "ticker" : "SCHW",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BQQ2S6",
+  "name" : "OCCIDENTAL PETROLEUM CORP",
+  "ticker" : "OXY",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BNWG87",
+  "name" : "MEDTRONIC PLC",
+  "ticker" : "MDT",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BS5DR2",
+  "name" : "ROBERT HALF INTL INC",
+  "ticker" : "RHI",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000C0ZW33",
+  "name" : "UMPQUA HOLDINGS CORP",
+  "ticker" : "UMPQ",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000L5CJF3",
+  "name" : "XPO LOGISTICS INC",
+  "ticker" : "XPO",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BG7423",
+  "name" : "CRANE CO",
+  "ticker" : "CR",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BDHD29",
+  "name" : "UNIVAR SOLUTIONS INC",
+  "ticker" : "UNVR",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00MRHG523",
+  "name" : "STERIS PLC",
+  "ticker" : "STE",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG0077VNXV6",
+  "name" : "PAYPAL HOLDINGS INC",
+  "ticker" : "PYPL",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG00GBVBK51",
+  "name" : "BAKER HUGHES CO",
+  "ticker" : "BKR",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG001KY3845",
+  "name" : "ALLISON TRANSMISSION HOLDING",
+  "ticker" : "ALSN",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BCZYD3",
+  "name" : "BECTON DICKINSON AND CO",
+  "ticker" : "BDX",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG00BN961G4",
+  "name" : "DUPONT DE NEMOURS INC",
+  "ticker" : "DD",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000CL9VN6",
+  "name" : "NETFLIX INC",
+  "ticker" : "NFLX",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000DYGNW7",
+  "name" : "MCKESSON CORP",
+  "ticker" : "MCK",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BYYLS8",
+  "name" : "BB&T CORP",
+  "ticker" : "BBT",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BNNYW1",
+  "name" : "MATTEL INC",
+  "ticker" : "MAT",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000H01H92",
+  "name" : "AMC NETWORKS INC-A",
+  "ticker" : "AMCX",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BDTBL9",
+  "name" : "SPDR S&P 500 ETF TRUST",
+  "ticker" : "SPY",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000BJ10N8",
+  "name" : "CONSUMER STAPLES SPDR",
+  "ticker" : "XLP",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000BS73J1",
+  "name" : "RAYMOND JAMES FINANCIAL INC",
+  "ticker" : "RJF",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BGB482",
+  "name" : "SPDR S&P OIL & GAS EXP & PR",
+  "ticker" : "XOP",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG001R72SR9",
+  "name" : "UBIQUITI INC",
+  "ticker" : "UI",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000F1ZSN5",
+  "name" : "ROPER TECHNOLOGIES INC",
+  "ticker" : "ROP",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00DW3SZS1",
+  "name" : "DELL TECHNOLOGIES -C",
+  "ticker" : "DELL",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BFLXV3",
+  "name" : "PILGRIM'S PRIDE CORP",
+  "ticker" : "PPC",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG0027Z6X10",
+  "name" : "SPIRIT REALTY CAPITAL INC",
+  "ticker" : "SRC",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BF6756",
+  "name" : "CROWN HOLDINGS INC",
+  "ticker" : "CCK",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BVVQQ8",
+  "name" : "TEXTRON INC",
+  "ticker" : "TXT",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000FV1Z23",
+  "name" : "CROWN CASTLE INTL CORP",
+  "ticker" : "CCI",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BFDLV8",
+  "name" : "CERNER CORP",
+  "ticker" : "CERN",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG002WMH2F2",
+  "name" : "SERVICEMASTER GLOBAL HOLDING",
+  "ticker" : "SERV",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000GPXKX9",
+  "name" : "FLEETCOR TECHNOLOGIES INC",
+  "ticker" : "FLT",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG00BLVZ228",
+  "name" : "FORTIVE CORP",
+  "ticker" : "FTV",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BN5HF7",
+  "name" : "LENNAR CORP-A",
+  "ticker" : "LEN",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000B9X8C0",
+  "name" : "AMEREN CORPORATION",
+  "ticker" : "AEE",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000L2Q7C4",
+  "name" : "KOSMOS ENERGY LTD",
+  "ticker" : "KOS",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000DZJVH0",
+  "name" : "NEXSTAR MEDIA GROUP INC-CL A",
+  "ticker" : "NXST",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BQHGR6",
+  "name" : "ONEOK INC",
+  "ticker" : "OKE",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG006G063F9",
+  "name" : "IHS MARKIT LTD",
+  "ticker" : "INFO",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BNSZP1",
+  "name" : "MCDONALD'S CORP",
+  "ticker" : "MCD",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG00LT2PDY4",
+  "name" : "BROOKFIELD PROPERTY REIT I-A",
+  "ticker" : "BPR",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000H6K1B0",
+  "name" : "PENSKE AUTOMOTIVE GROUP INC",
+  "ticker" : "PAG",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000TGLV00",
+  "name" : "ECHOSTAR CORP-A",
+  "ticker" : "SATS",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BGRY34",
+  "name" : "CVS HEALTH CORP",
+  "ticker" : "CVS",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000VMWHH5",
+  "name" : "DISCOVERY INC-C",
+  "ticker" : "DISCK",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000H1RYG7",
+  "name" : "PEGASYSTEMS INC",
+  "ticker" : "PEGA",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000QW7VC1",
+  "name" : "HCA HEALTHCARE INC",
+  "ticker" : "HCA",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000DN4ZT1",
+  "name" : "TEXAS CAPITAL BANCSHARES INC",
+  "ticker" : "TCBI",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BDJL83",
+  "name" : "FACTSET RESEARCH SYSTEMS INC",
+  "ticker" : "FDS",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG0017T9998",
+  "name" : "CAESARS ENTERTAINMENT CORP",
+  "ticker" : "CZR",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BB8SW7",
+  "name" : "PACKAGING CORP OF AMERICA",
+  "ticker" : "PKG",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG00FGXCJX5",
+  "name" : "PARK HOTELS & RESORTS INC",
+  "ticker" : "PK",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BQW085",
+  "name" : "HAIN CELESTIAL GROUP INC",
+  "ticker" : "HAIN",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000C41023",
+  "name" : "UDR INC",
+  "ticker" : "UDR",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BWQLY4",
+  "name" : "PACWEST BANCORP",
+  "ticker" : "PACW",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000L9CV04",
+  "name" : "UNITED PARCEL SERVICE-CL B",
+  "ticker" : "UPS",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BT7JW9",
+  "name" : "SNAP-ON INC",
+  "ticker" : "SNA",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BX3TD3",
+  "name" : "UNITED STATES STEEL CORP",
+  "ticker" : "X",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BBHXQ3",
+  "name" : "ARTHUR J GALLAGHER & CO",
+  "ticker" : "AJG",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BM9RH1",
+  "name" : "COPART INC",
+  "ticker" : "CPRT",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00B8N0HG1",
+  "name" : "YUM CHINA HOLDINGS INC",
+  "ticker" : "YUMC",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG00F5FNKJ7",
+  "name" : "JBG SMITH PROPERTIES",
+  "ticker" : "JBGS",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000QH56C1",
+  "name" : "CBOE GLOBAL MARKETS INC",
+  "ticker" : "CBOE",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BFVZ83",
+  "name" : "RENAISSANCERE HOLDINGS LTD",
+  "ticker" : "RNR",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BC15S7",
+  "name" : "AON PLC",
+  "ticker" : "AON",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG007TJF1N7",
+  "name" : "QORVO INC",
+  "ticker" : "QRVO",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG00B8NWRF5",
+  "name" : "AVANGRID INC",
+  "ticker" : "AGR",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BJ8YN7",
+  "name" : "FASTENAL CO",
+  "ticker" : "FAST",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BRMJN6",
+  "name" : "AQUA AMERICA INC",
+  "ticker" : "WTR",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000C0G1D1",
+  "name" : "INTEL CORP",
+  "ticker" : "INTC",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BQPC32",
+  "name" : "FORD MOTOR CO",
+  "ticker" : "F",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG00DYNJGH9",
+  "name" : "ARCONIC INC",
+  "ticker" : "ARNC",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG002R1CW27",
+  "name" : "GARDNER DENVER HOLDINGS INC",
+  "ticker" : "GDI",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BB5B84",
+  "name" : "LENNOX INTERNATIONAL INC",
+  "ticker" : "LII",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00B3T3HD3",
+  "name" : "ALCOA CORP",
+  "ticker" : "AA",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG00KHY5S69",
+  "name" : "BROADCOM INC",
+  "ticker" : "AVGO",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BWSV34",
+  "name" : "WHIRLPOOL CORP",
+  "ticker" : "WHR",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BGPVW0",
+  "name" : "TAUBMAN CENTERS INC",
+  "ticker" : "TCO",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000VZHLL9",
+  "name" : "KAR AUCTION SERVICES INC",
+  "ticker" : "KAR",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000RQ2GY7",
+  "name" : "PROOFPOINT INC",
+  "ticker" : "PFPT",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BJKPG0",
+  "name" : "FISERV INC",
+  "ticker" : "FISV",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BQHTV3",
+  "name" : "OLIN CORP",
+  "ticker" : "OLN",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG00HCY3Q67",
+  "name" : "WYNDHAM HOTELS & RESORTS INC",
+  "ticker" : "WH",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG005D7PF34",
+  "name" : "CERIDIAN HCM HOLDING INC",
+  "ticker" : "CDAY",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BKFZM4",
+  "name" : "CORNING INC",
+  "ticker" : "GLW",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000K4ND22",
+  "name" : "CHEVRON CORP",
+  "ticker" : "CVX",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BQBYR3",
+  "name" : "NVR INC",
+  "ticker" : "NVR",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG00FQH6BS9",
+  "name" : "INVITATION HOMES INC",
+  "ticker" : "INVH",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BSQLT9",
+  "name" : "SEI INVESTMENTS COMPANY",
+  "ticker" : "SEIC",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BK6MB5",
+  "name" : "GENERAL ELECTRIC CO",
+  "ticker" : "GE",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BB6KF5",
+  "name" : "METLIFE INC",
+  "ticker" : "MET",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BH1NH9",
+  "name" : "DEERE & CO",
+  "ticker" : "DE",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BWBZN1",
+  "name" : "VARIAN MEDICAL SYSTEMS INC",
+  "ticker" : "VAR",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BCQ4P6",
+  "name" : "AVERY DENNISON CORP",
+  "ticker" : "AVY",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000KLB4Q1",
+  "name" : "SKYWORKS SOLUTIONS INC",
+  "ticker" : "SWKS",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG00JHNKJY8",
+  "name" : "FOX CORP - CLASS B",
+  "ticker" : "FOX",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BNBPQ0",
+  "name" : "LEGG MASON INC",
+  "ticker" : "LM",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BSRN78",
+  "name" : "NORWEGIAN CRUISE LINE HOLDIN",
+  "ticker" : "NCLH",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000C8H633",
+  "name" : "MARATHON OIL CORP",
+  "ticker" : "MRO",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000DCCZW2",
+  "name" : "AGCO CORP",
+  "ticker" : "AGCO",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BF3G77",
+  "name" : "COMMERCE BANCSHARES INC",
+  "ticker" : "CBSH",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BQ8KV2",
+  "name" : "NUCOR CORP",
+  "ticker" : "NUE",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000QY4ZD0",
+  "name" : "AGIOS PHARMACEUTICALS INC",
+  "ticker" : "AGIO",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BSBBP1",
+  "name" : "ROLLINS INC",
+  "ticker" : "ROL",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG0019JZ882",
+  "name" : "KINDER MORGAN INC",
+  "ticker" : "KMI",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BB6MM3",
+  "name" : "WABCO HOLDINGS INC",
+  "ticker" : "WBC",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BQWPC5",
+  "name" : "P G & E CORP",
+  "ticker" : "PCG",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BLMY92",
+  "name" : "MID-AMERICA APARTMENT COMM",
+  "ticker" : "MAA",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BR2B91",
+  "name" : "PFIZER INC",
+  "ticker" : "PFE",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BX8DC4",
+  "name" : "FOOT LOCKER INC",
+  "ticker" : "FL",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BWQFY7",
+  "name" : "WELLS FARGO & CO",
+  "ticker" : "WFC",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000B9XYV2",
+  "name" : "AMERICAN TOWER CORP",
+  "ticker" : "AMT",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000P2TYL8",
+  "name" : "LPL FINANCIAL HOLDINGS INC",
+  "ticker" : "LPLA",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000F395V1",
+  "name" : "COTY INC-CL A",
+  "ticker" : "COTY",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BFXHL6",
+  "name" : "MOSAIC CO/THE",
+  "ticker" : "MOS",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000GMDMK8",
+  "name" : "GENESEE & WYOMING INC-CL A",
+  "ticker" : "GWR",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000CC7LQ7",
+  "name" : "ZEBRA TECHNOLOGIES CORP-CL A",
+  "ticker" : "ZBRA",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BG5BL8",
+  "name" : "CHARLES RIVER LABORATORIES",
+  "ticker" : "CRL",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000R8ZVD1",
+  "name" : "LULULEMON ATHLETICA INC",
+  "ticker" : "LULU",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BF3WW4",
+  "name" : "CABOT CORP",
+  "ticker" : "CBT",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BHCYJ1",
+  "name" : "NEKTAR THERAPEUTICS",
+  "ticker" : "NKTR",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG004T0YC41",
+  "name" : "SANTANDER CONSUMER USA HOLDI",
+  "ticker" : "SC",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BGZT72",
+  "name" : "ALTERYX INC - CLASS A",
+  "ticker" : "AYX",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG001BP92V1",
+  "name" : "PENUMBRA INC",
+  "ticker" : "PEN",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000C1FB75",
+  "name" : "INTERCONTINENTAL EXCHANGE IN",
+  "ticker" : "ICE",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000QBR5J5",
+  "name" : "DISCOVER FINANCIAL SERVICES",
+  "ticker" : "DFS",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BGPTV6",
+  "name" : "CUMMINS INC",
+  "ticker" : "CMI",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00629NGT2",
+  "name" : "TRADE DESK INC/THE -CLASS A",
+  "ticker" : "TTD",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BJF1Z8",
+  "name" : "FEDEX CORP",
+  "ticker" : "FDX",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000FQRVM3",
+  "name" : "WATERS CORP",
+  "ticker" : "WAT",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000FJH8W0",
+  "name" : "HANOVER INSURANCE GROUP INC/",
+  "ticker" : "THG",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000C75N77",
+  "name" : "COMERICA INC",
+  "ticker" : "CMA",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG001NY45K9",
+  "name" : "WPX ENERGY INC",
+  "ticker" : "WPX",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000DW76Y6",
+  "name" : "FAIR ISAAC CORP",
+  "ticker" : "FICO",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BJ81C1",
+  "name" : "TRAVELERS COS INC/THE",
+  "ticker" : "TRV",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000PTLGZ1",
+  "name" : "LEAR CORP",
+  "ticker" : "LEA",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000CLVM51",
+  "name" : "WELLCARE HEALTH PLANS INC",
+  "ticker" : "WCG",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000CX0P89",
+  "name" : "GLOBAL PAYMENTS INC",
+  "ticker" : "GPN",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BWZBT2",
+  "name" : "WEINGARTEN REALTY INVESTORS",
+  "ticker" : "WRI",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BJB6R0",
+  "name" : "TENNECO INC-CLASS A",
+  "ticker" : "TEN",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BG3445",
+  "name" : "COOPER COS INC/THE",
+  "ticker" : "COO",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG002PHSYX9",
+  "name" : "DIAMONDBACK ENERGY INC",
+  "ticker" : "FANG",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BPQD31",
+  "name" : "MYLAN NV",
+  "ticker" : "MYL",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BKWSR6",
+  "name" : "HUNTINGTON BANCSHARES INC",
+  "ticker" : "HBAN",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG00DXDL6Q1",
+  "name" : "VISTRA ENERGY CORP",
+  "ticker" : "VST",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BHLYP4",
+  "name" : "CME GROUP INC",
+  "ticker" : "CME",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG002Q7J5Z1",
+  "name" : "TRANSUNION",
+  "ticker" : "TRU",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000H8LGK2",
+  "name" : "MEDNAX INC",
+  "ticker" : "MD",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BDDNH5",
+  "name" : "BALL CORP",
+  "ticker" : "BLL",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000Q8RVM1",
+  "name" : "ISHARES CHINA LARGE-CAP ETF",
+  "ticker" : "FXI",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000VC0T95",
+  "name" : "WORKDAY INC-CLASS A",
+  "ticker" : "WDAY",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000D4LWF6",
+  "name" : "MONDELEZ INTERNATIONAL INC-A",
+  "ticker" : "MDLZ",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BTCH57",
+  "name" : "C.H. ROBINSON WORLDWIDE INC",
+  "ticker" : "CHRW",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000V78V75",
+  "name" : "FIRST AMERICAN FINANCIAL",
+  "ticker" : "FAF",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000G0Z878",
+  "name" : "HARTFORD FINANCIAL SVCS GRP",
+  "ticker" : "HIG",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG0015XMW40",
+  "name" : "TARGA RESOURCES CORP",
+  "ticker" : "TRGP",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG0055XMF02",
+  "name" : "EXTENDED STAY AMERICA INC",
+  "ticker" : "STAY",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000VPGNR2",
+  "name" : "CHARTER COMMUNICATIONS INC-A",
+  "ticker" : "CHTR",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000B9XG87",
+  "name" : "AMETEK INC",
+  "ticker" : "AME",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BGKTF9",
+  "name" : "CAPITAL ONE FINANCIAL CORP",
+  "ticker" : "COF",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG00KXRCDP0",
+  "name" : "CIGNA CORP",
+  "ticker" : "CI",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG0038V5TX1",
+  "name" : "CYRUSONE INC",
+  "ticker" : "CONE",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BCFXT0",
+  "name" : "AMERCO",
+  "ticker" : "UHAL",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG009H04M17",
+  "name" : "PLANET FITNESS INC - CL A",
+  "ticker" : "PLNT",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BJL3N0",
+  "name" : "FIFTH THIRD BANCORP",
+  "ticker" : "FITB",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BB2KN0",
+  "name" : "LANDSTAR SYSTEM INC",
+  "ticker" : "LSTR",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BPWXK1",
+  "name" : "NEWMONT GOLDCORP CORP",
+  "ticker" : "NEM",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000QGWY50",
+  "name" : "BLUEBIRD BIO INC",
+  "ticker" : "BLUE",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000JYP7L8",
+  "name" : "CELANESE CORP",
+  "ticker" : "CE",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000MDCQC2",
+  "name" : "AMERISOURCEBERGEN CORP",
+  "ticker" : "ABC",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BCWKD6",
+  "name" : "VOYA FINANCIAL INC",
+  "ticker" : "VOYA",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000DY28W5",
+  "name" : "BIO-RAD LABORATORIES-A",
+  "ticker" : "BIO",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG00MMDJG84",
+  "name" : "CERENCE INC",
+  "ticker" : "CRNC",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BVWLJ6",
+  "name" : "JOHNSON CONTROLS INTERNATION",
+  "ticker" : "JCI",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000TVRB50",
+  "name" : "LENDINGTREE INC",
+  "ticker" : "TREE",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BPD168",
+  "name" : "MERCK & CO. INC.",
+  "ticker" : "MRK",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BNC3Y9",
+  "name" : "LINCOLN NATIONAL CORP",
+  "ticker" : "LNC",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000PN1SJ8",
+  "name" : "DOUGLAS EMMETT INC",
+  "ticker" : "DEI",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BHLYS1",
+  "name" : "CONSOLIDATED EDISON INC",
+  "ticker" : "ED",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BNPSQ9",
+  "name" : "INCYTE CORP",
+  "ticker" : "INCY",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000PSKYX7",
+  "name" : "VISA INC-CLASS A SHARES",
+  "ticker" : "V",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BNNKG9",
+  "name" : "MASCO CORP",
+  "ticker" : "MAS",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BSZYR3",
+  "name" : "EPR PROPERTIES",
+  "ticker" : "EPR",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG00JHNJW99",
+  "name" : "FOX CORP - CLASS A",
+  "ticker" : "FOXA",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BH3GZ2",
+  "name" : "YUM! BRANDS INC",
+  "ticker" : "YUM",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000TJM7F0",
+  "name" : "KEURIG DR PEPPER INC",
+  "ticker" : "KDP",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BBJQV0",
+  "name" : "NVIDIA CORP",
+  "ticker" : "NVDA",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BKY1G5",
+  "name" : "WELLTOWER INC",
+  "ticker" : "WELL",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000M1R011",
+  "name" : "SERVICENOW INC",
+  "ticker" : "NOW",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG003CVMLQ2",
+  "name" : "LAMB WESTON HOLDINGS INC",
+  "ticker" : "LW",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG00286S4N9",
+  "name" : "PHILLIPS 66",
+  "ticker" : "PSX",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BLZRJ2",
+  "name" : "MORGAN STANLEY",
+  "ticker" : "MS",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BLGFJ9",
+  "name" : "L3HARRIS TECHNOLOGIES INC",
+  "ticker" : "LHX",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG001KY4N87",
+  "name" : "ARAMARK",
+  "ticker" : "ARMK",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000PV27K3",
+  "name" : "EXTRA SPACE STORAGE INC",
+  "ticker" : "EXR",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000C0F570",
+  "name" : "XILINX INC",
+  "ticker" : "XLNX",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BGBTC2",
+  "name" : "OMEGA HEALTHCARE INVESTORS",
+  "ticker" : "OHI",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000FQ6PY6",
+  "name" : "CITRIX SYSTEMS INC",
+  "ticker" : "CTXS",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BXRPH1",
+  "name" : "PIONEER NATURAL RESOURCES CO",
+  "ticker" : "PXD",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BHBGN6",
+  "name" : "CONTINENTAL RESOURCES INC/OK",
+  "ticker" : "CLR",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000D0FNV3",
+  "name" : "WESCO INTERNATIONAL INC",
+  "ticker" : "WCC",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000F5VVB6",
+  "name" : "NASDAQ INC",
+  "ticker" : "NDAQ",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG0035M2ZB7",
+  "name" : "NEWS CORP - CLASS B",
+  "ticker" : "NWS",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000J6XT05",
+  "name" : "EXELON CORP",
+  "ticker" : "EXC",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BRNGM2",
+  "name" : "ATMOS ENERGY CORP",
+  "ticker" : "ATO",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000H3FZM6",
+  "name" : "STERICYCLE INC",
+  "ticker" : "SRCL",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000Q1KFH4",
+  "name" : "WESTERN ALLIANCE BANCORP",
+  "ticker" : "WAL",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BB5373",
+  "name" : "WESTERN UNION CO",
+  "ticker" : "WU",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000HD3DW5",
+  "name" : "WINTRUST FINANCIAL CORP",
+  "ticker" : "WTFC",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG0025Y4RY4",
+  "name" : "ABBVIE INC",
+  "ticker" : "ABBV",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG0033377Y3",
+  "name" : "HD SUPPLY HOLDINGS INC",
+  "ticker" : "HDS",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG006MDLY05",
+  "name" : "GODADDY INC - CLASS A",
+  "ticker" : "GDDY",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000DJN7L9",
+  "name" : "WATSCO INC",
+  "ticker" : "WSO",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BL16Q7",
+  "name" : "HEICO CORP",
+  "ticker" : "HEI",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG006GNSZW5",
+  "name" : "LIBERTY BROADBAND-C",
+  "ticker" : "LBRDK",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG001J4J8T9",
+  "name" : "VEREIT INC",
+  "ticker" : "VER",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG001P3K000",
+  "name" : "DUNKIN' BRANDS GROUP INC",
+  "ticker" : "DNKN",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000H556T9",
+  "name" : "HONEYWELL INTERNATIONAL INC",
+  "ticker" : "HON",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000C42VL3",
+  "name" : "LIFE STORAGE INC",
+  "ticker" : "LSI",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BB4D72",
+  "name" : "FLOWERS FOODS INC",
+  "ticker" : "FLO",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BHX7N2",
+  "name" : "EMERSON ELECTRIC CO",
+  "ticker" : "EMR",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BVYN55",
+  "name" : "UGI CORP",
+  "ticker" : "UGI",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000NDYB67",
+  "name" : "GENERAL MOTORS CO",
+  "ticker" : "GM",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000C1BW00",
+  "name" : "LOCKHEED MARTIN CORP",
+  "ticker" : "LMT",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG003CVJP50",
+  "name" : "BEYOND MEAT INC",
+  "ticker" : "BYND",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BG7L34",
+  "name" : "RAYONIER INC",
+  "ticker" : "RYN",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000KJP3V7",
+  "name" : "CANTEL MEDICAL CORP",
+  "ticker" : "CMD",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000DWG505",
+  "name" : "BERKSHIRE HATHAWAY INC-CL B",
+  "ticker" : "BRK.B",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BRQ6L2",
+  "name" : "JETBLUE AIRWAYS CORP",
+  "ticker" : "JBLU",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG0018SLC07",
+  "name" : "SQUARE INC - A",
+  "ticker" : "SQ",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BCJ161",
+  "name" : "SAREPTA THERAPEUTICS INC",
+  "ticker" : "SRPT",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000C2ZCH8",
+  "name" : "SEMPRA ENERGY",
+  "ticker" : "SRE",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000QX74T1",
+  "name" : "CHIPOTLE MEXICAN GRILL INC",
+  "ticker" : "CMG",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000N7KJX8",
+  "name" : "DOCUSIGN INC",
+  "ticker" : "DOCU",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BSWKH7",
+  "name" : "INVESCO QQQ TRUST SERIES 1",
+  "ticker" : "QQQ",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000BQGLS5",
+  "name" : "OGE ENERGY CORP",
+  "ticker" : "OGE",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BV59Y6",
+  "name" : "TELEFLEX INC",
+  "ticker" : "TFX",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG0064N0ZZ5",
+  "name" : "PAYCOM SOFTWARE INC",
+  "ticker" : "PAYC",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG00KMYC574",
+  "name" : "PLURALSIGHT INC - A",
+  "ticker" : "PS",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000HS77T5",
+  "name" : "VERIZON COMMUNICATIONS INC",
+  "ticker" : "VZ",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000F61RJ8",
+  "name" : "AECOM",
+  "ticker" : "ACM",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000R4Y9C1",
+  "name" : "AVALARA INC",
+  "ticker" : "AVLR",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000GTYWL7",
+  "name" : "QIAGEN N.V.",
+  "ticker" : "QGEN",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BJ7G75",
+  "name" : "UTILITIES SELECT SECTOR SPDR",
+  "ticker" : "XLU",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG0078W3NQ3",
+  "name" : "HEWLETT PACKARD ENTERPRISE",
+  "ticker" : "HPE",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BTHH16",
+  "name" : "SERVICE CORP INTERNATIONAL",
+  "ticker" : "SCI",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BKFBD7",
+  "name" : "STATE STREET CORP",
+  "ticker" : "STT",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000N7MZ06",
+  "name" : "HUBSPOT INC",
+  "ticker" : "HUBS",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG005CPNTQ2",
+  "name" : "KRAFT HEINZ CO/THE",
+  "ticker" : "KHC",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BNJHS8",
+  "name" : "SOUTHWEST AIRLINES CO",
+  "ticker" : "LUV",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00LJYS1P8",
+  "name" : "ELANCO ANIMAL HEALTH INC",
+  "ticker" : "ELAN",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BF0672",
+  "name" : "CASEY'S GENERAL STORES INC",
+  "ticker" : "CASY",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000FRVHB9",
+  "name" : "VENTAS INC",
+  "ticker" : "VTR",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BLJWF3",
+  "name" : "SUN COMMUNITIES INC",
+  "ticker" : "SUI",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BCQM58",
+  "name" : "WP CAREY INC",
+  "ticker" : "WPC",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BLNNH6",
+  "name" : "INTL BUSINESS MACHINES CORP",
+  "ticker" : "IBM",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BGGBT8",
+  "name" : "CARLISLE COS INC",
+  "ticker" : "CSL",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG001M8HHB7",
+  "name" : "TRIPADVISOR INC",
+  "ticker" : "TRIP",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000FFH4P5",
+  "name" : "FLOWSERVE CORP",
+  "ticker" : "FLS",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000FSMWC3",
+  "name" : "WILLIAMS-SONOMA INC",
+  "ticker" : "WSM",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BYWTX7",
+  "name" : "MARVELL TECHNOLOGY GROUP LTD",
+  "ticker" : "MRVL",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000GXZ4W7",
+  "name" : "ANSYS INC",
+  "ticker" : "ANSS",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000KHWT55",
+  "name" : "HP INC",
+  "ticker" : "HPQ",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BNPS52",
+  "name" : "TRIMBLE INC",
+  "ticker" : "TRMB",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG006GNRZ83",
+  "name" : "LIBERTY BROADBAND-A",
+  "ticker" : "LBRDA",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BP1152",
+  "name" : "CIENA CORP",
+  "ticker" : "CIEN",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BS1YV5",
+  "name" : "TAKE-TWO INTERACTIVE SOFTWRE",
+  "ticker" : "TTWO",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BFYB47",
+  "name" : "CNA FINANCIAL CORP",
+  "ticker" : "CNA",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000F4W0M4",
+  "name" : "SIX FLAGS ENTERTAINMENT CORP",
+  "ticker" : "SIX",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BD2NY8",
+  "name" : "BROWN-FORMAN CORP-CLASS B",
+  "ticker" : "BF.B",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000Q5ZRM7",
+  "name" : "DIGITAL REALTY TRUST INC",
+  "ticker" : "DLR",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG00DYPZ4T0",
+  "name" : "BRIGHTHOUSE FINANCIAL INC",
+  "ticker" : "BHF",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BNGTQ7",
+  "name" : "L BRANDS INC",
+  "ticker" : "LB",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BX9WL1",
+  "name" : "ZIONS BANCORP NA",
+  "ticker" : "ZION",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BMX289",
+  "name" : "COCA-COLA CO/THE",
+  "ticker" : "KO",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BZ9223",
+  "name" : "EOG RESOURCES INC",
+  "ticker" : "EOG",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000FC7366",
+  "name" : "MARKEL CORP",
+  "ticker" : "MKL",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000NSCNT7",
+  "name" : "PRINCIPAL FINANCIAL GROUP",
+  "ticker" : "PFG",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BWXBC2",
+  "name" : "WALMART INC",
+  "ticker" : "WMT",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG005P7Q881",
+  "name" : "AMERICAN AIRLINES GROUP INC",
+  "ticker" : "AAL",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00333FYS2",
+  "name" : "IQVIA HOLDINGS INC",
+  "ticker" : "IQV",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BBS2Y0",
+  "name" : "AMGEN INC",
+  "ticker" : "AMGN",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG004M9ZHX5",
+  "name" : "LYFT INC-A",
+  "ticker" : "LYFT",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000CTM4J9",
+  "name" : "CARTER'S INC",
+  "ticker" : "CRI",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000MM5VL9",
+  "name" : "HERBALIFE NUTRITION LTD",
+  "ticker" : "HLF",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BXL4N7",
+  "name" : "CORPORATE OFFICE PROPERTIES",
+  "ticker" : "OFC",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000CHSS88",
+  "name" : "OLD DOMINION FREIGHT LINE",
+  "ticker" : "ODFL",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BC1L02",
+  "name" : "SMITH (A.O.) CORP",
+  "ticker" : "AOS",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BPXVJ6",
+  "name" : "REPUBLIC SERVICES INC",
+  "ticker" : "RSG",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000J2XL74",
+  "name" : "PHILIP MORRIS INTERNATIONAL",
+  "ticker" : "PM",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000G7K7Q0",
+  "name" : "ISHARES PREFERRED & INCOME S",
+  "ticker" : "PFF",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG006N7S6K9",
+  "name" : "FIDELITY NATIONAL FINANCIAL",
+  "ticker" : "FNF",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG009NRSWJ4",
+  "name" : "ZILLOW GROUP INC - C",
+  "ticker" : "Z",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BK67C7",
+  "name" : "GENERAL DYNAMICS CORP",
+  "ticker" : "GD",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BFQYY3",
+  "name" : "COLGATE-PALMOLIVE CO",
+  "ticker" : "CL",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BHR296",
+  "name" : "ISHARES 7-10 YEAR TREASURY B",
+  "ticker" : "IEF",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000LD9JQ8",
+  "name" : "WYNN RESORTS LTD",
+  "ticker" : "WYNN",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000TRJ294",
+  "name" : "AMERICAN WATER WORKS CO INC",
+  "ticker" : "AWK",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BT0CM2",
+  "name" : "SVB FINANCIAL GROUP",
+  "ticker" : "SIVB",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG009S39JX6",
+  "name" : "ALPHABET INC-CL A",
+  "ticker" : "GOOGL",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BWHD54",
+  "name" : "VORNADO REALTY TRUST",
+  "ticker" : "VNO",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000C22QV7",
+  "name" : "SEALED AIR CORP",
+  "ticker" : "SEE",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BJ49H3",
+  "name" : "BORGWARNER INC",
+  "ticker" : "BWA",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BRD0D8",
+  "name" : "PNC FINANCIAL SERVICES GROUP",
+  "ticker" : "PNC",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000F7RCJ1",
+  "name" : "ADVANCE AUTO PARTS INC",
+  "ticker" : "AAP",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000C1XVK6",
+  "name" : "EVEREST RE GROUP LTD",
+  "ticker" : "RE",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000PXGT62",
+  "name" : "TEMPUR SEALY INTERNATIONAL I",
+  "ticker" : "TPX",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BVXPZ8",
+  "name" : "NEW YORK COMMUNITY BANCORP",
+  "ticker" : "NYCB",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BP52R2",
+  "name" : "3M CO",
+  "ticker" : "MMM",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00BFHDCV6",
+  "name" : "LIBERTY MEDIA CORP-LIBERTY-A",
+  "ticker" : "FWONA",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG00FFJY867",
+  "name" : "LIONS GATE ENTERTAINMENT-B",
+  "ticker" : "LGF/B",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG0059KNH10",
+  "name" : "CHANGE HEALTHCARE INC",
+  "ticker" : "CHNG",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BMDBZ1",
+  "name" : "HUNT (JB) TRANSPRT SVCS INC",
+  "ticker" : "JBHT",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BHZ5J9",
+  "name" : "EQT CORP",
+  "ticker" : "EQT",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG004S5X3Y9",
+  "name" : "SPRINT CORP",
+  "ticker" : "S",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG0081VHTP3",
+  "name" : "INTERNATIONAL GAME TECHNOLOG",
+  "ticker" : "IGT",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BQC9V2",
+  "name" : "NEWELL BRANDS INC",
+  "ticker" : "NWL",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BHB3M6",
+  "name" : "DOVER CORP",
+  "ticker" : "DOV",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000CTV4N4",
+  "name" : "ENTEGRIS INC",
+  "ticker" : "ENTG",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BLDV98",
+  "name" : "H&R BLOCK INC",
+  "ticker" : "HRB",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BP0KQ8",
+  "name" : "ELECTRONIC ARTS INC",
+  "ticker" : "EA",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BH5DV1",
+  "name" : "INTUIT INC",
+  "ticker" : "INTU",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BF1PD2",
+  "name" : "LIBERTY PROPERTY TRUST",
+  "ticker" : "LPT",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000D898T9",
+  "name" : "CARDINAL HEALTH INC",
+  "ticker" : "CAH",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BJ7007",
+  "name" : "TECHNOLOGY SELECT SECT SPDR",
+  "ticker" : "XLK",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000BD53V2",
+  "name" : "WOODWARD INC",
+  "ticker" : "WWD",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000DPKKK0",
+  "name" : "AMERICAN FINANCIAL GROUP INC",
+  "ticker" : "AFG",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BXNJ07",
+  "name" : "CYPRESS SEMICONDUCTOR CORP",
+  "ticker" : "CY",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BBVJZ8",
+  "name" : "DEVON ENERGY CORP",
+  "ticker" : "DVN",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BCSPR5",
+  "name" : "CORESITE REALTY CORP",
+  "ticker" : "COR",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BDLCQ0",
+  "name" : "REINSURANCE GROUP OF AMERICA",
+  "ticker" : "RGA",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BRXTR8",
+  "name" : "REGAL BELOIT CORP",
+  "ticker" : "RBC",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BP4MH0",
+  "name" : "MARSH & MCLENNAN COS",
+  "ticker" : "MMC",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BL9C59",
+  "name" : "MACERICH CO/THE",
+  "ticker" : "MAC",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG00B6WH9G3",
+  "name" : "MATCH GROUP INC",
+  "ticker" : "MTCH",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG001QD41M9",
+  "name" : "APTIV PLC",
+  "ticker" : "APTV",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BBL8V7",
+  "name" : "QUANTA SERVICES INC",
+  "ticker" : "PWR",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000MBDGM6",
+  "name" : "EQUINIX INC",
+  "ticker" : "EQIX",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG006473QX9",
+  "name" : "APPLE HOSPITALITY REIT INC",
+  "ticker" : "APLE",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BS5170",
+  "name" : "ROYAL GOLD INC",
+  "ticker" : "RGLD",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BG14P4",
+  "name" : "CREE INC",
+  "ticker" : "CREE",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000CH5208",
+  "name" : "UNITEDHEALTH GROUP INC",
+  "ticker" : "UNH",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BP8Z50",
+  "name" : "MOTOROLA SOLUTIONS INC",
+  "ticker" : "MSI",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BNHSP9",
+  "name" : "JEFFERIES FINANCIAL GROUP IN",
+  "ticker" : "JEF",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BPBTL2",
+  "name" : "CHOICE HOTELS INTL INC",
+  "ticker" : "CHH",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG0035LY913",
+  "name" : "NEWS CORP - CLASS A",
+  "ticker" : "NWSA",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG002B04MT8",
+  "name" : "UBER TECHNOLOGIES INC",
+  "ticker" : "UBER",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000FXW512",
+  "name" : "PERKINELMER INC",
+  "ticker" : "PKI",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BSFRF3",
+  "name" : "SYNOPSYS INC",
+  "ticker" : "SNPS",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BGKHZ3",
+  "name" : "VERISIGN INC",
+  "ticker" : "VRSN",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000DBVBY4",
+  "name" : "EATON VANCE CORP",
+  "ticker" : "EV",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000D8RG11",
+  "name" : "NRG ENERGY INC",
+  "ticker" : "NRG",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000C5HS04",
+  "name" : "NIKE INC -CL B",
+  "ticker" : "NKE",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BP30Y0",
+  "name" : "EVERCORE INC - A",
+  "ticker" : "EVR",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BBQCY0",
+  "name" : "ADVANCED MICRO DEVICES",
+  "ticker" : "AMD",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG001B4BV87",
+  "name" : "FORTUNE BRANDS HOME & SECURI",
+  "ticker" : "FBHS",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00KDYT8C4",
+  "name" : "GRAFTECH INTERNATIONAL LTD",
+  "ticker" : "EAF",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BPBVW5",
+  "name" : "COGNEX CORP",
+  "ticker" : "CGNX",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BQQH30",
+  "name" : "CONOCOPHILLIPS",
+  "ticker" : "COP",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BSHH72",
+  "name" : "SOUTHERN COPPER CORP",
+  "ticker" : "SCCO",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000CXYSZ6",
+  "name" : "F5 NETWORKS INC",
+  "ticker" : "FFIV",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BKQG80",
+  "name" : "IAC/INTERACTIVECORP",
+  "ticker" : "IAC",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BCMBG4",
+  "name" : "FORTINET INC",
+  "ticker" : "FTNT",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000LV0836",
+  "name" : "INTERACTIVE BROKERS GRO-CL A",
+  "ticker" : "IBKR",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BCD3D5",
+  "name" : "ARROW ELECTRONICS INC",
+  "ticker" : "ARW",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BGSPS5",
+  "name" : "CURTISS-WRIGHT CORP",
+  "ticker" : "CW",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG003T1GM03",
+  "name" : "NEW RESIDENTIAL INVESTMENT",
+  "ticker" : "NRZ",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BLXZN1",
+  "name" : "TRACTOR SUPPLY COMPANY",
+  "ticker" : "TSCO",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BH2JM1",
+  "name" : "NORTONLIFELOCK INC",
+  "ticker" : "NLOK",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000C4LN67",
+  "name" : "GARMIN LTD",
+  "ticker" : "GRMN",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000D13GN8",
+  "name" : "ZILLOW GROUP INC - A",
+  "ticker" : "ZG",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BHPL78",
+  "name" : "EQUIFAX INC",
+  "ticker" : "EFX",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00D30HGP6",
+  "name" : "COLONY CAPITAL INC",
+  "ticker" : "CLNY",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BLCPY4",
+  "name" : "HELMERICH & PAYNE",
+  "ticker" : "HP",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BBXLW4",
+  "name" : "AUTONATION INC",
+  "ticker" : "AN",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG00K53L394",
+  "name" : "EQUITRANS MIDSTREAM CORP",
+  "ticker" : "ETRN",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000QC4T33",
+  "name" : "HUDSON PACIFIC PROPERTIES IN",
+  "ticker" : "HPP",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000DB3KT1",
+  "name" : "WILLIS TOWERS WATSON PLC",
+  "ticker" : "WLTW",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG003T4VFC2",
+  "name" : "SPOTIFY TECHNOLOGY SA",
+  "ticker" : "SPOT",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BW3299",
+  "name" : "UNION PACIFIC CORP",
+  "ticker" : "UNP",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BLMZK6",
+  "name" : "CARMAX INC",
+  "ticker" : "KMX",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000M44VW8",
+  "name" : "OWENS CORNING",
+  "ticker" : "OC",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG0020B4JG7",
+  "name" : "FIREEYE INC",
+  "ticker" : "FEYE",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000F5YH15",
+  "name" : "WORLD WRESTLING ENTERTAIN-A",
+  "ticker" : "WWE",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000D80VV4",
+  "name" : "SPDR S&P RETAIL ETF",
+  "ticker" : "XRT",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000BC33T9",
+  "name" : "ALEXANDRIA REAL ESTATE EQUIT",
+  "ticker" : "ARE",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG001KS9450",
+  "name" : "2U INC",
+  "ticker" : "TWOU",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BCVG28",
+  "name" : "POOL CORP",
+  "ticker" : "POOL",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000CNWNL6",
+  "name" : "OWENS-ILLINOIS INC",
+  "ticker" : "OI",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG0059FN811",
+  "name" : "KEYSIGHT TECHNOLOGIES IN",
+  "ticker" : "KEYS",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000C4MWH4",
+  "name" : "BGC PARTNERS INC-CL A",
+  "ticker" : "BGCP",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000KQY8Y7",
+  "name" : "CACI INTERNATIONAL INC -CL A",
+  "ticker" : "CACI",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG005H82GB2",
+  "name" : "CHEMOURS CO/THE",
+  "ticker" : "CC",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BWMX63",
+  "name" : "WEBSTER FINANCIAL CORP",
+  "ticker" : "WBS",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BFL116",
+  "name" : "FIRST SOLAR INC",
+  "ticker" : "FSLR",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BVMG26",
+  "name" : "MKS INSTRUMENTS INC",
+  "ticker" : "MKSI",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000TJ8XZ7",
+  "name" : "AGNC INVESTMENT CORP",
+  "ticker" : "AGNC",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG00DL8NMV2",
+  "name" : "TECHNIPFMC PLC",
+  "ticker" : "FTI",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000G9CGL0",
+  "name" : "JAZZ PHARMACEUTICALS PLC",
+  "ticker" : "JAZZ",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000PFLGY2",
+  "name" : "CHIMERA INVESTMENT CORP",
+  "ticker" : "CIM",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BHFHP8",
+  "name" : "DOMTAR CORP",
+  "ticker" : "UFS",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000C15114",
+  "name" : "BIO-TECHNE CORP",
+  "ticker" : "TECH",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG005XR47P5",
+  "name" : "CATALENT INC",
+  "ticker" : "CTLT",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000RQBFV2",
+  "name" : "GENPACT LTD",
+  "ticker" : "G",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BSD7C2",
+  "name" : "RAYTHEON COMPANY",
+  "ticker" : "RTN",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BWCZY8",
+  "name" : "VALHI INC",
+  "ticker" : "VHI",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BNDN65",
+  "name" : "LOWE'S COS INC",
+  "ticker" : "LOW",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BJVN28",
+  "name" : "FEDERAL REALTY INVS TRUST",
+  "ticker" : "FRT",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BGLRN3",
+  "name" : "CENTURYLINK INC",
+  "ticker" : "CTL",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000C04224",
+  "name" : "CBRE GROUP INC - A",
+  "ticker" : "CBRE",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000CBMH27",
+  "name" : "MGIC INVESTMENT CORP",
+  "ticker" : "MTG",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000D9KWL9",
+  "name" : "M & T BANK CORP",
+  "ticker" : "MTB",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG001C7TST4",
+  "name" : "SPLUNK INC",
+  "ticker" : "SPLK",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BRJL00",
+  "name" : "PPL CORP",
+  "ticker" : "PPL",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG006B6PVN9",
+  "name" : "CDK GLOBAL INC",
+  "ticker" : "CDK",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG002DZS299",
+  "name" : "ANAPLAN INC",
+  "ticker" : "PLAN",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000C90DH9",
+  "name" : "INTERPUBLIC GROUP OF COS INC",
+  "ticker" : "IPG",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000FY4S11",
+  "name" : "CITIGROUP INC",
+  "ticker" : "C",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000JG0547",
+  "name" : "AUTOMATIC DATA PROCESSING",
+  "ticker" : "ADP",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BWVSR1",
+  "name" : "WASTE MANAGEMENT INC",
+  "ticker" : "WM",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BWB7V4",
+  "name" : "VALMONT INDUSTRIES",
+  "ticker" : "VMI",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BBTJZ1",
+  "name" : "ERIE INDEMNITY COMPANY-CL A",
+  "ticker" : "ERIE",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BJ29X7",
+  "name" : "FINANCIAL SELECT SECTOR SPDR",
+  "ticker" : "XLF",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000C1HN22",
+  "name" : "IDEX CORP",
+  "ticker" : "IEX",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000M0P5L2",
+  "name" : "ISHARES MSCI EMERGING MARKET",
+  "ticker" : "EEM",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000BLMXN8",
+  "name" : "KILROY REALTY CORP",
+  "ticker" : "KRC",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BV95H9",
+  "name" : "TIMKEN CO",
+  "ticker" : "TKR",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000M6TR37",
+  "name" : "SIGNATURE BANK",
+  "ticker" : "SBNY",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000DCGRL8",
+  "name" : "IPG PHOTONICS CORP",
+  "ticker" : "IPGP",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000CGC1X8",
+  "name" : "QUALCOMM INC",
+  "ticker" : "QCOM",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000JWD753",
+  "name" : "LAS VEGAS SANDS CORP",
+  "ticker" : "LVS",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000CJ2181",
+  "name" : "RELIANCE STEEL & ALUMINUM",
+  "ticker" : "RS",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BCWCG1",
+  "name" : "BEST BUY CO INC",
+  "ticker" : "BBY",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BJX8C8",
+  "name" : "NATIONAL OILWELL VARCO INC",
+  "ticker" : "NOV",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000G6Y5W4",
+  "name" : "MCCORMICK & CO-NON VTG SHRS",
+  "ticker" : "MKC",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BR2TH3",
+  "name" : "PROCTER & GAMBLE CO/THE",
+  "ticker" : "PG",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000DD3510",
+  "name" : "APARTMENT INVT & MGMT CO -A",
+  "ticker" : "AIV",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000DFMXT3",
+  "name" : "ASPEN TECHNOLOGY INC",
+  "ticker" : "AZPN",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BCMWM1",
+  "name" : "VAIL RESORTS INC",
+  "ticker" : "MTN",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BZX1N5",
+  "name" : "ASSURANT INC",
+  "ticker" : "AIZ",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG0019LSQ49",
+  "name" : "FIRST REPUBLIC BANK/CA",
+  "ticker" : "FRC",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BLF8D2",
+  "name" : "HORMEL FOODS CORP",
+  "ticker" : "HRL",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000FLF615",
+  "name" : "AXIS CAPITAL HOLDINGS LTD",
+  "ticker" : "AXS",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BGZ832",
+  "name" : "SITE CENTERS CORP",
+  "ticker" : "SITC",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG00J7CBVW8",
+  "name" : "AXA EQUITABLE HOLDINGS INC",
+  "ticker" : "EQH",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000FV28W9",
+  "name" : "GRAND CANYON EDUCATION INC",
+  "ticker" : "LOPE",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG006D97VY9",
+  "name" : "GUARDANT HEALTH INC",
+  "ticker" : "GH",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000N9MNX3",
+  "name" : "TESLA INC",
+  "ticker" : "TSLA",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG00GQK3WB5",
+  "name" : "SMARTSHEET INC-CLASS A",
+  "ticker" : "SMAR",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BPMH90",
+  "name" : "MURPHY OIL CORP",
+  "ticker" : "MUR",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BL0P40",
+  "name" : "HAWAIIAN ELECTRIC INDS",
+  "ticker" : "HE",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000Q3JN03",
+  "name" : "REGIONS FINANCIAL CORP",
+  "ticker" : "RF",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000GZQ728",
+  "name" : "EXXON MOBIL CORP",
+  "ticker" : "XOM",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BHNNF7",
+  "name" : "MATERIALS SELECT SECTOR SPDR",
+  "ticker" : "XLB",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000DV7MX4",
+  "name" : "ON SEMICONDUCTOR CORP",
+  "ticker" : "ON",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BVL2G3",
+  "name" : "TRINITY INDUSTRIES INC",
+  "ticker" : "TRN",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BJ3PD2",
+  "name" : "EATON CORP PLC",
+  "ticker" : "ETN",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BMBL90",
+  "name" : "ILLINOIS TOOL WORKS",
+  "ticker" : "ITW",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00GVR8YQ9",
+  "name" : "LINDE PLC",
+  "ticker" : "LIN",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000HHLBF9",
+  "name" : "VIASAT INC",
+  "ticker" : "VSAT",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BVQRY3",
+  "name" : "TORO CO",
+  "ticker" : "TTC",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000R7RDB4",
+  "name" : "CONCHO RESOURCES INC",
+  "ticker" : "CXO",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000C3W281",
+  "name" : "MASIMO CORP",
+  "ticker" : "MASI",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000RJ2J04",
+  "name" : "SS&C TECHNOLOGIES HOLDINGS",
+  "ticker" : "SSNC",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BJ5GK2",
+  "name" : "EXPEDITORS INTL WASH INC",
+  "ticker" : "EXPD",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BTDS98",
+  "name" : "SPDR DJIA TRUST",
+  "ticker" : "DIA",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000N2HDY5",
+  "name" : "ARISTA NETWORKS INC",
+  "ticker" : "ANET",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000PPFKQ7",
+  "name" : "BROADRIDGE FINANCIAL SOLUTIO",
+  "ticker" : "BR",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000FFDM15",
+  "name" : "US BANCORP",
+  "ticker" : "USB",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BRRG02",
+  "name" : "PVH CORP",
+  "ticker" : "PVH",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG002ZM63J5",
+  "name" : "ZAYO GROUP HOLDINGS INC",
+  "ticker" : "ZAYO",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000B9ZXB4",
+  "name" : "ABBOTT LABORATORIES",
+  "ticker" : "ABT",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BFS7D3",
+  "name" : "CLOROX COMPANY",
+  "ticker" : "CLX",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000MHTV89",
+  "name" : "EPAM SYSTEMS INC",
+  "ticker" : "EPAM",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BKCFC2",
+  "name" : "GENERAL MILLS INC",
+  "ticker" : "GIS",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG006BFYZP8",
+  "name" : "PARSLEY ENERGY INC-CLASS A",
+  "ticker" : "PE",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BB65D0",
+  "name" : "GARTNER INC",
+  "ticker" : "IT",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BW6P59",
+  "name" : "US CELLULAR CORP",
+  "ticker" : "USM",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG001P63B80",
+  "name" : "CDW CORP/DE",
+  "ticker" : "CDW",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000D6L294",
+  "name" : "CIMAREX ENERGY CO",
+  "ticker" : "XEC",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG004S69ZX4",
+  "name" : "OUTFRONT MEDIA INC",
+  "ticker" : "OUT",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BL9JQ1",
+  "name" : "HOLLYFRONTIER CORP",
+  "ticker" : "HFC",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000FLZN98",
+  "name" : "MOHAWK INDUSTRIES INC",
+  "ticker" : "MHK",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BR54L0",
+  "name" : "PULTEGROUP INC",
+  "ticker" : "PHM",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000DGLTG5",
+  "name" : "DOLBY LABORATORIES INC-CL A",
+  "ticker" : "DLB",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BB6WG8",
+  "name" : "ARCHER-DANIELS-MIDLAND CO",
+  "ticker" : "ADM",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000DSMS70",
+  "name" : "ILLUMINA INC",
+  "ticker" : "ILMN",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000GQ7K93",
+  "name" : "GRAPHIC PACKAGING HOLDING CO",
+  "ticker" : "GPK",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BB9KF2",
+  "name" : "AMERICAN ELECTRIC POWER",
+  "ticker" : "AEP",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BFC848",
+  "name" : "KNIGHT-SWIFT TRANSPORTATION",
+  "ticker" : "KNX",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BM6788",
+  "name" : "INGERSOLL-RAND PLC",
+  "ticker" : "IR",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BBL0Y1",
+  "name" : "ALASKA AIR GROUP INC",
+  "ticker" : "ALK",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000M1J270",
+  "name" : "STARWOOD PROPERTY TRUST INC",
+  "ticker" : "STWD",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BB29X4",
+  "name" : "DTE ENERGY COMPANY",
+  "ticker" : "DTE",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000C43RR5",
+  "name" : "EBAY INC",
+  "ticker" : "EBAY",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BSPWD3",
+  "name" : "SEABOARD CORP",
+  "ticker" : "SEB",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BT4C39",
+  "name" : "LAZARD LTD-CL A",
+  "ticker" : "LAZ",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000G8N9C6",
+  "name" : "NORDSTROM INC",
+  "ticker" : "JWN",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BX24N8",
+  "name" : "WEST PHARMACEUTICAL SERVICES",
+  "ticker" : "WST",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG003PS7JV1",
+  "name" : "ALLEGION PLC",
+  "ticker" : "ALLE",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BN2DC2",
+  "name" : "SALESFORCE.COM INC",
+  "ticker" : "CRM",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG00FWQ4VD6",
+  "name" : "ULTA BEAUTY INC",
+  "ticker" : "ULTA",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BPYD87",
+  "name" : "NATIONAL FUEL GAS CO",
+  "ticker" : "NFG",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000H8TVT2",
+  "name" : "TARGET CORP",
+  "ticker" : "TGT",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BX57K1",
+  "name" : "DENTSPLY SIRONA INC",
+  "ticker" : "XRAY",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BT41Q8",
+  "name" : "SCHLUMBERGER LTD",
+  "ticker" : "SLB",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BS5CM9",
+  "name" : "BOSTON PROPERTIES INC",
+  "ticker" : "BXP",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000PQPCM6",
+  "name" : "BANKUNITED INC",
+  "ticker" : "BKU",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG0064N2T78",
+  "name" : "VIRTU FINANCIAL INC-CLASS A",
+  "ticker" : "VIRT",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000D7JKW9",
+  "name" : "COSTAR GROUP INC",
+  "ticker" : "CSGP",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000HGYNZ9",
+  "name" : "STEEL DYNAMICS INC",
+  "ticker" : "STLD",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG001NFKJ68",
+  "name" : "NEW RELIC INC",
+  "ticker" : "NEWR",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000C3WK36",
+  "name" : "KRONOS WORLDWIDE INC",
+  "ticker" : "KRO",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BQT4L6",
+  "name" : "PEOPLE'S UNITED FINANCIAL",
+  "ticker" : "PBCT",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG00H9MNDZ2",
+  "name" : "FRONTDOOR INC",
+  "ticker" : "FTDR",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BHKYH4",
+  "name" : "ECOLAB INC",
+  "ticker" : "ECL",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG001BPKGT0",
+  "name" : "MEDALLIA INC",
+  "ticker" : "MDLA",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BC2C10",
+  "name" : "APACHE CORP",
+  "ticker" : "APA",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BVMPN3",
+  "name" : "T ROWE PRICE GROUP INC",
+  "ticker" : "TROW",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000R3NPZ4",
+  "name" : "AIR LEASE CORP",
+  "ticker" : "AL",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BVP5P2",
+  "name" : "SL GREEN REALTY CORP",
+  "ticker" : "SLG",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000DGPR66",
+  "name" : "BUNGE LTD",
+  "ticker" : "BG",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000C13CD9",
+  "name" : "CADENCE DESIGN SYS INC",
+  "ticker" : "CDNS",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000KCZPC3",
+  "name" : "IRON MOUNTAIN INC",
+  "ticker" : "IRM",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BCLYL9",
+  "name" : "MSC INDUSTRIAL DIRECT CO-A",
+  "ticker" : "MSM",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BMHYD1",
+  "name" : "JOHNSON & JOHNSON",
+  "ticker" : "JNJ",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG0043BYPB8",
+  "name" : "PAGERDUTY INC",
+  "ticker" : "PD",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BD2C18",
+  "name" : "BROWN-FORMAN CORP-CLASS A",
+  "ticker" : "BF.A",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000F6ZWH2",
+  "name" : "DICK'S SPORTING GOODS INC",
+  "ticker" : "DKS",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000MM2P62",
+  "name" : "FACEBOOK INC-CLASS A",
+  "ticker" : "FB",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000MQ1SN9",
+  "name" : "DAVITA INC",
+  "ticker" : "DVA",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BWNFZ9",
+  "name" : "WESTERN DIGITAL CORP",
+  "ticker" : "WDC",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BQVTF5",
+  "name" : "PACCAR INC",
+  "ticker" : "PCAR",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BLHRS2",
+  "name" : "HERSHEY CO/THE",
+  "ticker" : "HSY",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BMXK89",
+  "name" : "NCR CORPORATION",
+  "ticker" : "NCR",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG006LYGNL7",
+  "name" : "ARDAGH GROUP SA",
+  "ticker" : "ARD",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG00JH9TZ56",
+  "name" : "APERGY CORP",
+  "ticker" : "APY",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000C3HSR0",
+  "name" : "CHENIERE ENERGY INC",
+  "ticker" : "LNG",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000C2YHG9",
+  "name" : "DISH NETWORK CORP-A",
+  "ticker" : "DISH",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BGYWY6",
+  "name" : "O'REILLY AUTOMOTIVE INC",
+  "ticker" : "ORLY",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BJ1MF9",
+  "name" : "CONSUMER DISCRETIONARY SELT",
+  "ticker" : "XLY",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG00212PVZ5",
+  "name" : "PURE STORAGE INC - CLASS A",
+  "ticker" : "PSTG",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BJPDZ1",
+  "name" : "INTUITIVE SURGICAL INC",
+  "ticker" : "ISRG",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BGX2S0",
+  "name" : "APTARGROUP INC",
+  "ticker" : "ATR",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000G7QX50",
+  "name" : "PREMIER INC-CLASS A",
+  "ticker" : "PINC",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000QTF8K1",
+  "name" : "DEXCOM INC",
+  "ticker" : "DXCM",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG007GJ2F81",
+  "name" : "FLOOR & DECOR HOLDINGS INC-A",
+  "ticker" : "FND",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000CL9JV4",
+  "name" : "SYNNEX CORP",
+  "ticker" : "SNX",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000C2BXK4",
+  "name" : "MGM RESORTS INTERNATIONAL",
+  "ticker" : "MGM",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG00CW2JCN1",
+  "name" : "ATHENE HOLDING LTD-CLASS A",
+  "ticker" : "ATH",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG00CVQZQ96",
+  "name" : "ITT INC",
+  "ticker" : "ITT",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000MBHNC8",
+  "name" : "MOLINA HEALTHCARE INC",
+  "ticker" : "MOH",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BLR3Y7",
+  "name" : "IDACORP INC",
+  "ticker" : "IDA",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BM5SR2",
+  "name" : "INTERNATIONAL PAPER CO",
+  "ticker" : "IP",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BV0VK7",
+  "name" : "TELEPHONE AND DATA SYSTEMS",
+  "ticker" : "TDS",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000M34GG1",
+  "name" : "MACQUARIE INFRASTRUCTURE COR",
+  "ticker" : "MIC",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BFJT36",
+  "name" : "CHURCH & DWIGHT CO INC",
+  "ticker" : "CHD",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BS0ZF1",
+  "name" : "RALPH LAUREN CORP",
+  "ticker" : "RL",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BRJ809",
+  "name" : "PPG INDUSTRIES INC",
+  "ticker" : "PPG",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BB7SX7",
+  "name" : "EQUITY LIFESTYLE PROPERTIES",
+  "ticker" : "ELS",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG00M1CKSK7",
+  "name" : "SOLARWINDS CORP",
+  "ticker" : "SWI",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000CS7CT9",
+  "name" : "KOHLS CORP",
+  "ticker" : "KSS",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BBGGQ1",
+  "name" : "VALERO ENERGY CORP",
+  "ticker" : "VLO",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BT5PG5",
+  "name" : "SCOTTS MIRACLE-GRO CO",
+  "ticker" : "SMG",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BFRRX8",
+  "name" : "CLEAN HARBORS INC",
+  "ticker" : "CLH",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BWCKB6",
+  "name" : "VF CORP",
+  "ticker" : "VFC",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG001J4BCN4",
+  "name" : "COUPA SOFTWARE INC",
+  "ticker" : "COUP",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BRDSX5",
+  "name" : "PINNACLE WEST CAPITAL",
+  "ticker" : "PNW",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BFVXX0",
+  "name" : "CMS ENERGY CORP",
+  "ticker" : "CMS",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000DQLV23",
+  "name" : "BRISTOL-MYERS SQUIBB CO",
+  "ticker" : "BMY",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG0022FDRY8",
+  "name" : "MONGODB INC",
+  "ticker" : "MDB",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BY2Y78",
+  "name" : "INVESCO LTD",
+  "ticker" : "IVZ",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000FPNN38",
+  "name" : "ACADIA HEALTHCARE CO INC",
+  "ticker" : "ACHC",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BH5LT6",
+  "name" : "TRANSOCEAN LTD",
+  "ticker" : "RIG",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BFK8Y6",
+  "name" : "TCF FINANCIAL CORP",
+  "ticker" : "TCF",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BJ2D31",
+  "name" : "SIMON PROPERTY GROUP INC",
+  "ticker" : "SPG",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG00GCTWDJ3",
+  "name" : "CARVANA CO",
+  "ticker" : "CVNA",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG006FCB019",
+  "name" : "ENERGIZER HOLDINGS INC",
+  "ticker" : "ENR",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000FQ7YR4",
+  "name" : "LIVE NATION ENTERTAINMENT IN",
+  "ticker" : "LYV",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BKXFN7",
+  "name" : "PATTERSON-UTI ENERGY INC",
+  "ticker" : "PTEN",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BFV758",
+  "name" : "MANHATTAN ASSOCIATES INC",
+  "ticker" : "MANH",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BHCP19",
+  "name" : "MICROCHIP TECHNOLOGY INC",
+  "ticker" : "MCHP",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BS7KS3",
+  "name" : "MOLSON COORS BREWING CO -B",
+  "ticker" : "TAP",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG001KFKQM7",
+  "name" : "SPROUTS FARMERS MARKET INC",
+  "ticker" : "SFM",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000DN7P92",
+  "name" : "STRYKER CORP",
+  "ticker" : "SYK",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BWLMJ4",
+  "name" : "WALGREENS BOOTS ALLIANCE INC",
+  "ticker" : "WBA",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000C221G9",
+  "name" : "PENTAIR PLC",
+  "ticker" : "PNR",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BQZMH4",
+  "name" : "PUBLIC SERVICE ENTERPRISE GP",
+  "ticker" : "PEG",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BGFGT8",
+  "name" : "LITTELFUSE INC",
+  "ticker" : "LFUS",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BMY992",
+  "name" : "KROGER CO",
+  "ticker" : "KR",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BRXP69",
+  "name" : "EDWARDS LIFESCIENCES CORP",
+  "ticker" : "EW",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000C3MXG5",
+  "name" : "AMDOCS LTD",
+  "ticker" : "DOX",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000C1XKF6",
+  "name" : "PINNACLE FINANCIAL PARTNERS",
+  "ticker" : "PNFP",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000D83WR4",
+  "name" : "SPDR S&P METALS & MINING ETF",
+  "ticker" : "XME",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG0058KMH30",
+  "name" : "HILTON WORLDWIDE HOLDINGS IN",
+  "ticker" : "HLT",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000DHPN63",
+  "name" : "REALTY INCOME CORP",
+  "ticker" : "O",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG0014GJCT9",
+  "name" : "PALO ALTO NETWORKS INC",
+  "ticker" : "PANW",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG00P4R3079",
+  "name" : "GROCERY OUTLET HOLDING CORP",
+  "ticker" : "GO",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000M9KP89",
+  "name" : "AMERICAN CAMPUS COMMUNITIES",
+  "ticker" : "ACC",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BLW530",
+  "name" : "EASTMAN CHEMICAL CO",
+  "ticker" : "EMN",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BLRP41",
+  "name" : "UNIVERSAL DISPLAY CORP",
+  "ticker" : "OLED",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BJBZ23",
+  "name" : "MARKETAXESS HOLDINGS INC",
+  "ticker" : "MKTX",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000FFC0B3",
+  "name" : "NEW YORK TIMES CO-A",
+  "ticker" : "NYT",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000B9Z0J8",
+  "name" : "PROLOGIS INC",
+  "ticker" : "PLD",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000C23PB0",
+  "name" : "LEIDOS HOLDINGS INC",
+  "ticker" : "LDOS",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG002N8HMW0",
+  "name" : "EMPIRE STATE REALTY TRUST-A",
+  "ticker" : "ESRT",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG00BFHD9S7",
+  "name" : "LIBERTY MEDIA COR-SIRIUSXM C",
+  "ticker" : "LSXMK",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG00KR691K8",
+  "name" : "COVETRUS INC",
+  "ticker" : "CVET",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BJKYW3",
+  "name" : "ISHARES 20+ YEAR TREASURY BO",
+  "ticker" : "TLT",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000C45984",
+  "name" : "LOEWS CORP",
+  "ticker" : "L",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BT0093",
+  "name" : "SIRIUS XM HOLDINGS INC",
+  "ticker" : "SIRI",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BGYMH7",
+  "name" : "MARTIN MARIETTA MATERIALS",
+  "ticker" : "MLM",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000GHZSZ6",
+  "name" : "FIRST HORIZON NATIONAL CORP",
+  "ticker" : "FHN",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000DQN9R3",
+  "name" : "MIDDLEBY CORP",
+  "ticker" : "MIDD",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BV8DN6",
+  "name" : "TJX COMPANIES INC",
+  "ticker" : "TJX",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000CVRFS4",
+  "name" : "HYATT HOTELS CORP - CL A",
+  "ticker" : "H",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BTQR96",
+  "name" : "STANLEY BLACK & DECKER INC",
+  "ticker" : "SWK",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG0098VVDT9",
+  "name" : "OLLIE'S BARGAIN OUTLET HOLDI",
+  "ticker" : "OLLI",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG00BN96922",
+  "name" : "DOW INC",
+  "ticker" : "DOW",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000CHWP52",
+  "name" : "DISCOVERY INC - A",
+  "ticker" : "DISCA",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG008NVB1C0",
+  "name" : "MONSTER BEVERAGE CORP",
+  "ticker" : "MNST",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG003MSMCS6",
+  "name" : "GAMING AND LEISURE PROPERTIE",
+  "ticker" : "GLPI",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BBDV81",
+  "name" : "COGNIZANT TECH SOLUTIONS-A",
+  "ticker" : "CTSH",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000CQV2N4",
+  "name" : "ICU MEDICAL INC",
+  "ticker" : "ICUI",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000R2YFG7",
+  "name" : "BOOZ ALLEN HAMILTON HOLDINGS",
+  "ticker" : "BAH",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BMZ7P7",
+  "name" : "KANSAS CITY SOUTHERN",
+  "ticker" : "KSU",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG001J2PFF5",
+  "name" : "ADAPTIVE BIOTECHNOLOGIES",
+  "ticker" : "ADPT",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000DHM3H8",
+  "name" : "VIACOM INC-CLASS A",
+  "ticker" : "VIA",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BNX3R4",
+  "name" : "MDU RESOURCES GROUP INC",
+  "ticker" : "MDU",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000D86F25",
+  "name" : "BWX TECHNOLOGIES INC",
+  "ticker" : "BWXT",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000CL6RJ3",
+  "name" : "BRANDYWINE REALTY TRUST",
+  "ticker" : "BDN",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BVDLH9",
+  "name" : "THERMO FISHER SCIENTIFIC INC",
+  "ticker" : "TMO",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BVPV84",
+  "name" : "AMAZON.COM INC",
+  "ticker" : "AMZN",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG001LFLZZ1",
+  "name" : "BRIXMOR PROPERTY GROUP INC",
+  "ticker" : "BRX",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000D5S4M0",
+  "name" : "POLARIS INC",
+  "ticker" : "PII",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000VD6768",
+  "name" : "ZYNGA INC - CL A",
+  "ticker" : "ZNGA",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000CWL0F5",
+  "name" : "EXACT SCIENCES CORP",
+  "ticker" : "EXAS",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BB1TH9",
+  "name" : "FLUOR CORP",
+  "ticker" : "FLR",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG004S641N5",
+  "name" : "BURLINGTON STORES INC",
+  "ticker" : "BURL",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000DW4Q75",
+  "name" : "ALLIANT ENERGY CORP",
+  "ticker" : "LNT",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG008NXC572",
+  "name" : "WESTROCK CO",
+  "ticker" : "WRK",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BKLH74",
+  "name" : "GAP INC/THE",
+  "ticker" : "GPS",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000K1T0M8",
+  "name" : "LIONS GATE ENTERTAINMENT-A",
+  "ticker" : "LGF.A",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000FH8PX5",
+  "name" : "ALLERGAN PLC",
+  "ticker" : "AGN",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000FDBX90",
+  "name" : "CENTERPOINT ENERGY INC",
+  "ticker" : "CNP",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BBY4T5",
+  "name" : "AMERICAN NATIONAL INSURANCE",
+  "ticker" : "ANAT",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG00H433CR2",
+  "name" : "EVERGY INC",
+  "ticker" : "EVRG",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000C1FQS9",
+  "name" : "ENTERGY CORP",
+  "ticker" : "ETR",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000MQQ963",
+  "name" : "SPDR S&P BIOTECH ETF",
+  "ticker" : "XBI",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000L4M7F1",
+  "name" : "RESMED INC",
+  "ticker" : "RMD",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG0029ZX840",
+  "name" : "TWILIO INC - A",
+  "ticker" : "TWLO",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BQ87N0",
+  "name" : "EVERSOURCE ENERGY",
+  "ticker" : "ES",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG00GFMPRK0",
+  "name" : "ALTICE USA INC- A",
+  "ticker" : "ATUS",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000C19QW1",
+  "name" : "CHEMED CORP",
+  "ticker" : "CHE",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BQ74K1",
+  "name" : "NORTHERN TRUST CORP",
+  "ticker" : "NTRS",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BG4202",
+  "name" : "CAMPBELL SOUP CO",
+  "ticker" : "CPB",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000CB8Q50",
+  "name" : "UNIVERSAL HEALTH SERVICES-B",
+  "ticker" : "UHS",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000HG21Y3",
+  "name" : "NU SKIN ENTERPRISES INC - A",
+  "ticker" : "NUS",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG005WQVVH4",
+  "name" : "SABRE CORP",
+  "ticker" : "SABR",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000C496P7",
+  "name" : "CBS CORP-CLASS B NON VOTING",
+  "ticker" : "CBS",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000C7LMS8",
+  "name" : "AUTOZONE INC",
+  "ticker" : "AZO",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG00D0Y81M1",
+  "name" : "ASHLAND GLOBAL HOLDINGS INC",
+  "ticker" : "ASH",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BV75B7",
+  "name" : "TIFFANY & CO",
+  "ticker" : "TIF",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BB0V03",
+  "name" : "CAMDEN PROPERTY TRUST",
+  "ticker" : "CPT",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BJNGN9",
+  "name" : "JABIL INC",
+  "ticker" : "JBL",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000DCNK80",
+  "name" : "RPM INTERNATIONAL INC",
+  "ticker" : "RPM",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BY29C7",
+  "name" : "TAPESTRY INC",
+  "ticker" : "TPR",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000R7Z112",
+  "name" : "DELTA AIR LINES INC",
+  "ticker" : "DAL",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BKPL53",
+  "name" : "ZIMMER BIOMET HOLDINGS INC",
+  "ticker" : "ZBH",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BVV7G1",
+  "name" : "TEXAS INSTRUMENTS INC",
+  "ticker" : "TXN",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000M65M61",
+  "name" : "UNITED AIRLINES HOLDINGS INC",
+  "ticker" : "UAL",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000C3FGH9",
+  "name" : "GRAHAM HOLDINGS CO-CLASS B",
+  "ticker" : "GHC",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000PV2L86",
+  "name" : "WYNDHAM DESTINATIONS INC",
+  "ticker" : "WYND",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BJQWD2",
+  "name" : "AKAMAI TECHNOLOGIES INC",
+  "ticker" : "AKAM",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000F0KF42",
+  "name" : "SEAGATE TECHNOLOGY",
+  "ticker" : "STX",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000CN5CJ3",
+  "name" : "REALPAGE INC",
+  "ticker" : "RP",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000NTFYM5",
+  "name" : "ISHARES 1-3 YEAR TREASURY BO",
+  "ticker" : "SHY",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG00K7K2XZ0",
+  "name" : "GCI LIBERTY INC - CLASS A",
+  "ticker" : "GLIBA",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000P458P3",
+  "name" : "DOMINO'S PIZZA INC",
+  "ticker" : "DPZ",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BPH459",
+  "name" : "MICROSOFT CORP",
+  "ticker" : "MSFT",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000H6HNW3",
+  "name" : "TWITTER INC",
+  "ticker" : "TWTR",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000DQTXY6",
+  "name" : "DR HORTON INC",
+  "ticker" : "DHI",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BFT2L4",
+  "name" : "COMCAST CORP-CLASS A",
+  "ticker" : "CMCSA",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000D9D830",
+  "name" : "ACCENTURE PLC-CL A",
+  "ticker" : "ACN",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BFGNJ5",
+  "name" : "ALNYLAM PHARMACEUTICALS INC",
+  "ticker" : "ALNY",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000C30L48",
+  "name" : "MONOLITHIC POWER SYSTEMS INC",
+  "ticker" : "MPWR",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BJ20S2",
+  "name" : "ENERGY SELECT SECTOR SPDR",
+  "ticker" : "XLE",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000BGJRC8",
+  "name" : "CSX CORP",
+  "ticker" : "CSX",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BF6LY3",
+  "name" : "CARNIVAL CORP",
+  "ticker" : "CCL",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000R0L5J4",
+  "name" : "TERADATA CORP",
+  "ticker" : "TDC",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BNMMJ3",
+  "name" : "HENRY SCHEIN INC",
+  "ticker" : "HSIC",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG007387YL8",
+  "name" : "PRA HEALTH SCIENCES INC",
+  "ticker" : "PRAH",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000DH7JK6",
+  "name" : "PEPSICO INC",
+  "ticker" : "PEP",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG0018SLDN0",
+  "name" : "DROPBOX INC-CLASS A",
+  "ticker" : "DBX",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000F7GST7",
+  "name" : "TFS FINANCIAL CORP",
+  "ticker" : "TFSL",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BLMDQ9",
+  "name" : "HEXCEL CORP",
+  "ticker" : "HXL",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BPT0C6",
+  "name" : "NOBLE ENERGY INC",
+  "ticker" : "NBL",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BHVSG6",
+  "name" : "HEALTH CARE SELECT SECTOR",
+  "ticker" : "XLV",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000C101X4",
+  "name" : "ABIOMED INC",
+  "ticker" : "ABMD",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG00JM9V731",
+  "name" : "GATES INDUSTRIAL CORP PLC",
+  "ticker" : "GTES",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG005497GZ3",
+  "name" : "ONEMAIN HOLDINGS INC",
+  "ticker" : "OMF",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000F6H8W8",
+  "name" : "COSTCO WHOLESALE CORP",
+  "ticker" : "COST",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BK38F5",
+  "name" : "ISHARES MSCI JAPAN ETF",
+  "ticker" : "EWJ",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000Q89NG6",
+  "name" : "VANGUARD REAL ESTATE ETF",
+  "ticker" : "VNQ",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000BKWCS0",
+  "name" : "HILL-ROM HOLDINGS INC",
+  "ticker" : "HRC",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000D52545",
+  "name" : "WENDY'S CO/THE",
+  "ticker" : "WEN",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BX3BL3",
+  "name" : "WEYERHAEUSER CO",
+  "ticker" : "WY",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BB8PG1",
+  "name" : "WR GRACE & CO",
+  "ticker" : "GRA",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000CKGBP2",
+  "name" : "GILEAD SCIENCES INC",
+  "ticker" : "GILD",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BB5006",
+  "name" : "ADOBE INC",
+  "ticker" : "ADBE",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000CNFQW6",
+  "name" : "PERRIGO CO PLC",
+  "ticker" : "PRGO",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000DZK6N6",
+  "name" : "NATIONAL INSTRUMENTS CORP",
+  "ticker" : "NATI",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BQ2C28",
+  "name" : "NORTHROP GRUMMAN CORP",
+  "ticker" : "NOC",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000CR20B1",
+  "name" : "EAST WEST BANCORP INC",
+  "ticker" : "EWBC",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BHK836",
+  "name" : "FLIR SYSTEMS INC",
+  "ticker" : "FLIR",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000JH6683",
+  "name" : "IONIS PHARMACEUTICALS INC",
+  "ticker" : "IONS",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BCG930",
+  "name" : "ANTHEM INC",
+  "ticker" : "ANTM",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000F02T51",
+  "name" : "CABLE ONE INC",
+  "ticker" : "CABO",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BDNB35",
+  "name" : "POPULAR INC",
+  "ticker" : "BPOP",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000D2KQ55",
+  "name" : "ISHARES MSCI EAFE ETF",
+  "ticker" : "EFA",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000BMW2Z0",
+  "name" : "KIMBERLY-CLARK CORP",
+  "ticker" : "KMB",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BKL348",
+  "name" : "GENUINE PARTS CO",
+  "ticker" : "GPC",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BMFFQ0",
+  "name" : "JACOBS ENGINEERING GROUP INC",
+  "ticker" : "JEC",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000C4HKK2",
+  "name" : "SKECHERS USA INC-CL A",
+  "ticker" : "SKX",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BC4JJ4",
+  "name" : "AIR PRODUCTS & CHEMICALS INC",
+  "ticker" : "APD",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000F86GP6",
+  "name" : "MOODY'S CORP",
+  "ticker" : "MCO",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG001DCCGR8",
+  "name" : "MARATHON PETROLEUM CORP",
+  "ticker" : "MPC",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BP1Q11",
+  "name" : "S&P GLOBAL INC",
+  "ticker" : "SPGI",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BLK267",
+  "name" : "HUBBELL INC",
+  "ticker" : "HUBB",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BY33P5",
+  "name" : "JUNIPER NETWORKS INC",
+  "ticker" : "JNPR",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BD8PN9",
+  "name" : "BANK OF NEW YORK MELLON CORP",
+  "ticker" : "BK",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000CGQ4F7",
+  "name" : "MORNINGSTAR INC",
+  "ticker" : "MORN",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG00C6H6D40",
+  "name" : "US FOODS HOLDING CORP",
+  "ticker" : "USFD",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG00HPDM5Z2",
+  "name" : "SWITCH INC - A",
+  "ticker" : "SWCH",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BV4XJ1",
+  "name" : "UNITED THERAPEUTICS CORP",
+  "ticker" : "UTHR",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BHY4D9",
+  "name" : "PROSPERITY BANCSHARES INC",
+  "ticker" : "PB",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BXPZB7",
+  "name" : "INGREDION INC",
+  "ticker" : "INGR",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG00CBYY6M1",
+  "name" : "HILTON GRAND VACATIONS INC",
+  "ticker" : "HGV",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BVWZF9",
+  "name" : "TYLER TECHNOLOGIES INC",
+  "ticker" : "TYL",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BCFQC3",
+  "name" : "ASSOCIATED BANC-CORP",
+  "ticker" : "ASB",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000D7HF89",
+  "name" : "SONOCO PRODUCTS CO",
+  "ticker" : "SON",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BJ5SS8",
+  "name" : "NEWMARKET CORP",
+  "ticker" : "NEU",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG00PNN7C40",
+  "name" : "DYNATRACE INC",
+  "ticker" : "DT",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG00265T6Q4",
+  "name" : "STORE CAPITAL CORP",
+  "ticker" : "STOR",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BL6138",
+  "name" : "MFA FINANCIAL INC",
+  "ticker" : "MFA",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BV6R84",
+  "name" : "THOR INDUSTRIES INC",
+  "ticker" : "THO",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BG8M31",
+  "name" : "EQUITY RESIDENTIAL",
+  "ticker" : "EQR",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000CRF6Q8",
+  "name" : "SPDR GOLD SHARES",
+  "ticker" : "GLD",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000BXMFC3",
+  "name" : "UNITED RENTALS INC",
+  "ticker" : "URI",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BVD6X4",
+  "name" : "GLOBE LIFE INC",
+  "ticker" : "GL",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG0014FFY08",
+  "name" : "HORIZON THERAPEUTICS PLC",
+  "ticker" : "HZNP",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BB72K8",
+  "name" : "LINCOLN ELECTRIC HOLDINGS",
+  "ticker" : "LECO",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BNBDC2",
+  "name" : "ELI LILLY & CO",
+  "ticker" : "LLY",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BMT9T6",
+  "name" : "TELEDYNE TECHNOLOGIES INC",
+  "ticker" : "TDY",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00LWZDYB9",
+  "name" : "ELASTIC NV",
+  "ticker" : "ESTC",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BKNX95",
+  "name" : "GOODYEAR TIRE & RUBBER CO",
+  "ticker" : "GT",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG00G2HHYD7",
+  "name" : "AVANTOR INC",
+  "ticker" : "AVTR",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000FBRL11",
+  "name" : "PARAMOUNT GROUP INC",
+  "ticker" : "PGRE",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BPPN67",
+  "name" : "PUBLIC STORAGE",
+  "ticker" : "PSA",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BMQCP6",
+  "name" : "KIRBY CORP",
+  "ticker" : "KEX",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BBCQD7",
+  "name" : "SLM CORP",
+  "ticker" : "SLM",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BCTQ65",
+  "name" : "XCEL ENERGY INC",
+  "ticker" : "XEL",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000N7MXL8",
+  "name" : "ETSY INC",
+  "ticker" : "ETSY",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000QFJJW0",
+  "name" : "BANK OZK",
+  "ticker" : "OZK",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BN53G7",
+  "name" : "LEGGETT & PLATT INC",
+  "ticker" : "LEG",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG00FN64XT9",
+  "name" : "DXC TECHNOLOGY CO",
+  "ticker" : "DXC",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000F2XXP2",
+  "name" : "SINCLAIR BROADCAST GROUP -A",
+  "ticker" : "SBGI",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000HXNN20",
+  "name" : "ARCH CAPITAL GROUP LTD",
+  "ticker" : "ACGL",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000Q0BPZ4",
+  "name" : "CIT GROUP INC",
+  "ticker" : "CIT",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG0088CYPX8",
+  "name" : "NIELSEN HOLDINGS PLC",
+  "ticker" : "NLSN",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BKZTP3",
+  "name" : "HARLEY-DAVIDSON INC",
+  "ticker" : "HOG",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000C5Z1S3",
+  "name" : "MICRON TECHNOLOGY INC",
+  "ticker" : "MU",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BB5792",
+  "name" : "ROYAL CARIBBEAN CRUISES LTD",
+  "ticker" : "RCL",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000G7PNS8",
+  "name" : "WHITE MOUNTAINS INSURANCE GP",
+  "ticker" : "WTM",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG0060CPLJ5",
+  "name" : "AXALTA COATING SYSTEMS LTD",
+  "ticker" : "AXTA",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BCWSS3",
+  "name" : "BRUNSWICK CORP",
+  "ticker" : "BC",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BTKGG8",
+  "name" : "SUNTRUST BANKS INC",
+  "ticker" : "STI",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000C1S2X2",
+  "name" : "VERTEX PHARMACEUTICALS INC",
+  "ticker" : "VRTX",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BPZBB6",
+  "name" : "NISOURCE INC",
+  "ticker" : "NI",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BCQZS4",
+  "name" : "AMERICAN EXPRESS CO",
+  "ticker" : "AXP",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000D2ZTS8",
+  "name" : "HANESBRANDS INC",
+  "ticker" : "HBI",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BLSL58",
+  "name" : "INTL FLAVORS & FRAGRANCES",
+  "ticker" : "IFF",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BBNQB7",
+  "name" : "SPDR S&P MIDCAP 400 ETF TRST",
+  "ticker" : "MDY",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000CN3S73",
+  "name" : "KIMCO REALTY CORP",
+  "ticker" : "KIM",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BKYDP9",
+  "name" : "HEALTHPEAK PROPERTIES INC",
+  "ticker" : "PEAK",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BP9WJ1",
+  "name" : "ADT INC",
+  "ticker" : "ADT",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00HY28K89",
+  "name" : "RESIDEO TECHNOLOGIES INC",
+  "ticker" : "REZI",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BGRB25",
+  "name" : "MEDICAL PROPERTIES TRUST INC",
+  "ticker" : "MPW",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BBBNC6",
+  "name" : "AFLAC INC",
+  "ticker" : "AFL",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG00GBNZ4M0",
+  "name" : "ANTERO MIDSTREAM CORP",
+  "ticker" : "AM",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BGZP70",
+  "name" : "DONALDSON CO INC",
+  "ticker" : "DCI",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000G3QLY3",
+  "name" : "AMERIPRISE FINANCIAL INC",
+  "ticker" : "AMP",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000DR87M7",
+  "name" : "SCHNEIDER NATIONAL INC-CL B",
+  "ticker" : "SNDR",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG003338H34",
+  "name" : "ZSCALER INC",
+  "ticker" : "ZS",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BLPBL5",
+  "name" : "AVALONBAY COMMUNITIES INC",
+  "ticker" : "AVB",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000CW9BM7",
+  "name" : "COUSINS PROPERTIES INC",
+  "ticker" : "CUZ",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG00GSNPM07",
+  "name" : "JANUS HENDERSON GROUP PLC",
+  "ticker" : "JHG",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000FP1N32",
+  "name" : "NETAPP INC",
+  "ticker" : "NTAP",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG00JPGYW43",
+  "name" : "SENSATA TECHNOLOGIES HOLDING",
+  "ticker" : "ST",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000PRJCX9",
+  "name" : "HEALTHCARE TRUST OF AME-CL A",
+  "ticker" : "HTA",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG00658F3P3",
+  "name" : "SYNCHRONY FINANCIAL",
+  "ticker" : "SYF",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000C2PL98",
+  "name" : "CULLEN/FROST BANKERS INC",
+  "ticker" : "CFR",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BVZP59",
+  "name" : "WEX INC",
+  "ticker" : "WEX",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BD1HP2",
+  "name" : "WR BERKLEY CORP",
+  "ticker" : "WRB",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BV7ZQ5",
+  "name" : "VANECK SEMICONDUCTOR",
+  "ticker" : "SMH",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000QQFVK6",
+  "name" : "RETAIL PROPERTIES OF AME - A",
+  "ticker" : "RPAI",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000MJRJJ2",
+  "name" : "HOWARD HUGHES CORP/THE",
+  "ticker" : "HHC",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000RGM5P1",
+  "name" : "TE CONNECTIVITY LTD",
+  "ticker" : "TEL",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG001636CR2",
+  "name" : "FIVE BELOW",
+  "ticker" : "FIVE",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG0039320N9",
+  "name" : "ZOETIS INC",
+  "ticker" : "ZTS",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG009DTD8H2",
+  "name" : "UNDER ARMOUR INC-CLASS C",
+  "ticker" : "UA",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG00K7ZQ662",
+  "name" : "IAA INC",
+  "ticker" : "IAA",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000T8ZF80",
+  "name" : "PRIMERICA INC",
+  "ticker" : "PRI",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000PLNQN7",
+  "name" : "VANECK GOLD MINERS",
+  "ticker" : "GDX",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000PG8230",
+  "name" : "SPDR EURO STOXX 50 ETF",
+  "ticker" : "FEZ",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000BKKQ84",
+  "name" : "COLUMBIA SPORTSWEAR CO",
+  "ticker" : "COLM",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BB6G37",
+  "name" : "ANALOG DEVICES INC",
+  "ticker" : "ADI",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BC9938",
+  "name" : "VMWARE INC-CLASS A",
+  "ticker" : "VMW",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BPDDB6",
+  "name" : "SILGAN HOLDINGS INC",
+  "ticker" : "SLGN",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000C17X76",
+  "name" : "BIOGEN INC",
+  "ticker" : "BIIB",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BVHBM1",
+  "name" : "TOLL BROTHERS INC",
+  "ticker" : "TOL",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BKVJK4",
+  "name" : "HASBRO INC",
+  "ticker" : "HAS",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BQSQ38",
+  "name" : "PAYCHEX INC",
+  "ticker" : "PAYX",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BQ5DS5",
+  "name" : "NORFOLK SOUTHERN CORP",
+  "ticker" : "NSC",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BWP7D9",
+  "name" : "WEC ENERGY GROUP INC",
+  "ticker" : "WEC",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BT1715",
+  "name" : "JM SMUCKER CO/THE",
+  "ticker" : "SJM",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BJCDS3",
+  "name" : "FIRST CITIZENS BCSHS  -CL A",
+  "ticker" : "FCNCA",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BL79J3",
+  "name" : "URBAN OUTFITTERS INC",
+  "ticker" : "URBN",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000C3GN47",
+  "name" : "CABOT OIL & GAS CORP",
+  "ticker" : "COG",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000CVWGS6",
+  "name" : "ACTIVISION BLIZZARD INC",
+  "ticker" : "ATVI",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000CGJMB9",
+  "name" : "ESSEX PROPERTY TRUST INC",
+  "ticker" : "ESS",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000DPRDJ1",
+  "name" : "WILEY (JOHN) & SONS-CLASS A",
+  "ticker" : "JW.A",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BSC0K9",
+  "name" : "DOLLAR TREE INC",
+  "ticker" : "DLTR",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BN84F3",
+  "name" : "QUEST DIAGNOSTICS INC",
+  "ticker" : "DGX",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000CQB185",
+  "name" : "ASSURED GUARANTY LTD",
+  "ticker" : "AGO",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG009S3NB30",
+  "name" : "ALPHABET INC-CL C",
+  "ticker" : "GOOG",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000F1C7F5",
+  "name" : "MERCURY GENERAL CORP",
+  "ticker" : "MCY",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000H3YXF8",
+  "name" : "CINTAS CORP",
+  "ticker" : "CTAS",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BKJ092",
+  "name" : "GENTEX CORP",
+  "ticker" : "GNTX",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BR3KL6",
+  "name" : "PARKER HANNIFIN CORP",
+  "ticker" : "PH",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000C2L2L0",
+  "name" : "JONES LANG LASALLE INC",
+  "ticker" : "JLL",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BH3JF8",
+  "name" : "DANAHER CORP",
+  "ticker" : "DHR",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000D7RKJ5",
+  "name" : "EDISON INTERNATIONAL",
+  "ticker" : "EIX",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000HCJMF9",
+  "name" : "PRUDENTIAL FINANCIAL INC",
+  "ticker" : "PRU",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BMTFR4",
+  "name" : "KLA CORP",
+  "ticker" : "KLAC",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000B9YJ35",
+  "name" : "AMPHENOL CORP-CL A",
+  "ticker" : "APH",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000DS5588",
+  "name" : "SPECTRUM BRANDS HOLDINGS INC",
+  "ticker" : "SPB",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000C5Z443",
+  "name" : "COLFAX CORP",
+  "ticker" : "CFX",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000DMBXR2",
+  "name" : "JPMORGAN CHASE & CO",
+  "ticker" : "JPM",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BZCKH3",
+  "name" : "METTLER-TOLEDO INTERNATIONAL",
+  "ticker" : "MTD",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BM7HL0",
+  "name" : "AUTODESK INC",
+  "ticker" : "ADSK",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BK9W84",
+  "name" : "GRACO INC",
+  "ticker" : "GGG",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BX6BJ3",
+  "name" : "ALLEGHANY CORP",
+  "ticker" : "Y",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BJ26K7",
+  "name" : "ALBEMARLE CORP",
+  "ticker" : "ALB",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BD3LM4",
+  "name" : "NUANCE COMMUNICATIONS INC",
+  "ticker" : "NUAN",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BMQPL1",
+  "name" : "KEYCORP",
+  "ticker" : "KEY",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BC2R71",
+  "name" : "ALLY FINANCIAL INC",
+  "ticker" : "ALLY",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000C8D8G9",
+  "name" : "BANK OF HAWAII CORP",
+  "ticker" : "BOH",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BT9DW0",
+  "name" : "SOUTHERN CO/THE",
+  "ticker" : "SO",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000L8CBX4",
+  "name" : "TRANSDIGM GROUP INC",
+  "ticker" : "TDG",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BFNR17",
+  "name" : "ALLIANCE DATA SYSTEMS CORP",
+  "ticker" : "ADS",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000CLP0Y4",
+  "name" : "NATIONAL RETAIL PROPERTIES",
+  "ticker" : "NNN",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BPWGR1",
+  "name" : "NORDSON CORP",
+  "ticker" : "NDSN",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000C29813",
+  "name" : "COPA HOLDINGS SA-CLASS A",
+  "ticker" : "CPA",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000MG3Y65",
+  "name" : "TWO HARBORS INVESTMENT CORP",
+  "ticker" : "TWO",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BMNBY1",
+  "name" : "EURONET WORLDWIDE INC",
+  "ticker" : "EEFT",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BMFD58",
+  "name" : "TD AMERITRADE HOLDING CORP",
+  "ticker" : "AMTD",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BKR1D6",
+  "name" : "WW GRAINGER INC",
+  "ticker" : "GWW",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000RTDY25",
+  "name" : "MSCI INC",
+  "ticker" : "MSCI",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000C3NTN5",
+  "name" : "HOLOGIC INC",
+  "ticker" : "HOLX",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BGBRG2",
+  "name" : "ENCOMPASS HEALTH CORP",
+  "ticker" : "EHC",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BD0TF8",
+  "name" : "FRANKLIN RESOURCES INC",
+  "ticker" : "BEN",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG00GNT7999",
+  "name" : "NVENT ELECTRIC PLC",
+  "ticker" : "NVT",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00BN969C1",
+  "name" : "CORTEVA INC",
+  "ticker" : "CTVA",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000FKJRC5",
+  "name" : "ESTEE LAUDER COMPANIES-CL A",
+  "ticker" : "EL",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG001C7PM75",
+  "name" : "GUIDEWIRE SOFTWARE INC",
+  "ticker" : "GWRE",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG001CGB489",
+  "name" : "VEEVA SYSTEMS INC-CLASS A",
+  "ticker" : "VEEV",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BVMGF2",
+  "name" : "ALLSTATE CORP",
+  "ticker" : "ALL",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000CS0D96",
+  "name" : "CREDIT ACCEPTANCE CORP",
+  "ticker" : "CACC",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000HF28Q9",
+  "name" : "CUBESMART",
+  "ticker" : "CUBE",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BLKK03",
+  "name" : "HUMANA INC",
+  "ticker" : "HUM",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000G30YX4",
+  "name" : "ALEXION PHARMACEUTICALS INC",
+  "ticker" : "ALXN",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BJW241",
+  "name" : "EAGLE MATERIALS INC",
+  "ticker" : "EXP",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG001KWG293",
+  "name" : "GRUBHUB INC",
+  "ticker" : "GRUB",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000C23KJ3",
+  "name" : "AES CORP",
+  "ticker" : "AES",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000WCFV84",
+  "name" : "LYONDELLBASELL INDU-CL A",
+  "ticker" : "LYB",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BJP882",
+  "name" : "FMC CORP",
+  "ticker" : "FMC",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000Q1R1Y9",
+  "name" : "BERRY GLOBAL GROUP INC",
+  "ticker" : "BERY",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BGVW60",
+  "name" : "DOMINION ENERGY INC",
+  "ticker" : "D",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000QF05R6",
+  "name" : "AMERICOLD REALTY TRUST",
+  "ticker" : "COLD",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG00BFHD827",
+  "name" : "LIBERTY MEDIA COR-SIRIUSXM A",
+  "ticker" : "LSXMA",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG003DNHV56",
+  "name" : "VALVOLINE INC",
+  "ticker" : "VVV",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000C3J3C9",
+  "name" : "CISCO SYSTEMS INC",
+  "ticker" : "CSCO",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BHD8S7",
+  "name" : "DUKE REALTY CORP",
+  "ticker" : "DRE",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000F79GY5",
+  "name" : "SERVICE PROPERTIES TRUST",
+  "ticker" : "SVC",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BWSGF4",
+  "name" : "BROWN & BROWN INC",
+  "ticker" : "BRO",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000D2M0Z7",
+  "name" : "SBA COMMUNICATIONS CORP",
+  "ticker" : "SBAC",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BMH2Q7",
+  "name" : "JACK HENRY & ASSOCIATES INC",
+  "ticker" : "JKHY",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000CC53X1",
+  "name" : "OSHKOSH CORP",
+  "ticker" : "OSK",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00NNG2ZJ8",
+  "name" : "XEROX HOLDINGS CORP",
+  "ticker" : "XRX",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BL46Q4",
+  "name" : "REGENCY CENTERS CORP",
+  "ticker" : "REG",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000H3GDJ8",
+  "name" : "KEMPER CORP",
+  "ticker" : "KMPR",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BJFJ98",
+  "name" : "ANNALY CAPITAL MANAGEMENT IN",
+  "ticker" : "NLY",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BKZB36",
+  "name" : "HOME DEPOT INC",
+  "ticker" : "HD",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BNMHS4",
+  "name" : "MANPOWERGROUP INC",
+  "ticker" : "MAN",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00CNYBQ76",
+  "name" : "CENTENNIAL RESOURCE DEVELO-A",
+  "ticker" : "CDEV",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000C43744",
+  "name" : "HIGHWOODS PROPERTIES INC",
+  "ticker" : "HIW",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000C46HM9",
+  "name" : "MACY'S INC",
+  "ticker" : "M",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000J1QLT0",
+  "name" : "CONSTELLATION BRANDS INC-A",
+  "ticker" : "STZ",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BCTLF6",
+  "name" : "BANK OF AMERICA CORP",
+  "ticker" : "BAC",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000CLNSF6",
+  "name" : "STERLING BANCORP/DE",
+  "ticker" : "STL",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BKTFN2",
+  "name" : "HALLIBURTON CO",
+  "ticker" : "HAL",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000D9DMK0",
+  "name" : "LABORATORY CRP OF AMER HLDGS",
+  "ticker" : "LH",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BCZL41",
+  "name" : "VERISK ANALYTICS INC",
+  "ticker" : "VRSK",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000PW5VX1",
+  "name" : "ANTERO RESOURCES CORP",
+  "ticker" : "AR",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BMKDM3",
+  "name" : "KELLOGG CO",
+  "ticker" : "K",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG0025X16Y5",
+  "name" : "SAGE THERAPEUTICS INC",
+  "ticker" : "SAGE",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BDD940",
+  "name" : "WABTEC CORP",
+  "ticker" : "WAB",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG006598YS8",
+  "name" : "PAYLOCITY HOLDING CORP",
+  "ticker" : "PCTY",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BBD070",
+  "name" : "HESS CORP",
+  "ticker" : "HES",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BBPFB9",
+  "name" : "APPLIED MATERIALS INC",
+  "ticker" : "AMAT",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000C4PLF7",
+  "name" : "OLD REPUBLIC INTL CORP",
+  "ticker" : "ORI",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000CFZ003",
+  "name" : "BOK FINANCIAL CORPORATION",
+  "ticker" : "BOKF",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG00HVVB499",
+  "name" : "VICI PROPERTIES INC",
+  "ticker" : "VICI",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000C2H3F0",
+  "name" : "CORELOGIC INC",
+  "ticker" : "CLGX",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BDXCJ5",
+  "name" : "CENTENE CORP",
+  "ticker" : "CNC",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BLG1L7",
+  "name" : "EQUITY COMMONWEALTH",
+  "ticker" : "EQC",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BNFLM9",
+  "name" : "LAM RESEARCH CORP",
+  "ticker" : "LRCX",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BH4R78",
+  "name" : "WALT DISNEY CO/THE",
+  "ticker" : "DIS",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BJ2RF7",
+  "name" : "INDUSTRIAL SELECT SECT SPDR",
+  "ticker" : "XLI",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000MQSW88",
+  "name" : "SPDR S&P HOMEBUILDERS ETF",
+  "ticker" : "XHB",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000C9F2F9",
+  "name" : "ALKERMES PLC",
+  "ticker" : "ALKS",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BLRT07",
+  "name" : "IDEXX LABORATORIES INC",
+  "ticker" : "IDXX",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000NDV1D4",
+  "name" : "T-MOBILE US INC",
+  "ticker" : "TMUS",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000C2PW58",
+  "name" : "BLACKROCK INC",
+  "ticker" : "BLK",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BJDB15",
+  "name" : "FREEPORT-MCMORAN INC",
+  "ticker" : "FCX",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG003LFWP05",
+  "name" : "BRIGHT HORIZONS FAMILY SOLUT",
+  "ticker" : "BFAM",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BRNLL2",
+  "name" : "ALIGN TECHNOLOGY INC",
+  "ticker" : "ALGN",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BCSST7",
+  "name" : "BOEING CO/THE",
+  "ticker" : "BA",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG00BDQ1H13",
+  "name" : "ATLASSIAN CORP PLC-CLASS A",
+  "ticker" : "TEAM",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG0029SNR63",
+  "name" : "CAPRI HOLDINGS LTD",
+  "ticker" : "CPRI",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000C6CFJ5",
+  "name" : "GOLDMAN SACHS GROUP INC",
+  "ticker" : "GS",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000GQGJT4",
+  "name" : "TREEHOUSE FOODS INC",
+  "ticker" : "THS",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000B9XRY4",
+  "name" : "APPLE INC",
+  "ticker" : "AAPL",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000F0CD91",
+  "name" : "HEICO CORP-CLASS A",
+  "ticker" : "HEI.A",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG001WTBC36",
+  "name" : "POST HOLDINGS INC",
+  "ticker" : "POST",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BSXQV7",
+  "name" : "SHERWIN-WILLIAMS CO/THE",
+  "ticker" : "SHW",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000BDXGP9",
+  "name" : "CONAGRA BRANDS INC",
+  "ticker" : "CAG",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000NS26Q8",
+  "name" : "HUNTSMAN CORP",
+  "ticker" : "HUN",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000DHSPT0",
+  "name" : "VIACOM INC-CLASS B",
+  "ticker" : "VIAB",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000F1ZSQ2",
+  "name" : "MASTERCARD INC - A",
+  "ticker" : "MA",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BSBZH7",
+  "name" : "ROSS STORES INC",
+  "ticker" : "ROST",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000QDVR53",
+  "name" : "CINEMARK HOLDINGS INC",
+  "ticker" : "CNK",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BW2QX0",
+  "name" : "UNUM GROUP",
+  "ticker" : "UNM",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BCVJ77",
+  "name" : "BAXTER INTERNATIONAL INC",
+  "ticker" : "BAX",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BBDZG3",
+  "name" : "AMERICAN INTERNATIONAL GROUP",
+  "ticker" : "AIG",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000NV1KK7",
+  "name" : "DOLLAR GENERAL CORP",
+  "ticker" : "DG",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG00BFHDFR4",
+  "name" : "LIBERTY MEDIA CORP-LIBERTY-C",
+  "ticker" : "FWONK",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BSJK37",
+  "name" : "AT&T INC",
+  "ticker" : "T",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BTVJ25",
+  "name" : "SYSCO CORP",
+  "ticker" : "SYY",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BS9489",
+  "name" : "OMNICOM GROUP",
+  "ticker" : "OMC",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BR14K5",
+  "name" : "CHUBB LTD",
+  "ticker" : "CB",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BK2F42",
+  "name" : "FIDELITY NATIONAL INFO SERV",
+  "ticker" : "FIS",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000R2T3H9",
+  "name" : "ISHARES IBOXX HIGH YLD CORP",
+  "ticker" : "HYG",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG001ZZPQJ6",
+  "name" : "ROKU INC",
+  "ticker" : "ROKU",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000BP6LJ8",
+  "name" : "ALTRIA GROUP INC",
+  "ticker" : "MO",
+  "sector" : "Consumer Staples"
+}, {
+  "instrumentId" : "BBG000BXW687",
+  "name" : "ISHARES US REAL ESTATE ETF",
+  "ticker" : "IYR",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000DW4LB1",
+  "name" : "ARMSTRONG WORLD INDUSTRIES",
+  "ticker" : "AWI",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG001B17MV2",
+  "name" : "WAYFAIR INC- CLASS A",
+  "ticker" : "W",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BJ9B29",
+  "name" : "FNB CORP",
+  "ticker" : "FNB",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BJ5HK0",
+  "name" : "ACUITY BRANDS INC",
+  "ticker" : "AYI",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BXM6V2",
+  "name" : "UNDER ARMOUR INC-CLASS A",
+  "ticker" : "UAA",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BQLTW7",
+  "name" : "ORACLE CORP",
+  "ticker" : "ORCL",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG007FG0C23",
+  "name" : "MADISON SQUARE GARDEN CO- A",
+  "ticker" : "MSG",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000PCQQL6",
+  "name" : "QURATE RETAIL INC-SERIES A",
+  "ticker" : "QRTEA",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000FGMKY1",
+  "name" : "LAMAR ADVERTISING CO-A",
+  "ticker" : "LAMR",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG0046LJYT2",
+  "name" : "FIRST HAWAIIAN INC",
+  "ticker" : "FHB",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000BFPK65",
+  "name" : "CINCINNATI FINANCIAL CORP",
+  "ticker" : "CINF",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG001YV1SM4",
+  "name" : "OKTA INC",
+  "ticker" : "OKTA",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG004LTL7L2",
+  "name" : "COMMSCOPE HOLDING CO INC",
+  "ticker" : "COMM",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BBNYF6",
+  "name" : "DARDEN RESTAURANTS INC",
+  "ticker" : "DRI",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BHGDH5",
+  "name" : "DUKE ENERGY CORP",
+  "ticker" : "DUK",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BRVP70",
+  "name" : "RYDER SYSTEM INC",
+  "ticker" : "R",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BB6M98",
+  "name" : "FIRSTENERGY CORP",
+  "ticker" : "FE",
+  "sector" : "Utilities"
+}, {
+  "instrumentId" : "BBG000BLNZL4",
+  "name" : "SYNOVUS FINANCIAL CORP",
+  "ticker" : "SNV",
+  "sector" : "Financials"
+}, {
+  "instrumentId" : "BBG000C0LW92",
+  "name" : "BOSTON SCIENTIFIC CORP",
+  "ticker" : "BSX",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000PXDL44",
+  "name" : "LKQ CORP",
+  "ticker" : "LKQ",
+  "sector" : "Consumer Discretionary"
+}, {
+  "instrumentId" : "BBG000BWJFZ4",
+  "name" : "CF INDUSTRIES HOLDINGS INC",
+  "ticker" : "CF",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG000PRJ2Z9",
+  "name" : "SPIRIT AEROSYSTEMS HOLD-CL A",
+  "ticker" : "SPR",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000BG1DH3",
+  "name" : "COHERENT INC",
+  "ticker" : "COHR",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000BWVCP8",
+  "name" : "WILLIAMS COS INC",
+  "ticker" : "WMB",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BL4504",
+  "name" : "CHESAPEAKE ENERGY CORP",
+  "ticker" : "CHK",
+  "sector" : "Energy"
+}, {
+  "instrumentId" : "BBG000BCPB71",
+  "name" : "AVNET INC",
+  "ticker" : "AVT",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000G3TQV2",
+  "name" : "CSG SYSTEMS INTL INC",
+  "ticker" : "CSGS",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000R7XX87",
+  "name" : "INSULET CORP",
+  "ticker" : "PODD",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG000BV4DR6",
+  "name" : "TERADYNE INC",
+  "ticker" : "TER",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000CZWZ05",
+  "name" : "BIOMARIN PHARMACEUTICAL INC",
+  "ticker" : "BMRN",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG00GX77LW3",
+  "name" : "BLACK KNIGHT INC",
+  "ticker" : "BKI",
+  "sector" : "Information Technology"
+}, {
+  "instrumentId" : "BBG000FS8GY0",
+  "name" : "ISHARES NASDAQ BIOTECHNOLOGY",
+  "ticker" : "IBB",
+  "sector" : null
+}, {
+  "instrumentId" : "BBG000BWGYF8",
+  "name" : "VULCAN MATERIALS CO",
+  "ticker" : "VMC",
+  "sector" : "Materials"
+}, {
+  "instrumentId" : "BBG003NXJNH6",
+  "name" : "AMERICAN HOMES 4 RENT- A",
+  "ticker" : "AMH",
+  "sector" : "Real Estate"
+}, {
+  "instrumentId" : "BBG000BQ4WF8",
+  "name" : "EXELIXIS INC",
+  "ticker" : "EXEL",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG001KJ2HM9",
+  "name" : "HUNTINGTON INGALLS INDUSTRIE",
+  "ticker" : "HII",
+  "sector" : "Industrials"
+}, {
+  "instrumentId" : "BBG000C734W3",
+  "name" : "REGENERON PHARMACEUTICALS",
+  "ticker" : "REGN",
+  "sector" : "Health Care"
+}, {
+  "instrumentId" : "BBG00L2DB535",
+  "name" : "SOHU.COM LTD-ADR",
+  "ticker" : "SOHU",
+  "sector" : "Telecommunication Services"
+}, {
+  "instrumentId" : "BBG000C060M4",
+  "name" : "AFFILIATED MANAGERS GROUP",
+  "ticker" : "AMG",
+  "sector" : "Financials"
+} ]

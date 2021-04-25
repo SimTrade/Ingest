@@ -1,0 +1,9 @@
+# exclude everything
+Library/Research/*
+node_modules/*
+Library/Secrets/*
+# exception to the rule
+!Library/Research/.gitkeep 
+
+# ignore stupid mac file
+**/.DS_Store

@@ -203,10 +203,10 @@ if (process.argv[2]) {
 		var back = dateObj.setDate(dateObj.getDate() - input)
 		ModelRunner.Build_Stock_Weekly(back)
 	}
-	else if ("Build_ShortVolume" == process.argv[2]) {
+	else if ("DailyIngest_ShortVolume" == process.argv[2]) {
 		var input = Number(process.argv[3]!=(undefined)?process.argv[3]:0)
 		var back = dateObj.setDate(dateObj.getDate() - input)
-		ModelRunner.TransformShortVolume(back)
+		ModelRunner.DailyIngest_ShortVolume(back)
 	}
 	else if ("RunEtfWeekly" == process.argv[2]) { //run on friday
 		Builder.RunEtfWeekly()
@@ -498,7 +498,7 @@ function HistoricTransformBuilder(daysback, indexAdder, incrementer, method) {
 				var dateTime = new Date()
 				var howFar = dateTime.setDate(dateTime.getDate() - (i + indexAdder))
 				var day_of_reference = new Date(howFar).toJSON().slice(0, 10)
-				if(i >300){ //dont run longer than a year for performance data leaks
+				if(i >201){ //dont run longer than a year for performance data leaks
 					console.log("indexer: "+(i + indexAdder))
 					console.log("date: "+day_of_reference)
 					throw "*********** DONE **********************"

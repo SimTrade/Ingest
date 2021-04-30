@@ -1,5 +1,6 @@
 # exclude everything
 Library/Research/*
+Library/Logs/*
 node_modules/*
 Library/Secrets/*
 # exception to the rule
@@ -7,3 +8,4 @@ Library/Secrets/*
 
 # ignore stupid mac file
 **/.DS_Store
+node_modules

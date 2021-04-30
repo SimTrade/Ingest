@@ -158,6 +158,10 @@ module.exports = {
     var url = 'https://www.quandl.com/api/v3/datasets/FINRA/FNYX_' + symbol + '.json?api_key=gX1f8wse2g2dQjXmZ-dR';
     return ApiCall(url)
   },
+  DailyShortVolume: function (symbol,date) {
+    var url = 'https://www.quandl.com/api/v3/datasets/FINRA/FNYX_' + symbol + '.json?api_key=gX1f8wse2g2dQjXmZ-dR';
+    return ApiCall(url)
+  },
   VIXQuandl: function () {
 
     var url = 'https://www.quandl.com/api/v3/datasets/CHRIS/CBOE_VX1.json?api_key=gX1f8wse2g2dQjXmZ-dR';

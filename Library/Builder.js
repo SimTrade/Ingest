@@ -668,31 +668,65 @@ module.exports = {
     })
     
   },
-  ShortVolumeIngest: function (callback) {
+  TableIngestRunner: function (date,callback) {
     async.waterfall([
       function (callback) {
         console.log("ENTER 1 -------------------------------")
-        Runner(5000,"Top1000", Analyze.ShortVolume, 'ShortVolume', function () { console.log("Top1000 Done") })
+        TableIngestRunner(5000,"Top1000", Analyze.DailyShortVolume,date, 'ShortVolume', function () { console.log("Top1000 Done") })
         callback()
       },
       function (callback) {
         console.log("ENTER 2 -------------------------------")
-        Runner(5000,"Second1000", Analyze.ShortVolume, 'ShortVolume', function () { console.log("Second1000 Done") })
+        TableIngestRunner(5000,"Second1000", Analyze.DailyShortVolume,date, 'ShortVolume', function () { console.log("Second1000 Done") })
         callback()
       },
       function (callback) {
         console.log("ENTER 3 -------------------------------")
-        Runner(5000,"Third1000", Analyze.ShortVolume, 'ShortVolume', function () { console.log("Third1000 Done") })
+        TableIngestRunner(5000,"Third1000", Analyze.DailyShortVolume,date, 'ShortVolume', function () { console.log("Third1000 Done") })
         callback()
       },
       function (callback) {
         console.log("ENTER 4 -------------------------------")
-        Runner(5000,"Fourth1000", Analyze.ShortVolume, 'ShortVolume', function () { console.log("Fourth1000 Done") })
+        TableIngestRunner(5000,"Fourth1000", Analyze.DailyShortVolume,date, 'ShortVolume', function () { console.log("Fourth1000 Done") })
         callback()
       },
       function (callback) {
         console.log("ENTER 5 -------------------------------")
-        Runner(5000,"Last1000", Analyze.ShortVolume, 'ShortVolume', function () { console.log("Last1000 Done") })
+        TableIngestRunner(5000,"Last1000", Analyze.DailyShortVolume,date, 'ShortVolume', function () { console.log("Last1000 Done") })
+        callback()
+      }
+     ], function (err, result) {
+      if (err) return callback(err);
+    
+      callback(null, result);
+     });
+    
+  },
+  ShortVolumeIngest: function (callback) {
+    async.waterfall([
+      function (callback) {
+        console.log("ENTER 1 -------------------------------")
+        MongoIngestRunner(5000,"Top1000", Analyze.ShortVolume, 'ShortVolume', function () { console.log("Top1000 Done") })
+        callback()
+      },
+      function (callback) {
+        console.log("ENTER 2 -------------------------------")
+        MongoIngestRunner(5000,"Second1000", Analyze.ShortVolume, 'ShortVolume', function () { console.log("Second1000 Done") })
+        callback()
+      },
+      function (callback) {
+        console.log("ENTER 3 -------------------------------")
+        MongoIngestRunner(5000,"Third1000", Analyze.ShortVolume, 'ShortVolume', function () { console.log("Third1000 Done") })
+        callback()
+      },
+      function (callback) {
+        console.log("ENTER 4 -------------------------------")
+        MongoIngestRunner(5000,"Fourth1000", Analyze.ShortVolume, 'ShortVolume', function () { console.log("Fourth1000 Done") })
+        callback()
+      },
+      function (callback) {
+        console.log("ENTER 5 -------------------------------")
+        MongoIngestRunner(5000,"Last1000", Analyze.ShortVolume, 'ShortVolume', function () { console.log("Last1000 Done") })
         callback()
       }
      ], function (err, result) {
@@ -3015,7 +3049,7 @@ function Barcharts(symbol) {
     });
 
 }
-function Runner(interval,universe, analyzer, name, callback) {
+function MongoIngestRunner(interval,universe, analyzer, name, callback) {
   Stocklist.SymbolList(universe,
     function (stocks) {
       var length = stocks.length;
@@ -3030,6 +3064,34 @@ function Runner(interval,universe, analyzer, name, callback) {
             } catch {
               var data = analyzer(stocks[i]);
               MongoDb.Upsert(name, stocks[i], data)
+            }
+            console.log(name + ": " + i + "_" + stocks[i])
+            if (i == length - 1) {
+              callback()
+            }
+          }, interval * (i));
+        })(i);
+
+      }
+    })
+}
+function TableIngestRunner(interval,universe, analyzer,date, name, callback) {
+  Stocklist.SymbolList(universe,
+    function (stocks) {
+      var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
+   
+      var length = stocks.length;
+      for (var i = 0; i < length; i++) {
+
+        (function (i) {
+          setTimeout(function () {
+            try {
+              analyzer(date,stocks[i]).then(data => {
+                dataToAzureTableStorage("ShortVolume", tableService, ShortVolumeTask(data,stock[i],date))
+              });
+            } catch {
+              var data = analyzer(date,stocks[i]);
+              dataToAzureTableStorage("ShortVolume", tableService, ShortVolumeTask(data,stock[i],date))
             }
             console.log(name + ": " + i + "_" + stocks[i])
             if (i == length - 1) {
@@ -3108,24 +3170,20 @@ function AlphaVantageStockRunner(interval, analyzer, name, callback) {
       }
 
     })
-
 }
 
-/**
- * 
-   Technology: 0.12481209172828832,
-  Beta: -0.008317306577491653,
-  'Basic Materials': 0.0223499130015284,
-  Healthcare: 0.03181251582909182,
-  'Real Estate': 0.058577913107337835,
-  undefined: -0.012252324128197193,
-  Industrials: 0.0625531947006459,
-  'Consumer Cyclical': -0.06563149336642846,
-  'Financial Services': -0.11749019165142194,
-  Energy: -0.004053300599839142,
-  'Consumer Defensive': -0.0008278977758351995,
-  Utilities: -0.03055554828886319 
- */
+ function ShortVolumeTask(data,stock,date) {
+console.log(data,stock,date)
+  // var task = {
+  //   PartitionKey: { '_': date },
+  //   RowKey: { '_': stock },
+  //   growthDiff: { '_': data.Beta },
+  //   shortDay: { '_': data['Basic Materials'] },
+  //   shortWeekAvg: { '_': data['Healthcare'] },
+    
+  // };
+ // return task
+}
 function RiskTask(data) {
 
   var day = new Date().toJSON().slice(0, 10)

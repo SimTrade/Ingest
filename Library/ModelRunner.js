@@ -6,6 +6,7 @@ const AzureSecrets = require('./Secrets/Azure').Secrets()
 const Analyze = require('./Analyze');
 const Stocklist = require('./Stocklist');
 const MongoDb = require('./MongoDb.js')
+const Builder = require('./Builder');
 var jsonquery = require('json-query')
 const mkdirp = require('mkdirp');
 const colors = require('colors/safe');
@@ -201,10 +202,16 @@ async function Build_Macro(date) {
     })
 
 }
-async function Build_ShortVolume(date) {
+async function Transform_ShortVolume(date) {
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
     MongoDb.GetMongoShortVolume(date, 'ShortVolume', function (data) {
         AzureStorage.ToTable("ShortVolume", tableService, ShortVolumeTask(data),data);
+    })
+}
+async function DailyIngest_ShortVolume(date) {
+    var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
+    Builder.TableIngestRunner(date,function(){
+        console.log("done>>>>>>>>>>>>")
     })
 }
 async function Built_PickList(date) {
@@ -520,7 +527,11 @@ module.exports = {
     },
     TransformShortVolume: function (daysback) {
         var day = new Date(daysback).toJSON().slice(0, 10)
-        Build_ShortVolume(day)
+        Transform_ShortVolume(day)
+    },
+    DailyIngest_ShortVolume: function (daysback) {
+        var day = new Date(daysback).toJSON().slice(0, 10)
+        DailyIngest_ShortVolume(day)
     },
     Built_PickList: function (daysback) {
         var day = new Date(daysback).toJSON().slice(0, 10)

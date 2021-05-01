@@ -158,8 +158,11 @@ module.exports = {
     var url = 'https://www.quandl.com/api/v3/datasets/FINRA/FNYX_' + symbol + '.json?api_key=gX1f8wse2g2dQjXmZ-dR';
     return ApiCall(url)
   },
-  DailyShortVolume: function (symbol,date) {
-    var url = 'https://www.quandl.com/api/v3/datasets/FINRA/FNYX_' + symbol + '.json?api_key=gX1f8wse2g2dQjXmZ-dR';
+  DailyShortVolume: function (symbol,endDate) {
+    var day = new Date(endDate)
+        var back = day.setDate(day.getDate() - 30)
+        var startDate = new Date(back).toJSON().slice(0, 10)
+    var url = 'https://www.quandl.com/api/v3/datasets/FINRA/FNYX_' + symbol + '?start_date='+startDate+'&end_date='+endDate+'&api_key=gX1f8wse2g2dQjXmZ-dR';
     return ApiCall(url)
   },
   VIXQuandl: function () {

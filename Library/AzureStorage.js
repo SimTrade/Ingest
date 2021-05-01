@@ -66,7 +66,7 @@ module.exports = {
           tableService.createTableIfNotExists(tableName, function (error, result) {
              logging.appendToErrorLog(tableName,data,error)
           });
-        logging.appendToErrorLog(tableName,data,[date,error])
+        logging.appendToErrorLog(tableName,data,date,error)
       }
 
     });

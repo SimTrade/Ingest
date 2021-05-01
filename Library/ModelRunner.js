@@ -208,9 +208,9 @@ async function Transform_ShortVolume(date) {
         AzureStorage.ToTable("ShortVolume", tableService, ShortVolumeTask(data),data);
     })
 }
-async function DailyIngest_ShortVolume(date) {
+async function DailyIngest_ShortVolume(endDate,task) {
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-    Builder.TableIngestRunner(date,function(){
+    Builder.TableIngestRunner(10000, Analyze.DailyShortVolume,'ShortVolume',task,endDate,function(){
         console.log("done>>>>>>>>>>>>")
     })
 }
@@ -529,9 +529,8 @@ module.exports = {
         var day = new Date(daysback).toJSON().slice(0, 10)
         Transform_ShortVolume(day)
     },
-    DailyIngest_ShortVolume: function (daysback) {
-        var day = new Date(daysback).toJSON().slice(0, 10)
-        DailyIngest_ShortVolume(day)
+    DailyIngest_ShortVolume: function (day,task) {     
+        DailyIngest_ShortVolume(day,task)
     },
     Built_PickList: function (daysback) {
         var day = new Date(daysback).toJSON().slice(0, 10)

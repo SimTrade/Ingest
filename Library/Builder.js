@@ -668,31 +668,31 @@ module.exports = {
     })
     
   },
-  TableIngestRunner: function (date,callback) {
+  TableIngestRunner: function (interval, analyzeFunction,azureTableName,task,day,callback) {
     async.waterfall([
       function (callback) {
         console.log("ENTER 1 -------------------------------")
-        TableIngestRunner(5000,"Top1000", Analyze.DailyShortVolume,date, 'ShortVolume', function () { console.log("Top1000 Done") })
+        TableIngestRunner(interval,"Top1000", analyzeFunction,day, azureTableName,task, function () { console.log("Top1000 Done") })
         callback()
       },
       function (callback) {
         console.log("ENTER 2 -------------------------------")
-        TableIngestRunner(5000,"Second1000", Analyze.DailyShortVolume,date, 'ShortVolume', function () { console.log("Second1000 Done") })
+        TableIngestRunner(interval,"Second1000",analyzeFunction,day, azureTableName,task, function () { console.log("Second1000 Done") })
         callback()
       },
       function (callback) {
         console.log("ENTER 3 -------------------------------")
-        TableIngestRunner(5000,"Third1000", Analyze.DailyShortVolume,date, 'ShortVolume', function () { console.log("Third1000 Done") })
+        TableIngestRunner(interval,"Third1000", analyzeFunction,day, azureTableName,task, function () { console.log("Third1000 Done") })
         callback()
       },
       function (callback) {
         console.log("ENTER 4 -------------------------------")
-        TableIngestRunner(5000,"Fourth1000", Analyze.DailyShortVolume,date, 'ShortVolume', function () { console.log("Fourth1000 Done") })
+        TableIngestRunner(interval,"Fourth1000",analyzeFunction,day, azureTableName,task, function () { console.log("Fourth1000 Done") })
         callback()
       },
       function (callback) {
         console.log("ENTER 5 -------------------------------")
-        TableIngestRunner(5000,"Last1000", Analyze.DailyShortVolume,date, 'ShortVolume', function () { console.log("Last1000 Done") })
+        TableIngestRunner(interval,"Last1000", analyzeFunction,day, azureTableName,task, function () { console.log("Last1000 Done") })
         callback()
       }
      ], function (err, result) {
@@ -702,6 +702,28 @@ module.exports = {
      });
     
   },
+   ShortVolumeTask: function(data,stock,date) {
+  
+    var obj = JSON.parse(data).dataset.data  
+             
+    var day1 = obj[0][1] * obj[0][1]/ obj[0][3]
+    var day2 = obj[1][1] * obj[1][1]/ obj[1][3]
+    var day3 = obj[2][1] * obj[2][1]/ obj[2][3]
+    var day4 = obj[3][1] * obj[3][1]/ obj[3][3]
+    var day5 = obj[4][1] * obj[4][1]/ obj[4][3]
+    var day6 = obj[5][1] * obj[5][1]/ obj[5][3]
+    var wkAvg = (day2 + day3 + day4 + day5 + day6) / 5
+      var task = {
+        PartitionKey: { '_': date },
+        RowKey: { '_': stock },
+        growthDiff: { '_': (wkAvg - day1) },
+        shortDay: { '_': day1 },
+        shortWeekAvg: { '_': wkAvg },
+        
+      };
+      
+     return task
+    },
   ShortVolumeIngest: function (callback) {
     async.waterfall([
       function (callback) {
@@ -3075,7 +3097,7 @@ function MongoIngestRunner(interval,universe, analyzer, name, callback) {
       }
     })
 }
-function TableIngestRunner(interval,universe, analyzer,date, name, callback) {
+function TableIngestRunner(interval,universe, analyzer,day, azureTableName,task, callback) {
   Stocklist.SymbolList(universe,
     function (stocks) {
       var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
@@ -3086,14 +3108,17 @@ function TableIngestRunner(interval,universe, analyzer,date, name, callback) {
         (function (i) {
           setTimeout(function () {
             try {
-              analyzer(date,stocks[i]).then(data => {
-                dataToAzureTableStorage("ShortVolume", tableService, ShortVolumeTask(data,stock[i],date))
+              analyzer(stocks[i],day).then(data => {
+                var obj ={'symbol':stocks[i],
+              'backtest Date':day}
+              
+                dataToAzureTableStorage(azureTableName, tableService, task(data,stocks[i],day),obj,day)
               });
             } catch {
-              var data = analyzer(date,stocks[i]);
-              dataToAzureTableStorage("ShortVolume", tableService, ShortVolumeTask(data,stock[i],date))
+              var data = analyzer(stocks[i],day);
+              dataToAzureTableStorage(azureTableName, tableService, task(data,stocks[i],day),obj,day)
             }
-            console.log(name + ": " + i + "_" + stocks[i])
+            console.log(azureTableName + ": " + i + "_" + stocks[i])
             if (i == length - 1) {
               callback()
             }
@@ -3139,7 +3164,7 @@ function AlphaVantageEtfRunner(interval, analyzer, name, callback) {
 }
 
 function AlphaVantageStockRunner(interval, analyzer, name, callback) {
-  var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
+  //var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
   Stocklist.EtfListAndSymbols(
     function (stocks) {
       var length = stocks.length;
@@ -3173,16 +3198,26 @@ function AlphaVantageStockRunner(interval, analyzer, name, callback) {
 }
 
  function ShortVolumeTask(data,stock,date) {
-console.log(data,stock,date)
-  // var task = {
-  //   PartitionKey: { '_': date },
-  //   RowKey: { '_': stock },
-  //   growthDiff: { '_': data.Beta },
-  //   shortDay: { '_': data['Basic Materials'] },
-  //   shortWeekAvg: { '_': data['Healthcare'] },
+  
+var obj = JSON.parse(data).dataset.data  
+         
+var day1 = obj[0][1] * obj[0][1]/ obj[0][3]
+var day2 = obj[1][1] * obj[1][1]/ obj[1][3]
+var day3 = obj[2][1] * obj[2][1]/ obj[2][3]
+var day4 = obj[3][1] * obj[3][1]/ obj[3][3]
+var day5 = obj[4][1] * obj[4][1]/ obj[4][3]
+var day6 = obj[5][1] * obj[5][1]/ obj[5][3]
+var wkAvg = (day2 + day3 + day4 + day5 + day6) / 5
+  var task = {
+    PartitionKey: { '_': date },
+    RowKey: { '_': stock },
+    growthDiff: { '_': (wkAvg - day1) },
+    shortDay: { '_': day1 },
+    shortWeekAvg: { '_': wkAvg },
     
-  // };
- // return task
+  };
+  
+ return task
 }
 function RiskTask(data) {
 
@@ -3561,8 +3596,8 @@ function dataToAzureFileStorage(data, stock, name, fileService) {
   AzureStorage.Upload(day, stock, name, fileService, data);
 }
 
-function dataToAzureTableStorage(name, tableService, task) {
-  AzureStorage.ToTable(name, tableService, task);
+function dataToAzureTableStorage(name, tableService, task,data,date) {
+  AzureStorage.ToTable(name, tableService, task,data,date);
 }
 
 

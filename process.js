@@ -1,10 +1,13 @@
 /////////////////////////////////////////////////// DEPENDENCIES //////////////////////////////////////////////////////////////
 'use strict'
+process.env.UV_THREADPOOL_SIZE = 1028;
+
 const TwilioSecrets = require('./Library/Secrets/Twilio').Secrets()
 const twilio = require('twilio')(TwilioSecrets.SID, TwilioSecrets.AUTH);
 var jsdom = require("jsdom");
 var RunAlgo = require('./Library/RunAlgo')
 var GetDaily = require('./Library/GetDaily')
+const Analyze = require('./Library/Analyze');
 const { JSDOM } = jsdom;
 const mkdirp = require('mkdirp');
 const { document } = (new JSDOM('')).window;
@@ -32,6 +35,33 @@ if (process.argv[2]) {
 		});
 	}
 
+	/************** OHLC FUNCTIONS ************************ */
+	
+
+	/** 
+	* Builds daily ohlcv using 5000Universe
+	* in StocksDailyBacktester Table Storage
+	* RUN IN TASK SCHEDULER
+	*/
+	else if ("Scheduled_DailyIngest_StocksDailyBacktester" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var back = dateObj.setDate(dateObj.getDate() -input)
+		var range = dateObj.setDate(dateObj.getDate() -input+5)
+		var beginning = new Date(range).toJSON().slice(0, 10)
+		var day = new Date(back).toJSON().slice(0, 10)
+		Builder.Run('TIME_SERIES_DAILY_ADJUSTED',
+					'StocksDailyBacktester',
+					'compact',83000,
+					beginning,'')
+	}
+	else if ("HistoricDailyIngest_StocksDailyBacktester" == process.argv[2]) {
+		Builder.Run('TIME_SERIES_DAILY_ADJUSTED',
+					'StocksDailyBacktester',
+					'full',83000,
+					'2015-01-01','')
+	}
+	/*************end  OHLCV functions*************************** */
+
 	/************** SHORT VOLUME FUNCTIONS ************************ */
 	/** 
 	* Builds mongodb ShortVolume Table using 5000Universe
@@ -40,7 +70,7 @@ if (process.argv[2]) {
 	else if ("ShortVolumeIngest" == process.argv[2]) {
 		var day = new Date().toJSON().slice(0, 10)
 		try {
-			Builder.ShortVolumeIngest(function () {
+			Builder.MongoIngest(Analyze.ShortVolume, 'ShortVolume', 5000,function () {
 				console.log("DONE")
 			});
 		}
@@ -266,9 +296,7 @@ if (process.argv[2]) {
 			else if ("RunStockWeekly" == process.argv[2]) { //run on friday
 				Builder.RunStockWeekly()
 			}
-			else if ("RunDailyOCHV" == process.argv[2]) {
-				Builder.RunDailyOCHV()
-			}
+			
 			else if ("RapidApi_Single" == process.argv[2]) {
 				Builder.RapidApi_Single()
 			}// RapidApi_Single
@@ -547,7 +575,7 @@ function HistoricTransformBuilder(daysback, indexAdder, incrementer, method) {
 				var dateTime = new Date()
 				var howFar = dateTime.setDate(dateTime.getDate() - (i + indexAdder))
 				var day_of_reference = new Date(howFar).toJSON().slice(0, 10)
-				if (i > 201) { //dont run longer than a year for performance data leaks
+				if (i > 101) { //dont run longer than a year for performance data leaks
 					console.log("indexer: " + (i + indexAdder))
 					console.log("date: " + day_of_reference)
 					throw "*********** DONE **********************"

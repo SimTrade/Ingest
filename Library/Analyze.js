@@ -11,10 +11,22 @@ const textapi = new AYLIENTextAPI({
   application_key: "348381f55fce2d3f80848ece644a9885"
 });
 module.exports = {
-  //https://api.iextrading.com/1.0/stock/cfg/stats
-  //https://api.iextrading.com/1.0/stock/aapl/chart
-  //https://api.iextrading.com/1.0/stock/aapl/news
+  ShortVolume: function (symbol) {
+    var url = 'https://www.quandl.com/api/v3/datasets/FINRA/FNYX_' + symbol + '.json?api_key=gX1f8wse2g2dQjXmZ-dR';
+    return ApiCall(url)
+  },
+  DailyShortVolume: function (symbol,endDate) {
+    var day = new Date(endDate)
+        var back = day.setDate(day.getDate() - 30)
+        var startDate = new Date(back).toJSON().slice(0, 10)
+    var url = 'https://www.quandl.com/api/v3/datasets/FINRA/FNYX_' + symbol + '?start_date='+startDate+'&end_date='+endDate+'&api_key=gX1f8wse2g2dQjXmZ-dR';
+    return ApiCall(url)
+  },
 
+
+
+
+  
   stats: function (symbol) {
     var url = 'https://api.iextrading.com/1.0/stock/' + symbol + '/stats?token=' + iexToken;
     return ApiCall(url)
@@ -154,17 +166,7 @@ module.exports = {
     var url = 'https://www.quandl.com/api/v3/datasets/CFTC/020601_FO_L_ALL.json?api_key=gX1f8wse2g2dQjXmZ-dR';
     return ApiCall(url)
   },
-  ShortVolume: function (symbol) {
-    var url = 'https://www.quandl.com/api/v3/datasets/FINRA/FNYX_' + symbol + '.json?api_key=gX1f8wse2g2dQjXmZ-dR';
-    return ApiCall(url)
-  },
-  DailyShortVolume: function (symbol,endDate) {
-    var day = new Date(endDate)
-        var back = day.setDate(day.getDate() - 30)
-        var startDate = new Date(back).toJSON().slice(0, 10)
-    var url = 'https://www.quandl.com/api/v3/datasets/FINRA/FNYX_' + symbol + '?start_date='+startDate+'&end_date='+endDate+'&api_key=gX1f8wse2g2dQjXmZ-dR';
-    return ApiCall(url)
-  },
+ 
   VIXQuandl: function () {
 
     var url = 'https://www.quandl.com/api/v3/datasets/CHRIS/CBOE_VX1.json?api_key=gX1f8wse2g2dQjXmZ-dR';
@@ -340,12 +342,10 @@ module.exports = {
     var url = 'https://api.polygon.io/v1/meta/symbols/' + symbol + '/earnings?apiKey=' + apiKey;
     return ApiCall(url)
   },
-  RapidApi: function (symbol) {
-    return RapidApi_Timeseries(symbol,'TIME_SERIES_WEEKLY_ADJUSTED')
+  RapidApi: function (symbol,stock_time_series,output_size) {
+    return RapidApi_Timeseries(symbol,stock_time_series,output_size)
   },
-  RapidDailyOCHL: function (symbol) {
-    return RapidApi_Timeseries(symbol,'TIME_SERIES_DAILY_ADJUSTED')
-  },
+ 
   RapidApi_Single: function(callback){
     RapidApi_Single(callback)
   }
@@ -363,7 +363,7 @@ function buildDate(daysback) {
     day = '0' + day;
   return [year, month, day].join('-')
 }
-function RapidApi_Timeseries(symbol,funct) {
+function RapidApi_Timeseries(symbol,stock_time_series,output_size) {
   var run = new Promise(function (resolve, reject) {
     var http = require("https");
 
@@ -371,7 +371,8 @@ function RapidApi_Timeseries(symbol,funct) {
       "method": "GET",
       "hostname": "alpha-vantage.p.rapidapi.com",
       "port": null,
-      "path": "/query?symbol=" + symbol + "&datatype=json&function="+funct+"&outputsize=full",
+      "path": "/query?symbol=" + symbol + 
+              "&datatype=json&function="+stock_time_series+"&outputsize="+output_size,
       "headers": {
         "x-rapidapi-host": "alpha-vantage.p.rapidapi.com",
         "x-rapidapi-key": "c25cb216f4mshf884e46c3c24667p11a0b9jsn557c1341ee0e",

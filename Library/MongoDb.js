@@ -40,13 +40,13 @@ module.exports = {
           if (matchedCount && modifiedCount) {
             console.log(`Successfully added a new record.`)
 
-          } client.close();
+          }  
+          client.close();
         })
-        .catch(err => console.error(`Failed to add record:${tableName} ${symbol} ${err}`)
-        )
+        
 
     });
-
+    
   },
 
 
@@ -563,9 +563,10 @@ module.exports = {
     var client = new MongoClient(MongoDbUri.URI, { useNewUrlParser: true, useUnifiedTopology: true });
     client.connect(err => {
       var columnName = "Time Series (Daily)"
-     
+      console.log("obj")
       client.db("Fundamentals").collection(factor).find({}).toArray((error, result) => {
         var jsonCollectionstring = ''
+       
         if (!error) {
          
 
@@ -608,6 +609,7 @@ module.exports = {
                     var jsonify = '{' + (jsonString.substring(0, jsonString.length - 1)) + '}'
                     var obj = JSON.parse(jsonify)
                     obj.symbol = entity.name
+                    
                     callback(obj)
                     client.close();
                   }

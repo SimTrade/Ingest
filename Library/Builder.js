@@ -724,39 +724,47 @@ module.exports = {
       
      return task
     },
-  ShortVolumeIngest: function (callback) {
-    async.waterfall([
-      function (callback) {
-        console.log("ENTER 1 -------------------------------")
-        MongoIngestRunner(5000,"Top1000", Analyze.ShortVolume, 'ShortVolume', function () { console.log("Top1000 Done") })
-        callback()
-      },
-      function (callback) {
-        console.log("ENTER 2 -------------------------------")
-        MongoIngestRunner(5000,"Second1000", Analyze.ShortVolume, 'ShortVolume', function () { console.log("Second1000 Done") })
-        callback()
-      },
-      function (callback) {
-        console.log("ENTER 3 -------------------------------")
-        MongoIngestRunner(5000,"Third1000", Analyze.ShortVolume, 'ShortVolume', function () { console.log("Third1000 Done") })
-        callback()
-      },
-      function (callback) {
-        console.log("ENTER 4 -------------------------------")
-        MongoIngestRunner(5000,"Fourth1000", Analyze.ShortVolume, 'ShortVolume', function () { console.log("Fourth1000 Done") })
-        callback()
-      },
-      function (callback) {
-        console.log("ENTER 5 -------------------------------")
-        MongoIngestRunner(5000,"Last1000", Analyze.ShortVolume, 'ShortVolume', function () { console.log("Last1000 Done") })
-        callback()
-      }
-     ], function (err, result) {
-      if (err) return callback(err);
-    
-      callback(null, result);
-     });
+  MongoIngest: function (analyzeFunction, azureTableName,interval, callback) {
+    MongoIngestRunner(interval,"whatever", analyzeFunction, azureTableName, function () { console.log("Top1000 Done") })
 
+    // async.waterfall([
+    //   function (callback) {
+    //     console.log("ENTER 1 -------------------------------")
+    //       MongoIngestRunner(interval,"whatever", analyzeFunction, azureTableName, function () { console.log("Top1000 Done") })
+    //     callback()
+    //   },
+      // function (callback) {
+      //   console.log("ENTER 2 -------------------------------")
+      //    MongoIngestRunner(interval,"Second1000",analyzeFunction, azureTableName, function () { console.log("Second1000 Done") })
+      //   callback()
+      // },
+      // function (callback) {
+      //   console.log("ENTER 3 -------------------------------")
+      //     MongoIngestRunner(interval,"Third1000", analyzeFunction, azureTableName, function () { console.log("Third1000 Done") })
+      //   callback()
+      // },
+      // function (callback) {
+      //   console.log("ENTER 4 -------------------------------")
+      //     MongoIngestRunner(interval,"Fourth1000",analyzeFunction, azureTableName, function () { console.log("Fourth1000 Done") })
+      //   callback()
+      // },
+      // function (callback) {
+      //   console.log("ENTER 5 -------------------------------")
+      //   MongoIngestRunner(interval,"Last1000", analyzeFunction, azureTableName, function () { console.log("Last1000 Done") })
+      //   callback()
+      // }
+    //  ], function (err, result) {
+    //   if (err) return callback(err);
+    
+    //   callback(null, result);
+    //  });
+   // MongoIngestRunner(interval,"Top1000", analyzeFunction, azureTableName, function () { console.log("Top1000 Done") })
+
+  },
+  Run: function (stock_time_series,azureTableName,output_size,interval,begin,end) {
+    AlphaVantageStockRunner(interval,begin,end, Analyze.RapidApi, azureTableName,stock_time_series,output_size, function () {
+      console.log("RapidApi Done")
+    })
   },
   LogBeta: function (data) {
     var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
@@ -1651,11 +1659,7 @@ module.exports = {
       console.log(data)
     })
   },
-  RunDailyOCHV: function () {
-    AlphaVantageStockRunner(10000, Analyze.RapidDailyOCHL, 'StocksDaily', function () {
-      console.log("RapidApi Done")
-    })
-  },
+  
   RunEtfWeekly: function () {
     AlphaVantageEtfRunner(60000, Analyze.RapidApi, 'SectorEtfWeekly', function () {
       console.log("RapidApi Done")
@@ -3071,7 +3075,7 @@ function Barcharts(symbol) {
     });
 
 }
-function MongoIngestRunner(interval,universe, analyzer, name, callback) {
+async function  MongoIngestRunner(interval,universe, analyzer, name, callback) {
   Stocklist.SymbolList(universe,
     function (stocks) {
       var length = stocks.length;
@@ -3163,62 +3167,76 @@ function AlphaVantageEtfRunner(interval, analyzer, name, callback) {
 
 }
 
-function AlphaVantageStockRunner(interval, analyzer, name, callback) {
-  //var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-  Stocklist.EtfListAndSymbols(
-    function (stocks) {
-      var length = stocks.length;
-      // var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-      for (var i = 0; i < length; i++) {
+function AlphaVantageStockRunner(interval,begin,end, analyzer, name,stock_time_series,output_size, callback) {
+  var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
+  Stocklist.SymbolList("",
+  function (stocks) {
+    var length = stocks.length;
+    var open = "1. open"
+    var high = "2. high"
+    var low = "3. low"
+    var close = "4. close"
+    var adjustedClose = "5. adjusted close"
+    var volume = "6. volume"
+    for (var i = 0; i < length; i++) {
 
-        (function (i) {
-          setTimeout(function () {
-            try {
-              analyzer(stocks[i]).then(data => {
-                //     console.log(data)
-                MongoDb.Upsert(name, stocks[i], data)
-                //    dataToAzureFileStorage(data,stocks[i],name,fileService)
-              });
-            } catch {
-              var data = analyzer(stocks[i]);
-              //   console.log(data)
-              MongoDb.Upsert(name, stocks[i], data)
-              //   dataToAzureFileStorage(data,stocks[i],name,fileService)  
-            }
-            console.log(name + ": " + i + "_" + stocks[i])
-            if (i == length - 1) {
-              callback()
-            }
-          }, interval * (i));
-        })(i);
+      (function (i) {
+        setTimeout(function () {
+          try {
+            analyzer(stocks[i],stock_time_series,output_size).then(data => {
 
-      }
+              var vals = Object.values(JSON.parse(data))[1]
+              var keys = Object.keys(Object.values(JSON.parse(data))[1])
+              var datalength = keys.length
+              
+              for (var j = 0; j < datalength; j++) {
+                if (keys[j] < begin){
+                  throw 'threw';
+                  
+                }
+                if (keys[j] < end||end==''){
+                (function (j) {
+                  setTimeout(function () {
+                    var task = {
+                      PartitionKey: { '_': keys[j] },
+                      RowKey: { '_': stocks[i] },
+                      open: { '_': vals[keys[j]][open] },
+                      high: { '_': vals[keys[j]][high] },
+                      low: { '_': vals[keys[j]][low] },
+                      close: { '_': vals[keys[j]][close] },
+                      adjustedClose: { '_': vals[keys[j]][adjustedClose] },
+                      volume: { '_': vals[keys[j]][volume] }
+                    };
+                    var obj  = {
+                      'symbol':stocks[i],
+                      'backtest Date': keys[j]
+                    }
+                    
+                    
+                    console.log(task)
+                    AzureStorage.ToTable(name, tableService, task,obj,keys[j]);
 
-    })
+                  }, 50 * (j))
+                })(j)
+              }
+              }
+            });
+          } catch {
+           // var data = analyzer(stocks[i]);
+            console.log("tyr/catch for "+stocks[i] ) 
+          }
+          console.log(name + ": " + i + "_" + stocks[i])
+          if (i == length - 1) {
+            callback()
+          }
+        }, interval * (i));
+      })(i);
+
+    }
+
+  })
 }
 
- function ShortVolumeTask(data,stock,date) {
-  
-var obj = JSON.parse(data).dataset.data  
-         
-var day1 = obj[0][1] * obj[0][1]/ obj[0][3]
-var day2 = obj[1][1] * obj[1][1]/ obj[1][3]
-var day3 = obj[2][1] * obj[2][1]/ obj[2][3]
-var day4 = obj[3][1] * obj[3][1]/ obj[3][3]
-var day5 = obj[4][1] * obj[4][1]/ obj[4][3]
-var day6 = obj[5][1] * obj[5][1]/ obj[5][3]
-var wkAvg = (day2 + day3 + day4 + day5 + day6) / 5
-  var task = {
-    PartitionKey: { '_': date },
-    RowKey: { '_': stock },
-    growthDiff: { '_': (wkAvg - day1) },
-    shortDay: { '_': day1 },
-    shortWeekAvg: { '_': wkAvg },
-    
-  };
-  
- return task
-}
 function RiskTask(data) {
 
   var day = new Date().toJSON().slice(0, 10)

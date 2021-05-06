@@ -79,11 +79,47 @@ module.exports = {
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
     var symbolDistinct = []
     var query = new azure.TableQuery()
-    AzureStorage.GetTable(universe, tableService, query, function (data) {
+    AzureStorage.GetTable('Top1000', tableService, query, function (data) {
+      data = data.sort()
       data.forEach(function (x) {
-        symbolDistinct.push(Object.values(x.RowKey)[1])
+          symbolDistinct.push(Object.values(x.RowKey)[1])
       })
-      callback(symbolDistinct)
+      AzureStorage.GetTable('Second1000', tableService, query, function (data) {
+        data = data.sort()
+        data.forEach(function (x) {
+                  symbolDistinct.push(Object.values(x.RowKey)[1])  
+        })
+        AzureStorage.GetTable('Third1000', tableService, query, function (data) {
+          data = data.sort()
+          data.forEach(function (x) {
+            symbolDistinct.push(Object.values(x.RowKey)[1])
+          })
+          AzureStorage.GetTable('Fourth1000', tableService, query, function (data) {
+            data = data.sort()
+            data.forEach(function (x) {
+              symbolDistinct.push(Object.values(x.RowKey)[1])
+            })
+            AzureStorage.GetTable('Last1000', tableService, query, function (data) {
+              data = data.sort()
+              data.forEach(function (x) {
+                symbolDistinct.push(Object.values(x.RowKey)[1])
+              })
+              var collection = symbolDistinct.sort().filter(onlyUnique)
+              var temp = [] 
+              collection.forEach(function(x){
+                  temp.push(x)
+              })
+              var symbols = temp.sort().filter(onlyUnique)
+              console.log("symbollist length:"+ symbols.length)
+              callback(symbols)
+            }
+            )
+          }
+          )
+        }
+        )
+      }
+      )
     }
     )
 
@@ -287,3 +323,9 @@ function csv2array(data, delimeter) {
 
   return array;
 }
+
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
+}
+
+

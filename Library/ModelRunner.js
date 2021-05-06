@@ -202,10 +202,16 @@ async function Build_Macro(date) {
     })
 
 }
+async function Transform_DailyOhlcv(date) {
+    var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
+    MongoDb.GetMongoStockDaily(date, 'StocksDaily', function (data) {
+        AzureStorage.ToTable("StocksDailyBacktester", tableService, StockDailyTask(data),data,date);
+    })
+}
 async function Transform_ShortVolume(date) {
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
     MongoDb.GetMongoShortVolume(date, 'ShortVolume', function (data) {
-        AzureStorage.ToTable("ShortVolume", tableService, ShortVolumeTask(data),data);
+        AzureStorage.ToTable("ShortVolume", tableService, ShortVolumeTask(data),data,date);
     })
 }
 async function DailyIngest_ShortVolume(endDate,task) {
@@ -528,6 +534,10 @@ module.exports = {
     TransformShortVolume: function (daysback) {
         var day = new Date(daysback).toJSON().slice(0, 10)
         Transform_ShortVolume(day)
+    },
+    TransformDailyOhlcv: function (daysback) {
+        var day = new Date(daysback).toJSON().slice(0, 10)
+        Transform_DailyOhlcv(day)
     },
     DailyIngest_ShortVolume: function (day,task) {     
         DailyIngest_ShortVolume(day,task)

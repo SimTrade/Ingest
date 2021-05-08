@@ -225,46 +225,26 @@ function Built_Income(date) {
     Stocklist.SymbolList('',
         function (stocks) {
             var length = stocks.length;
-            var interval = 60*indexAdder>10000?60*indexAdder+1000:10000;
+            var interval = 60 * indexAdder > 10000 ? 60 * indexAdder + 1000 : 10000;
             var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
 
             for (var i = 0; i < length; i++) {
 
                 (function (i) {
                     setTimeout(function () {
-                        MongoDb.GetStockrowIncome('Income', stocks[i],
-                            ['Revenue',
-                            'Cost of Revenue',
-                            'Gross Profit',
-                            // 'SG&A Expenses',
-                            'Operating Income',
-                            // 'Non-operating Interest Expenses',
-                            // 'Non-operating Income/Expense',
-                            // 'EBT',
-                            // 'Income Tax Provision',
-                            'Income after Tax',
-                            // 'Net Income Common',
-                            // 'EPS (Basic)',
-                            // 'EPS (Diluted)',
-                            // 'Shares (Basic, Weighted)',
-                            // 'Shares (Diluted, Weighted)',
-                             'Gross Margin',
-                            // 'EBIT Margin',
-                            // 'EBT margin',
-                            'Net Profit Margin',
-                            'EBITDA',
-                            'EBIT',
-                            // 'Income from Continuous Operations',
-                            // 'Income from Discontinued Operations',
-                            // 'Consolidated Net Income/Loss',
-                            'EPS (Basic, from Continuous Ops)',
-                            // 'EPS (Diluted, from Cont. Ops)',
-                            // 'EPS (Basic, Consolidated)',
-                            // 'EPS (Diluted, Consolidated)',
-                            // 'Shares (Diluted, Average)',
-                            // 'EBITDA Margin',
-                            'Operating Cash Flow Margin'],date,indexAdder, function (data) {
-                                AzureStorage.ToTable("PickListTest", tableService, GenericTask(data),data,date);
+                        var fundamentals = {
+                            'Income': ['Income%20Statement', ['EBIT', 'Gross Margin']],
+                            'CashFlow': ['Cash%20Flow', ['Operating Cash Flow', 'Net Income']],
+                            'Metrics': ['Metrics', ['Asset Turnover', 'EV/Sales', 'EV/EBIT', 'EV/EBITDA', 'Market Cap', 'Debt/Assets', 'P/E ratio']],
+                            'BalanceSheet': ['Balance%20Sheet', ['Retained Earnings', 'Total liabilities', 'Total Assets', 'Total current liabilities',
+                                'Total current assets', 'Long Term Debt (Total)']],
+                            'Growth': ['Growth', ['EPS Growth (diluted)']]
+                        }
+
+                        //fundamentals, stock, date, indexAdder, callback
+                        MongoDb.GetStockrowFundamentals('Growth', fundamentals, stocks[i],
+                            date, indexAdder, function (data) {
+                                AzureStorage.ToTable("PickListTest", tableService, GenericTask(data), data, date);
                             })
 
                         if (i == length - 1) {
@@ -547,36 +527,19 @@ function GrowthTask(data) {
 function GenericTask(data) {
     var obj = JSON.parse(data)
     var jsonString = ''
-    for (const [k, value] of Object.entries(obj)) {
-        var sub = typeof value==='number'? '{ "_":'+value+'},':'{ "_":"'+value+'"},'
+    for (const [k, v] of Object.entries(obj)) {
+        var value = typeof v === 'number' ? '{ "_":' + v + '},' : '{ "_":"' + v + '"},'
         var key = k;
-        if (key == 'symbol')
-        {
+        if (key == 'symbol') {
             key = 'RowKey'
         }
-        if (key == 'backtest Date'){
+        if (key == 'backtest Date') {
             key = 'PartitionKey'
         }
-        jsonString += '"'+key+'":'+sub
-      }
-      
-    var  task =  JSON.parse('{' + (jsonString.substring(0, jsonString.length - 1)) + '}')
-    console.log(task)
-    // var task = {
-    //     PartitionKey: { '_': obj["backtest Date"] },
-    //     RowKey: { '_': obj.symbol },
+        jsonString += '"' + key + '":' + value
+    }
 
-    //     GrossMargin: { '_': obj['Gross Margin'] },
-    //     GrossMargin_lastYear: { '_': obj['Gross Margin' + _lastYear] },
-    //     GrossMargin_lastYear_REPORT_DATE: { '_': obj['Gross Margin' + _lastYear_REPORT_DATE] },
-    //     GrossMargin_REPORT_DATE: { '_': obj['Gross Margin' + _REPORT_DATE] },
-
-    //     EBIT: { '_': obj['EBIT'] },
-    //     EBIT_lastYear: { '_': obj['EBIT' + _lastYear] },
-    //     EBIT_lastYear_REPORT_DATE: { '_': obj['EBIT' + _lastYear_REPORT_DATE] },
-    //     EBIT_REPORT_DATE: { '_': obj['EBIT' + _REPORT_DATE] }
-    // };
-    
+    var task = JSON.parse('{' + (jsonString.substring(0, jsonString.length - 1)) + '}')
     return task
 }
 module.exports = {

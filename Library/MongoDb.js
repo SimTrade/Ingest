@@ -44,24 +44,7 @@ function csvToJSON(type, data, symbol) {
   jsonString += "]}]}";
   return jsonString;
 }
-function empty(data) {
-  if (typeof (data) == 'number' || typeof (data) == 'boolean') {
-    return false;
-  }
-  if (typeof (data) == 'undefined' || data === null) {
-    return true;
-  }
-  if (typeof (data.length) != 'undefined') {
-    return data.length == 0;
-  }
-  var count = 0;
-  for (var i in data) {
-    if (data.hasOwnProperty(i)) {
-      count++;
-    }
-  }
-  return count == 0;
-}
+
 function parserMethod(entity, stock, factorArray, date, callback) {
   try {
     var jsonString = '"symbol":"' + stock + '",'
@@ -128,14 +111,14 @@ function IsTradingDay(tradingDay, callback) {
     xhttp.send();
   })
   get.then(function (json) {
-    callback(true)//JSON.parse(json)[0].date == tradingDay)
+    callback(JSON.parse(json)[0].date == tradingDay)
   });
 }
 module.exports = {
-  GetStockrowIncome: function (name, stock, factorArray, date, indexAdder, callback) {
-
-
-    var url = "https://stockrow.com/api/companies/" + stock + "/financials.xlsx?dimension=Q&section=Income%20Statement&sort=desc";
+  GetStockrowFundamentals: function (name, fundamentals, stock, date, indexAdder, callback) {
+       var endpoint = fundamentals[name][0]
+       var factorArray = fundamentals[name][1]
+    var url = "https://stockrow.com/api/companies/" + stock + "/financials.xlsx?dimension=Q&section="+endpoint+"&sort=desc";
     download(url).then(data => {
 
       var incrementer = 40

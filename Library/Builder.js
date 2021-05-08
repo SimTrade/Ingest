@@ -779,6 +779,7 @@ module.exports = {
     GetPortfolio(callback)
   },
   GetCalendar: function (tradingDay, callback) {
+   
     IsTradingDay(tradingDay, callback)
   },
   CancelAllOrders: function () {
@@ -2438,6 +2439,7 @@ function CallbackAPIPromise(array, functional, interval, callback) {
 }
 function unitOfWork(i, length, url, stocks, name, fileService) {
   download(url).then(data => {
+    
     var jsonText = csvToJSON("_" + name, data, stocks[i])
     //  dataToAzureFileStorage(jsonText,stocks[i],name,fileService)
     MongoDb.Upsert(name, stocks[i], jsonText)
@@ -3223,7 +3225,7 @@ function AlphaVantageStockRunner(interval,begin,end, analyzer, name,stock_time_s
             });
           } catch {
            // var data = analyzer(stocks[i]);
-            console.log("tyr/catch for "+stocks[i] ) 
+            console.log("tyr/catch for ") 
           }
           console.log(name + ": " + i + "_" + stocks[i])
           if (i == length - 1) {

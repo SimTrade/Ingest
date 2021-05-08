@@ -34,10 +34,34 @@ if (process.argv[2]) {
 			console.log("DONE")
 		});
 	}
+	/************** PICKLIST FUNCTIONS ************************ */	
+	/** 
+	* Builds daily ohlcv using 5000Universe
+	* in StocksDailyBacktester Table Storage
+	* RUN IN TASK SCHEDULER
+	*/
+	else if ("Scheduled_WeeklyIngest_Picklist" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var back = dateObj.setDate(dateObj.getDate() -input)
+		var range = dateObj.setDate(dateObj.getDate() -(input+10))
+		var beginning = new Date(range).toJSON().slice(0, 10)
+		var day = new Date(back).toJSON().slice(0, 10)
+		console.log(beginning)
+		Builder.Run('TIME_SERIES_DAILY_ADJUSTED',
+					'StocksDailyBacktester',
+					'compact',1000,
+					beginning,'')
+	}
+	else if ("HistoricWeeklyIncome_Picklist" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var back = dateObj.setDate(dateObj.getDate() -input)
+		ModelRunner.Built_Income(back)
+		//HistoricPicklistBuilder(355 * 7, input, 100000, ModelRunner.Built_Income)
+	}
+	/*************end  PICKLIST functions*************************** */
+/***********************************************************************************************************/
 
-	/************** OHLC FUNCTIONS ************************ */
-	
-
+	/************** OHLC FUNCTIONS ************************ */	
 	/** 
 	* Builds daily ohlcv using 5000Universe
 	* in StocksDailyBacktester Table Storage
@@ -46,12 +70,13 @@ if (process.argv[2]) {
 	else if ("Scheduled_DailyIngest_StocksDailyBacktester" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var back = dateObj.setDate(dateObj.getDate() -input)
-		var range = dateObj.setDate(dateObj.getDate() -input+5)
+		var range = dateObj.setDate(dateObj.getDate() -(input+10))
 		var beginning = new Date(range).toJSON().slice(0, 10)
 		var day = new Date(back).toJSON().slice(0, 10)
+		console.log(beginning)
 		Builder.Run('TIME_SERIES_DAILY_ADJUSTED',
 					'StocksDailyBacktester',
-					'compact',83000,
+					'compact',1000,
 					beginning,'')
 	}
 	else if ("HistoricDailyIngest_StocksDailyBacktester" == process.argv[2]) {
@@ -61,7 +86,7 @@ if (process.argv[2]) {
 					'2015-01-01','')
 	}
 	/*************end  OHLCV functions*************************** */
-
+/***********************************************************************************************************/
 	/************** SHORT VOLUME FUNCTIONS ************************ */
 	/** 
 	* Builds mongodb ShortVolume Table using 5000Universe
@@ -584,6 +609,37 @@ function HistoricTransformBuilder(daysback, indexAdder, incrementer, method) {
 					Builder.GetCalendar(day_of_reference, function (isTradingDay) {
 						if (isTradingDay) {
 							method(day_of_reference)
+							console.log("TRADING TODAY: " + day_of_reference)
+						}
+						else {
+							console.log("NOT TRADING ON: " + day_of_reference)
+						}
+					})
+
+				} catch {
+					console.log("HistoricTransformBuilder has NO DATA THIS ITERATION " + (i + indexAdder) + " For Date " + day_of_reference)
+				}
+			}, (i == 0 ? 1 : i * incrementer));
+		})(i);
+	}
+}
+function HistoricPicklistBuilder(daysback, indexAdder, incrementer, method) {
+	for (var i = 0; i < daysback; i++) {
+		(function (i) {
+			setTimeout(function () {
+				console.log("____________Daysback: " + (i + indexAdder))
+				var dateTime = new Date()
+				var howFar = dateTime.setDate(dateTime.getDate() - (i + indexAdder))
+				var day_of_reference = new Date(howFar).toJSON().slice(0, 10)
+				if (i > 101) { //dont run longer than a year for performance data leaks
+					console.log("indexer: " + (i + indexAdder))
+					console.log("date: " + day_of_reference)
+					throw "*********** DONE **********************"
+				}
+				try {
+					Builder.GetCalendar(day_of_reference, function (isTradingDay) {
+						if (isTradingDay) {
+							method(day_of_reference,indexAdder)
 							console.log("TRADING TODAY: " + day_of_reference)
 						}
 						else {

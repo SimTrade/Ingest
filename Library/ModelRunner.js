@@ -14,7 +14,7 @@ const fs = require('fs');
 const { callbackify } = require("util");
 
 async function BuildOBV(input) {
-    console.log(input+"Build OBV")
+    console.log(input + "Build OBV")
     var dateObj = new Date()
     var end = dateObj.setDate(dateObj.getDate() - input)
     var begin = dateObj.setDate((new Date(end)).getDate() - 20)
@@ -33,7 +33,7 @@ async function BuildOBV(input) {
                     var data = result.filter(obj => {
                         return Object.values(obj.RowKey)[1] == symbol
                     })
-            
+
                     var tenDayobv = 0
                     var fiveDayobv = 0
                     var twoDayobv = 0
@@ -42,7 +42,7 @@ async function BuildOBV(input) {
                     for (var i = length; i > length - 10; i--) {
 
                         if (data[i] != undefined) {
-                        
+
                             sumVol += Object.values(data[i].volume)[0]
 
 
@@ -71,27 +71,27 @@ async function BuildOBV(input) {
                     tenDayobv = tenDayobv / avgVol / length
                     fiveDayobv = fiveDayobv / avgVol / 7
                     twoDayobv = twoDayobv / avgVol / 4
-                    var isObvBull = twoDayobv>0 && twoDayobv > fiveDayobv && fiveDayobv > tenDayobv
+                    var isObvBull = twoDayobv > 0 && twoDayobv > fiveDayobv && fiveDayobv > tenDayobv
                     var isObvBear = twoDayobv < 0 && (fiveDayobv < 0 || tenDayobv < 0) && (fiveDayobv < tenDayobv || twoDayobv < fiveDayobv)
-                   
-                   
-                   
+
+
+
                     var obj = {
 
                         "symbol": symbol,
                         "tenDayobv": tenDayobv,
                         "fiveDayobv": fiveDayobv,
                         "twoDayobv": twoDayobv,
-                        "score": (twoDayobv+fiveDayobv)/2,
+                        "score": (twoDayobv + fiveDayobv) / 2,
                         "bull": isObvBull,
                         "bear": isObvBear,
                         "date": end
                     }
                     console.log(obj)
-                    if(obj != undefined || obj.symbol != undefined){
+                    if (obj != undefined || obj.symbol != undefined) {
                         AzureStorage.ToTable("OBV", tableService, obvDailyTask(obj));
                     }
-                    
+
                 })
 
             })
@@ -205,20 +205,76 @@ async function Build_Macro(date) {
 async function Transform_DailyOhlcv(date) {
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
     MongoDb.GetMongoStockDaily(date, 'StocksDaily', function (data) {
-        AzureStorage.ToTable("StocksDailyBacktester", tableService, StockDailyTask(data),data,date);
+        AzureStorage.ToTable("StocksDailyBacktester", tableService, StockDailyTask(data), data, date);
     })
 }
 async function Transform_ShortVolume(date) {
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
     MongoDb.GetMongoShortVolume(date, 'ShortVolume', function (data) {
-        AzureStorage.ToTable("ShortVolume", tableService, ShortVolumeTask(data),data,date);
+        AzureStorage.ToTable("ShortVolume", tableService, ShortVolumeTask(data), data, date);
     })
 }
-async function DailyIngest_ShortVolume(endDate,task) {
+async function DailyIngest_ShortVolume(endDate, task) {
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-    Builder.TableIngestRunner(10000, Analyze.DailyShortVolume,'ShortVolume',task,endDate,function(){
+    Builder.TableIngestRunner(10000, Analyze.DailyShortVolume, 'ShortVolume', task, endDate, function () {
         console.log("done>>>>>>>>>>>>")
     })
+}
+function Built_Income(date) {
+    var indexAdder = 10
+    Stocklist.SymbolList('',
+        function (stocks) {
+            var length = stocks.length;
+            var interval = 60*indexAdder>10000?60*indexAdder+1000:10000;
+            var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
+
+            for (var i = 0; i < length; i++) {
+
+                (function (i) {
+                    setTimeout(function () {
+                        MongoDb.GetStockrowIncome('Income', stocks[i],
+                            ['Revenue',
+                            'Cost of Revenue',
+                            'Gross Profit',
+                            // 'SG&A Expenses',
+                            'Operating Income',
+                            // 'Non-operating Interest Expenses',
+                            // 'Non-operating Income/Expense',
+                            // 'EBT',
+                            // 'Income Tax Provision',
+                            'Income after Tax',
+                            // 'Net Income Common',
+                            // 'EPS (Basic)',
+                            // 'EPS (Diluted)',
+                            // 'Shares (Basic, Weighted)',
+                            // 'Shares (Diluted, Weighted)',
+                             'Gross Margin',
+                            // 'EBIT Margin',
+                            // 'EBT margin',
+                            'Net Profit Margin',
+                            'EBITDA',
+                            'EBIT',
+                            // 'Income from Continuous Operations',
+                            // 'Income from Discontinued Operations',
+                            // 'Consolidated Net Income/Loss',
+                            'EPS (Basic, from Continuous Ops)',
+                            // 'EPS (Diluted, from Cont. Ops)',
+                            // 'EPS (Basic, Consolidated)',
+                            // 'EPS (Diluted, Consolidated)',
+                            // 'Shares (Diluted, Average)',
+                            // 'EBITDA Margin',
+                            'Operating Cash Flow Margin'],date,indexAdder, function (data) {
+                                AzureStorage.ToTable("PickListTest", tableService, GenericTask(data),data,date);
+                            })
+
+                        if (i == length - 1) {
+                            callback()
+                        }
+                    }, interval * (i));
+                })(i);
+            }
+        })
+
 }
 async function Built_PickList(date) {
 
@@ -228,7 +284,7 @@ async function Built_PickList(date) {
 
         MongoDb.GetMongoFundamentals(date, 'Income',
             ['EBIT', 'Gross Margin'], function (data) {
-                AzureStorage.ToTable("PickList", tableService, IncomeTask(data));
+                AzureStorage.ToTable("PickList", tableService, GenericTask(data));
             })
 
 
@@ -268,10 +324,10 @@ const _lastYear = '_lastYear'
 const _lastYear_REPORT_DATE = '_lastYear_REPORT_DATE'
 const _REPORT_DATE = '_REPORT_DATE'
 
-function obvDailyTask(obj){
+function obvDailyTask(obj) {
     var task = {
-        PartitionKey: { '_': obj.date},
-        RowKey: { '_': obj.symbol !=undefined?obj.symbol:'' },
+        PartitionKey: { '_': obj.date },
+        RowKey: { '_': obj.symbol != undefined ? obj.symbol : '' },
         tenDayobv: { '_': obj.tenDayobv },
         fiveDayobv: { '_': obj.fiveDayobv },
         twoDayobv: { '_': obj.twoDayobv },
@@ -488,23 +544,39 @@ function GrowthTask(data) {
     return task
 }
 
-function IncomeTask(data) {
+function GenericTask(data) {
     var obj = JSON.parse(data)
-    var task = {
-        PartitionKey: { '_': obj["backtest Date"] },
-        RowKey: { '_': obj.symbol },
-
-        GrossMargin: { '_': obj['Gross Margin'] },
-        GrossMargin_lastYear: { '_': obj['Gross Margin' + _lastYear] },
-        GrossMargin_lastYear_REPORT_DATE: { '_': obj['Gross Margin' + _lastYear_REPORT_DATE] },
-        GrossMargin_REPORT_DATE: { '_': obj['Gross Margin' + _REPORT_DATE] },
-
-        EBIT: { '_': obj['EBIT'] },
-        EBIT_lastYear: { '_': obj['EBIT' + _lastYear] },
-        EBIT_lastYear_REPORT_DATE: { '_': obj['EBIT' + _lastYear_REPORT_DATE] },
-        EBIT_REPORT_DATE: { '_': obj['EBIT' + _REPORT_DATE] }
-    };
+    var jsonString = ''
+    for (const [k, value] of Object.entries(obj)) {
+        var sub = typeof value==='number'? '{ "_":'+value+'},':'{ "_":"'+value+'"},'
+        var key = k;
+        if (key == 'symbol')
+        {
+            key = 'RowKey'
+        }
+        if (key == 'backtest Date'){
+            key = 'PartitionKey'
+        }
+        jsonString += '"'+key+'":'+sub
+      }
+      
+    var  task =  JSON.parse('{' + (jsonString.substring(0, jsonString.length - 1)) + '}')
     console.log(task)
+    // var task = {
+    //     PartitionKey: { '_': obj["backtest Date"] },
+    //     RowKey: { '_': obj.symbol },
+
+    //     GrossMargin: { '_': obj['Gross Margin'] },
+    //     GrossMargin_lastYear: { '_': obj['Gross Margin' + _lastYear] },
+    //     GrossMargin_lastYear_REPORT_DATE: { '_': obj['Gross Margin' + _lastYear_REPORT_DATE] },
+    //     GrossMargin_REPORT_DATE: { '_': obj['Gross Margin' + _REPORT_DATE] },
+
+    //     EBIT: { '_': obj['EBIT'] },
+    //     EBIT_lastYear: { '_': obj['EBIT' + _lastYear] },
+    //     EBIT_lastYear_REPORT_DATE: { '_': obj['EBIT' + _lastYear_REPORT_DATE] },
+    //     EBIT_REPORT_DATE: { '_': obj['EBIT' + _REPORT_DATE] }
+    // };
+    
     return task
 }
 module.exports = {
@@ -539,12 +611,17 @@ module.exports = {
         var day = new Date(daysback).toJSON().slice(0, 10)
         Transform_DailyOhlcv(day)
     },
-    DailyIngest_ShortVolume: function (day,task) {     
-        DailyIngest_ShortVolume(day,task)
+    DailyIngest_ShortVolume: function (day, task) {
+        DailyIngest_ShortVolume(day, task)
     },
     Built_PickList: function (daysback) {
         var day = new Date(daysback).toJSON().slice(0, 10)
         Built_PickList(day)
+
+    },
+    Built_Income: function (daysback) {
+        var day = new Date(daysback).toJSON().slice(0, 10)
+        Built_Income(day)
 
     }
 

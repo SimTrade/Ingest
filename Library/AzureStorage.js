@@ -58,7 +58,7 @@ module.exports = {
     
     tableService.insertOrMergeEntity(tableName, task, function (error, result, response) {
       if (!error) {
-        console.log(data.symbol+" entered:"+data['backtest Date'])
+        console.log(JSON.parse(data).symbol+" entered:"+JSON.parse(data)['backtest Date'])
         
       }
       else {

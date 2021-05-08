@@ -1,11 +1,181 @@
 
 const MongoClient = require('mongodb').MongoClient;
 const MongoDbUri = require('./Secrets/Azure').MongoDbUri()
-const fs = require('fs');
-const { isPlainObject, result, toArray } = require('lodash');
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const Builder = require('./Builder');
+const KEYID = require('./Secrets/AlpacaCreds').KEYID();
+const SECRETKEY = require('./Secrets/AlpacaCreds').SECRETKEY();
+//const fs = require('fs');
+const xlsx = require('node-xlsx').default;
+const download = require('download');
+//const { isPlainObject, result, toArray } = require('lodash');
+//FuckMongo
 
+function csvToJSON(type, data, symbol) {
+  var jsonString = '{"' + symbol + '":[{"' + type + '":[';
+  var statement = xlsx.parse(data);
+  statement[0]['data'].forEach(function (metric) {
+    var count = 1;
+
+    if (statement[0]['data'][0] !== metric) {
+      jsonString += '{"' + metric[0] + '":[';
+      var lines = statement[0]['data'][0];
+      lines.forEach(function (datetime) {
+        if (statement[0]['data'][0][0] !== datetime) {
+          var date = new Date(1900, 0, datetime);
+          var year = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+          if (metric[count] == undefined) {
+            metric[count] = '"undefined"';
+          }
+          if (metric[count] == "") {
+            metric[count] = '"empty"';
+          }
+          if (count + 1 < lines.length) {
+            jsonString += '{"' + year + '" : ' + metric[count++] + '},'
+          }
+          else {
+            jsonString += '{"' + year + '" : ' + metric[count++] + '}]},'
+          }
+        }
+      })
+    }
+  })
+  jsonString = jsonString.substring(0, jsonString.length - 1);
+  jsonString += "]}]}";
+  return jsonString;
+}
+function empty(data) {
+  if (typeof (data) == 'number' || typeof (data) == 'boolean') {
+    return false;
+  }
+  if (typeof (data) == 'undefined' || data === null) {
+    return true;
+  }
+  if (typeof (data.length) != 'undefined') {
+    return data.length == 0;
+  }
+  var count = 0;
+  for (var i in data) {
+    if (data.hasOwnProperty(i)) {
+      count++;
+    }
+  }
+  return count == 0;
+}
+function parserMethod(entity, stock, factorArray, date, callback) {
+  try {
+    var jsonString = '"symbol":"' + stock + '",'
+    var d1 = new Date(date);
+    d1.setFullYear(d1.getFullYear())
+    jsonString += '"backtest Date":"' + d1.toJSON().slice(0, 10).toString() + '",'
+    Object.values(entity).forEach(function (x) {
+
+
+      var d2 = new Date(date);
+      d2.setFullYear(d1.getFullYear() - 1)
+      factorArray.forEach(
+        function (factor) {
+          if (x[factor]) {
+            var unentered1 = true
+            var unentered2 = true
+            x[factor].forEach(function (row) {
+              var factorIndex = x[factor].length
+              var reportDate = new Date(Object.keys(row)[0]);
+              var value = Object.values(row)[0] ? Object.values(row)[0] : 0
+              var factored = replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(factor, ",", ''), ".", ""), "(", ""), ")", ""), "/", "_"), " ", "_"), "&", ""), "-", "_")
+              if (d1 > reportDate && unentered1) {
+                unentered1 = false
+
+                jsonString += '"' + factored + '":' + value + ','
+                jsonString += '"' + factored + '_REPORT_DATE' + '":"' + reportDate.toJSON().slice(0, 10).toString() + '",'
+              }
+              if (d2 > reportDate && unentered2) {
+                unentered2 = false
+                jsonString += '"' + factored + '_lastYear":' + value + ','
+                jsonString += '"' + factored + '_lastYear_REPORT_DATE' + '":"' + reportDate.toJSON().slice(0, 10).toString() + '",'
+              }
+              factorIndex--
+            })
+          }
+        }
+      )
+    })
+
+    var jsonify = '{' + (jsonString.substring(0, jsonString.length - 1)) + '}'
+    // console.log(jsonify)
+    jsonify = replaceAll(jsonify, "empty", 'null')
+    callback(jsonify)
+  } catch (ex) {
+    console.log(ex)
+  }
+}
+function replaceAll(string, search, replace) {
+  return string.split(search).join(replace);
+}
+function IsTradingDay(tradingDay, callback) {
+  var get = new Promise(function (resolve, reject) {
+    var url = "https://paper-api.alpaca.markets/v2/calendar?start=" + tradingDay + "&end=" + tradingDay; // "https://www.quandl.com/api/v3/datasets/ISM/MAN_PMI.csv";
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        resolve(this.responseText);
+      }
+    };
+    xhttp.open("GET", url, false);
+    xhttp.setRequestHeader('APCA-API-KEY-ID', KEYID)
+    xhttp.setRequestHeader('APCA-API-SECRET-KEY', SECRETKEY)
+    xhttp.send();
+  })
+  get.then(function (json) {
+    callback(true)//JSON.parse(json)[0].date == tradingDay)
+  });
+}
 module.exports = {
+  GetStockrowIncome: function (name, stock, factorArray, date, indexAdder, callback) {
 
+
+    var url = "https://stockrow.com/api/companies/" + stock + "/financials.xlsx?dimension=Q&section=Income%20Statement&sort=desc";
+    download(url).then(data => {
+
+      var incrementer = 40
+      var jsonText = csvToJSON(name, data, stock)
+
+      var entity = JSON.parse(jsonText)[stock][0][name]
+
+
+      for (var i = 0; i < indexAdder; i++) {
+
+        (function (i) {
+          setTimeout(function () {
+
+            var dateTime = new Date(date)
+            console.log("____________Daysback: " + (i))
+            var howFar = dateTime.setDate(dateTime.getDate() - (i))
+            var day_of_reference = new Date(howFar).toJSON().slice(0, 10)
+
+            try {
+              IsTradingDay(day_of_reference, function (isTradingDay) {
+
+                if (isTradingDay) {
+                  parserMethod(entity, stock, factorArray, day_of_reference, callback)
+                  console.log("TRADING TODAY: " + day_of_reference)
+                }
+                else {
+                  console.log("NOT TRADING ON: " + day_of_reference)
+                }
+              })
+
+            } catch (ex) {
+              console.log(stock + " --HistoricTransformBuilder has NO DATA THIS ITERATION " + ex)
+            }
+          }, (i == 0 ? 1 : i * incrementer));
+        })(i);
+      }
+
+
+    });
+  },
   Delete: function (tableName) {
     var client = new MongoClient(MongoDbUri.URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -40,13 +210,13 @@ module.exports = {
           if (matchedCount && modifiedCount) {
             console.log(`Successfully added a new record.`)
 
-          }  
+          }
           client.close();
         })
-        
+
 
     });
-    
+
   },
 
 
@@ -203,7 +373,7 @@ module.exports = {
 
               })
               var jsonify = '{' + (jsonString.substring(0, jsonString.length - 1)) + '}'
-             // console.log(jsonify)
+              // console.log(jsonify)
               var obj = JSON.parse(jsonify)
               var day1 = obj.ShortVolume1 * obj.ShortVolume1 / obj.TotalVolume1
               var day2 = obj.ShortVolume2 * obj.ShortVolume2 / obj.TotalVolume2
@@ -556,7 +726,7 @@ module.exports = {
     });
 
   },
-  
+
 
   GetMongoStockDaily: function (date, factor, callback) {
     var d1 = new Date(date);
@@ -566,9 +736,9 @@ module.exports = {
       console.log("obj")
       client.db("Fundamentals").collection(factor).find({}).toArray((error, result) => {
         var jsonCollectionstring = ''
-       
+
         if (!error) {
-         
+
 
           result.forEach(function (entity) {
 
@@ -609,13 +779,13 @@ module.exports = {
                     var jsonify = '{' + (jsonString.substring(0, jsonString.length - 1)) + '}'
                     var obj = JSON.parse(jsonify)
                     obj.symbol = entity.name
-                    
+
                     callback(obj)
                     client.close();
                   }
                 })
               }
-              
+
 
 
             } catch (ex) {

@@ -121,13 +121,13 @@ module.exports = {
     var url = "https://stockrow.com/api/companies/" + stock + "/financials.xlsx?dimension=Q&section="+endpoint+"&sort=desc";
     download(url).then(data => {
 
-      var incrementer = 40
+      var incrementer = 50
       var jsonText = csvToJSON(name, data, stock)
 
       var entity = JSON.parse(jsonText)[stock][0][name]
 
 
-      for (var i = 0; i < indexAdder; i++) {
+      for (var i = 0; i < 30; i++) {
 
         (function (i) {
           setTimeout(function () {

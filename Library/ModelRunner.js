@@ -220,29 +220,27 @@ async function DailyIngest_ShortVolume(endDate, task) {
         console.log("done>>>>>>>>>>>>")
     })
 }
+var fundamentals = {
+    'Income': ['Income%20Statement', ['EBIT', 'Gross Margin']],
+    'CashFlow': ['Cash%20Flow', ['Operating Cash Flow', 'Net Income']],
+    'Metrics': ['Metrics', ['Asset Turnover', 'EV/Sales', 'EV/EBIT', 'EV/EBITDA', 'Market Cap', 'Debt/Assets', 'P/E ratio']],
+    'BalanceSheet': ['Balance%20Sheet', ['Retained Earnings', 'Total liabilities', 'Total Assets', 'Total current liabilities',
+        'Total current assets', 'Long Term Debt (Total)']],
+    'Growth': ['Growth', ['EPS Growth (diluted)']]
+}
 function Built_Income(date) {
-    var indexAdder = 10
+    var indexAdder = 100
     Stocklist.SymbolList('',
         function (stocks) {
             var length = stocks.length;
-            var interval = 60 * indexAdder > 10000 ? 60 * indexAdder + 1000 : 10000;
+            var interval = 18000;
             var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
 
             for (var i = 0; i < length; i++) {
 
                 (function (i) {
                     setTimeout(function () {
-                        var fundamentals = {
-                            'Income': ['Income%20Statement', ['EBIT', 'Gross Margin']],
-                            'CashFlow': ['Cash%20Flow', ['Operating Cash Flow', 'Net Income']],
-                            'Metrics': ['Metrics', ['Asset Turnover', 'EV/Sales', 'EV/EBIT', 'EV/EBITDA', 'Market Cap', 'Debt/Assets', 'P/E ratio']],
-                            'BalanceSheet': ['Balance%20Sheet', ['Retained Earnings', 'Total liabilities', 'Total Assets', 'Total current liabilities',
-                                'Total current assets', 'Long Term Debt (Total)']],
-                            'Growth': ['Growth', ['EPS Growth (diluted)']]
-                        }
-
-                        //fundamentals, stock, date, indexAdder, callback
-                        MongoDb.GetStockrowFundamentals('Growth', fundamentals, stocks[i],
+                        MongoDb.GetStockrowFundamentals('BalanceSheet', fundamentals, stocks[i],
                             date, indexAdder, function (data) {
                                 AzureStorage.ToTable("PickListTest", tableService, GenericTask(data), data, date);
                             })

@@ -1076,7 +1076,7 @@ module.exports = {
 
   },
   POLYGONCOMPANIES: function (callback) {
-    AzureTableRunner(1000,
+    AzureTableRunner(16000,
       Analyze.Company,
       'PolygonCompany',
       function (data, stock) { return CompanyTask(data, stock) },
@@ -2437,11 +2437,10 @@ function CallbackAPIPromise(array, functional, interval, callback) {
     )(i)
   }
 }
-function unitOfWork(i, length, url, stocks, name, fileService) {
+function unitOfWork(i, length, url, stocks, name) {
   download(url).then(data => {
     
     var jsonText = csvToJSON("_" + name, data, stocks[i])
-    //  dataToAzureFileStorage(jsonText,stocks[i],name,fileService)
     MongoDb.Upsert(name, stocks[i], jsonText)
   });
   console.log(name + ": " + i + "_" + stocks[i])
@@ -2496,7 +2495,7 @@ function Fundamentals(callback) {
     })
 }
 function IncomeIngest(callback) {
-  Stocklist.SymbolList1000(
+  Stocklist.SymbolList('',
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
@@ -2519,11 +2518,10 @@ function IncomeIngest(callback) {
 }
 
 function GrowthIngest(callback) {
-  Stocklist.SymbolList1000(
+  Stocklist.SymbolList('',
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
-      var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
 
       for (var i = 0; i < length; i++) {
 
@@ -2531,7 +2529,7 @@ function GrowthIngest(callback) {
         (function (i) {
           setTimeout(function () {
             var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section=Growth&sort=desc";
-            unitOfWork(i, length, url, stocks, "Growth", fileService)
+            unitOfWork(i, length, url, stocks, "Growth")
             if (i == length - 1) {
               callback()
             }
@@ -2542,7 +2540,7 @@ function GrowthIngest(callback) {
 }
 
 function MetricsIngest(callback) {
-  Stocklist.SymbolList1000(
+  Stocklist.SymbolList('',
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
@@ -2563,7 +2561,7 @@ function MetricsIngest(callback) {
     })
 }
 function BalanceSheetIngest(callback) {
-  Stocklist.SymbolList1000(
+  Stocklist.SymbolList('',
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
@@ -2583,7 +2581,7 @@ function BalanceSheetIngest(callback) {
     })
 }
 function CashFlowIngest(callback) {
-  Stocklist.SymbolList1000(
+  Stocklist.SymbolList('',
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
@@ -3395,7 +3393,7 @@ function BarchartTask(data, stock) {
   return task
 }
 function AzureTableRunner(interval, analyzer, name, taskCallback, callback) {
-  Stocklist.SymbolList1000(
+  Stocklist.SymbolList('',
     function (stocks) {
       console.log("______________stocks__________")
       var length = stocks.length;
@@ -3408,7 +3406,7 @@ function AzureTableRunner(interval, analyzer, name, taskCallback, callback) {
             try {
               analyzer(stocks[i]).then(data => {
                 var task = taskCallback(data, stocks[i])
-                dataToAzureTableStorage(name, tableService, task)
+                dataToAzureTableStorage(name, tableService, task,data,i)
               });
             } catch {
               var data = analyzer(stocks[i]);
@@ -3427,7 +3425,7 @@ function AzureTableRunner(interval, analyzer, name, taskCallback, callback) {
   );
 }
 function AzureTableRunner1000(interval, analyzer, name, taskCallback, callback) {
-  Stocklist.SymbolList1000(
+  Stocklist.SymbolList('',
     function (stocks) {
       console.log("______________stocks__________")
       var length = stocks.length;

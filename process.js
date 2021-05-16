@@ -24,6 +24,8 @@ var daysback = dateObj.setDate(dateObj.getDate() - 0)
 if (process.argv[2]) {
 	/**************** BEGIN -- USE FOR INJEST MICROOSERVICE **************************/
 
+
+	
 	/** 
 	* Builds Top1000, Second1000, Third1000, Fourth1000, Last1000 Universe Tables
 	* in Azure Table storage
@@ -34,29 +36,61 @@ if (process.argv[2]) {
 			console.log("DONE")
 		});
 	}
+	else if ("POLYGONCOMPANIES" == process.argv[2]) {
+		Builder.POLYGONCOMPANIES(function () {
+			console.log("Polygon done!")
+		});
+	}
 	/************** PICKLIST FUNCTIONS ************************ */	
-	/** 
-	* Builds daily ohlcv using 5000Universe
-	* in StocksDailyBacktester Table Storage
+	/** using 5000Universe more like 4k
+	* <Run...Ingest's> Ingest to Mongo DB (original method)
+	* <Build...Picklist's> Transform from Mongo to Table Storage (still) 
+	* <HistoricWeekly...PicksList's> Build and transform only works on short timeframes (30 days) 
+	
 	* RUN IN TASK SCHEDULER
 	*/
-	else if ("Scheduled_WeeklyIngest_Picklist" == process.argv[2]) {
+	//Growth
+	else if ("RunGrowthIngest" == process.argv[2]) {
+		Builder.RunGrowthIngest()
+	}
+	else if ("Transform_Growth_Picklist_Backtest" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Transform_Growth_PickList)
+	}
+	else if ("HistoricWeeklyGrowth_Picklist" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var back = dateObj.setDate(dateObj.getDate() -input)
-		var range = dateObj.setDate(dateObj.getDate() -(input+10))
-		var beginning = new Date(range).toJSON().slice(0, 10)
-		var day = new Date(back).toJSON().slice(0, 10)
-		console.log(beginning)
-		Builder.Run('TIME_SERIES_DAILY_ADJUSTED',
-					'StocksDailyBacktester',
-					'compact',1000,
-					beginning,'')
+		ModelRunner.Built_Growth(back)
+		//HistoricPicklistBuilder(355 * 7, input, 100000, ModelRunner.Built_Income)
 	}
+	
+
+	//Income
+	else if ("RunIncomeIngest" == process.argv[2]) {
+		Builder.RunIncomeIngest()
+	}
+	else if ("Transform_Income_Picklist_Backtest" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Transform_Income_PickList)
+	}	
 	else if ("HistoricWeeklyIncome_Picklist" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var back = dateObj.setDate(dateObj.getDate() -input)
 		ModelRunner.Built_Income(back)
 		//HistoricPicklistBuilder(355 * 7, input, 100000, ModelRunner.Built_Income)
+	}
+
+	//Metrics
+	else if ("RunMetricsIngest" == process.argv[2]) {
+		Builder.RunMetricsIngest()
+	}
+	//BalanceSheet
+	else if ("RunBalanceSheetIngest" == process.argv[2]) {
+		Builder.RunBalanceSheetIngest()
+	}
+	//CashFlow
+	else if ("RunCashFlowIngest" == process.argv[2]) {
+		Builder.RunCashFlowIngest()
 	}
 	/*************end  PICKLIST functions*************************** */
 /***********************************************************************************************************/
@@ -218,21 +252,9 @@ if (process.argv[2]) {
 				})
 
 			}
-			else if ("RunMetricsIngest" == process.argv[2]) {
-				Builder.RunMetricsIngest()
-			}
-			else if ("RunIncomeIngest" == process.argv[2]) {
-				Builder.RunIncomeIngest()
-			}
-			else if ("RunBalanceSheetIngest" == process.argv[2]) {
-				Builder.RunBalanceSheetIngest()
-			}
-			else if ("RunGrowthIngest" == process.argv[2]) {
-				Builder.RunGrowthIngest()
-			}
-			else if ("RunCashFlowIngest" == process.argv[2]) {
-				Builder.RunCashFlowIngest()
-			}
+			
+			
+			
 			else if ("Built_PickList" == process.argv[2]) {
 				var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 				var back = dateObj.setDate(dateObj.getDate() - input)
@@ -426,7 +448,7 @@ if (process.argv[2]) {
 				Builder.WSJ();
 				Builder.Zacks();
 				Builder.IEX();
-				Builder.ShortSqueeze();
+				//Builder.ShortSqueeze();
 			} else if ("ShortSqueeze" == process.argv[2]) {
 				Builder.ShortSqueeze();
 
@@ -435,11 +457,7 @@ if (process.argv[2]) {
 
 
 			///////////////////////////////////////////////////////////
-			else if ("POLYGONCOMPANIES" == process.argv[2]) {
-				Builder.POLYGONCOMPANIES(function () {
-					console.log("Polygon done!")
-				});
-			}
+			
 			else if ("BuildTableUniverses" == process.argv[2]) {
 				Builder.BuildTableUniverses(function () { console.log("done") });
 			}
@@ -600,7 +618,7 @@ function HistoricTransformBuilder(daysback, indexAdder, incrementer, method) {
 				var dateTime = new Date()
 				var howFar = dateTime.setDate(dateTime.getDate() - (i + indexAdder))
 				var day_of_reference = new Date(howFar).toJSON().slice(0, 10)
-				if (i > 101) { //dont run longer than a year for performance data leaks
+				if (i > 300) { //dont run longer than a year for performance data leaks
 					console.log("indexer: " + (i + indexAdder))
 					console.log("date: " + day_of_reference)
 					throw "*********** DONE **********************"

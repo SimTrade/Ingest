@@ -221,11 +221,41 @@ async function DailyIngest_ShortVolume(endDate, task) {
     })
 }
 var fundamentals = {
-    'Income': ['Income%20Statement', ['EBIT', 'Gross Margin']],
-    'CashFlow': ['Cash%20Flow', ['Operating Cash Flow', 'Net Income']],
-    'Metrics': ['Metrics', ['Asset Turnover', 'EV/Sales', 'EV/EBIT', 'EV/EBITDA', 'Market Cap', 'Debt/Assets', 'P/E ratio']],
-    'BalanceSheet': ['Balance%20Sheet', ['Retained Earnings', 'Total liabilities', 'Total Assets', 'Total current liabilities',
-        'Total current assets', 'Long Term Debt (Total)']],
+    /*
+
+    Beniesh -------------
+    Income - Revenue
+    Income -  Cost of Revenue
+    Income - SG&A Expenses
+    CashFlow - Depreciation & Amortization
+    Income - Income from Continuous Operations
+    Balance Sheet - Receivables
+    Balance Sheet - Total current assets
+    Balance Sheet - Property, Plant, Equpment (Net)
+    ---
+    Balance Sheet - Total Assets
+    Balance Sheet - Total liabilities
+    Balance Sheet - Total Debt
+    Cash Flow - Operating Cash Flow
+    
+    
+    Top Delta -------
+    ______LONG
+    Cash Flow - Financing cash flow
+    Metrics - Enterprise Value
+    
+    
+    _______SHORT
+    Metrics - 1/Enterprise Value * EV/FCF (to get FCF)
+    EPS Growth (basic)
+    
+    17 x 4 (last and current year date and value)
+   */
+    'Income': ['Income%20Statement', ['Income from Continuous Operations','SG&A Expenses','EBIT', 'Gross Margin','Revenue','Cost of Revenue']],
+    'CashFlow': ['Cash%20Flow', ['Operating Cash Flow','Depreciation & Amortization','Operating Cash Flow', 'Net Income','Financing cash flow']],
+    'Metrics': ['Metrics', ['EV/FCF','Enterprise Value','Asset Turnover', 'EV/Sales', 'EV/EBIT', 'EV/EBITDA', 'Market Cap', 'Debt/Assets', 'P/E ratio','Enterprise Value']],
+    'BalanceSheet': ['Balance%20Sheet', ['Total Debt','Receivables','Retained Earnings', 'Total liabilities', 'Total Assets', 'Total current liabilities',
+        'Total current assets', 'Long Term Debt (Total)','Property, Plant, Equpment (Net)']],
     'Growth': ['Growth', ['EPS Growth (diluted)']]
 }
 function Built_Income(date) {
@@ -240,9 +270,35 @@ function Built_Income(date) {
 
                 (function (i) {
                     setTimeout(function () {
-                        MongoDb.GetStockrowFundamentals('BalanceSheet', fundamentals, stocks[i],
+                        MongoDb.GetStockrowFundamentals('Income', fundamentals, stocks[i],
                             date, indexAdder, function (data) {
                                 AzureStorage.ToTable("PickListTest", tableService, GenericTask(data), data, date);
+                            })
+
+                        if (i == length - 1) {
+                            callback()
+                        }
+                    }, interval * (i));
+                })(i);
+            }
+        })
+
+}
+function Built_Growth(date) {
+    var indexAdder = 100
+    Stocklist.SymbolList('',
+        function (stocks) {
+            var length = stocks.length;
+            var interval = 18000;
+            var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
+
+            for (var i = 0; i < length; i++) {
+
+                (function (i) {
+                    setTimeout(function () {
+                        MongoDb.GetStockrowFundamentals('Growth', fundamentals, stocks[i],
+                            date, indexAdder, function (data) {
+                                AzureStorage.ToTable("PickList5000", tableService, GenericTask(data), data, date);
                             })
 
                         if (i == length - 1) {
@@ -260,40 +316,62 @@ async function Built_PickList(date) {
 
         var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
 
+        // MongoDb.GetMongoFundamentals(date, 'Income',
+        //     ['EBIT', 'Gross Margin'], function (data) {
+        //         AzureStorage.ToTable("PickList5000", tableService, GenericTask(data));
+        //     })
+
+
+        // setTimeout(function () {
+        //     MongoDb.GetMongoFundamentals(date, 'CashFlow',
+        //         ['Operating Cash Flow', 'Net Income'], function (data) {
+        //             AzureStorage.ToTable("PickList5000", tableService, CashFlowTask(data));
+        //         })
+        // }, 15000)
+
+        // setTimeout(function () {
+        //     MongoDb.GetMongoFundamentals(date, 'Metrics',
+        //         ['Asset Turnover', 'EV/Sales', 'EV/EBIT', 'EV/EBITDA', 'Market Cap', 'Debt/Assets', 'P/E ratio'], function (data) {
+        //             AzureStorage.ToTable("PickList5000", tableService, MetricsTask(data));
+        //         })
+        // }, 30000)
+
+        // setTimeout(function () {
+        //     MongoDb.GetMongoFundamentals(date, 'BalanceSheet',
+        //         ['Retained Earnings', 'Total liabilities', 'Total Assets', 'Total current liabilities',
+        //             'Total current assets', 'Long Term Debt (Total)'], function (data) {
+        //                 AzureStorage.ToTable("PickList5000", tableService, BalanceSheetTask(data));
+        //             })
+        // }, 45000)
+
+        //  setTimeout(function () {
+
+        //   }, 60000)
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+async function Transform_Growth_PickList(date) {
+
+    try {
+        var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
+        MongoDb.GetMongoFundamentals(date, 'Growth',
+            ['EPS Growth (diluted)'], function (data) {
+                AzureStorage.ToTable("PickList5000", tableService, GrowthTask(data), data, date);
+            })
+    } catch (err) {
+        console.error(err);
+    }
+}
+async function Transform_Income_PickList(date) {
+
+    try {
+        var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
         MongoDb.GetMongoFundamentals(date, 'Income',
             ['EBIT', 'Gross Margin'], function (data) {
-                AzureStorage.ToTable("PickList", tableService, GenericTask(data));
+                AzureStorage.ToTable("PickList5000", tableService, IncomeTask(data), data, date);
             })
-
-
-        setTimeout(function () {
-            MongoDb.GetMongoFundamentals(date, 'CashFlow',
-                ['Operating Cash Flow', 'Net Income'], function (data) {
-                    AzureStorage.ToTable("PickList", tableService, CashFlowTask(data));
-                })
-        }, 15000)
-
-        setTimeout(function () {
-            MongoDb.GetMongoFundamentals(date, 'Metrics',
-                ['Asset Turnover', 'EV/Sales', 'EV/EBIT', 'EV/EBITDA', 'Market Cap', 'Debt/Assets', 'P/E ratio'], function (data) {
-                    AzureStorage.ToTable("PickList", tableService, MetricsTask(data));
-                })
-        }, 30000)
-
-        setTimeout(function () {
-            MongoDb.GetMongoFundamentals(date, 'BalanceSheet',
-                ['Retained Earnings', 'Total liabilities', 'Total Assets', 'Total current liabilities',
-                    'Total current assets', 'Long Term Debt (Total)'], function (data) {
-                        AzureStorage.ToTable("PickList", tableService, BalanceSheetTask(data));
-                    })
-        }, 45000)
-
-        setTimeout(function () {
-            MongoDb.GetMongoFundamentals(date, 'Growth',
-                ['EPS Growth (diluted)'], function (data) {
-                    AzureStorage.ToTable("PickList", tableService, GrowthTask(data));
-                })
-        }, 60000)
     } catch (err) {
         console.error(err);
     }
@@ -513,10 +591,27 @@ function GrowthTask(data) {
         PartitionKey: { '_': obj["backtest Date"] },
         RowKey: { '_': obj.symbol },
 
-        EpsGrowth: { '_': obj['EPS Growth (diluted)'] },
-        EpsGrowth_lastYear: { '_': obj['EPS Growth (diluted)' + _lastYear] },
-        EpsGrowthLastYear_lastYear_REPORT_DATE: { '_': obj['EPS Growth (diluted)' + _lastYear_REPORT_DATE] },
-        EpsGrowth_REPORT_DATE: { '_': obj['EPS Growth (diluted)' + _REPORT_DATE] }
+        EPS_Growth_diluted: { '_': obj['EPS Growth (diluted)'] },
+        EPS_Growth_diluted_lastYear: { '_': obj['EPS Growth (diluted)' + _lastYear] },
+        EPS_Growth_diluted_lastYear_REPORT_DATE: { '_': obj['EPS Growth (diluted)' + _lastYear_REPORT_DATE] },
+        EPS_Growth_diluted_REPORT_DATE: { '_': obj['EPS Growth (diluted)' + _REPORT_DATE] }
+    };
+    console.log(task)
+    return task
+}
+function IncomeTask(data) {
+    var obj = JSON.parse(data)
+    var task = {
+        PartitionKey: { '_': obj["backtest Date"] },
+        RowKey: { '_': obj.symbol },
+        Gross_Margin: { '_': obj['Gross Margin'] },
+        Gross_Margin_diluted_lastYear: { '_': obj['Gross Margin' + _lastYear] },
+        Gross_Margin_lastYear_REPORT_DATE: { '_': obj['Gross Margin' + _lastYear_REPORT_DATE] },
+        Gross_Margin_REPORT_DATE: { '_': obj['Gross Margin' + _REPORT_DATE] },
+        EBIT: { '_': obj['EBIT'] },
+        EBIT_lastYear: { '_': obj['EBIT' + _lastYear] },
+        EBIT_lastYear_REPORT_DATE: { '_': obj['EBIT' + _lastYear_REPORT_DATE] },
+        EBIT_REPORT_DATE: { '_': obj['EBIT' + _REPORT_DATE] }
     };
     console.log(task)
     return task
@@ -541,6 +636,17 @@ function GenericTask(data) {
     return task
 }
 module.exports = {
+
+    Transform_Growth_PickList: function (daysback) {
+        var day = new Date(daysback).toJSON().slice(0, 10)
+        Transform_Growth_PickList(day)
+
+    },
+    Transform_Income_PickList: function (daysback) {
+        var day = new Date(daysback).toJSON().slice(0, 10)
+        Transform_Income_PickList(day)
+
+    },
     BuildOBV: function (input) {
 
         BuildOBV(input)
@@ -580,9 +686,15 @@ module.exports = {
         Built_PickList(day)
 
     },
+
     Built_Income: function (daysback) {
         var day = new Date(daysback).toJSON().slice(0, 10)
         Built_Income(day)
+
+    },
+    Built_Growth: function (daysback) {
+        var day = new Date(daysback).toJSON().slice(0, 10)
+        Built_Growth(day)
 
     }
 

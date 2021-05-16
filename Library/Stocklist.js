@@ -107,6 +107,7 @@ module.exports = {
               var collection = symbolDistinct.sort().filter(onlyUnique)
               var temp = [] 
               collection.forEach(function(x){
+              //  if(x>='MYGN')
                   temp.push(x)
               })
               var symbols = temp.sort().filter(onlyUnique)

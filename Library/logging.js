@@ -7,9 +7,9 @@ var count =0;
 var fs = require('fs');
 const fsextra = require('fs-extra');
 module.exports = {
-	appendToErrorLog: function(folder,data,date,error){
+	appendToErrorLog: function(folder,symbol,date,error){
 		folder +='_failures'
-		var file = +date+"_"+data.symbol
+		var file = +date+"_"+symbol
 		if (!fs.existsSync("Library/Logs/")){
 			fs.mkdirSync("Library/Logs/");
 		}

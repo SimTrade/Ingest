@@ -54,17 +54,20 @@ module.exports = {
   GetTable: function (tableName, tableService, query, callback) {
     GetTable(tableName, tableService, query, callback, null)
   },
-  ToTable: function (tableName, tableService, task,data,date) {
+  ToTable: function (tableName, tableService, task) {
     
     tableService.insertOrMergeEntity(tableName, task, function (error, result, response) {
       if (!error) {
-        console.log(JSON.parse(data).symbol+" entered:"+JSON.parse(data)['backtest Date'])
+        console.log(task)
         
       }
       else {
         console.log(error)
           tableService.createTableIfNotExists(tableName, function (error, result) {
-             logging.appendToErrorLog(tableName,data,error,date)
+             logging.appendToErrorLog(tableName,
+                                      Object.values(task.RowKey)[0],
+                                      Object.values(task.PartitionKey)[0],
+                                      error)
           });
       }
 

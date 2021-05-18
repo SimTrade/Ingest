@@ -55,7 +55,10 @@ if (process.argv[2]) {
 	}
 	else if ("Transform_Growth_Picklist_Backtest" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Transform_Growth_PickList)
+		var ingest = 'Growth'
+		var table = "Picklist5000"
+								//daysback,ingest,table, indexAdder, incrementer, method
+		HistoricTransformBuilder(355 * 7,ingest,table, input, 100000, ModelRunner.TransformIngest)
 	}
 	else if ("HistoricWeeklyGrowth_Picklist" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
@@ -71,12 +74,16 @@ if (process.argv[2]) {
 	}
 	else if ("Transform_Income_Picklist_Backtest" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Transform_Income_PickList)
+		
+		var ingest = 'Income'
+		var table = "Picklist5000"
+		ModelRunner.TransformIngest(input,ingest,table)
+	//	HistoricTransformBuilder(355 * 7,ingest,table, input, 100000, ModelRunner.TransformIngest)
 	}	
 	else if ("HistoricWeeklyIncome_Picklist" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var back = dateObj.setDate(dateObj.getDate() -input)
-		ModelRunner.Built_Income(back)
+		ModelRunner.TransformIngest(back)
 		//HistoricPicklistBuilder(355 * 7, input, 100000, ModelRunner.Built_Income)
 	}
 
@@ -84,14 +91,34 @@ if (process.argv[2]) {
 	else if ("RunMetricsIngest" == process.argv[2]) {
 		Builder.RunMetricsIngest()
 	}
+	else if ("Transform_Metrics_Picklist_Backtest" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var ingest = 'Metrics'
+		var table = "Picklist5000"
+		HistoricTransformBuilder(355 * 7,ingest,table, input, 100000, ModelRunner.TransformIngest)
+	}	
 	//BalanceSheet
 	else if ("RunBalanceSheetIngest" == process.argv[2]) {
 		Builder.RunBalanceSheetIngest()
 	}
+	else if ("Transform_BalanceSheet_Picklist_Backtest" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var ingest = 'BalanceSheet'
+		var table = "Picklist5000"
+		ModelRunner.TransformIngest(input,ingest,table)
+		
+		//HistoricTransformBuilder(355 * 7,ingest,table, input, 100000, ModelRunner.TransformIngest)
+	}	
 	//CashFlow
 	else if ("RunCashFlowIngest" == process.argv[2]) {
 		Builder.RunCashFlowIngest()
 	}
+	else if ("Transform_CashFlow_Picklist_Backtest" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var ingest = 'CashFlow'
+		var table = "Picklist5000"
+		HistoricTransformBuilder(355 * 7,ingest,table, input, 100000, ModelRunner.TransformIngest)
+	}	
 	/*************end  PICKLIST functions*************************** */
 /***********************************************************************************************************/
 
@@ -609,8 +636,9 @@ function ReturnsBuilder(indexAdder, incrementer, method) {
 		})(i);
 	}
 }
-function HistoricTransformBuilder(daysback, indexAdder, incrementer, method) {
+function HistoricTransformBuilder(daysback,ingest,table, indexAdder, incrementer, method) {
 	var returns = 0
+	//355 * 7,ingest,table, input, 100000, ModelRunner.TransformIngest
 	for (var i = 0; i < daysback; i++) {
 		(function (i) {
 			setTimeout(function () {
@@ -626,7 +654,7 @@ function HistoricTransformBuilder(daysback, indexAdder, incrementer, method) {
 				try {
 					Builder.GetCalendar(day_of_reference, function (isTradingDay) {
 						if (isTradingDay) {
-							method(day_of_reference)
+							method(day_of_reference, ingest, table)
 							console.log("TRADING TODAY: " + day_of_reference)
 						}
 						else {

@@ -215,8 +215,7 @@ async function Transform_ShortVolume(date) {
     })
 }
 async function DailyIngest_ShortVolume(endDate, task) {
-    var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-    Builder.TableIngestRunner(10000, Analyze.DailyShortVolume, 'ShortVolume', task, endDate, function () {
+    Builder.TableIngestRunner(3000, Analyze.DailyShortVolume, 'ShortVolume', task, endDate, function () {
         console.log("done>>>>>>>>>>>>")
     })
 }
@@ -253,30 +252,33 @@ var fundamentals = {
    */
     'Income': ['Income%20Statement', ['Income from Continuous Operations','SG&A Expenses','EBIT', 'Gross Margin','Revenue','Cost of Revenue']],
     'CashFlow': ['Cash%20Flow', ['Operating Cash Flow','Depreciation & Amortization','Operating Cash Flow', 'Net Income','Financing cash flow']],
-    'Metrics': ['Metrics', ['EV/FCF','Enterprise Value','Asset Turnover', 'EV/Sales', 'EV/EBIT', 'EV/EBITDA', 'Market Cap', 'Debt/Assets', 'P/E ratio','Enterprise Value']],
+    'Metrics': ['Metrics', ['Working Capital','Graham Net Nets','Operating CF/Net income','EV/FCF','Enterprise Value','Asset Turnover', 'EV/Sales', 'EV/EBIT', 'EV/EBITDA', 'Market Cap', 'Debt/Assets', 'P/E ratio','Enterprise Value']],
     'BalanceSheet': ['Balance%20Sheet', ['Total Debt','Receivables','Retained Earnings', 'Total liabilities', 'Total Assets', 'Total current liabilities',
         'Total current assets', 'Long Term Debt (Total)','Property, Plant, Equpment (Net)']],
     'Growth': ['Growth', ['EPS Growth (diluted)']]
 }
-function Built_Income(date) {
-    var indexAdder = 100
+function TransformIngest(daysback,ingest,table) {
+   
+    var indexAdder = 20
     Stocklist.SymbolList('',
         function (stocks) {
             var length = stocks.length;
-            var interval = 18000;
+            var interval = indexAdder*1000;
             var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-
+            
             for (var i = 0; i < length; i++) {
 
                 (function (i) {
+                   // console.log(date,ingest,stocks[i])
                     setTimeout(function () {
-                        MongoDb.GetStockrowFundamentals('Income', fundamentals, stocks[i],
-                            date, indexAdder, function (data) {
-                                AzureStorage.ToTable("PickListTest", tableService, GenericTask(data), data, date);
+                        MongoDb.GetStockrowFundamentals(daysback,ingest, fundamentals, stocks[i],
+                             indexAdder, function (data) {
+                                
+                                AzureStorage.ToTable(table, tableService, GenericTask(data));
                             })
 
                         if (i == length - 1) {
-                            callback()
+                         //   throw 'done'
                         }
                     }, interval * (i));
                 })(i);
@@ -284,32 +286,7 @@ function Built_Income(date) {
         })
 
 }
-function Built_Growth(date) {
-    var indexAdder = 100
-    Stocklist.SymbolList('',
-        function (stocks) {
-            var length = stocks.length;
-            var interval = 18000;
-            var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
 
-            for (var i = 0; i < length; i++) {
-
-                (function (i) {
-                    setTimeout(function () {
-                        MongoDb.GetStockrowFundamentals('Growth', fundamentals, stocks[i],
-                            date, indexAdder, function (data) {
-                                AzureStorage.ToTable("PickList5000", tableService, GenericTask(data), data, date);
-                            })
-
-                        if (i == length - 1) {
-                            callback()
-                        }
-                    }, interval * (i));
-                })(i);
-            }
-        })
-
-}
 async function Built_PickList(date) {
 
     try {
@@ -358,7 +335,7 @@ async function Transform_Growth_PickList(date) {
         var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
         MongoDb.GetMongoFundamentals(date, 'Growth',
             ['EPS Growth (diluted)'], function (data) {
-                AzureStorage.ToTable("PickList5000", tableService, GrowthTask(data), data, date);
+                AzureStorage.ToTable("PickList5000_test", tableService, GrowthTask(data));
             })
     } catch (err) {
         console.error(err);
@@ -370,7 +347,19 @@ async function Transform_Income_PickList(date) {
         var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
         MongoDb.GetMongoFundamentals(date, 'Income',
             ['EBIT', 'Gross Margin'], function (data) {
-                AzureStorage.ToTable("PickList5000", tableService, IncomeTask(data), data, date);
+                AzureStorage.ToTable("PickList5000_test", tableService, IncomeTask(data));
+            })
+    } catch (err) {
+        console.error(err);
+    }
+}
+async function Transform_Metrics_PickList(date) {
+
+    try {
+        var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
+        MongoDb.GetMongoFundamentals(date, 'Metrics',
+        ['Asset Turnover', 'EV/Sales', 'EV/EBIT', 'EV/EBITDA', 'Market Cap', 'Debt/Assets', 'P/E ratio'], function (data) {
+                AzureStorage.ToTable("PickList5000_test", tableService, MetricsTask(data));
             })
     } catch (err) {
         console.error(err);
@@ -519,7 +508,7 @@ function BalanceSheetTask(data) {
         LongTermDebtTotal_lastYear_REPORT_DATE: { '_': obj['Long Term Debt (Total)' + _lastYear_REPORT_DATE] },
         LongTermDebtTotal_REPORT_DATE: { '_': obj['Long Term Debt (Total)' + _REPORT_DATE] }
     };
-    console.log(task)
+   // console.log(task)
     return task
 }
 function MetricsTask(data) {//'Asset Turnover', 'EV/Sales', 'EV/EBIT', 'EV/EBITDA', 'Market Cap', 'Debt/Assets', 'P/E ratio'
@@ -528,10 +517,10 @@ function MetricsTask(data) {//'Asset Turnover', 'EV/Sales', 'EV/EBIT', 'EV/EBITD
         PartitionKey: { '_': obj["backtest Date"] },
         RowKey: { '_': obj.symbol },
 
-        AssetTurnover: { '_': obj['Asset Turnover'] },
-        AssetTurnover_lastYear: { '_': obj['Asset Turnover' + _lastYear] },
-        AssetTurnover_lastYear_REPORT_DATE: { '_': obj['Asset Turnover' + _lastYear_REPORT_DATE] },
-        AssetTurnover_REPORT_DATE: { '_': obj['Asset Turnover' + _REPORT_DATE] },
+        Asset_Turnover: { '_': obj['Asset Turnover'] },
+        Asset_Turnover_lastYear: { '_': obj['Asset Turnover' + _lastYear] },
+        Asset_Turnover_lastYear_REPORT_DATE: { '_': obj['Asset Turnover' + _lastYear_REPORT_DATE] },
+        Asset_Turnover_REPORT_DATE: { '_': obj['Asset Turnover' + _REPORT_DATE] },
 
         EvSales: { '_': obj['EV/Sales'] },
         EvSales_lastYear: { '_': obj['EV/Sales' + _lastYear] },
@@ -548,22 +537,22 @@ function MetricsTask(data) {//'Asset Turnover', 'EV/Sales', 'EV/EBIT', 'EV/EBITD
         EvEBITDA_lastYear_REPORT_DATE: { '_': obj['EV/EBITDA' + _lastYear_REPORT_DATE] },
         EvEBITDA_REPORT_DATE: { '_': obj['EV/EBITDA' + _REPORT_DATE] },
 
-        MarketCap: { '_': obj['Market Cap'] },
-        MarketCap_lastYear: { '_': obj['Market Cap' + _lastYear] },
-        MarketCap_lastYear_REPORT_DATE: { '_': obj['Market Cap' + _lastYear_REPORT_DATE] },
-        MarketCap_REPORT_DATE: { '_': obj['Market Cap' + _REPORT_DATE] },
+        Market_Cap: { '_': obj['Market Cap'] },
+        Market_Cap_lastYear: { '_': obj['Market Cap' + _lastYear] },
+        Market_Cap_lastYear_REPORT_DATE: { '_': obj['Market Cap' + _lastYear_REPORT_DATE] },
+        Market_Cap_REPORT_DATE: { '_': obj['Market Cap' + _REPORT_DATE] },
 
         DebtAssets: { '_': obj['Debt/Assets'] },
         DebtAssets_lastYear: { '_': obj['Debt/Assets' + _lastYear] },
         DebtAssets_lastYear_REPORT_DATE: { '_': obj['Debt/Assets' + _lastYear_REPORT_DATE] },
         DebtAssets_REPORT_DATE: { '_': obj['Debt/Assets' + _REPORT_DATE] },
 
-        PeRatio: { '_': obj['P/E ratio'] },
-        PeRatio_lastYear: { '_': obj['P/E ratio' + _lastYear] },
-        PeRatio_lastYear_REPORT_DATE: { '_': obj['P/E ratio' + _lastYear_REPORT_DATE] },
-        PeRatio_REPORT_DATE: { '_': obj['P/E ratio' + _REPORT_DATE] }
+        PE_ratio: { '_': obj['P/E ratio'] },
+        PE_ratio_lastYear: { '_': obj['P/E ratio' + _lastYear] },
+        PE_ratio_lastYear_REPORT_DATE: { '_': obj['P/E ratio' + _lastYear_REPORT_DATE] },
+        PE_ratio_REPORT_DATE: { '_': obj['P/E ratio' + _REPORT_DATE] }
     };
-    console.log(task)
+   // console.log(task)
     return task
 }
 function CashFlowTask(data) { //'Operating Cash Flow', 'Net Income'
@@ -619,6 +608,7 @@ function IncomeTask(data) {
 
 function GenericTask(data) {
     var obj = JSON.parse(data)
+    
     var jsonString = ''
     for (const [k, v] of Object.entries(obj)) {
         var value = typeof v === 'number' ? '{ "_":' + v + '},' : '{ "_":"' + v + '"},'
@@ -645,6 +635,11 @@ module.exports = {
     Transform_Income_PickList: function (daysback) {
         var day = new Date(daysback).toJSON().slice(0, 10)
         Transform_Income_PickList(day)
+
+    },
+    Transform_Metrics_PickList: function (daysback) {
+        var day = new Date(daysback).toJSON().slice(0, 10)
+        Transform_Metrics_PickList(day)
 
     },
     BuildOBV: function (input) {
@@ -687,9 +682,9 @@ module.exports = {
 
     },
 
-    Built_Income: function (daysback) {
-        var day = new Date(daysback).toJSON().slice(0, 10)
-        Built_Income(day)
+    TransformIngest: function (daysback,ingest,table) {
+        
+        TransformIngest(daysback,ingest,table)
 
     },
     Built_Growth: function (daysback) {

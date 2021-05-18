@@ -669,37 +669,7 @@ module.exports = {
     
   },
   TableIngestRunner: function (interval, analyzeFunction,azureTableName,task,day,callback) {
-    async.waterfall([
-      function (callback) {
-        console.log("ENTER 1 -------------------------------")
-        TableIngestRunner(interval,"Top1000", analyzeFunction,day, azureTableName,task, function () { console.log("Top1000 Done") })
-        callback()
-      },
-      function (callback) {
-        console.log("ENTER 2 -------------------------------")
-        TableIngestRunner(interval,"Second1000",analyzeFunction,day, azureTableName,task, function () { console.log("Second1000 Done") })
-        callback()
-      },
-      function (callback) {
-        console.log("ENTER 3 -------------------------------")
-        TableIngestRunner(interval,"Third1000", analyzeFunction,day, azureTableName,task, function () { console.log("Third1000 Done") })
-        callback()
-      },
-      function (callback) {
-        console.log("ENTER 4 -------------------------------")
-        TableIngestRunner(interval,"Fourth1000",analyzeFunction,day, azureTableName,task, function () { console.log("Fourth1000 Done") })
-        callback()
-      },
-      function (callback) {
-        console.log("ENTER 5 -------------------------------")
-        TableIngestRunner(interval,"Last1000", analyzeFunction,day, azureTableName,task, function () { console.log("Last1000 Done") })
-        callback()
-      }
-     ], function (err, result) {
-      if (err) return callback(err);
-    
-      callback(null, result);
-     });
+    TableIngestRunner(interval, analyzeFunction,day, azureTableName,task, function () { console.log("5000 Done") })
     
   },
    ShortVolumeTask: function(data,stock,date) {
@@ -1098,7 +1068,7 @@ module.exports = {
   },
   ShortSqueeze: function () {
     //  console.log(ShortSqueeze('ZTS'))
-    AzureTableRunner1000(60000,
+    AzureTableRunnerNonSeries(60000,
       ShortSqueeze,
       'ShortSqueeze',
       function (data, stock) { return ShortSqueezeTargetTask(data, stock) },
@@ -1106,14 +1076,14 @@ module.exports = {
 
   },
   Barcharts: function () {
-    AzureTableRunner1000(5000,
+    AzureTableRunnerNonSeries(5000,
       Barcharts,
       'Barcharts',
       function (data, stock) { return BarchartTask(data, stock) },
       function () { console.log("Barcharts Done") })
   },
   WSJ: function () {
-    AzureTableRunner1000(7000,
+    AzureTableRunnerNonSeries(7000,
       WsjTarget,
       'WsjTarget',
       function (data, stock) { return WsjTargetTask(data, stock) },
@@ -1121,7 +1091,7 @@ module.exports = {
 
   },
   Zacks: function () {
-    AzureTableRunner1000(5000,
+    AzureTableRunnerNonSeries(5000,
       Zacks,
       'Zacks',
       function (data, stock) { return ZacksTask(data, stock) },
@@ -1129,7 +1099,7 @@ module.exports = {
 
   },
   IEX: function () {
-    AzureTableRunner1000(3000,
+    AzureTableRunnerNonSeries(3000,
       Analyze.IEX,
       'IEX',
       function (data, stock) { return IexTask(data, stock) },
@@ -3101,8 +3071,8 @@ async function  MongoIngestRunner(interval,universe, analyzer, name, callback) {
       }
     })
 }
-function TableIngestRunner(interval,universe, analyzer,day, azureTableName,task, callback) {
-  Stocklist.SymbolList(universe,
+function TableIngestRunner(interval, analyzer,day, azureTableName,task, callback) {
+  Stocklist.SymbolList('',
     function (stocks) {
       var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
    
@@ -3116,11 +3086,11 @@ function TableIngestRunner(interval,universe, analyzer,day, azureTableName,task,
                 var obj ={'symbol':stocks[i],
               'backtest Date':day}
               
-                dataToAzureTableStorage(azureTableName, tableService, task(data,stocks[i],day),obj,day)
+                dataToAzureTableStorage(azureTableName, tableService, task(data,stocks[i],day))
               });
             } catch {
               var data = analyzer(stocks[i],day);
-              dataToAzureTableStorage(azureTableName, tableService, task(data,stocks[i],day),obj,day)
+              dataToAzureTableStorage(azureTableName, tableService, task(data,stocks[i],day))
             }
             console.log(azureTableName + ": " + i + "_" + stocks[i])
             if (i == length - 1) {
@@ -3424,7 +3394,7 @@ function AzureTableRunner(interval, analyzer, name, taskCallback, callback) {
     }
   );
 }
-function AzureTableRunner1000(interval, analyzer, name, taskCallback, callback) {
+function AzureTableRunnerNonSeries(interval, analyzer, name, taskCallback, callback) {
   Stocklist.SymbolList('',
     function (stocks) {
       console.log("______________stocks__________")
@@ -3614,8 +3584,8 @@ function dataToAzureFileStorage(data, stock, name, fileService) {
   AzureStorage.Upload(day, stock, name, fileService, data);
 }
 
-function dataToAzureTableStorage(name, tableService, task,data,date) {
-  AzureStorage.ToTable(name, tableService, task,data,date);
+function dataToAzureTableStorage(name, tableService, task) {
+  AzureStorage.ToTable(name, tableService, task);
 }
 
 

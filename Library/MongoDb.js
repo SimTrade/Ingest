@@ -115,10 +115,13 @@ function IsTradingDay(tradingDay, callback) {
   });
 }
 module.exports = {
-  GetStockrowFundamentals: function (name, fundamentals, stock, date, indexAdder, callback) {
-       var endpoint = fundamentals[name][0]
-       var factorArray = fundamentals[name][1]
-    var url = "https://stockrow.com/api/companies/" + stock + "/financials.xlsx?dimension=Q&section="+endpoint+"&sort=desc";
+  GetStockrowFundamentals: function (input, name, fundamentals, stock, indexAdder, callback) {
+    var dateObj = new Date()
+    var back = dateObj.setDate(dateObj.getDate() -input)
+    var date = new Date(back).toJSON().slice(0, 10)
+    var endpoint = fundamentals[name][0]
+    var factorArray = fundamentals[name][1]
+    var url = "https://stockrow.com/api/companies/" + stock + "/financials.xlsx?dimension=Q&section=" + endpoint + "&sort=desc";
     download(url).then(data => {
 
       var incrementer = 50
@@ -127,13 +130,13 @@ module.exports = {
       var entity = JSON.parse(jsonText)[stock][0][name]
 
 
-      for (var i = 0; i < 30; i++) {
+      for (var i = 0; i < indexAdder; i++) {
 
         (function (i) {
           setTimeout(function () {
 
             var dateTime = new Date(date)
-            console.log("____________Daysback: " + (i))
+            console.log("____________Daysback: " + (input + i))
             var howFar = dateTime.setDate(dateTime.getDate() - (i))
             var day_of_reference = new Date(howFar).toJSON().slice(0, 10)
 
@@ -142,10 +145,10 @@ module.exports = {
 
                 if (isTradingDay) {
                   parserMethod(entity, stock, factorArray, day_of_reference, callback)
-                  console.log("TRADING TODAY: " + day_of_reference)
+                  //   console.log("TRADING TODAY: " + day_of_reference)
                 }
                 else {
-                  console.log("NOT TRADING ON: " + day_of_reference)
+                  //  console.log("NOT TRADING ON: " + day_of_reference)
                 }
               })
 

@@ -55,23 +55,33 @@ module.exports = {
     GetTable(tableName, tableService, query, callback, null)
   },
   ToTable: function (tableName, tableService, task) {
-    
-    tableService.insertOrMergeEntity(tableName, task, function (error, result, response) {
-      if (!error) {
-        console.log(task)
-        
-      }
-      else {
-        console.log(error)
-          tableService.createTableIfNotExists(tableName, function (error, result) {
-             logging.appendToErrorLog(tableName,
-                                      Object.values(task.RowKey)[0],
-                                      Object.values(task.PartitionKey)[0],
-                                      error)
-          });
-      }
-
-    });
+    try{
+      tableService.createTableIfNotExists(tableName, function (error, result) { 
+       // console.log(error,result)
+       });
+      tableService.insertOrMergeEntity(tableName, task, function (error, result, response) {
+        //console.log(error,result)
+        if (!error) {
+          console.log('inserted',Object.values(task.RowKey)[0],
+          Object.values(task.PartitionKey)[0],)
+          
+        }
+        else {
+         // console.log(error)
+            tableService.createTableIfNotExists(tableName, function (error, result) {
+               logging.appendToErrorLog(tableName,
+                                        Object.values(task.RowKey)[0],
+                                        Object.values(task.PartitionKey)[0],
+                                        error)
+            });
+        }
+  
+      });
+    }catch(ex)
+    {
+      console.log("why: "+ex)
+    }
+   
   },
   GetEtfDictionary: function (fileService, callback) {
     fileService.getFileToText('etf-dictionary', '', 'SectorEtfs.txt', function (error, result) {

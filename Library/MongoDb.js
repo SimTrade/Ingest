@@ -115,53 +115,117 @@ function IsTradingDay(tradingDay, callback) {
   });
 }
 module.exports = {
-  GetStockrowFundamentals: function (input, name, fundamentals, stock, indexAdder, callback) {
+  GetStockrowFundamentals: function (input, name, fundamentals, stock, incrementer, callback) {
     var dateObj = new Date()
-    var back = dateObj.setDate(dateObj.getDate() -input)
+    var back = dateObj.setDate(dateObj.getDate() - input)
     var date = new Date(back).toJSON().slice(0, 10)
     var endpoint = fundamentals[name][0]
     var factorArray = fundamentals[name][1]
     var url = "https://stockrow.com/api/companies/" + stock + "/financials.xlsx?dimension=Q&section=" + endpoint + "&sort=desc";
     download(url).then(data => {
 
-      var incrementer = 50
+
       var jsonText = csvToJSON(name, data, stock)
 
       var entity = JSON.parse(jsonText)[stock][0][name]
 
 
-      for (var i = 0; i < indexAdder; i++) {
+      for (var i = 0; i < incrementer; i++) {
 
-        (function (i) {
-          setTimeout(function () {
+        // (function (i) {
+        //   setTimeout(function () {
 
-            var dateTime = new Date(date)
-            console.log("____________Daysback: " + (input + i))
-            var howFar = dateTime.setDate(dateTime.getDate() - (i))
-            var day_of_reference = new Date(howFar).toJSON().slice(0, 10)
+        var dateTime = new Date(date)
 
-            try {
-              IsTradingDay(day_of_reference, function (isTradingDay) {
+        var howFar = dateTime.setDate(dateTime.getDate() - (i))
+        var day_of_reference = new Date(howFar).toJSON().slice(0, 10)
+        console.log(name + "____Daysback: " + stock + " " + day_of_reference + " " + (input + i))
+        try {
+          IsTradingDay(day_of_reference, function (isTradingDay) {
 
-                if (isTradingDay) {
-                  parserMethod(entity, stock, factorArray, day_of_reference, callback)
-                  //   console.log("TRADING TODAY: " + day_of_reference)
-                }
-                else {
-                  //  console.log("NOT TRADING ON: " + day_of_reference)
-                }
-              })
-
-            } catch (ex) {
-              console.log(stock + " --HistoricTransformBuilder has NO DATA THIS ITERATION " + ex)
+            if (isTradingDay) {
+              parserMethod(entity, stock, factorArray, day_of_reference, callback)
+              //   console.log("TRADING TODAY: " + day_of_reference)
             }
-          }, (i == 0 ? 1 : i * incrementer));
-        })(i);
+            else {
+              //  console.log("NOT TRADING ON: " + day_of_reference)
+            }
+          })
+
+        } catch (ex) {
+          console.log(stock + " --HistoricTransformBuilder has NO DATA THIS ITERATION " + ex)
+        }
+        //   }, (i == 0 ? 1 : i ));
+        // })(i);
       }
 
 
     });
   },
+
+  GetMongoFundamentals: function (date, factor, factorArray, callback) {
+
+    var client = new MongoClient(MongoDbUri.URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    client.connect(err => {
+
+      client.db("Fundamentals").collection(factor).find({}).toArray((error, result) => {
+        if (!error) {
+
+          result.forEach(function (entity) {
+           
+            try {
+              var index = entity.history.length - 1
+              var jsonString = '"symbol":"' + Object.keys(entity.history[index])[0] + '",'
+              Object.values(Object.values(entity.history[index])[0][0])[0].forEach(function (x) {
+                var d1 = new Date(date);
+                d1.setFullYear(d1.getFullYear())
+                jsonString += '"backtest Date":"' + d1.toJSON().slice(0, 10).toString() + '",'
+                var d2 = new Date(date);
+                d2.setFullYear(d1.getFullYear() - 1)
+                factorArray.forEach(
+                  function (factor) {
+                    if (x[factor]) {
+                      var unentered1 = true
+                      var unentered2 = true
+                      x[factor].forEach(function (row) {
+                        var factorIndex = x[factor].length
+                        var reportDate = new Date(Object.keys(row)[0]);
+                        var factored = replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(factor, ",", ''), ".", ""), "(", ""), ")", ""), "/", "_"), " ", "_"), "&", ""), "-", "_")
+
+                        if (d1 > reportDate && unentered1) {
+                          unentered1 = false
+                          jsonString += '"' + factored + '":' + Object.values(row)[0] + ','
+                          jsonString += '"' + factored + '_REPORT_DATE' + '":"' + reportDate.toJSON().slice(0, 10).toString() + '",'
+                        }
+                        if (d2 > reportDate && unentered2) {
+                          unentered2 = false
+                          jsonString += '"' + factored + '_lastYear":' + Object.values(row)[0] + ','
+                          jsonString += '"' + factored + '_lastYear_REPORT_DATE' + '":"' + reportDate.toJSON().slice(0, 10).toString() + '",'
+                        }
+
+                        factorIndex--
+                      })
+
+                    }
+                  }
+                )
+              })
+              var jsonify = '{' + (jsonString.substring(0, jsonString.length - 1)) + '}'
+              callback(jsonify)
+              client.close();
+            } catch {
+              client.close();
+
+            }
+
+          })
+        }
+      })
+
+    });
+
+  },
+
   Delete: function (tableName) {
     var client = new MongoClient(MongoDbUri.URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -206,77 +270,7 @@ module.exports = {
   },
 
 
-  GetMongoFundamentals: function (date, factor, factorArray, callback) {
 
-    var array = {}
-    var client = new MongoClient(MongoDbUri.URI, { useNewUrlParser: true, useUnifiedTopology: true });
-    client.connect(err => {
-
-      client.db("Fundamentals").collection(factor).find({}).toArray((error, result) => {
-        console.log(error)
-        if (!error) {
-
-          result.forEach(function (entity) {
-            //  console.log(entity)
-
-
-            try {
-              var index = entity.history.length - 1
-              var jsonString = '"symbol":"' + Object.keys(entity.history[index])[0] + '",'
-              Object.values(Object.values(entity.history[index])[0][0])[0].forEach(function (x) {
-                var d1 = new Date(date);
-                d1.setFullYear(d1.getFullYear())
-                jsonString += '"backtest Date":"' + d1.toJSON().slice(0, 10).toString() + '",'
-                var d2 = new Date(date);
-                d2.setFullYear(d1.getFullYear() - 1)
-                factorArray.forEach(
-                  function (factor) {
-                    if (x[factor]) {
-                      var unentered1 = true
-                      var unentered2 = true
-                      x[factor].forEach(function (row) {
-                        var factorIndex = x[factor].length
-                        var reportDate = new Date(Object.keys(row)[0]);
-                        //2020-10-25, 2019-10-25, 2020-07-01
-                        //  console.log(d1.toJSON().slice(0, 10),d2.toJSON().slice(0, 10), reportDate.toJSON().slice(0, 10))
-
-                        if (d1 > reportDate && unentered1) {
-                          unentered1 = false
-                          jsonString += '"' + factor + '":' + Object.values(row)[0] + ','
-                          jsonString += '"' + factor + '_REPORT_DATE' + '":"' + reportDate.toJSON().slice(0, 10).toString() + '",'
-                        }
-                        if (d2 > reportDate && unentered2) {
-                          unentered2 = false
-                          jsonString += '"' + factor + '_lastYear":' + Object.values(row)[0] + ','
-                          jsonString += '"' + factor + '_lastYear_REPORT_DATE' + '":"' + reportDate.toJSON().slice(0, 10).toString() + '",'
-                        }
-
-                        factorIndex--
-                      })
-
-                    }
-                  }
-                )
-              })
-              var jsonify = '{' + (jsonString.substring(0, jsonString.length - 1)) + '}'
-              callback(jsonify)
-              client.close();
-              // array[JSON.parse(jsonify).symbol] = JSON.parse(jsonify)
-            } catch {
-              client.close();
-              //  console.log("failed")
-              //  console.log(jsonify)
-            }
-
-          })
-          // console.log(array)
-          // callback()
-        }
-      })
-
-    });
-
-  },
 
 
   GetMongoShortVolume: function (date, factor, callback) {

@@ -220,7 +220,14 @@ async function DailyIngest_ShortVolume(endDate, task) {
     })
 }
 var fundamentals = {
-    /*
+  
+    'Income': ['Income%20Statement', ['Income from Continuous Operations','SG&A Expenses','EBIT', 'Gross Margin','Revenue','Cost of Revenue']],
+    'CashFlow': ['Cash%20Flow', ['Operating Cash Flow','Depreciation & Amortization','Operating Cash Flow', 'Net Income','Financing cash flow']],
+    'Metrics': ['Metrics', ['Working Capital','Graham Net Nets','Operating CF/Net income','EV/FCF','Enterprise Value','Asset Turnover', 'EV/Sales', 'EV/EBIT', 'EV/EBITDA', 'Market Cap', 'Debt/Assets', 'P/E ratio','Enterprise Value']],
+    'BalanceSheet': ['Balance%20Sheet', ['Total Debt','Receivables','Retained Earnings', 'Total liabilities', 'Total Assets', 'Total current liabilities',
+        'Total current assets', 'Long Term Debt (Total)','Property, Plant, Equpment (Net)']],
+    'Growth': ['Growth', ['EPS Growth (diluted)']]
+      /*
 
     Beniesh -------------
     Income - Revenue
@@ -250,12 +257,6 @@ var fundamentals = {
     
     17 x 4 (last and current year date and value)
    */
-    'Income': ['Income%20Statement', ['Income from Continuous Operations','SG&A Expenses','EBIT', 'Gross Margin','Revenue','Cost of Revenue']],
-    'CashFlow': ['Cash%20Flow', ['Operating Cash Flow','Depreciation & Amortization','Operating Cash Flow', 'Net Income','Financing cash flow']],
-    'Metrics': ['Metrics', ['Working Capital','Graham Net Nets','Operating CF/Net income','EV/FCF','Enterprise Value','Asset Turnover', 'EV/Sales', 'EV/EBIT', 'EV/EBITDA', 'Market Cap', 'Debt/Assets', 'P/E ratio','Enterprise Value']],
-    'BalanceSheet': ['Balance%20Sheet', ['Total Debt','Receivables','Retained Earnings', 'Total liabilities', 'Total Assets', 'Total current liabilities',
-        'Total current assets', 'Long Term Debt (Total)','Property, Plant, Equpment (Net)']],
-    'Growth': ['Growth', ['EPS Growth (diluted)']]
 }
 function TransformIngest(daysback,ingest,table) {
    
@@ -263,7 +264,7 @@ function TransformIngest(daysback,ingest,table) {
     Stocklist.SymbolList('',
         function (stocks) {
             var length = stocks.length;
-            var interval = indexAdder*1000;
+            var interval = indexAdder;
             var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
             
             for (var i = 0; i < length; i++) {
@@ -278,7 +279,7 @@ function TransformIngest(daysback,ingest,table) {
                             })
 
                         if (i == length - 1) {
-                         //   throw 'done'
+                            throw 'done'
                         }
                     }, interval * (i));
                 })(i);
@@ -287,16 +288,22 @@ function TransformIngest(daysback,ingest,table) {
 
 }
 
-async function Built_PickList(date) {
+async function Built_PickList_From_Mongo(date,factor) {
 
     try {
 
         var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-
-        // MongoDb.GetMongoFundamentals(date, 'Income',
-        //     ['EBIT', 'Gross Margin'], function (data) {
-        //         AzureStorage.ToTable("PickList5000", tableService, GenericTask(data));
-        //     })
+       // var table= Object.values(fundamentals[factor])[0]
+        var features = Object.values(fundamentals[factor])[1]
+        console.log(factor)
+        console.log(features)
+            MongoDb.GetMongoFundamentals(date, factor,
+                features, function (data) {
+                    
+                        AzureStorage.ToTable("PickList5000", tableService, GenericTask(data));
+                })
+        
+        
 
 
         // setTimeout(function () {
@@ -623,6 +630,7 @@ function GenericTask(data) {
     }
 
     var task = JSON.parse('{' + (jsonString.substring(0, jsonString.length - 1)) + '}')
+    console.log(task)
     return task
 }
 module.exports = {
@@ -676,9 +684,9 @@ module.exports = {
     DailyIngest_ShortVolume: function (day, task) {
         DailyIngest_ShortVolume(day, task)
     },
-    Built_PickList: function (daysback) {
+    Built_Factor_PickList: function (daysback,factor) {
         var day = new Date(daysback).toJSON().slice(0, 10)
-        Built_PickList(day)
+        Built_PickList_From_Mongo(day,factor)
 
     },
 

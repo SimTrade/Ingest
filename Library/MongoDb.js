@@ -170,56 +170,63 @@ module.exports = {
 
       client.db("Fundamentals").collection(factor).find({}).toArray((error, result) => {
         if (!error) {
-
+          var i = 0;
+          console.log("result: "+result.length)
           result.forEach(function (entity) {
-           
-            try {
-              var index = entity.history.length - 1
-              var jsonString = '"symbol":"' + Object.keys(entity.history[index])[0] + '",'
-              Object.values(Object.values(entity.history[index])[0][0])[0].forEach(function (x) {
-                var d1 = new Date(date);
-                d1.setFullYear(d1.getFullYear())
-                jsonString += '"backtest Date":"' + d1.toJSON().slice(0, 10).toString() + '",'
-                var d2 = new Date(date);
-                d2.setFullYear(d1.getFullYear() - 1)
-                factorArray.forEach(
-                  function (factor) {
-                    if (x[factor]) {
-                      var unentered1 = true
-                      var unentered2 = true
-                      x[factor].forEach(function (row) {
-                        var factorIndex = x[factor].length
-                        var reportDate = new Date(Object.keys(row)[0]);
-                        var factored = replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(factor, ",", ''), ".", ""), "(", ""), ")", ""), "/", "_"), " ", "_"), "&", ""), "-", "_")
-
-                        if (d1 > reportDate && unentered1) {
-                          unentered1 = false
-                          jsonString += '"' + factored + '":' + Object.values(row)[0] + ','
-                          jsonString += '"' + factored + '_REPORT_DATE' + '":"' + reportDate.toJSON().slice(0, 10).toString() + '",'
-                        }
-                        if (d2 > reportDate && unentered2) {
-                          unentered2 = false
-                          jsonString += '"' + factored + '_lastYear":' + Object.values(row)[0] + ','
-                          jsonString += '"' + factored + '_lastYear_REPORT_DATE' + '":"' + reportDate.toJSON().slice(0, 10).toString() + '",'
-                        }
-
-                        factorIndex--
+            
+            
+                  setTimeout(function () {
+                    try {
+                      var index = entity.history.length - 1
+                      var jsonString = '"symbol":"' + Object.keys(entity.history[index])[0] + '",'
+                      Object.values(Object.values(entity.history[index])[0][0])[0].forEach(function (x) {
+                        var d1 = new Date(date);
+                        d1.setFullYear(d1.getFullYear())
+                        jsonString += '"backtest Date":"' + d1.toJSON().slice(0, 10).toString() + '",'
+                        var d2 = new Date(date);
+                        d2.setFullYear(d1.getFullYear() - 1)
+                        factorArray.forEach(
+                          function (factor) {
+                            if (x[factor]) {
+                              var unentered1 = true
+                              var unentered2 = true
+                              x[factor].forEach(function (row) {
+                                var factorIndex = x[factor].length
+                                var reportDate = new Date(Object.keys(row)[0]);
+                                var factored = replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(replaceAll(factor, ",", ''), ".", ""), "(", ""), ")", ""), "/", "_"), " ", "_"), "&", ""), "-", "_")
+        
+                                if (d1 > reportDate && unentered1) {
+                                  unentered1 = false
+                                  jsonString += '"' + factored + '":' + Object.values(row)[0] + ','
+                                //  jsonString += '"' + factored + '_REPORT_DATE' + '":"' + reportDate.toJSON().slice(0, 10).toString() + '",'
+                                }
+                                if (d2 > reportDate && unentered2) {
+                                  unentered2 = false
+                                  jsonString += '"' + factored + '_LastYear":' + Object.values(row)[0] + ','
+                                 // jsonString += '"' + factored + '_lastYear_REPORT_DATE' + '":"' + reportDate.toJSON().slice(0, 10).toString() + '",'
+                                }
+        
+                                factorIndex--
+                              })
+        
+                            }
+                          }
+                        )
                       })
-
+                      var jsonify = '{' + (jsonString.substring(0, jsonString.length - 1)) + '}'
+                      callback(jsonify)
+                      client.close();
+                    } catch {
+                      client.close();
+        
                     }
-                  }
-                )
-              })
-              var jsonify = '{' + (jsonString.substring(0, jsonString.length - 1)) + '}'
-              callback(jsonify)
-              client.close();
-            } catch {
-              client.close();
-
-            }
+                  },  (i++));
+              
+           
 
           })
         }
+        console.log("result: "+result.length)
       })
 
     });

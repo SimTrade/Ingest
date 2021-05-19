@@ -54,7 +54,7 @@ module.exports = {
   GetTable: function (tableName, tableService, query, callback) {
     GetTable(tableName, tableService, query, callback, null)
   },
-  ToTable: function (tableName, tableService, task) {
+  ToTable: function (tableName, tableService, task,factor) {
     try{
       tableService.createTableIfNotExists(tableName, function (error, result) { 
        // console.log(error,result)
@@ -62,12 +62,12 @@ module.exports = {
       tableService.insertOrMergeEntity(tableName, task, function (error, result, response) {
         //console.log(error,result)
         if (!error) {
-          console.log('inserted',Object.values(task.RowKey)[0],
-          Object.values(task.PartitionKey)[0],)
+          console.log('inserted',factor,tableName,Object.values(task.RowKey)[0],
+          Object.values(task.PartitionKey)[0])
           
         }
         else {
-         // console.log(error)
+          console.log(error)
             tableService.createTableIfNotExists(tableName, function (error, result) {
                logging.appendToErrorLog(tableName,
                                         Object.values(task.RowKey)[0],

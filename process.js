@@ -137,7 +137,7 @@ if (process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		ModelRunner.TransformIngest(input,ingest,table)
 	}	
-	else if ("Built_CashFlow__PickList_Backtest" == process.argv[2]) {
+	else if ("Built_CashFlow_PickList_Backtest" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Built_Factor_PickList,'CashFlow')
 	}

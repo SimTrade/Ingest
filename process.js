@@ -52,94 +52,45 @@ if (process.argv[2]) {
 	//Growth
 	else if ("RunGrowthIngest" == process.argv[2]) {
 		Builder.RunGrowthIngest()
-	}
-	else if ("Transform_Growth_Picklist_Backtest" == process.argv[2]) {
-		
-		var ingest = 'Growth'
-		var table = "Picklist5000"
+	}	
+	else if ("Transform_Growth_PickList_Backtest" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		ModelRunner.TransformIngest(input,ingest,table)
-	}
-	else if ("HistoricWeeklyGrowth_Picklist" == process.argv[2]) {
-		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		var back = dateObj.setDate(dateObj.getDate() -input)
-		ModelRunner.Built_Growth(back)
-		//HistoricPicklistBuilder(355 * 7, input, 100000, ModelRunner.Built_Income)
-	}
-	else if ("Built_Growth_PickList_Backtest" == process.argv[2]) {
-		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Built_Factor_PickList,'Growth')
+		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Transform_Factor_PickList,'Growth')
 	}
 
 	//Income
 	else if ("RunIncomeIngest" == process.argv[2]) {
 		Builder.RunIncomeIngest()
 	}
-	else if ("Transform_Income_Picklist_Backtest" == process.argv[2]) {
-		
-		var ingest = 'Income'
-		var table = "Picklist5000"
+	else if ("Transform_Income_PickList_Backtest" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		ModelRunner.TransformIngest(input,ingest,table)
-	}	
-	else if ("HistoricWeeklyIncome_Picklist" == process.argv[2]) {
-		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		var back = dateObj.setDate(dateObj.getDate() -input)
-		ModelRunner.TransformIngest(back)
-		//HistoricPicklistBuilder(355 * 7, input, 100000, ModelRunner.Built_Income)
-	}
-	else if ("Built_Income_PickList_Backtest" == process.argv[2]) {
-		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Built_Factor_PickList,'Income')
+		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Transform_Factor_PickList,'Income')
 	}
 
 	//Metrics
 	else if ("RunMetricsIngest" == process.argv[2]) {
 		Builder.RunMetricsIngest()
 	}
-	else if ("Transform_Metrics_Picklist_Backtest" == process.argv[2]) {
-		
-		var ingest = 'Metrics'
-		var table = "Picklist5000"
+	else if ("Transform_Metrics_PickList_Backtest" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		ModelRunner.TransformIngest(input,ingest,table)
-	}
-	else if ("Built_Metrics_PickList_Backtest" == process.argv[2]) {
-		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Built_Factor_PickList,'Metrics')
+		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Transform_Factor_PickList,'Metrics')
 	}	
 
 	//BalanceSheet
 	else if ("RunBalanceSheetIngest" == process.argv[2]) {
 		Builder.RunBalanceSheetIngest()
 	}
-	else if ("Transform_BalanceSheet_Picklist_Backtest" == process.argv[2]) {
-		
-		var ingest = 'BalanceSheet'
-		var table = "Picklist5000"
+	else if ("Transform_BalanceSheet_PickList_Backtest" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		ModelRunner.TransformIngest(input,ingest,table)
-		
-		//HistoricTransformBuilder(355 * 7,ingest,table, input, 100000, ModelRunner.TransformIngest)
-	}
-	else if ("Built_BalanceSheet_PickList_Backtest" == process.argv[2]) {
-		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Built_Factor_PickList,'BalanceSheet')
+		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Transform_Factor_PickList,'BalanceSheet')
 	}	
 	//CashFlow
 	else if ("RunCashFlowIngest" == process.argv[2]) {
 		Builder.RunCashFlowIngest()
-	}
-	else if ("Transform_CashFlow_Picklist_Backtest" == process.argv[2]) {
-		
-		var ingest = 'CashFlow'
-		var table = "Picklist5000"
-		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		ModelRunner.TransformIngest(input,ingest,table)
 	}	
-	else if ("Built_CashFlow_PickList_Backtest" == process.argv[2]) {
+	else if ("Transform_CashFlow_PickList_Backtest" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Built_Factor_PickList,'CashFlow')
+		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Transform_Factor_PickList,'CashFlow')
 	}
 	/*************end  PICKLIST functions*************************** */
 /***********************************************************************************************************/
@@ -307,7 +258,7 @@ if (process.argv[2]) {
 			else if ("Built_PickList" == process.argv[2]) {
 				var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 				var back = dateObj.setDate(dateObj.getDate() - input)
-				ModelRunner.Built_Factor_PickList(back)
+				ModelRunner.Transform_Factor_PickList(back)
 			}
 			else if ("Build_Macro" == process.argv[2]) {
 				var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)

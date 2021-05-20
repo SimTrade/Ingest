@@ -227,38 +227,8 @@ const FundamentalsFeatures = {
         'Total current assets', 'Long Term Debt (Total)','Property, Plant, Equpment (Net)']],
     'Growth': ['Growth', ['EPS Growth (diluted)','Net Income Growth']]
 }
-function TransformIngest(daysback,ingest,table) {
-   
-    var indexAdder = 20
-    Stocklist.SymbolList('',
-        function (stocks) {
-            var length = stocks.length;
-            var interval = indexAdder;
-            var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-            
-            for (var i = 0; i < length; i++) {
 
-                (function (i) {
-                   // console.log(date,ingest,stocks[i])
-                    setTimeout(function () {
-                        MongoDb.GetStockrowFundamentals(daysback,ingest, FundamentalsFeatures, stocks[i],
-                             indexAdder, function (data) {
-                                
-                                AzureStorage.ToTable(table, tableService, GenericTask(data),'');
-                            })
-
-                        if (i == length - 1) {
-                            throw 'done'
-                        }
-                        
-                    }, interval * (i));
-                })(i);
-            }
-        })
-
-}
-
-async function Built_PickList_From_Mongo(date,factor) {
+async function Transform_PickList_From_Mongo(date,factor) {
     try {
         var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
         var features = Object.values(FundamentalsFeatures[factor])[1]
@@ -451,21 +421,9 @@ module.exports = {
     DailyIngest_ShortVolume: function (day, task) {
         DailyIngest_ShortVolume(day, task)
     },
-    Built_Factor_PickList: function (daysback,factor) {
+    Transform_Factor_PickList: function (daysback,factor) {
         var day = new Date(daysback).toJSON().slice(0, 10)
-        Built_PickList_From_Mongo(day,factor)
-
-    },
-
-    TransformIngest: function (daysback,ingest,table) {
-        
-        TransformIngest(daysback,ingest,table)
-
-    },
-    Built_Growth: function (daysback) {
-        var day = new Date(daysback).toJSON().slice(0, 10)
-        Built_Growth(day)
+        Transform_PickList_From_Mongo(day,factor)
 
     }
-
 }

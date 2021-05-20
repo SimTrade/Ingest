@@ -170,12 +170,10 @@ module.exports = {
 
       client.db("Fundamentals").collection(factor).find({}).toArray((error, result) => {
         if (!error) {
-          var i = 0;
+ 
           console.log("result: "+result.length)
           result.forEach(function (entity) {
-            
-            
-                  setTimeout(function () {
+
                     try {
                       var index = entity.history.length - 1
                       var jsonString = '"symbol":"' + Object.keys(entity.history[index])[0] + '",'
@@ -218,12 +216,7 @@ module.exports = {
                       client.close();
                     } catch {
                       client.close();
-        
                     }
-                  },  (i++));
-              
-           
-
           })
         }
         console.log("result: "+result.length)

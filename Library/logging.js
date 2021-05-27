@@ -9,7 +9,7 @@ const fsextra = require('fs-extra');
 module.exports = {
 	appendToErrorLog: function(folder,symbol,date,error){
 		folder +='_failures'
-		var file = +date+"_"+symbol
+		var file = date+"_"+symbol
 		if (!fs.existsSync("Library/Logs/")){
 			fs.mkdirSync("Library/Logs/");
 		}
@@ -24,9 +24,16 @@ module.exports = {
 		if(lines == ''){
 			lines = '[]'
 		}
-		var table = JSON.parse(lines)
-		table.push(error);
-		fs.writeFileSync("Library/Logs/"+folder+"/"+file+".json", JSON.stringify(table));
+		try{
+			var table = JSON.parse(lines)
+			table.push(error);
+			fs.writeFileSync("Library/Logs/"+folder+"/"+file+".json", JSON.stringify(error));
+		}
+		catch(ex){
+			console.log(ex)
+			console.log("ex at line 34 /logging")
+		}
+		
 	},
   CreateCSV: function(all,name, callback){
   	try{

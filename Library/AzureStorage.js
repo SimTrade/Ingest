@@ -68,12 +68,12 @@ module.exports = {
         }
         else {
           console.log(error)
-            tableService.createTableIfNotExists(tableName, function (error, result) {
+            //.createTableIfNotExists(tableName, function (error, result) {
                logging.appendToErrorLog(tableName,
                                         Object.values(task.RowKey)[0],
                                         Object.values(task.PartitionKey)[0],
                                         error)
-            });
+           // });
         }
   
       });

@@ -731,7 +731,7 @@ module.exports = {
    // MongoIngestRunner(interval,"Top1000", analyzeFunction, azureTableName, function () { console.log("Top1000 Done") })
 
   },
-  Run: function (stock_time_series,azureTableName,output_size,interval,begin,end) {
+  RunDaily: function (stock_time_series,azureTableName,output_size,interval,begin,end) {
     AlphaVantageStockRunner(interval,begin,end, Analyze.RapidApi, azureTableName,stock_time_series,output_size, function () {
       console.log("RapidApi Done")
     })
@@ -1638,7 +1638,7 @@ module.exports = {
   },
 
   RunStockWeekly: function () {
-    AlphaVantageStockRunner(10000, Analyze.RapidApi, 'StocksWeekly', function () {
+    AlphaMongoStockRunner(10000, Analyze.RapidApi,'TIME_SERIES_DAILY_ADJUSTED','full', 'StocksWeekly', function () {
       console.log("RapidApi Done")
     })
   },
@@ -3136,7 +3136,35 @@ function AlphaVantageEtfRunner(interval, analyzer, name, callback) {
     })
 
 }
+function AlphaMongoStockRunner(interval, analyzer,api,outputSize, name, callback) {
+  var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
+  Stocklist.SymbolList("",
+    function (stocks) {
+      var length = stocks.length;
+      for (var i = 0; i < length; i++) {
 
+        (function (i) {
+          setTimeout(function () {
+            try {
+              analyzer(stocks[i],api,outputSize).then(data => {
+                MongoDb.Upsert(name, stocks[i], data)
+              });
+            } catch {
+              var data = analyzer(stocks[i]);
+              MongoDb.Upsert(name, stocks[i], data)
+            }
+            console.log(name + ": " + i + "_" + stocks[i])
+            if (i == length - 1) {
+              callback()
+            }
+          }, interval * (i));
+        })(i);
+
+      }
+
+    })
+
+}
 function AlphaVantageStockRunner(interval,begin,end, analyzer, name,stock_time_series,output_size, callback) {
   var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
   Stocklist.SymbolList("",

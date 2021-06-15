@@ -613,10 +613,12 @@ module.exports = {
       var columnName = "Weekly Adjusted Time Series"
       client.db("Fundamentals").collection(factor).find({}).toArray((error, result) => {
         var jsonCollectionstring = ''
+        
         if (!error) {
           console.log("entity")
-
+          
           result.forEach(function (entity) {
+            
             var unentered1 = true
             var unentered2 = true
 
@@ -693,8 +695,8 @@ module.exports = {
               callback(obj)
               client.close();
 
-            } catch {
-              console.log("failed")
+            } catch (ex) {
+             // console.log(ex)
               //  console.log(jsonify)
             }
 

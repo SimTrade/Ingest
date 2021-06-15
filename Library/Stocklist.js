@@ -107,7 +107,7 @@ module.exports = {
               var collection = symbolDistinct.sort().filter(onlyUnique)
               var temp = [] 
               collection.forEach(function(x){
-               // if(x=='A'||x=='AAPL')
+                //if(x=='A'||x=='AAPL')
                   temp.push(x)
               })
               var symbols = temp.sort().filter(onlyUnique)

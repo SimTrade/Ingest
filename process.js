@@ -108,16 +108,28 @@ if (process.argv[2]) {
 		var beginning = new Date(range).toJSON().slice(0, 10)
 		var day = new Date(back).toJSON().slice(0, 10)
 		console.log(beginning)
-		Builder.Run('TIME_SERIES_DAILY_ADJUSTED',
+		Builder.RunDaily('TIME_SERIES_DAILY_ADJUSTED',
 					'StocksDailyBacktester',
 					'compact',1000,
 					beginning,'')
 	}
 	else if ("HistoricDailyIngest_StocksDailyBacktester" == process.argv[2]) {
-		Builder.Run('TIME_SERIES_DAILY_ADJUSTED',
+		Builder.RunDaily('TIME_SERIES_DAILY_ADJUSTED',
 					'StocksDailyBacktester',
 					'full',83000,
 					'2015-01-01','')
+	}
+	/** 
+	 Buid Stocks weekly 
+	 
+	*/
+	else if ("RunStockWeekly" == process.argv[2]) { //run on friday
+		Builder.RunStockWeekly()
+	}
+	else if ("Build_Stock_Weekly_Backtest" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		HistoricTransformBuilder(355 * 7, input, 30000, ModelRunner.Build_Stock_Weekly,'')
+
 	}
 	/*************end  OHLCV functions*************************** */
 /***********************************************************************************************************/
@@ -284,11 +296,7 @@ if (process.argv[2]) {
 				HistoricTransformBuilder(355 * 7, input, 7000, ModelRunner.Build_Macro,'')
 			}
 
-			else if ("Build_Stock_Weekly_Backtest" == process.argv[2]) {
-				var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-				HistoricTransformBuilder(355 * 7, input, 30000, ModelRunner.Build_Stock_Weekly,'')
-
-			}
+			
 			else if ("Build_Stock_Daily_Backtest" == process.argv[2]) {
 				var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 				var dateTime = new Date()
@@ -337,9 +345,7 @@ if (process.argv[2]) {
 					console.log("Polygon done!")
 				});
 			}
-			else if ("RunStockWeekly" == process.argv[2]) { //run on friday
-				Builder.RunStockWeekly()
-			}
+			
 			
 			else if ("RapidApi_Single" == process.argv[2]) {
 				Builder.RapidApi_Single()

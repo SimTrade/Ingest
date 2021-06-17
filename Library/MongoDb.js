@@ -608,12 +608,13 @@ module.exports = {
     d2.setDate(d1.getDate() - 31);
     var array = {}
     var client = new MongoClient(MongoDbUri.URI, { useNewUrlParser: true, useUnifiedTopology: true });
-
+   
     client.connect(err => {
       var columnName = "Weekly Adjusted Time Series"
-      client.db("Fundamentals").collection(factor).find({}).toArray((error, result) => {
+     
+      client.db("Fundamentals").collection("StocksWeekly").find({}).toArray((error, result) => {
         var jsonCollectionstring = ''
-        
+        console.log(error)
         if (!error) {
           console.log("entity")
           

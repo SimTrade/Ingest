@@ -123,12 +123,16 @@ if (process.argv[2]) {
 	 Buid Stocks weekly 
 	 
 	*/
-	else if ("RunStockWeekly" == process.argv[2]) { //run on friday
-		Builder.RunStockWeekly()
-	}
-	else if ("Build_Stock_Weekly_Backtest" == process.argv[2]) {
+	// else if ("RunStockWeekly" == process.argv[2]) { //run on friday
+	// 	Builder.RunStockWeekly()
+	// }
+	else if ("HistoricDailyIngest_StocksMonthlyGrowth" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, input, 30000, ModelRunner.Build_Stock_Weekly,'')
+		Builder.RunWeeklyToMonthly('TIME_SERIES_WEEKLY_ADJUSTED',
+					'StocksMonthlyGrowth',
+					'full',83000,
+					'2015-01-01','')
+	//	BacktestRunBuilder(355 * 7, input, 30000, ModelRunner.Build_Stock_Weekly)
 
 	}
 	/*************end  OHLCV functions*************************** */
@@ -644,37 +648,7 @@ function HistoricTransformBuilder(daysback, indexAdder, incrementer, method,fact
 		})(i);
 	}
 }
-function HistoricPicklistBuilder(daysback, indexAdder, incrementer, method) {
-	for (var i = 0; i < daysback; i++) {
-		(function (i) {
-			setTimeout(function () {
-				console.log("____________Daysback: " + (i + indexAdder))
-				var dateTime = new Date()
-				var howFar = dateTime.setDate(dateTime.getDate() - (i + indexAdder))
-				var day_of_reference = new Date(howFar).toJSON().slice(0, 10)
-				if (i > 101) { //dont run longer than a year for performance data leaks
-					console.log("indexer: " + (i + indexAdder))
-					console.log("date: " + day_of_reference)
-					throw "*********** DONE **********************"
-				}
-				try {
-					Builder.GetCalendar(day_of_reference, function (isTradingDay) {
-						if (isTradingDay) {
-							method(day_of_reference,indexAdder)
-							console.log("TRADING TODAY: " + day_of_reference)
-						}
-						else {
-							console.log("NOT TRADING ON: " + day_of_reference)
-						}
-					})
 
-				} catch {
-					console.log("HistoricTransformBuilder has NO DATA THIS ITERATION " + (i + indexAdder) + " For Date " + day_of_reference)
-				}
-			}, (i == 0 ? 1 : i * incrementer));
-		})(i);
-	}
-}
 function BacktestRunBuilder(daysback, indexAdder, incrementer, method) {
 	var returns = 0
 	for (var i = 0; i < daysback; i++) {
@@ -688,7 +662,7 @@ function BacktestRunBuilder(daysback, indexAdder, incrementer, method) {
 					Builder.GetCalendar(dayyo, function (isTradingDay) {
 						if (isTradingDay) {
 							method(dayyo)
-							//	console.log("YAY trading today: " + dayyo)
+								console.log("weeklbuier trading today: " + dayyo)
 						}
 						else {
 							console.log("not trading today: " + dayyo)

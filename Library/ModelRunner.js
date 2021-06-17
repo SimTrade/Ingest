@@ -177,7 +177,7 @@ async function Build_Stock_Daily(date) {
 }
 async function Build_Stock_Weekly(date) {
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-
+    
     MongoDb.GetMongoStockWeekly(date, 'StocksWeekly', function (data) {
         AzureStorage.ToTable("StocksMonthlyGrowth", tableService, StockWeeklyTask(data),'');
     })
@@ -404,6 +404,7 @@ module.exports = {
     },
     Build_Stock_Weekly: function (daysback) {
         var day = new Date(daysback).toJSON().slice(0, 10)
+       
         Build_Stock_Weekly(day)
     },
     Build_Macro: function (daysback) {

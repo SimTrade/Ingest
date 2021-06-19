@@ -27,7 +27,7 @@ async function BuildOBV(input) {
         .where("PartitionKey ge ?", begin)
         .and("PartitionKey le ?", end)
     AzureStorage.GetTable('StocksDailyBacktester', tableService, query, function (result) {
-        Stocklist.SymbolList1000(
+        Stocklist.SymbolList('',
             function (stocks) {
                 stocks.forEach(function (symbol) {
                     var data = result.filter(obj => {

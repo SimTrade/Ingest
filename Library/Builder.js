@@ -37,28 +37,35 @@ function closeAllPositions() {
   paca.closeAllPositions().then((report) => {
     console.log('closed all positions ')
   })
-  paca.cancelAllOrders().then((report) => {
-    console.log('closed all positions ')
-  })
 }
-
-function order(orderQuantity, orderSide, symbol) {
-
-  var orderObj = {
-    symbol: symbol,
-    qty: Math.abs(orderQuantity),
-    side: orderSide,
-    type: 'market',
-    time_in_force: 'day',
+  function Ingest(factor,callback) {
+    var factors = {Income:"Income%20Statement",
+                    Metrics:"Metrics",
+                    Growth:"Growth",
+                    CashFlow:"Cash%20Flow",
+                    BalanceSheet:"Balance%20Sheet"}
+    var FACTOR = factors[factor]
+    Stocklist.SymbolList('',
+      function (stocks) {
+        var length = stocks.length;
+        var interval = 10000;
+        var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
+  
+        for (var i = 0; i < length; i++) {
+  
+          (function (i) {
+            setTimeout(function () {
+              var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section="+FACTOR+"&sort=desc";
+              unitOfWork(i, length, url, stocks[i], factor, fileService)
+  
+              if (i == length - 1) {
+                callback()
+              }
+            }, interval * (i));
+          })(i);
+        }
+      })
   }
-
-
-  console.log(orderObj)
-  paca.createOrder(orderObj).then((order) => {
-    console.log('Order :', order)
-  });
-
-}
 function TopUniverse(tableService, callback) {
   GetFinnhubList(tableService, function (list) {
     var items = Object.keys(list).map(function (key) {
@@ -613,6 +620,13 @@ function INFLATION() {
 
 
 module.exports = {
+  RunIngest: function (factor) {
+    Ingest(factor,function () {
+      console.log(factor+"Ingest Done!")
+      process.exit(1);
+    })
+
+  },
   GetOrders: function () {
     getOrders()
   },
@@ -1185,6 +1199,9 @@ module.exports = {
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
     dataToAzureTableStorage(table, tableService, RiskTask(data))
   },
+  DeleteTable: function (table,callback) {
+    MongoDb.Delete(table,callback)
+  },
   DeleteStocksWeekly: function () {
     MongoDb.Delete('StocksWeekly')
   },
@@ -1659,8 +1676,8 @@ module.exports = {
       console.log("GoogleTrend Done!")
     })
   },
-  FinnhubCalendar: function (day) {
-    FinnhubCalendar(day)
+  FinnhubIpoCalendar: function (day) {
+    FinnhubIpoCalendar(day)
   },
   PreRun: function () {
     PrimeBuilder(1, Analyze.IEX, 'IEX', function () {//Splits
@@ -2781,7 +2798,7 @@ function FinnhubHistorical() {
 
 
 }
-function FinnhubCalendar(days) {
+function FinnhubIpoCalendar(days) {
   var ipoCalendar = Analyze.FinnhubIpoCalendar(days)
   ipoCalendar.then(data => {
 

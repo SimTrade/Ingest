@@ -226,7 +226,7 @@ module.exports = {
 
   },
 
-  Delete: function (tableName) {
+  Delete: function (tableName,callback) {
     var client = new MongoClient(MongoDbUri.URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
     client.connect(err => {
@@ -240,6 +240,7 @@ module.exports = {
         )
 
     });
+    callback()
   },
   Upsert: function (tableName, symbol, data) {
     var client = new MongoClient(MongoDbUri.URI, { useNewUrlParser: true, useUnifiedTopology: true });

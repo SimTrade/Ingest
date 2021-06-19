@@ -711,39 +711,6 @@ module.exports = {
   MongoIngest: function (analyzeFunction, azureTableName, interval, callback) {
     MongoIngestRunner(interval, "whatever", analyzeFunction, azureTableName, function () { console.log("Top1000 Done") })
 
-    // async.waterfall([
-    //   function (callback) {
-    //     console.log("ENTER 1 -------------------------------")
-    //       MongoIngestRunner(interval,"whatever", analyzeFunction, azureTableName, function () { console.log("Top1000 Done") })
-    //     callback()
-    //   },
-    // function (callback) {
-    //   console.log("ENTER 2 -------------------------------")
-    //    MongoIngestRunner(interval,"Second1000",analyzeFunction, azureTableName, function () { console.log("Second1000 Done") })
-    //   callback()
-    // },
-    // function (callback) {
-    //   console.log("ENTER 3 -------------------------------")
-    //     MongoIngestRunner(interval,"Third1000", analyzeFunction, azureTableName, function () { console.log("Third1000 Done") })
-    //   callback()
-    // },
-    // function (callback) {
-    //   console.log("ENTER 4 -------------------------------")
-    //     MongoIngestRunner(interval,"Fourth1000",analyzeFunction, azureTableName, function () { console.log("Fourth1000 Done") })
-    //   callback()
-    // },
-    // function (callback) {
-    //   console.log("ENTER 5 -------------------------------")
-    //   MongoIngestRunner(interval,"Last1000", analyzeFunction, azureTableName, function () { console.log("Last1000 Done") })
-    //   callback()
-    // }
-    //  ], function (err, result) {
-    //   if (err) return callback(err);
-
-    //   callback(null, result);
-    //  });
-    // MongoIngestRunner(interval,"Top1000", analyzeFunction, azureTableName, function () { console.log("Top1000 Done") })
-
   },
   RunDaily: function (stock_time_series, azureTableName, output_size, interval, begin, end) {
     AlphaVantageDailyStockRunner(interval, begin, end, Analyze.RapidApi, azureTableName, stock_time_series, output_size, function () {

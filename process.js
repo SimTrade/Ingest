@@ -66,29 +66,52 @@ if (process.argv[2]) {
 
 	else if ("Transform_Income_PickList_Backtest" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Transform_Factor_PickList,'Income')
+		HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'Income')
 	}
 
 	
 	else if ("Transform_Metrics_PickList_Backtest" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Transform_Factor_PickList,'Metrics')
+		HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'Metrics')
 	}	
 
 	
 	else if ("Transform_BalanceSheet_PickList_Backtest" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Transform_Factor_PickList,'BalanceSheet')
+		HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'BalanceSheet')
 	}	
 		
 	else if ("Transform_CashFlow_PickList_Backtest" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, input, 100000, ModelRunner.Transform_Factor_PickList,'CashFlow')
+		HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'CashFlow')
 	}
 	/*************end  PICKLIST functions*************************** */
 /***********************************************************************************************************/
 
 	/************** OHLC FUNCTIONS ************************ */	
+	/** 
+	* Builds hourly ohlcv using 5000Universe
+	* in StocksHourlyBacktester Table Storage
+	* RUN IN TASK SCHEDULER
+	*/
+	else if ("HistoricHourlyIngest_StocksHourlyBacktester" == process.argv[2]) {
+		Builder.RunDaily('TIME_SERIES_INTRADAY&interval=60min',
+					'StocksHourlyBacktester',
+					'full',83000,
+					'2015-01-01','')
+	}
+	else if ("Scheduled_HourlyIngest_StocksHourlyBacktester" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var back = dateObj.setDate(dateObj.getDate() -input)
+		var range = dateObj.setDate(dateObj.getDate() -(input+10))
+		var beginning = new Date(range).toJSON().slice(0, 10)
+		var day = new Date(back).toJSON().slice(0, 10)
+		console.log(beginning)
+		Builder.RunDaily('TIME_SERIES_INTRADAY&interval=60min',
+					'StocksHourlyBacktester',
+					'compact',1000,
+					beginning,'')
+	}
 	/** 
 	* Builds daily ohlcv using 5000Universe
 	* in StocksDailyBacktester Table Storage

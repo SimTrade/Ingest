@@ -49,6 +49,7 @@ function Ingest(factor, callback) {
   var FACTOR = factors[factor]
   Stocklist.SymbolList('',
     function (stocks) {
+      
       var length = stocks.length;
       var interval = 10000;
       var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
@@ -57,8 +58,9 @@ function Ingest(factor, callback) {
 
         (function (i) {
           setTimeout(function () {
+            console.log(stocks[i])
             var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section=" + FACTOR + "&sort=desc";
-            unitOfWork(i, length, url, stocks[i], factor, fileService)
+            unitOfWork(i, length, url, stocks, factor, fileService)
 
             if (i == length - 1) {
               callback()

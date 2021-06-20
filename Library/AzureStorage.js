@@ -69,10 +69,10 @@ module.exports = {
         else {
           console.log(error)
             //.createTableIfNotExists(tableName, function (error, result) {
-               logging.appendToErrorLog(tableName,
-                                        Object.values(task.RowKey)[0],
-                                        Object.values(task.PartitionKey)[0],
-                                        error)
+              //  logging.appendToErrorLog(tableName,
+              //                           Object.values(task.RowKey)[0],
+              //                           Object.values(task.PartitionKey)[0],
+              //                           error)
            // });
         }
   

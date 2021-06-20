@@ -366,7 +366,6 @@ function buildDate(daysback) {
 function RapidApi_Timeseries(symbol,stock_time_series,output_size) {
   var run = new Promise(function (resolve, reject) {
     var http = require("https");
-
     var options = {
       "method": "GET",
       "hostname": "alpha-vantage.p.rapidapi.com",

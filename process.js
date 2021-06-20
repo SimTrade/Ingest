@@ -95,9 +95,9 @@ if (process.argv[2]) {
 	* RUN IN TASK SCHEDULER
 	*/
 	else if ("HistoricHourlyIngest_StocksHourlyBacktester" == process.argv[2]) {
-		Builder.RunDaily('TIME_SERIES_INTRADAY&interval=60min',
+		Builder.RunDaily('TIME_SERIES_INTRADAY_EXTENDED&slice=year1month1&interval=60min',
 					'StocksHourlyBacktester',
-					'full',83000,
+					'full',12000,
 					'2015-01-01','')
 	}
 	else if ("Scheduled_HourlyIngest_StocksHourlyBacktester" == process.argv[2]) {

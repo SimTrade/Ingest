@@ -38,34 +38,36 @@ function closeAllPositions() {
     console.log('closed all positions ')
   })
 }
-  function Ingest(factor,callback) {
-    var factors = {Income:"Income%20Statement",
-                    Metrics:"Metrics",
-                    Growth:"Growth",
-                    CashFlow:"Cash%20Flow",
-                    BalanceSheet:"Balance%20Sheet"}
-    var FACTOR = factors[factor]
-    Stocklist.SymbolList('',
-      function (stocks) {
-        var length = stocks.length;
-        var interval = 10000;
-        var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-  
-        for (var i = 0; i < length; i++) {
-  
-          (function (i) {
-            setTimeout(function () {
-              var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section="+FACTOR+"&sort=desc";
-              unitOfWork(i, length, url, stocks[i], factor, fileService)
-  
-              if (i == length - 1) {
-                callback()
-              }
-            }, interval * (i));
-          })(i);
-        }
-      })
+function Ingest(factor, callback) {
+  var factors = {
+    Income: "Income%20Statement",
+    Metrics: "Metrics",
+    Growth: "Growth",
+    CashFlow: "Cash%20Flow",
+    BalanceSheet: "Balance%20Sheet"
   }
+  var FACTOR = factors[factor]
+  Stocklist.SymbolList('',
+    function (stocks) {
+      var length = stocks.length;
+      var interval = 10000;
+      var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
+
+      for (var i = 0; i < length; i++) {
+
+        (function (i) {
+          setTimeout(function () {
+            var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section=" + FACTOR + "&sort=desc";
+            unitOfWork(i, length, url, stocks[i], factor, fileService)
+
+            if (i == length - 1) {
+              callback()
+            }
+          }, interval * (i));
+        })(i);
+      }
+    })
+}
 function TopUniverse(tableService, callback) {
   GetFinnhubList(tableService, function (list) {
     var items = Object.keys(list).map(function (key) {
@@ -621,8 +623,8 @@ function INFLATION() {
 
 module.exports = {
   RunIngest: function (factor) {
-    Ingest(factor,function () {
-      console.log(factor+"Ingest Done!")
+    Ingest(factor, function () {
+      console.log(factor + "Ingest Done!")
       process.exit(1);
     })
 
@@ -1166,8 +1168,8 @@ module.exports = {
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
     dataToAzureTableStorage(table, tableService, RiskTask(data))
   },
-  DeleteTable: function (table,callback) {
-    MongoDb.Delete(table,callback)
+  DeleteTable: function (table, callback) {
+    MongoDb.Delete(table, callback)
   },
   DeleteStocksWeekly: function () {
     MongoDb.Delete('StocksWeekly')
@@ -3175,6 +3177,23 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
             try {
               analyzer(stocks[i], stock_time_series, output_size).then(data => {
 
+
+                if (stock_time_series.includes("EXTENDED")) {
+                  var datum = '{"Meta Data": {"1. Information": "Daily Time Series with Splits and Dividend Events","2. Symbol": "A","3. Last Refreshed": "2021-06-18","4. Output Size": "Full size","5. Time Zone": "US/Eastern"},"Time Series (Daily)":{'
+                  data = data.split('\n')
+                  data.shift()
+                 
+                  data.forEach(function (x) {
+                    var row = x.replace('\r', '').split(',')
+                    if (row[0]) {
+                      datum+='"'+[row[0]]+'":{"'+open+'":"'+row[1]+'","'+high+'":"'+row[2]+'","'+low+'":"'+row[3]+'","'+close+'":"'+row[4]+'"},'
+                    }
+
+                  })
+                  data = datum.slice(0, -1)
+                  data = data +'}}'
+                }
+               
                 var vals = Object.values(JSON.parse(data))[1]
                 var keys = Object.keys(Object.values(JSON.parse(data))[1])
                 var datalength = keys.length

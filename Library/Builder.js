@@ -1044,8 +1044,8 @@ module.exports = {
       function (data, stock) { return CompanyTask(data, stock) },
       function () { callback() })
   },
-  EQUITYPICKS: function (callback) {
-    AzureTableRunnerForIEX(3000,
+  FINNHUBLISTIEX: function (callback) {
+    AzureTableRunnerForFinnhubListIEX(3000,
       Analyze.IEX,
       'IEX',
       function (data, stock) { return MarketCap_Beta(data, stock) },
@@ -3624,24 +3624,29 @@ function AzureTableRunnerForETFs(interval, analyzer, name, taskCallback, callbac
   })
 
 }
-function AzureTableRunnerForIEX(interval, analyzer, name, taskCallback, callback) {
+function AzureTableRunnerForFinnhubListIEX(interval, analyzer, name, taskCallback, callback) {
+  var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
   console.log(" inside AzureTableRunnerForEIX _________________")
   name = "FinnhubList" + name
   stocklist(function (data) {
+    
     data = JSON.parse(data)
-    data = jsonquery('[*type=EQS].symbol', { data: data }).value
-    var theStockList = []
+    data = jsonquery('[*type=Common Stock].symbol', { data: data }).value
+    
+    var stocks = []
+    
     data.forEach(function (row) {
+     
       if (row.length < 5 && !(row.includes('/') || row.includes('.'))) {
-        theStockList.push(row)
+        
+        stocks.push(row)
       }
     })
-
-
-    var stocks = theStockList//Stocklist.theStockList();
+    stocks = stocks.sort((a, b) =>
+    a > b ? 1 : -1);
+    //console.log(stocks)
     var length = stocks.length;
-    var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-
+   
     for (var i = 0; i < length; i++) {
 
       (function (i) {

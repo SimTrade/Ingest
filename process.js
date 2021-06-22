@@ -35,6 +35,25 @@ if (process.argv[2]) {
 			console.log("Polygon done!")
 		});
 	}
+	else if ("FINNHUBLISTIEX" == process.argv[2]) {
+		Builder.FINNHUBLISTIEX(function () {
+			console.log("FINNHUBLISTIEX done!")
+		});
+	}
+
+	/*RUN DAILY*/
+	else if ("Build_Macro" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		ModelRunner.Build_Macro(back)
+	}
+	else if ("TableRun" == process.argv[2]) {
+		Builder.Barcharts();
+		Builder.WSJ();
+		Builder.Zacks();
+		Builder.IEX();
+		//Builder.ShortSqueeze();
+	}
 	/************** PICKLIST FUNCTIONS ************************ */	
 	/** using 5000Universe more like 4k
 	* <Run...Ingest's> Ingest to Mongo DB (original method)
@@ -44,6 +63,17 @@ if (process.argv[2]) {
 	* RUN IN TASK SCHEDULER
 	*/
 	
+
+	
+	
+	
+
+	// else if ("RunEtfWeekly" == process.argv[2]) { //run on friday
+	// 	Builder.RunEtfWeekly()
+	// 	Builder.POLYGONCOMPANIES(function () {
+	// 		console.log("ETF done!")
+	// 	});
+	// }
 	
 
 	//Weekly Generic ingest
@@ -95,7 +125,7 @@ if (process.argv[2]) {
 	* RUN IN TASK SCHEDULER
 	*/
 	else if ("HistoricHourlyIngest_StocksHourlyBacktester" == process.argv[2]) {
-		Builder.RunDaily('TIME_SERIES_INTRADAY_EXTENDED&slice=year1month1&interval=60min',
+		Builder.RunDaily('TIME_SERIES_INTRADAY_EXTENDED&slice=year1month3&interval=60min',
 					'StocksHourlyBacktester',
 					'full',12000,
 					'2015-01-01','')
@@ -109,7 +139,7 @@ if (process.argv[2]) {
 		console.log(beginning)
 		Builder.RunDaily('TIME_SERIES_INTRADAY&interval=60min',
 					'StocksHourlyBacktester',
-					'compact',1000,
+					'compact',4000,
 					beginning,'')
 	}
 	/** 
@@ -134,6 +164,12 @@ if (process.argv[2]) {
 					'StocksDailyBacktester',
 					'full',83000,
 					'2015-01-01','')
+	}
+
+	else if ("BuildOBV" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		ModelRunner.BuildOBV(input)
+
 	}
 	/** 
 	 Buid Stocks weekly 
@@ -270,27 +306,7 @@ if (process.argv[2]) {
 			
 			
 			
-			else if ("Build_Macro" == process.argv[2]) {
-				var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-				var back = dateObj.setDate(dateObj.getDate() - input)
-				ModelRunner.Build_Macro(back)
-			}
 			
-
-			else if ("BuildOBV" == process.argv[2]) {
-				var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-				ModelRunner.BuildOBV(input)
-
-			}
-			
-			
-
-			else if ("RunEtfWeekly" == process.argv[2]) { //run on friday
-				Builder.RunEtfWeekly()
-				Builder.POLYGONCOMPANIES(function () {
-					console.log("Polygon done!")
-				});
-			}
 			
 			
 			
@@ -307,13 +323,7 @@ if (process.argv[2]) {
 			else if ("CompanyProfile" == process.argv[2]) {
 				Builder.CompanyProfile(process.argv[3]);
 			}
-			else if ("TableRun" == process.argv[2]) {
-				Builder.Barcharts();
-				Builder.WSJ();
-				Builder.Zacks();
-				Builder.IEX();
-				//Builder.ShortSqueeze();
-			} else if ("ShortSqueeze" == process.argv[2]) {
+			 else if ("ShortSqueeze" == process.argv[2]) {
 				Builder.ShortSqueeze();
 
 			}

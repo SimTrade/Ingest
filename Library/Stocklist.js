@@ -75,7 +75,7 @@ module.exports = {
     return list;
   },
 
-  SymbolList: function (universe,callback) {
+  SymbolList: function (symbolStart,callback) {
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
     var symbolDistinct = []
     var query = new azure.TableQuery()
@@ -107,10 +107,16 @@ module.exports = {
               var collection = symbolDistinct.sort().filter(onlyUnique)
               var temp = [] 
               collection.forEach(function(x){
-                //if(x=='A'||x=='AAPL')
+                if(symbolStart == "REVERSE"){
+                  temp.push(x)
+                }
+                else if(!symbolStart||x>symbolStart)
                   temp.push(x)
               })
               var symbols = temp.sort().filter(onlyUnique)
+              if(symbolStart == "REVERSE"){
+                symbols = symbols.reverse()
+              }
               console.log("symbollist length:"+ symbols.length)
               callback(symbols)
             }

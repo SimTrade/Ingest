@@ -19,7 +19,7 @@ if (process.argv[2]) {
 	/**************** BEGIN -- USE FOR INJEST MICROOSERVICE **************************/
 
 
-	
+
 	/** 
 	* Builds Top1000, Second1000, Third1000, Fourth1000, Last1000 Universe Tables
 	* in Azure Table storage
@@ -54,7 +54,7 @@ if (process.argv[2]) {
 		Builder.IEX();
 		//Builder.ShortSqueeze();
 	}
-	/************** PICKLIST FUNCTIONS ************************ */	
+	/************** PICKLIST FUNCTIONS ************************ */
 	/** using 5000Universe more like 4k
 	* <Run...Ingest's> Ingest to Mongo DB (original method)
 	* <Build...Picklist's> Transform from Mongo to Table Storage (still) 
@@ -62,11 +62,11 @@ if (process.argv[2]) {
 	
 	* RUN IN TASK SCHEDULER
 	*/
-	
 
-	
-	
-	
+
+
+
+
 
 	// else if ("RunEtfWeekly" == process.argv[2]) { //run on friday
 	// 	Builder.RunEtfWeekly()
@@ -74,51 +74,52 @@ if (process.argv[2]) {
 	// 		console.log("ETF done!")
 	// 	});
 	// }
-	
+
 
 	//Weekly Generic ingest
-	else if ("Ingest" == process.argv[2]) {	
-		Builder.DeleteTable(process.argv[3],function(){
+	else if ("Ingest" == process.argv[2]) {
+		Builder.DeleteTable(process.argv[3], function () {
 			Builder.RunIngest(process.argv[3])
 		})
-		
+
 	}
 	// daily generic transform
 	else if ("Transform" == process.argv[2]) { //take about an hour to transform all 5 fundamentals
-		HistoricTransformBuilder(355 * 7,5, 0, 100000, ModelRunner.Transform_Factor_PickList,process.argv[3])
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		HistoricTransformBuilder(355 * 7, 300, input, 100000, ModelRunner.Transform_Factor_PickList, process.argv[3])
 	}
 
 
-	else if ("Transform_Growth_PickList_Backtest" == process.argv[2]) {
-		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'Growth')
-	}
+	// else if ("Transform_Growth_PickList_Backtest" == process.argv[2]) {
+	// 	var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+	// 	HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'Growth')
+	// }
 
-	else if ("Transform_Income_PickList_Backtest" == process.argv[2]) {
-		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'Income')
-	}
+	// else if ("Transform_Income_PickList_Backtest" == process.argv[2]) {
+	// 	var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+	// 	HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'Income')
+	// }
 
-	
-	else if ("Transform_Metrics_PickList_Backtest" == process.argv[2]) {
-		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'Metrics')
-	}	
 
-	
-	else if ("Transform_BalanceSheet_PickList_Backtest" == process.argv[2]) {
-		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'BalanceSheet')
-	}	
-		
-	else if ("Transform_CashFlow_PickList_Backtest" == process.argv[2]) {
-		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'CashFlow')
-	}
+	// else if ("Transform_Metrics_PickList_Backtest" == process.argv[2]) {
+	// 	var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+	// 	HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'Metrics')
+	// }	
+
+
+	// else if ("Transform_BalanceSheet_PickList_Backtest" == process.argv[2]) {
+	// 	var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+	// 	HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'BalanceSheet')
+	// }	
+
+	// else if ("Transform_CashFlow_PickList_Backtest" == process.argv[2]) {
+	// 	var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+	// 	HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'CashFlow')
+	// }
 	/*************end  PICKLIST functions*************************** */
-/***********************************************************************************************************/
+	/***********************************************************************************************************/
 
-	/************** OHLC FUNCTIONS ************************ */	
+	/************** OHLC FUNCTIONS ************************ */
 	/** 
 	* Builds hourly ohlcv using 5000Universe
 	* in StocksHourlyBacktester Table Storage
@@ -126,21 +127,21 @@ if (process.argv[2]) {
 	*/
 	else if ("HistoricHourlyIngest_StocksHourlyBacktester" == process.argv[2]) {
 		Builder.RunDaily('TIME_SERIES_INTRADAY_EXTENDED&slice=year1month3&interval=60min',
-					'StocksHourlyBacktester',
-					'full',12000,
-					'2015-01-01','')
+			'StocksHourlyBacktester',
+			'full', 12000,
+			'2015-01-01', '')
 	}
 	else if ("Scheduled_HourlyIngest_StocksHourlyBacktester" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		var back = dateObj.setDate(dateObj.getDate() -input)
-		var range = dateObj.setDate(dateObj.getDate() -(input+10))
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
 		var beginning = new Date(range).toJSON().slice(0, 10)
 		var day = new Date(back).toJSON().slice(0, 10)
 		console.log(beginning)
 		Builder.RunDaily('TIME_SERIES_INTRADAY&interval=60min',
-					'StocksHourlyBacktester',
-					'compact',4000,
-					beginning,'')
+			'StocksHourlyBacktester',
+			'compact', 4000,
+			beginning, '')
 	}
 	/** 
 	* Builds daily ohlcv using 5000Universe
@@ -149,26 +150,47 @@ if (process.argv[2]) {
 	*/
 	else if ("Scheduled_DailyIngest_StocksDailyBacktester" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		var back = dateObj.setDate(dateObj.getDate() -input)
-		var range = dateObj.setDate(dateObj.getDate() -(input+10))
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
 		var beginning = new Date(range).toJSON().slice(0, 10)
 		var day = new Date(back).toJSON().slice(0, 10)
 		console.log(beginning)
 		Builder.RunDaily('TIME_SERIES_DAILY_ADJUSTED',
-					'StocksDailyBacktester',
-					'compact',1000,
-					beginning,'')
+			'StocksDailyBacktester',
+			'compact', 1000,
+			beginning, '')
 	}
 	else if ("HistoricDailyIngest_StocksDailyBacktester" == process.argv[2]) {
 		Builder.RunDaily('TIME_SERIES_DAILY_ADJUSTED',
-					'StocksDailyBacktester',
-					'full',83000,
-					'2015-01-01','')
+			'StocksDailyBacktester',
+			'full', 83000,
+			'2015-01-01', '')
 	}
 
 	else if ("BuildOBV" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		ModelRunner.BuildOBV(input)
+		var dateTime = new Date()
+		var howFar = dateTime.setDate(dateTime.getDate() - input)
+		var day_of_reference = new Date(howFar).toJSON().slice(0, 10)
+		ModelRunner.BuildOBV(day_of_reference)
+
+	}
+	else if ("BuildOBVBacktest" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		HistoricTransformBuilder(355 * 7, 300, input, 100000, ModelRunner.BuildOBV, '')
+
+
+	}
+
+	else if ("BuildCot" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		RunAlgo.CotTableBuilder(input)
+
+	}
+	else if ("Build_Cot_Backtest" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		//var back = dateObj.setDate(dateObj.getDate() - input)
+		BacktestCot(5000, input, 5000, RunAlgo.CotTableBuilder)
 
 	}
 	/** 
@@ -180,27 +202,27 @@ if (process.argv[2]) {
 	// }
 	else if ("Scheduled_DailyIngest_StocksMonthlyGrowth" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		var back = dateObj.setDate(dateObj.getDate() -input)
-		var range = dateObj.setDate(dateObj.getDate() -(input+10))
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
 		var beginning = new Date(range).toJSON().slice(0, 10)
 		var day = new Date(back).toJSON().slice(0, 10)
 		console.log(beginning)
 		Builder.RunDaily('TIME_SERIES_WEEKLY_ADJUSTED',
-					'StocksDailyBacktester',
-					'compact',1000,
-					beginning,'')
+			'StocksDailyBacktester',
+			'compact', 1000,
+			beginning, '')
 	}
 	else if ("HistoricDailyIngest_StocksMonthlyGrowth" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		Builder.RunWeeklyToMonthly('TIME_SERIES_WEEKLY_ADJUSTED',
-					'StocksMonthlyGrowth',
-					'full',83000,
-					'2015-01-01','')
-	//	BacktestRunBuilder(355 * 7, input, 30000, ModelRunner.Build_Stock_Weekly)
+			'StocksMonthlyGrowth',
+			'full', 83000,
+			'2015-01-01', '')
+		//	BacktestRunBuilder(355 * 7, input, 30000, ModelRunner.Build_Stock_Weekly)
 
 	}
 	/*************end  OHLCV functions*************************** */
-/***********************************************************************************************************/
+	/***********************************************************************************************************/
 	/************** SHORT VOLUME FUNCTIONS ************************ */
 	/** 
 	* Builds mongodb ShortVolume Table using 5000Universe
@@ -209,7 +231,7 @@ if (process.argv[2]) {
 	else if ("ShortVolumeIngest" == process.argv[2]) {
 		var day = new Date().toJSON().slice(0, 10)
 		try {
-			Builder.MongoIngest(Analyze.ShortVolume, 'ShortVolume', 5000,function () {
+			Builder.MongoIngest(Analyze.ShortVolume, 'ShortVolume', 5000, function () {
 				console.log("DONE")
 			});
 		}
@@ -232,7 +254,7 @@ if (process.argv[2]) {
 	*/
 	else if ("TransformShortVolume" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, input, 5 * 30000, ModelRunner.TransformShortVolume,'')
+		HistoricTransformBuilder(355 * 7, 300, input, 100000, ModelRunner.TransformShortVolume, '')
 	}
 
 	/** 
@@ -244,15 +266,15 @@ if (process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var back = dateObj.setDate(dateObj.getDate() - input)
 		var day = new Date(back).toJSON().slice(0, 10)
-				Builder.GetCalendar(day, function (isTradingDay) {
-					if (isTradingDay) {
-						console.log(" trading today: " + day)
-						ModelRunner.DailyIngest_ShortVolume(day, Builder.ShortVolumeTask)
-					}
-					else {
-						console.log("not trading today: " + day)
-					}
-				})
+		Builder.GetCalendar(day, function (isTradingDay) {
+			if (isTradingDay) {
+				console.log(" trading today: " + day)
+				ModelRunner.DailyIngest_ShortVolume(day, Builder.ShortVolumeTask, process.argv[4])
+			}
+			else {
+				console.log("not trading today: " + day)
+			}
+		})
 	}
 	/*************end shortvolume functions*************************** */
 
@@ -271,12 +293,7 @@ if (process.argv[2]) {
 
 
 
-	else if ("CotAlgo_Backtest" == process.argv[2]) {
-		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		//var back = dateObj.setDate(dateObj.getDate() - input)
-		BacktestCot(5000, input, 5000, RunAlgo.CotTableBuilder)
 
-	}
 	else
 		if ("DCFalgo" == process.argv[2]) {
 			var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
@@ -303,14 +320,14 @@ if (process.argv[2]) {
 					.then(message => console.log(message.sid))
 					.done();
 			}
-			
-			
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
+
+
 
 
 			else if ('StockList' == [process.argv[2]]) {
@@ -323,7 +340,7 @@ if (process.argv[2]) {
 			else if ("CompanyProfile" == process.argv[2]) {
 				Builder.CompanyProfile(process.argv[3]);
 			}
-			 else if ("ShortSqueeze" == process.argv[2]) {
+			else if ("ShortSqueeze" == process.argv[2]) {
 				Builder.ShortSqueeze();
 
 			}
@@ -331,15 +348,15 @@ if (process.argv[2]) {
 
 
 			///////////////////////////////////////////////////////////
-			
-			else if ("BuildTableUniverses" == process.argv[2]) {
-				Builder.BuildTableUniverses(function () { console.log("done") });
-			}
+
+			// else if ("BuildTableUniverses" == process.argv[2]) {
+			// 	Builder.BuildTableUniverses(function () { console.log("done") });
+			// }
 
 
-			else if ("GetOrders" == process.argv[2]) {
-				Builder.GetOrders()
-			}
+			// else if ("GetOrders" == process.argv[2]) {
+			// 	Builder.GetOrders()
+			// }
 
 			else if ("IPOS" == process.argv[2]) {
 				for (var i = 1; i < 4; i++) {
@@ -348,14 +365,14 @@ if (process.argv[2]) {
 				}
 
 			}
-			
-			
 
-			else if ("GetEtfDictionary" == process.argv[2]) {
-				Builder.GetEtfDictionary()
-				//Builder.AlphaVantage()
-			}
-			
+
+
+			// else if ("GetEtfDictionary" == process.argv[2]) {
+			// 	Builder.GetEtfDictionary()
+			// 	//Builder.AlphaVantage()
+			// }
+
 
 			else {
 				console.log('no known call....');
@@ -364,9 +381,8 @@ if (process.argv[2]) {
 	console.log('no known call....');
 
 
-}					
-function HistoricTransformBuilder(daysback, days, indexAdder, incrementer, method,factor) {
-	var returns = 0
+}
+function HistoricTransformBuilder(daysback, days, indexAdder, incrementer, method, factor) {
 	for (var i = 0; i < daysback; i++) {
 		(function (i) {
 			setTimeout(function () {
@@ -382,7 +398,7 @@ function HistoricTransformBuilder(daysback, days, indexAdder, incrementer, metho
 				try {
 					Builder.GetCalendar(day_of_reference, function (isTradingDay) {
 						if (isTradingDay) {
-							method(day_of_reference,factor)
+							method(day_of_reference, factor)
 							console.log("TRADING TODAY: " + day_of_reference)
 						}
 						else {
@@ -398,6 +414,31 @@ function HistoricTransformBuilder(daysback, days, indexAdder, incrementer, metho
 	}
 }
 
+function BacktestOBV(begin, incrementer, method) {
+
+	var end = 300
+	for (var i = begin; i <= end; i++) {
+
+		(function (i) {
+			setTimeout(function () {
+				try {
+					Builder.GetCalendar(day_of_reference, function (isTradingDay) {
+						if (isTradingDay) {
+							method(i)
+							console.log("TRADING TODAY: " + day_of_reference)
+						}
+						else {
+							console.log("NOT TRADING ON: " + day_of_reference)
+						}
+					})
+				} catch {
+					console.log("no obv no data")
+				}
+
+			}, (i == 0 ? 1 : i * incrementer));
+		})(i);
+	}
+}
 
 function BacktestCot(count, adder, incrementer, method) {
 	for (var i = 0; i < count; i++) {
@@ -422,7 +463,7 @@ function BacktestDF(count, adder, incrementer, method) {
 					console.log(day)
 					method(day, false)
 				} catch {
-					console.log("BacktestCot no data")
+					console.log("BacktestDF no data")
 				}
 			}, (i == 0 ? 1 : i * incrementer));
 		})(i);

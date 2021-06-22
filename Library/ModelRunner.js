@@ -15,8 +15,8 @@ const { callbackify } = require("util");
 
 async function BuildOBV(input) {
     console.log(input + "Build OBV")
-    var dateObj = new Date()
-    var end = dateObj.setDate(dateObj.getDate() - input)
+    var dateObj = new Date(input)
+    var end = dateObj.setDate(dateObj.getDate())
     var begin = dateObj.setDate((new Date(end)).getDate() - 20)
     begin = new Date(begin).toJSON().slice(0, 10)
     end = new Date(end).toJSON().slice(0, 10)
@@ -214,8 +214,8 @@ async function Transform_ShortVolume(date) {
         AzureStorage.ToTable("ShortVolume", tableService, ShortVolumeTask(data),'');
     })
 }
-async function DailyIngest_ShortVolume(endDate, task) {
-    Builder.TableIngestRunner(3000, Analyze.DailyShortVolume, 'ShortVolume', task, endDate, function () {
+async function DailyIngest_ShortVolume(endDate, task,symbolStart) {
+    Builder.TableIngestRunner(3000, Analyze.DailyShortVolume, 'ShortVolume', task, endDate,symbolStart, function () {
         console.log("done>>>>>>>>>>>>")
     })
 }
@@ -419,8 +419,8 @@ module.exports = {
         var day = new Date(daysback).toJSON().slice(0, 10)
         Transform_DailyOhlcv(day)
     },
-    DailyIngest_ShortVolume: function (day, task) {
-        DailyIngest_ShortVolume(day, task)
+    DailyIngest_ShortVolume: function (day, task, symbolStart) {
+        DailyIngest_ShortVolume(day, task,symbolStart)
     },
     Transform_Factor_PickList: function (daysback,factor) {
         var day = new Date(daysback).toJSON().slice(0, 10)

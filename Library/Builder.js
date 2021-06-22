@@ -686,8 +686,8 @@ module.exports = {
     })
 
   },
-  TableIngestRunner: function (interval, analyzeFunction, azureTableName, task, day, callback) {
-    TableIngestRunner(interval, analyzeFunction, day, azureTableName, task, function () { console.log("5000 Done") })
+  TableIngestRunner: function (interval, analyzeFunction, azureTableName, task, day,symbolStart, callback) {
+    TableIngestRunner(interval, analyzeFunction, day, azureTableName, task,symbolStart, function () { console.log("5000 Done") })
 
   },
   ShortVolumeTask: function (data, stock, date) {
@@ -3065,8 +3065,8 @@ async function MongoIngestRunner(interval, universe, analyzer, name, callback) {
       }
     })
 }
-function TableIngestRunner(interval, analyzer, day, azureTableName, task, callback) {
-  Stocklist.SymbolList('',
+function TableIngestRunner(interval, analyzer, day, azureTableName, task,symbolStart, callback) {
+  Stocklist.SymbolList(symbolStart,
     function (stocks) {
       var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
 

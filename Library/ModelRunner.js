@@ -17,7 +17,7 @@ async function BuildOBV(input) {
     console.log(input + "Build OBV")
     var dateObj = new Date(input)
     var end = dateObj.setDate(dateObj.getDate())
-    var begin = dateObj.setDate((new Date(end)).getDate() - 20)
+    var begin = dateObj.setDate((new Date(end)).getDate() - 30)
     begin = new Date(begin).toJSON().slice(0, 10)
     end = new Date(end).toJSON().slice(0, 10)
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
@@ -33,44 +33,63 @@ async function BuildOBV(input) {
                     var data = result.filter(obj => {
                         return Object.values(obj.RowKey)[1] == symbol
                     })
-
+                    var fifteenDaySma = 0
+                    var threeDaySma = 0
                     var tenDayobv = 0
                     var fiveDayobv = 0
                     var twoDayobv = 0
                     var sumVol = 0
-                    var length = data.length - 1
-                    for (var i = length; i > length - 10; i--) {
+                    var length = data.length 
+                    
+                    for (var i = length; i > 0; i--) {
+                        
+                        if (data[i] != undefined && length>16) {
 
-                        if (data[i] != undefined) {
-
-                            sumVol += Object.values(data[i].volume)[0]
-
+                            
+                            if (i < 16) {
+                                fifteenDaySma += Number(Object.values(data[i].close)[0])
+                            }
+                            if (i < 4) {
+                                threeDaySma += Number(Object.values(data[i].close)[0])
+                            }
 
                             if (0 < (Object.values(data[i].close)[0] - Object.values(data[i].open)[0])) {
-                                tenDayobv += Object.values(data[i].volume)[0]
-                                if (i < 5) {
-                                    twoDayobv += Object.values(data[i].volume)[0]
+                                tenDayobv += Number(Object.values(data[i].volume)[0])
+                                if (i < 3) {
+                                    twoDayobv +=Number( Object.values(data[i].volume)[0])
                                 }
-                                if (i < 8) {
-                                    fiveDayobv += Object.values(data[i].volume)[0]
+                                if (i < 6) {
+                                    fiveDayobv += Number(Object.values(data[i].volume)[0])
                                 }
+                                if (i < 10) {
+                                    tenDayobv += Number(Object.values(data[i].volume)[0])
+                                }
+                                
                             } else {
-                                tenDayobv -= Object.values(data[i].volume)[0]
-                                if (i < 5) {
-                                    twoDayobv -= Object.values(data[i].volume)[0]
+                                tenDayobv -= Number(Object.values(data[i].volume)[0])
+                                if (i < 3) {
+                                    twoDayobv -= Number(Object.values(data[i].volume)[0])
                                 }
-                                if (i < 8) {
-                                    fiveDayobv -= Object.values(data[i].volume)[0]
+                                if (i < 6) {
+                                    fiveDayobv -= Number(Object.values(data[i].volume)[0])
                                 }
+                                if (i < 10) {
+                                    tenDayobv -= Number(Object.values(data[i].volume)[0])
+                                }
+                               
                             }
                         }
 
 
                     }
-                    var avgVol = sumVol / length
-                    tenDayobv = tenDayobv / avgVol / length
-                    fiveDayobv = fiveDayobv / avgVol / 7
-                    twoDayobv = twoDayobv / avgVol / 4
+                    // console.log({length:length,
+                    //     avgVol:avgVol,sumVol:sumVol,twoDayobv:twoDayobv
+                    // })
+                    fifteenDaySma = fifteenDaySma/15
+                    threeDaySma = threeDaySma/3
+                    tenDayobv = tenDayobv  / 10
+                    fiveDayobv = fiveDayobv  / 5
+                    twoDayobv = twoDayobv  / 2
                     var isObvBull = twoDayobv > 0 && twoDayobv > fiveDayobv && fiveDayobv > tenDayobv
                     var isObvBear = twoDayobv < 0 && (fiveDayobv < 0 || tenDayobv < 0) && (fiveDayobv < tenDayobv || twoDayobv < fiveDayobv)
 
@@ -79,17 +98,23 @@ async function BuildOBV(input) {
                     var obj = {
 
                         "symbol": symbol,
+                        "fifteenDaySma":fifteenDaySma,
+                        "threeDaySma":threeDaySma,
                         "tenDayobv": tenDayobv,
                         "fiveDayobv": fiveDayobv,
                         "twoDayobv": twoDayobv,
-                        "score": (twoDayobv + fiveDayobv) / 2,
                         "bull": isObvBull,
                         "bear": isObvBear,
                         "date": end
                     }
-                    console.log(obj)
+                   
                     if (obj != undefined || obj.symbol != undefined) {
-                        AzureStorage.ToTable("OBV", tableService, obvDailyTask(obj),'');
+                        try{
+                            AzureStorage.ToTable("OBV", tableService, obvDailyTask(obj),'');
+                        }
+                      catch{
+                          
+                      }
                     }
 
                 })
@@ -253,7 +278,8 @@ function obvDailyTask(obj) {
         tenDayobv: { '_': obj.tenDayobv },
         fiveDayobv: { '_': obj.fiveDayobv },
         twoDayobv: { '_': obj.twoDayobv },
-        score: { '_': obj.score },
+        fifteenDaySma:{ '_': obj.fifteenDaySma },
+        threeDaySma:{ '_': obj.threeDaySma },
         bull: { '_': obj.bull },
         bear: { '_': obj.bear }
     };

@@ -126,7 +126,9 @@ if (process.argv[2]) {
 	* RUN IN TASK SCHEDULER
 	*/
 	else if ("HistoricHourlyIngest_StocksHourlyBacktester" == process.argv[2]) {
-		Builder.RunDaily('TIME_SERIES_INTRADAY_EXTENDED&slice=year1month3&interval=60min',
+		var first = Number(process.argv[3] != (undefined) ? process.argv[3] : 1)
+		var second = Number(process.argv[3] != (undefined) ? process.argv[4] : 1)
+		Builder.RunDaily('TIME_SERIES_INTRADAY_EXTENDED&slice=year'+first+'month'+second+'&interval=60min',
 			'StocksHourlyBacktester',
 			'full', 12000,
 			'2015-01-01', '')
@@ -207,8 +209,8 @@ if (process.argv[2]) {
 		var beginning = new Date(range).toJSON().slice(0, 10)
 		var day = new Date(back).toJSON().slice(0, 10)
 		console.log(beginning)
-		Builder.RunDaily('TIME_SERIES_WEEKLY_ADJUSTED',
-			'StocksDailyBacktester',
+		Builder.RunWeeklyToMonthly('TIME_SERIES_WEEKLY_ADJUSTED',
+			'StocksMonthlyGrowth',
 			'compact', 1000,
 			beginning, '')
 	}

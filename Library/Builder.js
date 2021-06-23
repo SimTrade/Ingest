@@ -3340,7 +3340,7 @@ function AlphaVantageWeeklyToMonthlyStockRunner(interval, begin, end, analyzer, 
                           'backtest Date': keys[j]
                         }
 
-                        console.log(task)
+                       // console.log(task)
                         AzureStorage.ToTable(name, tableService, task, '-');
                       }
                     }

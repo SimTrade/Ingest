@@ -216,7 +216,7 @@ else if ("BuildBBands" == process.argv[2]) {
 	else if ("BuildOBVWeekly" == process.argv[2]) {
 		Builder.RunDaily('OBV&interval=weekly',
 			'OBVWeekly',
-			'full', 83000,
+			'full', 25000,
 			'2015-01-01', '')
 
 	}

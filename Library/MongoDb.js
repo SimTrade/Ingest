@@ -97,7 +97,7 @@ function replaceAll(string, search, replace) {
 }
 function IsTradingDay(tradingDay, callback) {
   var get = new Promise(function (resolve, reject) {
-    var url = "https://paper-api.alpaca.markets/v2/calendar?start=" + tradingDay + "&end=" + tradingDay; // "https://www.quandl.com/api/v3/datasets/ISM/MAN_PMI.csv";
+    var url = "https://paper-api.alpaca.markets/v2/calendar?start=" + tradingDay + "&end=" + tradingDay; 
     var xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function () {
@@ -236,7 +236,7 @@ module.exports = {
           console.log(result)
           client.close();
         })
-        .catch(err => console.error(`Failed to drop:${tableName} ${symbol} ${err}`)
+        .catch(err => console.error(`Failed to drop:${tableName}  ${err}`)
         )
 
     });

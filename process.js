@@ -40,13 +40,38 @@ if (process.argv[2]) {
 			console.log("FINNHUBLISTIEX done!")
 		});
 	}
+	/* MACRO HANDLING */
+	
 
-	/*RUN DAILY*/
-	else if ("Build_Macro" == process.argv[2]) {
+	else if ("MacroIngest" == process.argv[2]) { //run on friday
+		Builder.DeleteTable("PMI", function () {
+			Builder.DeleteTable("VIX", function () {
+				Builder.PmiVixIngestion()
+				Builder.DeleteTable("SectorEtfWeekly", function () {
+					Builder.SectorEtfIngestion()
+				})
+			})
+		})
+		
+		
+
+		
+		
+	}
+	else if ("MacroTransform" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var back = dateObj.setDate(dateObj.getDate() - input)
 		ModelRunner.Build_Macro(back)
+		
 	}
+
+	else if ("HistoricMacroTransform" == process.argv[2]) { //take about an hour to transform all 5 fundamentals
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		HistoricTransformBuilder(355 * 7, 300, input, 1000, ModelRunner.Build_Macro, process.argv[3])
+	}
+	/*RUN DAILY*/
+	
+	
 	else if ("TableRun" == process.argv[2]) {
 		Builder.Barcharts();
 		Builder.WSJ();
@@ -62,18 +87,7 @@ if (process.argv[2]) {
 	
 	* RUN IN TASK SCHEDULER
 	*/
-
-
-
-
-
-
-	// else if ("RunEtfWeekly" == process.argv[2]) { //run on friday
-	// 	Builder.RunEtfWeekly()
-	// 	Builder.POLYGONCOMPANIES(function () {
-	// 		console.log("ETF done!")
-	// 	});
-	// }
+	
 
 
 	//Weekly Generic ingest
@@ -125,6 +139,7 @@ if (process.argv[2]) {
 	* in StocksHourlyBacktester Table Storage
 	* RUN IN TASK SCHEDULER
 	*/
+	
 	else if ("HistoricHourlyIngest_StocksHourlyBacktester" == process.argv[2]) {
 		var first = Number(process.argv[3] != (undefined) ? process.argv[3] : 1)
 		var second = Number(process.argv[3] != (undefined) ? process.argv[4] : 1)
@@ -168,21 +183,44 @@ if (process.argv[2]) {
 			'full', 83000,
 			'2015-01-01', '')
 	}
+	//SMA&symbol=IBM&interval=weekly&time_period=10&series_type=open
+//BBANDS&symbol=IBM&interval=weekly&time_period=5&series_type=close
+else if ("Build50DaySMA" == process.argv[2]) {
+	Builder.RunDaily('SMA&interval=daily&time_period=50&series_type=close',
+		'SMA50Day',
+		'full', 83000,
+		'2015-01-01', '')
 
-	else if ("BuildOBV" == process.argv[2]) {
-		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		var dateTime = new Date()
-		var howFar = dateTime.setDate(dateTime.getDate() - input)
-		var day_of_reference = new Date(howFar).toJSON().slice(0, 10)
-		ModelRunner.BuildOBV(day_of_reference)
+}
+else if ("Build20DaySMA" == process.argv[2]) {
+	Builder.RunDaily('SMA&interval=daily&time_period=20&series_type=close',
+		'SMA20Day',
+		'full', 83000,
+		'2015-01-01', '')
+
+}
+else if ("BuildBBands" == process.argv[2]) {
+	Builder.RunDaily('BBANDS&interval=daily&time_period=20&series_type=close',
+		'BBandsDaily',
+		'full', 83000,
+		'2015-01-01', '')
+
+}
+	else if ("BuildOBVDaily" == process.argv[2]) {
+		Builder.RunDaily('OBV&interval=daily',
+			'OBVDaily',
+			'full', 83000,
+			'2015-01-01', '')
 
 	}
-	else if ("BuildOBVBacktest" == process.argv[2]) {
-		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, 300, input, 100000, ModelRunner.BuildOBV, '')
-
+	else if ("BuildOBVWeekly" == process.argv[2]) {
+		Builder.RunDaily('OBV&interval=weekly',
+			'OBVWeekly',
+			'full', 83000,
+			'2015-01-01', '')
 
 	}
+	
 
 	else if ("BuildCot" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
@@ -199,20 +237,19 @@ if (process.argv[2]) {
 	 Buid Stocks weekly 
 	 
 	*/
-	// else if ("RunStockWeekly" == process.argv[2]) { //run on friday
-	// 	Builder.RunStockWeekly()
-	// }
+	
 	else if ("Scheduled_DailyIngest_StocksMonthlyGrowth" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var symbol = (process.argv[4] != (undefined) ? process.argv[4] : '')
 		var back = dateObj.setDate(dateObj.getDate() - input)
 		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
 		var beginning = new Date(range).toJSON().slice(0, 10)
 		var day = new Date(back).toJSON().slice(0, 10)
-		console.log(beginning)
+		console.log(beginning+symbol)
 		Builder.RunWeeklyToMonthly('TIME_SERIES_WEEKLY_ADJUSTED',
 			'StocksMonthlyGrowth',
 			'compact', 1000,
-			beginning, '')
+			beginning, '',symbol)
 	}
 	else if ("HistoricDailyIngest_StocksMonthlyGrowth" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)

@@ -722,8 +722,8 @@ module.exports = {
       process.exit(1)
     })
   },
-  RunWeeklyToMonthly: function (stock_time_series, azureTableName, output_size, interval, begin, end) {
-    AlphaVantageWeeklyToMonthlyStockRunner(interval, begin, end, Analyze.RapidApi, azureTableName, stock_time_series, output_size, function () {
+  RunWeeklyToMonthly: function (stock_time_series, azureTableName, output_size, interval, begin, end,symbol) {
+    AlphaVantageWeeklyToMonthlyStockRunner(interval, begin, end, Analyze.RapidApi, azureTableName, stock_time_series, output_size, symbol, function () {
       console.log("RapidApi Done")
       process.exit(1)
     })
@@ -1207,7 +1207,7 @@ module.exports = {
     var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
     AzureStorage.GetEtfDictionary(fileService)
   },
-  Macro: function () {
+  PmiVixIngestion: function () {
     Analyze.VIXQuandl().then(data => {
       console.log("VIXQuandl")
       MongoDb.Upsert("VIX", "vix", data)
@@ -1625,17 +1625,13 @@ module.exports = {
     })
   },
 
-  RunEtfWeekly: function () {
-    AlphaVantageEtfRunner(60000, Analyze.RapidApi, 'SectorEtfWeekly', function () {
+  SectorEtfIngestion: function () {
+    AlphaVantageEtfRunner(5000, Analyze.RapidApi, 'TIME_SERIES_WEEKLY_ADJUSTED', 'full','SectorEtfWeekly', function () {
       console.log("RapidApi Done")
+      process.exit(1);  
     })
   },
 
-  RunStockWeekly: function () {
-    AlphaMongoStockRunner(10000, Analyze.RapidApi, 'TIME_SERIES_DAILY_ADJUSTED', 'full', 'StocksWeekly', function () {
-      console.log("RapidApi Done")
-    })
-  },
   GoogleByLetter: function () {
     googleBuilder(10000, GoogleTrendOld, 'GoogleTrendMonthly', function () {
       console.log("GoogleTrend Done!")
@@ -3098,7 +3094,7 @@ function TableIngestRunner(interval, analyzer, day, azureTableName, task,symbolS
       }
     })
 }
-function AlphaVantageEtfRunner(interval, analyzer, name, callback) {
+function AlphaVantageEtfRunner(interval, analyzer,api, outputSize, name, callback) {
   var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
   AzureStorage.GetSectorEtfs(fileService,
     function (stocks) {
@@ -3109,16 +3105,12 @@ function AlphaVantageEtfRunner(interval, analyzer, name, callback) {
         (function (i) {
           setTimeout(function () {
             try {
-              analyzer(stocks[i]).then(data => {
-                //    console.log(data)
+              analyzer(stocks[i], api, outputSize).then(data => {
                 MongoDb.Upsert(name, stocks[i], data)
-                //    dataToAzureFileStorage(data,stocks[i],name,fileService)
               });
             } catch {
               var data = analyzer(stocks[i]);
-              //   console.log(data)
               MongoDb.Upsert(name, stocks[i], data)
-              //   dataToAzureFileStorage(data,stocks[i],name,fileService)  
             }
             console.log(name + ": " + i + "_" + stocks[i])
             if (i == length - 1) {
@@ -3208,6 +3200,39 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
                   if (keys[j] < end || end == '') {
                     (function (j) {
                       setTimeout(function () {
+                        if(name.includes("SMA")){
+                          var task = {
+                            PartitionKey: { '_': keys[j] },
+                            RowKey: { '_': stocks[i] },
+                            SMA: { '_': vals[keys[j]]["SMA"] }
+                          };
+                         }
+                      else if(name.includes("OBV")){
+                        var task = {
+                          PartitionKey: { '_': keys[j] },
+                          RowKey: { '_': stocks[i] },
+                          OBV: { '_': vals[keys[j]]["OBV"] }
+                        };
+                       }else if(name == 'BBandsDaily'){
+                        var task = {
+                          PartitionKey: { '_': keys[j] },
+                          RowKey: { '_': stocks[i] },
+                          Real_Middle_Band: { '_': vals[keys[j]]["Real Middle Band"] },
+                          Real_Upper_Band: { '_': vals[keys[j]]["Real Upper Band"] },
+                          Real_Lower_Band: { '_': vals[keys[j]]["Real Lower Band"] }
+                        };
+                       }
+                       else if(name == 'BBandsDaily'){
+                        var task = {
+                          PartitionKey: { '_': keys[j] },
+                          RowKey: { '_': stocks[i] },
+                          Real_Middle_Band: { '_': vals[keys[j]]["Real Middle Band"] },
+                          Real_Upper_Band: { '_': vals[keys[j]]["Real Upper Band"] },
+                          Real_Lower_Band: { '_': vals[keys[j]]["Real Lower Band"] }
+                        };
+                       }
+                       else{
+
                         var task = {
                           PartitionKey: { '_': keys[j] },
                           RowKey: { '_': stocks[i] },
@@ -3218,6 +3243,7 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
                           adjustedClose: { '_': vals[keys[j]][adjustedClose] },
                           volume: { '_': vals[keys[j]][volume] }
                         };
+                      }
                         var obj = {
                           'symbol': stocks[i],
                           'backtest Date': keys[j]
@@ -3247,10 +3273,10 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
 
     })
 }
-function AlphaVantageWeeklyToMonthlyStockRunner(interval, begin, end, analyzer, name, stock_time_series, output_size, callback) {
+function AlphaVantageWeeklyToMonthlyStockRunner(interval, begin, end, analyzer, name, stock_time_series, output_size,symbol, callback) {
   var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
 
-  Stocklist.SymbolList("",
+  Stocklist.SymbolList(symbol,
     function (stocks) {
       var length = stocks.length;
       var open = "1. open"

@@ -192,10 +192,10 @@ if (process.argv[2]) {
 	}
 	//SMA&symbol=IBM&interval=weekly&time_period=10&series_type=open
 //BBANDS&symbol=IBM&interval=weekly&time_period=5&series_type=close
-else if ("BuildCCI" == process.argv[2]) {
+else if ("BuildCCI20Day" == process.argv[2]) {
 	Builder.RunDaily('CCI&interval=daily&time_period=20&series_type=close',
 		'CCI20Day',
-		'full', 83000,
+		'full', 40000,
 		'2015-01-01', '')
 
 }

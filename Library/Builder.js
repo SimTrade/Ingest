@@ -37,7 +37,7 @@ function closeAllPositions() {
   paca.closeAllPositions().then((report) => {
     console.log('closed all positions ')
   })
-}//
+}////
 function Ingest(factor,stock, callback) {
   var factors = {
     Income: "Income%20Statement",

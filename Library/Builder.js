@@ -38,7 +38,7 @@ function closeAllPositions() {
     console.log('closed all positions ')
   })
 }
-function Ingest(factor, callback) {
+function Ingest(factor,stock, callback) {
   var factors = {
     Income: "Income%20Statement",
     Metrics: "Metrics",
@@ -47,7 +47,7 @@ function Ingest(factor, callback) {
     BalanceSheet: "Balance%20Sheet"
   }
   var FACTOR = factors[factor]
-  Stocklist.SymbolList('',
+  Stocklist.SymbolList(stock,
     function (stocks) {
       
       var length = stocks.length;
@@ -624,8 +624,8 @@ function INFLATION() {
 
 
 module.exports = {
-  RunIngest: function (factor) {
-    Ingest(factor, function () {
+  RunIngest: function (factor,stock) {
+    Ingest(factor,stock, function () {
       console.log(factor + "Ingest Done!")
       process.exit(1);
     })

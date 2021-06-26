@@ -206,9 +206,23 @@ else if ("Build20DaySMA" == process.argv[2]) {
 		'2015-01-01', '')
 
 }
-else if ("BuildBBands" == process.argv[2]) {
+else if ("BuildBBandsDaily" == process.argv[2]) {
 	Builder.RunDaily('BBANDS&interval=daily&time_period=20&series_type=close',
 		'BBandsDaily',
+		'full', 83000,
+		'2015-01-01', '')
+
+}
+else if ("BuildBBandsWeekly" == process.argv[2]) {
+	Builder.RunDaily('BBANDS&interval=weekly&time_period=10&series_type=close',
+		'BBandsWeekly',
+		'full', 83000,
+		'2015-01-01', '')
+
+}
+else if ("BuildOBVMonthly" == process.argv[2]) {
+	Builder.RunDaily('OBV&interval=monthly',
+		'OBVMonthly',
 		'full', 83000,
 		'2015-01-01', '')
 

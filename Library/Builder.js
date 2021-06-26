@@ -3231,6 +3231,14 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
                         
                         };
                        }
+                       else if(name.includes("CCI")){
+                        var task = {
+                          PartitionKey: { '_': keys[j] },
+                          RowKey: { '_': stocks[i] },
+                          CCI: { '_': vals[keys[j]]["CCI"] }
+                        
+                        };
+                       }
                        else{
 
                         var task = {

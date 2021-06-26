@@ -3213,7 +3213,7 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
                           RowKey: { '_': stocks[i] },
                           OBV: { '_': vals[keys[j]]["OBV"] }
                         };
-                       }else if(name == 'BBandsDaily'){
+                       }else if(name.includes("BBands")){
                         var task = {
                           PartitionKey: { '_': keys[j] },
                           RowKey: { '_': stocks[i] },
@@ -3222,13 +3222,13 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
                           Real_Lower_Band: { '_': vals[keys[j]]["Real Lower Band"] }
                         };
                        }
-                       else if(name == 'BBandsDaily'){
+                      
+                       else if(name.includes("AD")){
                         var task = {
                           PartitionKey: { '_': keys[j] },
                           RowKey: { '_': stocks[i] },
-                          Real_Middle_Band: { '_': vals[keys[j]]["Real Middle Band"] },
-                          Real_Upper_Band: { '_': vals[keys[j]]["Real Upper Band"] },
-                          Real_Lower_Band: { '_': vals[keys[j]]["Real Lower Band"] }
+                          AD_Line: { '_': vals[keys[j]]["Chaikin A/D"] }
+                        
                         };
                        }
                        else{

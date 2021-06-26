@@ -216,14 +216,14 @@ else if ("BuildBBandsDaily" == process.argv[2]) {
 else if ("BuildBBandsWeekly" == process.argv[2]) {
 	Builder.RunDaily('BBANDS&interval=weekly&time_period=10&series_type=close',
 		'BBandsWeekly',
-		'full', 83000,
+		'full', 25000,
 		'2015-01-01', '')
 
 }
 else if ("BuildOBVMonthly" == process.argv[2]) {
 	Builder.RunDaily('OBV&interval=monthly',
 		'OBVMonthly',
-		'full', 83000,
+		'full', 15000,
 		'2015-01-01', '')
 
 }
@@ -241,6 +241,56 @@ else if ("BuildOBVMonthly" == process.argv[2]) {
 			'2015-01-01', '')
 
 	}
+
+	else if ("BuildBBandsWeekly" == process.argv[2]) {
+	Builder.RunDaily('BBANDS&interval=weekly&time_period=10&series_type=close',
+		'BBandsWeekly',
+		'full', 25000,
+		'2015-01-01', '')
+
+}
+else if ("BuildOBVMonthly" == process.argv[2]) {
+	Builder.RunDaily('OBV&interval=monthly',
+		'OBVMonthly',
+		'full', 15000,
+		'2015-01-01', '')
+
+}
+	else if ("BuildOBVDaily" == process.argv[2]) {
+		Builder.RunDaily('OBV&interval=daily',
+			'OBVDaily',
+			'full', 83000,
+			'2015-01-01', '')
+
+	}
+	else if ("BuildOBVWeekly" == process.argv[2]) {
+		Builder.RunDaily('OBV&interval=weekly',
+			'OBVWeekly',
+			'full', 25000,
+			'2015-01-01', '')
+
+	}
+	else if ("BuildADMonthly" == process.argv[2]) {
+		Builder.RunDaily('AD&interval=monthly',
+			'ADMonthly',
+			'full', 15000,
+			'2015-01-01', '')
+	
+	}
+		else if ("BuildADDaily" == process.argv[2]) {
+			Builder.RunDaily('AD&interval=daily',
+				'ADDaily',
+				'full', 83000,
+				'2015-01-01', '')
+	
+		}
+		else if ("BuildADWeekly" == process.argv[2]) {
+			Builder.RunDaily('AD&interval=weekly',
+				'ADWeekly',
+				'full', 25000,
+				'2015-01-01', '')
+	
+		}
 	
 
 	else if ("BuildCot" == process.argv[2]) {

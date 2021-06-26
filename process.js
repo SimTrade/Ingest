@@ -92,10 +92,16 @@ if (process.argv[2]) {
 
 	//Weekly Generic ingest
 	else if ("Ingest" == process.argv[2]) {
-		Builder.DeleteTable(process.argv[3], function () {
-			var stock = (process.argv[3] != (undefined) ? process.argv[4] : '')
+		var stock = (process.argv[3] != (undefined) ? process.argv[4] : '')
+		if (stock){
 			Builder.RunIngest(process.argv[3],stock)
-		})
+		}
+		else{
+			Builder.DeleteTable(process.argv[3], function () {	
+				Builder.RunIngest(process.argv[3],stock)
+			})
+		}
+		
 
 	}
 	// daily generic transform

@@ -716,11 +716,8 @@ module.exports = {
     MongoIngestRunner(interval, "whatever", analyzeFunction, azureTableName, function () { console.log("Top1000 Done") })
 
   },
-  RunDaily: function (stock_time_series, azureTableName, output_size, interval, begin, end) {
-    AlphaVantageDailyStockRunner(interval, begin, end, Analyze.RapidApi, azureTableName, stock_time_series, output_size, function () {
-      console.log("RapidApi Done")
-      process.exit(1)
-    })
+  RunDaily: function (stock_time_series, azureTableName, output_size, interval, begin, end,stock,callback) {
+    AlphaVantageDailyStockRunner(interval, begin, end, Analyze.RapidApi, azureTableName, stock_time_series, output_size,stock,callback)
   },
   RunWeeklyToMonthly: function (stock_time_series, azureTableName, output_size, interval, begin, end,symbol) {
     AlphaVantageWeeklyToMonthlyStockRunner(interval, begin, end, Analyze.RapidApi, azureTableName, stock_time_series, output_size, symbol, function () {
@@ -1058,42 +1055,42 @@ module.exports = {
       function (data, stock) { return IexTask(data, stock) },
       function () { console.log("IEX Done") })
   },
-  ShortSqueeze: function () {
+  ShortSqueeze: function (stock) {
     //  console.log(ShortSqueeze('ZTS'))
     AzureTableRunnerNonSeries(60000,
       ShortSqueeze,
-      'ShortSqueeze',
+      'ShortSqueeze',stock,
       function (data, stock) { return ShortSqueezeTargetTask(data, stock) },
       function () { console.log("ShortSqueeze Done") })
 
   },
-  Barcharts: function () {
+  Barcharts: function (stock) {
     AzureTableRunnerNonSeries(5000,
       Barcharts,
-      'Barcharts',
+      'Barcharts',stock,
       function (data, stock) { return BarchartTask(data, stock) },
       function () { console.log("Barcharts Done") })
   },
-  WSJ: function () {
+  WSJ: function (stock) {
     AzureTableRunnerNonSeries(7000,
       WsjTarget,
-      'WsjTarget',
+      'WsjTarget',stock,
       function (data, stock) { return WsjTargetTask(data, stock) },
       function () { console.log("WsjTarget Done") })
 
   },
-  Zacks: function () {
+  Zacks: function (stock) {
     AzureTableRunnerNonSeries(5000,
       Zacks,
-      'Zacks',
+      'Zacks',stock,
       function (data, stock) { return ZacksTask(data, stock) },
       function () { console.log("Zacks Done") })
 
   },
-  IEX: function () {
+  IEX: function (stock) {
     AzureTableRunnerNonSeries(3000,
       Analyze.IEX,
-      'IEX',
+      'IEX',stock,
       function (data, stock) { return IexTask(data, stock) },
       function () { console.log("IEX Done") })
   },
@@ -2455,7 +2452,7 @@ function Fundamentals(callback) {
     })
 }
 function IncomeIngest(callback) {
-  Stocklist.SymbolList('',
+  Stocklist.SymbolList('',false,
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
@@ -2478,7 +2475,7 @@ function IncomeIngest(callback) {
 }
 
 function GrowthIngest(callback) {
-  Stocklist.SymbolList('',
+  Stocklist.SymbolList('',false,
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
@@ -2500,7 +2497,7 @@ function GrowthIngest(callback) {
 }
 
 function MetricsIngest(callback) {
-  Stocklist.SymbolList('',
+  Stocklist.SymbolList('',false,
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
@@ -2521,7 +2518,7 @@ function MetricsIngest(callback) {
     })
 }
 function BalanceSheetIngest(callback) {
-  Stocklist.SymbolList('',
+  Stocklist.SymbolList('',false,
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
@@ -2541,7 +2538,7 @@ function BalanceSheetIngest(callback) {
     })
 }
 function CashFlowIngest(callback) {
-  Stocklist.SymbolList('',
+  Stocklist.SymbolList('',false,
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
@@ -3036,7 +3033,7 @@ function Barcharts(symbol) {
 
 }
 async function MongoIngestRunner(interval, universe, analyzer, name, callback) {
-  Stocklist.SymbolList(universe,
+  Stocklist.SymbolList(universe,false,
     function (stocks) {
       var length = stocks.length;
       for (var i = 0; i < length; i++) {
@@ -3062,7 +3059,7 @@ async function MongoIngestRunner(interval, universe, analyzer, name, callback) {
     })
 }
 function TableIngestRunner(interval, analyzer, day, azureTableName, task,symbolStart, callback) {
-  Stocklist.SymbolList(symbolStart,
+  Stocklist.SymbolList(symbolStart, false,
     function (stocks) {
       var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
 
@@ -3126,7 +3123,7 @@ function AlphaVantageEtfRunner(interval, analyzer,api, outputSize, name, callbac
 }
 function AlphaMongoStockRunner(interval, analyzer, api, outputSize, name, callback) {
   var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-  Stocklist.SymbolList("",
+  Stocklist.SymbolList("",false,
     function (stocks) {
       var length = stocks.length;
       for (var i = 0; i < length; i++) {
@@ -3153,9 +3150,9 @@ function AlphaMongoStockRunner(interval, analyzer, api, outputSize, name, callba
     })
 
 }
-function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stock_time_series, output_size, callback) {
+function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stock_time_series, output_size, stock, callback) {
   var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-  Stocklist.SymbolList("",
+  Stocklist.SymbolList(stock,false,
     function (stocks) {
       var length = stocks.length;
       var open = "1. open"
@@ -3272,7 +3269,8 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
             }
             console.log(name + ": " + i + "_" + stocks[i])
             if (i == length - 1) {
-              callback()
+              console.log("done!")
+              process.exit(1);
             }
           }, interval * (i));
         })(i);
@@ -3284,7 +3282,7 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
 function AlphaVantageWeeklyToMonthlyStockRunner(interval, begin, end, analyzer, name, stock_time_series, output_size,symbol, callback) {
   var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
 
-  Stocklist.SymbolList(symbol,
+  Stocklist.SymbolList(symbol,false,
     function (stocks) {
       var length = stocks.length;
       var open = "1. open"
@@ -3551,7 +3549,7 @@ function BarchartTask(data, stock) {
   return task
 }
 function AzureTableRunner(interval, analyzer, name, taskCallback, callback) {
-  Stocklist.SymbolList('',
+  Stocklist.SymbolList('',false,
     function (stocks) {
       console.log("______________stocks__________")
       var length = stocks.length;
@@ -3582,8 +3580,8 @@ function AzureTableRunner(interval, analyzer, name, taskCallback, callback) {
     }
   );
 }
-function AzureTableRunnerNonSeries(interval, analyzer, name, taskCallback, callback) {
-  Stocklist.SymbolList('',
+function AzureTableRunnerNonSeries(interval, analyzer, name, stock,taskCallback, callback) {
+  Stocklist.SymbolList(stock,
     function (stocks) {
       console.log("______________stocks__________")
       var length = stocks.length;

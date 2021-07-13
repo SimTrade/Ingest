@@ -41,7 +41,7 @@ if (process.argv[2]) {
 		});
 	}
 	/* MACRO HANDLING */
-	
+
 
 	else if ("MacroIngest" == process.argv[2]) { //run on friday
 		Builder.DeleteTable("PMI", function () {
@@ -52,17 +52,17 @@ if (process.argv[2]) {
 				})
 			})
 		})
-		
-		
 
-		
-		
+
+
+
+
 	}
 	else if ("MacroTransform" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var back = dateObj.setDate(dateObj.getDate() - input)
 		ModelRunner.Build_Macro(back)
-		
+
 	}
 
 	else if ("HistoricMacroTransform" == process.argv[2]) { //take about an hour to transform all 5 fundamentals
@@ -70,44 +70,58 @@ if (process.argv[2]) {
 		HistoricTransformBuilder(355 * 7, 300, input, 1000, ModelRunner.Build_Macro, process.argv[3])
 	}
 	/*RUN DAILY*/
-	
-	
+
+
 	else if ("TableRun" == process.argv[2]) {
-		Builder.Barcharts();
-		Builder.WSJ();
-		Builder.Zacks();
-		Builder.IEX();
+		var stock = (process.argv[3] != (undefined) ? process.argv[3] : 'REVERSE')
+		Builder.Barcharts(stock);
+		Builder.WSJ(stock);
+		Builder.Zacks(stock);
+		Builder.IEX(stock);
 		//Builder.ShortSqueeze();
 	}
-	/************** PICKLIST FUNCTIONS ************************ */
-	/** using 5000Universe more like 4k
-	* <Run...Ingest's> Ingest to Mongo DB (original method)
-	* <Build...Picklist's> Transform from Mongo to Table Storage (still) 
-	* <HistoricWeekly...PicksList's> Build and transform only works on short timeframes (30 days) 
+		//Weekly Generic ingest
+		else if ("Ingest" == process.argv[2]) {
+			var stock = (process.argv[3] != (undefined) ? process.argv[3] : 'NONE')
+			if (stock=="DELETE"){
+				Builder.DeleteTable("BalanceSheet", function () {	
+					Builder.DeleteTable("CashFlow", function () {	
+						Builder.DeleteTable("Growth", function () {	
+							Builder.DeleteTable("Income", function () {	
+								Builder.DeleteTable("Metrics", function () {	
+									console.log(factor + "Delete Done!")
+								})
+							})
+						})
+					})
+				})
+			}
+			else if (stock=="REVERSE"||stock=="NORMAL")
+			{
+			 Builder.RunIngest("BalanceSheet",stock, function () {
+				Builder.RunIngest("CashFlow",stock, function () {
+						Builder.RunIngest("Growth",stock, function () {
+							Builder.RunIngest("Income",stock, function () {
+								Builder.RunIngest("Metrics",stock, function () {
+								
+									console.log(factor + "Ingest Done!")
+									process.exit(1);
+								  })
+							  })
+						  })
+					  })
+				  })
+			}
 	
-	* RUN IN TASK SCHEDULER
-	*/
-	
-//test
-
-	//Weekly Generic ingest
-	else if ("Ingest" == process.argv[2]) {
-		var stock = (process.argv[3] != (undefined) ? process.argv[4] : '')
-		if (stock){
-			Builder.RunIngest(process.argv[3],stock)
 		}
-		else{
-			Builder.DeleteTable(process.argv[3], function () {	
-				Builder.RunIngest(process.argv[3],stock)
-			})
-		}
-		
-
-	}
 	// daily generic transform
 	else if ("Transform" == process.argv[2]) { //take about an hour to transform all 5 fundamentals
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, 300, input, 100000, ModelRunner.Transform_Factor_PickList, process.argv[3])
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		ModelRunner.Transform_Factor_PickList( process.argv[4],back,function(x){
+			
+		})
+		//HistoricTransformBuilder(355 * 7, 300, input, 100000, ModelRunner.Transform_Factor_PickList, process.argv[3])
 	}
 
 
@@ -146,14 +160,14 @@ if (process.argv[2]) {
 	* in StocksHourlyBacktester Table Storage
 	* RUN IN TASK SCHEDULER
 	*/
-	
+
 	else if ("HistoricHourlyIngest_StocksHourlyBacktester" == process.argv[2]) {
 		var first = Number(process.argv[3] != (undefined) ? process.argv[3] : 1)
 		var second = Number(process.argv[3] != (undefined) ? process.argv[4] : 1)
-		Builder.RunDaily('TIME_SERIES_INTRADAY_EXTENDED&slice=year'+first+'month'+second+'&interval=60min',
+		Builder.RunDaily('TIME_SERIES_INTRADAY_EXTENDED&slice=year' + first + 'month' + second + '&interval=60min',
 			'StocksHourlyBacktester',
 			'full', 12000,
-			'2015-01-01', '')
+			'2015-01-01', '', '')
 	}
 	else if ("Scheduled_HourlyIngest_StocksHourlyBacktester" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
@@ -165,7 +179,7 @@ if (process.argv[2]) {
 		Builder.RunDaily('TIME_SERIES_INTRADAY&interval=60min',
 			'StocksHourlyBacktester',
 			'compact', 4000,
-			beginning, '')
+			beginning, '', '')
 	}
 	/** 
 	* Builds daily ohlcv using 5000Universe
@@ -182,7 +196,7 @@ if (process.argv[2]) {
 		Builder.RunDaily('TIME_SERIES_DAILY_ADJUSTED',
 			'StocksDailyBacktester',
 			'compact', 1000,
-			beginning, '')
+			beginning, '', '')
 	}
 	else if ("HistoricDailyIngest_StocksDailyBacktester" == process.argv[2]) {
 		Builder.RunDaily('TIME_SERIES_DAILY_ADJUSTED',
@@ -191,114 +205,306 @@ if (process.argv[2]) {
 			'2015-01-01', '')
 	}
 	//SMA&symbol=IBM&interval=weekly&time_period=10&series_type=open
-//BBANDS&symbol=IBM&interval=weekly&time_period=5&series_type=close
-else if ("BuildCCI20Day" == process.argv[2]) {
-	Builder.RunDaily('CCI&interval=daily&time_period=20&series_type=close',
-		'CCI20Day',
-		'full', 40000,
-		'2015-01-01', '')
+	//BBANDS&symbol=IBM&interval=weekly&time_period=5&series_type=close
+	else if ("Historic_BuildCCI20Day" == process.argv[2]) {
+		Builder.RunDaily('CCI&interval=daily&time_period=20&series_type=close',
+			'CCI20Day',
+			'full', 40000,
+			'2015-01-01', '', '')
 
-}
-else if ("Build50DaySMA" == process.argv[2]) {
-	Builder.RunDaily('SMA&interval=daily&time_period=50&series_type=close',
-		'SMA50Day',
-		'full', 83000,
-		'2015-01-01', '')
+	}
 
-}
-else if ("Build20DaySMA" == process.argv[2]) {
-	Builder.RunDaily('SMA&interval=daily&time_period=20&series_type=close',
-		'SMA20Day',
-		'full', 83000,
-		'2015-01-01', '')
 
-}
-else if ("BuildBBandsDaily" == process.argv[2]) {
-	Builder.RunDaily('BBANDS&interval=daily&time_period=20&series_type=close',
-		'BBandsDaily',
-		'full', 83000,
-		'2015-01-01', '')
-
-}
-else if ("BuildBBandsWeekly" == process.argv[2]) {
-	Builder.RunDaily('BBANDS&interval=weekly&time_period=10&series_type=close',
-		'BBandsWeekly',
-		'full', 25000,
-		'2015-01-01', '')
-
-}
-else if ("BuildOBVMonthly" == process.argv[2]) {
-	Builder.RunDaily('OBV&interval=monthly',
-		'OBVMonthly',
-		'full', 15000,
-		'2015-01-01', '')
-
-}
-	else if ("BuildOBVDaily" == process.argv[2]) {
-		Builder.RunDaily('OBV&interval=daily',
-			'OBVDaily',
+	else if ("Scheduled_DailyIngest_BuildCCI20Day" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var symbol = (process.argv[4] != (undefined) ? process.argv[4] : '')
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
+		var beginning = new Date(range).toJSON().slice(0, 10)
+		var day = new Date(back).toJSON().slice(0, 10)
+		console.log(beginning + symbol)
+		Builder.RunDaily('CCI&interval=daily&time_period=20&series_type=close',
+			'CCI20Day',
+			'compact', 1000,
+			beginning, '', symbol)
+	}
+	else if ("Build50DaySMA" == process.argv[2]) {
+		Builder.RunDaily('SMA&interval=daily&time_period=50&series_type=close',
+			'SMA50Day',
 			'full', 83000,
-			'2015-01-01', '')
+			'2015-01-01', '', '')
 
 	}
-	else if ("BuildOBVWeekly" == process.argv[2]) {
-		Builder.RunDaily('OBV&interval=weekly',
-			'OBVWeekly',
-			'full', 25000,
-			'2015-01-01', '')
+	else if ("Scheduled_DailyIngest_Build50DaySMA" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var symbol = (process.argv[4] != (undefined) ? process.argv[4] : '')
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
+		var beginning = new Date(range).toJSON().slice(0, 10)
+		var day = new Date(back).toJSON().slice(0, 10)
+		console.log(beginning + symbol)
+		Builder.RunDaily('SMA&interval=daily&time_period=50&series_type=close',
+			'SMA50Day',
+			'compact', 1000,
+			beginning, '', symbol)
+	}
+	else if ("Build20DaySMA" == process.argv[2]) {
+		Builder.RunDaily('SMA&interval=daily&time_period=20&series_type=close',
+			'SMA20Day',
+			'full', 83000,
+			'2015-01-01', '', '')
 
 	}
+	else if ("Scheduled_DailyIngest_Build20DaySMA" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var symbol = (process.argv[4] != (undefined) ? process.argv[4] : '')
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
+		var beginning = new Date(range).toJSON().slice(0, 10)
+		var day = new Date(back).toJSON().slice(0, 10)
+		console.log(beginning + symbol)
+		Builder.RunDaily('SMA&interval=daily&time_period=20&series_type=close',
+			'SMA20Day',
+			'compact', 1000,
+			beginning, '', symbol)
+	}
 
+	else if ("BuildBBandsDaily" == process.argv[2]) {
+		Builder.RunDaily('BBANDS&interval=daily&time_period=20&series_type=close',
+			'BBandsDaily',
+			'full', 83000,
+			'2015-01-01', '', '')
+
+	}
+	else if ("Scheduled_DailyIngest_BuildBBandsDaily" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var symbol = (process.argv[4] != (undefined) ? process.argv[4] : '')
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
+		var beginning = new Date(range).toJSON().slice(0, 10)
+		var day = new Date(back).toJSON().slice(0, 10)
+		console.log(beginning + symbol)
+		Builder.RunDaily('BBANDS&interval=daily&time_period=20&series_type=close',
+			'BBandsDaily',
+			'compact', 1000,
+			beginning, '', symbol)
+	}
 	else if ("BuildBBandsWeekly" == process.argv[2]) {
-	Builder.RunDaily('BBANDS&interval=weekly&time_period=10&series_type=close',
-		'BBandsWeekly',
-		'full', 25000,
-		'2015-01-01', '')
+		Builder.RunDaily('BBANDS&interval=weekly&time_period=10&series_type=close',
+			'BBandsWeekly',
+			'full', 25000,
+			'2015-01-01', '', '')
 
-}
-else if ("BuildOBVMonthly" == process.argv[2]) {
-	Builder.RunDaily('OBV&interval=monthly',
-		'OBVMonthly',
-		'full', 15000,
-		'2015-01-01', '')
+	}
+	else if ("Scheduled_DailyIngest_BuildBBandsWeekly" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var symbol = (process.argv[4] != (undefined) ? process.argv[4] : '')
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
+		var beginning = new Date(range).toJSON().slice(0, 10)
+		var day = new Date(back).toJSON().slice(0, 10)
+		console.log(beginning + symbol)
+		Builder.RunDaily('BBANDS&interval=weekly&time_period=10&series_type=close',
+			'BBandsWeekly',
+			'compact', 1000,
+			beginning, '', symbol)
+	}
+	else if ("BuildOBVMonthly" == process.argv[2]) {
+		Builder.RunDaily('OBV&interval=monthly',
+			'OBVMonthly',
+			'full', 15000,
+			'2015-01-01', '', 'REVERSE')
 
-}
+	}
+	else if ("Scheduled_DailyIngest_BuildOBVMonthly" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var symbol = (process.argv[4] != (undefined) ? process.argv[4] : '')
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
+		var beginning = new Date(range).toJSON().slice(0, 10)
+		var day = new Date(back).toJSON().slice(0, 10)
+		console.log(beginning + symbol)
+		Builder.RunDaily('OBV&interval=monthly',
+			'OBVMonthly',
+			'compact', 1000,
+			beginning, '', symbol)
+	}
+
 	else if ("BuildOBVDaily" == process.argv[2]) {
 		Builder.RunDaily('OBV&interval=daily',
 			'OBVDaily',
 			'full', 83000,
-			'2015-01-01', '')
+			'2015-01-01', '', '')
 
+	}
+	else if ("Scheduled_DailyIngest_BuildOBVDaily" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var symbol = (process.argv[4] != (undefined) ? process.argv[4] : '')
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
+		var beginning = new Date(range).toJSON().slice(0, 10)
+		var day = new Date(back).toJSON().slice(0, 10)
+		console.log(beginning + symbol)
+		Builder.RunDaily('OBV&interval=daily',
+			'OBVDaily',
+			'compact', 1000,
+			beginning, '', symbol)
 	}
 	else if ("BuildOBVWeekly" == process.argv[2]) {
 		Builder.RunDaily('OBV&interval=weekly',
 			'OBVWeekly',
 			'full', 25000,
-			'2015-01-01', '')
+			'2015-01-01', '', '')
 
+	}
+	else if ("Scheduled_DailyIngest_BuildOBVWeekly" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var symbol = (process.argv[4] != (undefined) ? process.argv[4] : '')
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
+		var beginning = new Date(range).toJSON().slice(0, 10)
+		var day = new Date(back).toJSON().slice(0, 10)
+		console.log(beginning + symbol)
+		Builder.RunDaily('OBV&interval=weekly',
+			'OBVWeekly',
+			'compact', 1000,
+			beginning, '', symbol)
+	}
+
+
+	else if ("Scheduled_DailyIngest_TA" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var symbol = (process.argv[4] != (undefined) ? process.argv[4] : '')
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
+		var beginning = new Date(range).toJSON().slice(0, 10)
+		var day = new Date(back).toJSON().slice(0, 10)
+		console.log(beginning + symbol)
+		Builder.RunDaily('CCI&interval=daily&time_period=20&series_type=close',
+			'CCI20Day',
+			'compact', 1000,
+			beginning, '', symbol, function () {
+				Builder.RunDaily('CCI&interval=daily&time_period=20&series_type=close',
+					'CCI20Day',
+					'compact', 1000,
+					beginning, '', symbol, function () {
+						Builder.RunDaily('SMA&interval=daily&time_period=50&series_type=close',
+							'SMA50Day',
+							'full', 83000,
+							'2015-01-01', '', '', function () {
+								Builder.RunDaily('SMA&interval=daily&time_period=20&series_type=close',
+									'SMA20Day',
+									'compact', 1000,
+									beginning, '', symbol, function () {
+										Builder.RunDaily('BBANDS&interval=daily&time_period=20&series_type=close',
+											'BBandsDaily',
+											'compact', 1000,
+											beginning, '', symbol, function () {
+												Builder.RunDaily('BBANDS&interval=weekly&time_period=10&series_type=close',
+													'BBandsWeekly',
+													'compact', 1000,
+													beginning, '', symbol, function () {
+														Builder.RunDaily('OBV&interval=monthly',
+															'OBVMonthly',
+															'compact', 1000,
+															beginning, '', symbol, function () {
+																Builder.RunDaily('OBV&interval=daily',
+																	'OBVDaily',
+																	'compact', 1000,
+																	beginning, '', symbol, function () {
+																		Builder.RunDaily('OBV&interval=weekly',
+																			'OBVWeekly',
+																			'compact', 1000,
+																			beginning, '', symbol, function () {
+																				Builder.RunDaily('AD&interval=monthly',
+																					'ADMonthly',
+																					'compact', 1000,
+																					beginning, '', symbol, function () {
+																						Builder.RunDaily('AD&interval=weekly',
+																							'ADWeekly',
+																							'compact', 1000,
+																							beginning, '', symbol, function () {
+																								Builder.RunDaily('AD&interval=daily',
+																									'ADDaily',
+																									'compact', 1000,
+																									beginning, '', symbol, function () {
+
+																										console.log("TA Ingest Done")
+																										process.exit(1)
+
+																									})
+																							})
+																					})
+																			})
+																	})
+															})
+													})
+											})
+									})
+							})
+					})
+			})
 	}
 	else if ("BuildADMonthly" == process.argv[2]) {
 		Builder.RunDaily('AD&interval=monthly',
 			'ADMonthly',
 			'full', 15000,
-			'2015-01-01', '')
-	
+			'2015-01-01', '', 'REVERSE')
+
 	}
-		else if ("BuildADDaily" == process.argv[2]) {
-			Builder.RunDaily('AD&interval=daily',
-				'ADDaily',
-				'full', 83000,
-				'2015-01-01', '')
-	
-		}
-		else if ("BuildADWeekly" == process.argv[2]) {
-			Builder.RunDaily('AD&interval=weekly',
-				'ADWeekly',
-				'full', 25000,
-				'2015-01-01', '')
-	
-		}
-	
+	else if ("Scheduled_DailyIngest_BuildADMonthly" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var symbol = (process.argv[4] != (undefined) ? process.argv[4] : '')
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
+		var beginning = new Date(range).toJSON().slice(0, 10)
+		var day = new Date(back).toJSON().slice(0, 10)
+		console.log(beginning + symbol)
+		Builder.RunDaily('AD&interval=monthly',
+			'ADMonthly',
+			'compact', 1000,
+			beginning, '', symbol)
+	}
+	else if ("BuildADDaily" == process.argv[2]) {
+		Builder.RunDaily('AD&interval=daily',
+			'ADDaily',
+			'full', 83000,
+			'2015-01-01', '', '')
+
+	}
+	else if ("Scheduled_DailyIngest_BuildADDaily" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var symbol = (process.argv[4] != (undefined) ? process.argv[4] : '')
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
+		var beginning = new Date(range).toJSON().slice(0, 10)
+		var day = new Date(back).toJSON().slice(0, 10)
+		console.log(beginning + symbol)
+		Builder.RunDaily('AD&interval=daily',
+			'ADDaily',
+			'compact', 1000,
+			beginning, '', symbol)
+	}
+	else if ("BuildADWeekly" == process.argv[2]) {
+		Builder.RunDaily('AD&interval=weekly',
+			'ADWeekly',
+			'full', 25000,
+			'2015-01-01', '', '')
+
+	}
+	else if ("Scheduled_DailyIngest_BuildADWeekly" == process.argv[2]) {
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var symbol = (process.argv[4] != (undefined) ? process.argv[4] : '')
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
+		var beginning = new Date(range).toJSON().slice(0, 10)
+		var day = new Date(back).toJSON().slice(0, 10)
+		console.log(beginning + symbol)
+		Builder.RunDaily('AD&interval=weekly',
+			'ADWeekly',
+			'compact', 1000,
+			beginning, '', symbol)
+	}
 
 	else if ("BuildCot" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
@@ -315,7 +521,7 @@ else if ("BuildOBVMonthly" == process.argv[2]) {
 	 Buid Stocks weekly 
 	 
 	*/
-	
+
 	else if ("Scheduled_DailyIngest_StocksMonthlyGrowth" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var symbol = (process.argv[4] != (undefined) ? process.argv[4] : '')
@@ -323,11 +529,11 @@ else if ("BuildOBVMonthly" == process.argv[2]) {
 		var range = dateObj.setDate(dateObj.getDate() - (input + 10))
 		var beginning = new Date(range).toJSON().slice(0, 10)
 		var day = new Date(back).toJSON().slice(0, 10)
-		console.log(beginning+symbol)
+		console.log(beginning + symbol)
 		Builder.RunWeeklyToMonthly('TIME_SERIES_WEEKLY_ADJUSTED',
 			'StocksMonthlyGrowth',
 			'compact', 1000,
-			beginning, '',symbol)
+			beginning, '', symbol)
 	}
 	else if ("HistoricDailyIngest_StocksMonthlyGrowth" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
@@ -371,6 +577,7 @@ else if ("BuildOBVMonthly" == process.argv[2]) {
 	*/
 	else if ("TransformShortVolume" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		
 		HistoricTransformBuilder(355 * 7, 300, input, 100000, ModelRunner.TransformShortVolume, '')
 	}
 
@@ -526,32 +733,6 @@ function HistoricTransformBuilder(daysback, days, indexAdder, incrementer, metho
 				} catch {
 					console.log("HistoricTransformBuilder has NO DATA THIS ITERATION " + (i + indexAdder) + " For Date " + day_of_reference)
 				}
-			}, (i == 0 ? 1 : i * incrementer));
-		})(i);
-	}
-}
-
-function BacktestOBV(begin, incrementer, method) {
-
-	var end = 300
-	for (var i = begin; i <= end; i++) {
-
-		(function (i) {
-			setTimeout(function () {
-				try {
-					Builder.GetCalendar(day_of_reference, function (isTradingDay) {
-						if (isTradingDay) {
-							method(i)
-							console.log("TRADING TODAY: " + day_of_reference)
-						}
-						else {
-							console.log("NOT TRADING ON: " + day_of_reference)
-						}
-					})
-				} catch {
-					console.log("no obv no data")
-				}
-
 			}, (i == 0 ? 1 : i * incrementer));
 		})(i);
 	}

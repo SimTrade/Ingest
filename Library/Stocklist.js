@@ -104,19 +104,16 @@ module.exports = {
               data.forEach(function (x) {
                 symbolDistinct.push(Object.values(x.RowKey)[1])
               })
-              var collection = symbolDistinct.sort().filter(onlyUnique)
-              var temp = [] 
-              collection.forEach(function(x){
-                if(symbolStart == "REVERSE"){
-                  temp.push(x)
-                }
-                else if(!symbolStart||x>symbolStart)
-                  temp.push(x)
-              })
-              var symbols = temp.sort().filter(onlyUnique)
+             
+              var symbols = symbolDistinct.sort().filter(onlyUnique)
               if(symbolStart == "REVERSE"){
                 symbols = symbols.reverse()
+                
               }
+              if(symbolStart == "REVERSE"||symbolStart == "NORMAL"){
+                symbols = symbols.slice(0, Math.ceil(symbols.length/2));
+              }
+              
               console.log("symbollist length:"+ symbols.length)
               callback(symbols)
             }

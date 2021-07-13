@@ -27,7 +27,7 @@ async function BuildOBV(input) {
         .where("PartitionKey ge ?", begin)
         .and("PartitionKey le ?", end)
     AzureStorage.GetTable('StocksDailyBacktester', tableService, query, function (result) {
-        Stocklist.SymbolList('',
+        Stocklist.SymbolList('',false,
             function (stocks) {
                 stocks.forEach(function (symbol) {
                     var data = result.filter(obj => {
@@ -113,7 +113,7 @@ async function BuildOBV(input) {
                             AzureStorage.ToTable("OBV", tableService, obvDailyTask(obj),'');
                         }
                       catch{
-                          
+
                       }
                     }
 
@@ -208,7 +208,7 @@ async function Build_Stock_Weekly(date) {
     })
 
 }
-async function Build_Macro(date) {
+async function Transform_Macro(date) {
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
 
     MongoDb.GetMongoSectorEtf(date, 'SectorEtfWeekly', function (data) {
@@ -255,12 +255,13 @@ const FundamentalsFeatures = {
 
 async function Transform_PickList_From_Mongo(date,factor) {
     try {
+        console.log(date,factor)
         var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
         var features = Object.values(FundamentalsFeatures[factor])[1]
             MongoDb.GetMongoFundamentals(date, factor,
                 features, function (data) {
                         AzureStorage.ToTable("PickList5000", tableService, GenericTask(data),factor);
-                        console.log(factor)
+                        //console.log(factor)
                 })  
     } catch (err) {
         console.error(err);
@@ -378,7 +379,7 @@ function ShortVolumeTask(obj) {
 
 function GenericTask(data) {
     var obj = JSON.parse(data)
-    
+    console.log(data)
     var jsonString = ''
     for (const [k, v] of Object.entries(obj)) {
         var value = typeof v === 'number' ? '{ "_":' + v + '},' : '{ "_":"' + v + '"},'
@@ -393,7 +394,7 @@ function GenericTask(data) {
     }
 
     var task = JSON.parse('{' + (jsonString.substring(0, jsonString.length - 1)) + '}')
-    console.log(task)
+   // console.log(task)
     return task
 }
 module.exports = {
@@ -435,7 +436,7 @@ module.exports = {
     },
     Build_Macro: function (daysback) {
         var day = new Date(daysback).toJSON().slice(0, 10)
-        Build_Macro(day)
+        Transform_Macro(day)
     },
     TransformShortVolume: function (daysback) {
         var day = new Date(daysback).toJSON().slice(0, 10)
@@ -448,9 +449,9 @@ module.exports = {
     DailyIngest_ShortVolume: function (day, task, symbolStart) {
         DailyIngest_ShortVolume(day, task,symbolStart)
     },
-    Transform_Factor_PickList: function (daysback,factor) {
+    Transform_Factor_PickList: function (factor,daysback,callback) {
         var day = new Date(daysback).toJSON().slice(0, 10)
         Transform_PickList_From_Mongo(day,factor)
-
+        
     }
 }

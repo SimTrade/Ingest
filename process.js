@@ -125,32 +125,6 @@ if (process.argv[2]) {
 	}
 
 
-	// else if ("Transform_Growth_PickList_Backtest" == process.argv[2]) {
-	// 	var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-	// 	HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'Growth')
-	// }
-
-	// else if ("Transform_Income_PickList_Backtest" == process.argv[2]) {
-	// 	var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-	// 	HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'Income')
-	// }
-
-
-	// else if ("Transform_Metrics_PickList_Backtest" == process.argv[2]) {
-	// 	var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-	// 	HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'Metrics')
-	// }	
-
-
-	// else if ("Transform_BalanceSheet_PickList_Backtest" == process.argv[2]) {
-	// 	var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-	// 	HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'BalanceSheet')
-	// }	
-
-	// else if ("Transform_CashFlow_PickList_Backtest" == process.argv[2]) {
-	// 	var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-	// 	HistoricTransformBuilder(355 * 7,300, input, 100000, ModelRunner.Transform_Factor_PickList,'CashFlow')
-	// }
 	/*************end  PICKLIST functions*************************** */
 	/***********************************************************************************************************/
 

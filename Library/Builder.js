@@ -2452,7 +2452,7 @@ function Fundamentals(callback) {
     })
 }
 function IncomeIngest(callback) {
-  Stocklist.SymbolList('',false,
+  Stocklist.SymbolList('',
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
@@ -2475,7 +2475,7 @@ function IncomeIngest(callback) {
 }
 
 function GrowthIngest(callback) {
-  Stocklist.SymbolList('',false,
+  Stocklist.SymbolList('',
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
@@ -2497,7 +2497,7 @@ function GrowthIngest(callback) {
 }
 
 function MetricsIngest(callback) {
-  Stocklist.SymbolList('',false,
+  Stocklist.SymbolList('',
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
@@ -2518,7 +2518,7 @@ function MetricsIngest(callback) {
     })
 }
 function BalanceSheetIngest(callback) {
-  Stocklist.SymbolList('',false,
+  Stocklist.SymbolList('',
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
@@ -2538,7 +2538,7 @@ function BalanceSheetIngest(callback) {
     })
 }
 function CashFlowIngest(callback) {
-  Stocklist.SymbolList('',false,
+  Stocklist.SymbolList('',
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
@@ -3033,7 +3033,7 @@ function Barcharts(symbol) {
 
 }
 async function MongoIngestRunner(interval, universe, analyzer, name, callback) {
-  Stocklist.SymbolList(universe,false,
+  Stocklist.SymbolList(universe,
     function (stocks) {
       var length = stocks.length;
       for (var i = 0; i < length; i++) {
@@ -3059,7 +3059,7 @@ async function MongoIngestRunner(interval, universe, analyzer, name, callback) {
     })
 }
 function TableIngestRunner(interval, analyzer, day, azureTableName, task,symbolStart, callback) {
-  Stocklist.SymbolList(symbolStart, false,
+  Stocklist.SymbolList(symbolStart,
     function (stocks) {
       var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
 
@@ -3123,7 +3123,7 @@ function AlphaVantageEtfRunner(interval, analyzer,api, outputSize, name, callbac
 }
 function AlphaMongoStockRunner(interval, analyzer, api, outputSize, name, callback) {
   var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-  Stocklist.SymbolList("",false,
+  Stocklist.SymbolList("",
     function (stocks) {
       var length = stocks.length;
       for (var i = 0; i < length; i++) {
@@ -3152,7 +3152,7 @@ function AlphaMongoStockRunner(interval, analyzer, api, outputSize, name, callba
 }
 function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stock_time_series, output_size, stock, callback) {
   var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-  Stocklist.SymbolList(stock,false,
+  Stocklist.SymbolList(stock,
     function (stocks) {
       var length = stocks.length;
       var open = "1. open"
@@ -3282,7 +3282,7 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
 function AlphaVantageWeeklyToMonthlyStockRunner(interval, begin, end, analyzer, name, stock_time_series, output_size,symbol, callback) {
   var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
 
-  Stocklist.SymbolList(symbol,false,
+  Stocklist.SymbolList(symbol,
     function (stocks) {
       var length = stocks.length;
       var open = "1. open"
@@ -3549,7 +3549,7 @@ function BarchartTask(data, stock) {
   return task
 }
 function AzureTableRunner(interval, analyzer, name, taskCallback, callback) {
-  Stocklist.SymbolList('',false,
+  Stocklist.SymbolList('',
     function (stocks) {
       console.log("______________stocks__________")
       var length = stocks.length;

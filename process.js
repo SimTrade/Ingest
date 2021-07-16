@@ -213,7 +213,7 @@ if (process.argv[2]) {
 		console.log(beginning + symbol)
 		Builder.RunDaily('CCI&interval=daily&time_period=20&series_type=close',
 			'CCI20Day',
-			'compact', 1000,
+			'compact', 250,
 			beginning, '',  function(){
 				console.log("done!")
               process.exit(1);
@@ -413,10 +413,8 @@ if (process.argv[2]) {
 		var beginning = new Date(range).toJSON().slice(0, 10)
 		var day = new Date(back).toJSON().slice(0, 10)
 		console.log(beginning + symbol)
-		Builder.RunDaily('CCI&interval=daily&time_period=50&series_type=close',
-			'CCI50Day',
-			'compact', 250,
-			beginning, '', symbol, function () {
+		
+		
 				Builder.RunDaily('CCI&interval=daily&time_period=20&series_type=close',
 					'CCI20Day',
 					'compact', 250,
@@ -489,7 +487,7 @@ if (process.argv[2]) {
 									})
 							})
 					})
-			})
+		
 	}
 	else if ("BuildADMonthly" == process.argv[2]) {
 		Builder.RunDaily('AD&interval=monthly',
@@ -534,7 +532,7 @@ if (process.argv[2]) {
 		console.log(beginning + symbol)
 		Builder.RunDaily('AD&interval=daily',
 			'ADDaily',
-			'compact', 1000,
+			'compact', 250,
 			beginning, '',  function(){
 				console.log("done!")
               process.exit(1);

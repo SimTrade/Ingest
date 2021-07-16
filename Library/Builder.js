@@ -3269,8 +3269,9 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
             }
             console.log(name + ": " + i + "_" + stocks[i])
             if (i == length - 1) {
-              console.log("done!")
-              process.exit(1);
+              callback();
+              // console.log("done!")
+              // process.exit(1);
             }
           }, interval * (i));
         })(i);

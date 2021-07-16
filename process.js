@@ -80,46 +80,45 @@ if (process.argv[2]) {
 		Builder.IEX(stock);
 		//Builder.ShortSqueeze();
 	}
-		//Weekly Generic ingest
-		else if ("Ingest" == process.argv[2]) {
-			var stock = (process.argv[3] != (undefined) ? process.argv[3] : 'NONE')
-			if (stock=="DELETE"){
-				Builder.DeleteTable("BalanceSheet", function () {	
-					Builder.DeleteTable("CashFlow", function () {	
-						Builder.DeleteTable("Growth", function () {	
-							Builder.DeleteTable("Income", function () {	
-								Builder.DeleteTable("Metrics", function () {	
-									console.log(factor + "Delete Done!")
-								})
+	//Weekly Generic ingest
+	else if ("Ingest" == process.argv[2]) {
+		var stock = (process.argv[3] != (undefined) ? process.argv[3] : 'NONE')
+		if (stock == "DELETE") {
+			Builder.DeleteTable("BalanceSheet", function () {
+				Builder.DeleteTable("CashFlow", function () {
+					Builder.DeleteTable("Growth", function () {
+						Builder.DeleteTable("Income", function () {
+							Builder.DeleteTable("Metrics", function () {
+								console.log(factor + "Delete Done!")
 							})
 						})
 					})
 				})
-			}
-			else if (stock=="REVERSE"||stock=="NORMAL")
-			{
-			 Builder.RunIngest("BalanceSheet",stock, function () {
-				Builder.RunIngest("CashFlow",stock, function () {
-						Builder.RunIngest("Growth",stock, function () {
-							Builder.RunIngest("Income",stock, function () {
-								Builder.RunIngest("Metrics",stock, function () {
-								
-									console.log(factor + "Ingest Done!")
-									process.exit(1);
-								  })
-							  })
-						  })
-					  })
-				  })
-			}
-	
+			})
 		}
+		else if (stock == "REVERSE" || stock == "NORMAL") {
+			Builder.RunIngest("BalanceSheet", stock, function () {
+				Builder.RunIngest("CashFlow", stock, function () {
+					Builder.RunIngest("Growth", stock, function () {
+						Builder.RunIngest("Income", stock, function () {
+							Builder.RunIngest("Metrics", stock, function () {
+
+								console.log(factor + "Ingest Done!")
+								process.exit(1);
+							})
+						})
+					})
+				})
+			})
+		}
+
+	}
 	// daily generic transform
 	else if ("Transform" == process.argv[2]) { //take about an hour to transform all 5 fundamentals
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var back = dateObj.setDate(dateObj.getDate() - input)
-		ModelRunner.Transform_Factor_PickList( process.argv[4],back,function(x){
-			
+		ModelRunner.Transform_Factor_PickList(process.argv[4], back, function (x) {
+
 		})
 		//HistoricTransformBuilder(355 * 7, 300, input, 100000, ModelRunner.Transform_Factor_PickList, process.argv[3])
 	}
@@ -141,7 +140,10 @@ if (process.argv[2]) {
 		Builder.RunDaily('TIME_SERIES_INTRADAY_EXTENDED&slice=year' + first + 'month' + second + '&interval=60min',
 			'StocksHourlyBacktester',
 			'full', 12000,
-			'2015-01-01', '', '')
+			'2015-01-01', '', function(){
+				console.log("done!")
+              process.exit(1);
+			})
 	}
 	else if ("Scheduled_HourlyIngest_StocksHourlyBacktester" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
@@ -152,8 +154,11 @@ if (process.argv[2]) {
 		console.log(beginning)
 		Builder.RunDaily('TIME_SERIES_INTRADAY&interval=60min',
 			'StocksHourlyBacktester',
-			'compact', 4000,
-			beginning, '', '')
+			'compact', 1000,
+			beginning, '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 	}
 	/** 
 	* Builds daily ohlcv using 5000Universe
@@ -169,14 +174,20 @@ if (process.argv[2]) {
 		console.log(beginning)
 		Builder.RunDaily('TIME_SERIES_DAILY_ADJUSTED',
 			'StocksDailyBacktester',
-			'compact', 1000,
-			beginning, '', '')
+			'compact', 250,
+			beginning, '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 	}
 	else if ("HistoricDailyIngest_StocksDailyBacktester" == process.argv[2]) {
 		Builder.RunDaily('TIME_SERIES_DAILY_ADJUSTED',
 			'StocksDailyBacktester',
 			'full', 83000,
-			'2015-01-01', '')
+			'2015-01-01',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 	}
 	//SMA&symbol=IBM&interval=weekly&time_period=10&series_type=open
 	//BBANDS&symbol=IBM&interval=weekly&time_period=5&series_type=close
@@ -184,7 +195,10 @@ if (process.argv[2]) {
 		Builder.RunDaily('CCI&interval=daily&time_period=20&series_type=close',
 			'CCI20Day',
 			'full', 40000,
-			'2015-01-01', '', '')
+			'2015-01-01', '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 
 	}
 
@@ -200,13 +214,19 @@ if (process.argv[2]) {
 		Builder.RunDaily('CCI&interval=daily&time_period=20&series_type=close',
 			'CCI20Day',
 			'compact', 1000,
-			beginning, '', symbol)
+			beginning, '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 	}
 	else if ("Build50DaySMA" == process.argv[2]) {
 		Builder.RunDaily('SMA&interval=daily&time_period=50&series_type=close',
 			'SMA50Day',
 			'full', 83000,
-			'2015-01-01', '', '')
+			'2015-01-01', '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 
 	}
 	else if ("Scheduled_DailyIngest_Build50DaySMA" == process.argv[2]) {
@@ -219,14 +239,20 @@ if (process.argv[2]) {
 		console.log(beginning + symbol)
 		Builder.RunDaily('SMA&interval=daily&time_period=50&series_type=close',
 			'SMA50Day',
-			'compact', 1000,
-			beginning, '', symbol)
+			'compact', 250,
+			beginning, '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 	}
 	else if ("Build20DaySMA" == process.argv[2]) {
 		Builder.RunDaily('SMA&interval=daily&time_period=20&series_type=close',
 			'SMA20Day',
 			'full', 83000,
-			'2015-01-01', '', '')
+			'2015-01-01', '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 
 	}
 	else if ("Scheduled_DailyIngest_Build20DaySMA" == process.argv[2]) {
@@ -239,15 +265,21 @@ if (process.argv[2]) {
 		console.log(beginning + symbol)
 		Builder.RunDaily('SMA&interval=daily&time_period=20&series_type=close',
 			'SMA20Day',
-			'compact', 1000,
-			beginning, '', symbol)
+			'compact', 250,
+			beginning, '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 	}
 
 	else if ("BuildBBandsDaily" == process.argv[2]) {
 		Builder.RunDaily('BBANDS&interval=daily&time_period=20&series_type=close',
 			'BBandsDaily',
 			'full', 83000,
-			'2015-01-01', '', '')
+			'2015-01-01', '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 
 	}
 	else if ("Scheduled_DailyIngest_BuildBBandsDaily" == process.argv[2]) {
@@ -261,13 +293,19 @@ if (process.argv[2]) {
 		Builder.RunDaily('BBANDS&interval=daily&time_period=20&series_type=close',
 			'BBandsDaily',
 			'compact', 1000,
-			beginning, '', symbol)
+			beginning, '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 	}
 	else if ("BuildBBandsWeekly" == process.argv[2]) {
 		Builder.RunDaily('BBANDS&interval=weekly&time_period=10&series_type=close',
 			'BBandsWeekly',
 			'full', 25000,
-			'2015-01-01', '', '')
+			'2015-01-01', '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 
 	}
 	else if ("Scheduled_DailyIngest_BuildBBandsWeekly" == process.argv[2]) {
@@ -281,13 +319,19 @@ if (process.argv[2]) {
 		Builder.RunDaily('BBANDS&interval=weekly&time_period=10&series_type=close',
 			'BBandsWeekly',
 			'compact', 1000,
-			beginning, '', symbol)
+			beginning, '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 	}
 	else if ("BuildOBVMonthly" == process.argv[2]) {
 		Builder.RunDaily('OBV&interval=monthly',
 			'OBVMonthly',
 			'full', 15000,
-			'2015-01-01', '', '')
+			'2015-01-01', '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 
 	}
 	else if ("Scheduled_DailyIngest_BuildOBVMonthly" == process.argv[2]) {
@@ -301,14 +345,20 @@ if (process.argv[2]) {
 		Builder.RunDaily('OBV&interval=monthly',
 			'OBVMonthly',
 			'compact', 1000,
-			beginning, '', symbol)
+			beginning, '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 	}
 
 	else if ("BuildOBVDaily" == process.argv[2]) {
 		Builder.RunDaily('OBV&interval=daily',
 			'OBVDaily',
 			'full', 83000,
-			'2015-01-01', '', '')
+			'2015-01-01', '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 
 	}
 	else if ("Scheduled_DailyIngest_BuildOBVDaily" == process.argv[2]) {
@@ -322,13 +372,19 @@ if (process.argv[2]) {
 		Builder.RunDaily('OBV&interval=daily',
 			'OBVDaily',
 			'compact', 1000,
-			beginning, '', symbol)
+			beginning, '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 	}
 	else if ("BuildOBVWeekly" == process.argv[2]) {
 		Builder.RunDaily('OBV&interval=weekly',
 			'OBVWeekly',
 			'full', 25000,
-			'2015-01-01', '', '')
+			'2015-01-01', '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 
 	}
 	else if ("Scheduled_DailyIngest_BuildOBVWeekly" == process.argv[2]) {
@@ -342,7 +398,10 @@ if (process.argv[2]) {
 		Builder.RunDaily('OBV&interval=weekly',
 			'OBVWeekly',
 			'compact', 1000,
-			beginning, '', symbol)
+			beginning, '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 	}
 
 
@@ -354,57 +413,70 @@ if (process.argv[2]) {
 		var beginning = new Date(range).toJSON().slice(0, 10)
 		var day = new Date(back).toJSON().slice(0, 10)
 		console.log(beginning + symbol)
-		Builder.RunDaily('CCI&interval=daily&time_period=20&series_type=close',
-			'CCI20Day',
-			'compact', 1000,
+		Builder.RunDaily('CCI&interval=daily&time_period=50&series_type=close',
+			'CCI50Day',
+			'compact', 250,
 			beginning, '', symbol, function () {
 				Builder.RunDaily('CCI&interval=daily&time_period=20&series_type=close',
 					'CCI20Day',
-					'compact', 1000,
+					'compact', 250,
 					beginning, '', symbol, function () {
 						Builder.RunDaily('SMA&interval=daily&time_period=50&series_type=close',
 							'SMA50Day',
-							'full', 83000,
+							'compact', 250,
 							'2015-01-01', '', '', function () {
 								Builder.RunDaily('SMA&interval=daily&time_period=20&series_type=close',
 									'SMA20Day',
-									'compact', 1000,
+									'compact', 250,
 									beginning, '', symbol, function () {
 										Builder.RunDaily('BBANDS&interval=daily&time_period=20&series_type=close',
 											'BBandsDaily',
-											'compact', 1000,
+											'compact', 250,
 											beginning, '', symbol, function () {
 												Builder.RunDaily('BBANDS&interval=weekly&time_period=10&series_type=close',
 													'BBandsWeekly',
-													'compact', 1000,
+													'compact', 250,
 													beginning, '', symbol, function () {
 														Builder.RunDaily('OBV&interval=monthly',
 															'OBVMonthly',
-															'compact', 1000,
+															'compact', 250,
 															beginning, '', symbol, function () {
 																Builder.RunDaily('OBV&interval=daily',
 																	'OBVDaily',
-																	'compact', 1000,
+																	'compact', 250,
 																	beginning, '', symbol, function () {
 																		Builder.RunDaily('OBV&interval=weekly',
 																			'OBVWeekly',
-																			'compact', 1000,
+																			'compact', 250,
 																			beginning, '', symbol, function () {
 																				Builder.RunDaily('AD&interval=monthly',
 																					'ADMonthly',
-																					'compact', 1000,
+																					'compact', 250,
 																					beginning, '', symbol, function () {
 																						Builder.RunDaily('AD&interval=weekly',
 																							'ADWeekly',
-																							'compact', 1000,
+																							'compact', 250,
 																							beginning, '', symbol, function () {
 																								Builder.RunDaily('AD&interval=daily',
 																									'ADDaily',
-																									'compact', 1000,
+																									'compact', 250,
 																									beginning, '', symbol, function () {
-
-																										console.log("TA Ingest Done")
-																										process.exit(1)
+																										Builder.RunDaily('TIME_SERIES_INTRADAY&interval=60min',
+																											'StocksHourlyBacktester',
+																											'compact', 1000,
+																											beginning, '', function () {
+																												Builder.RunDaily('TIME_SERIES_DAILY_ADJUSTED',
+																													'StocksDailyBacktester',
+																													'compact', 250,
+																													beginning, '', function () {
+																														Builder.RunWeeklyToMonthly('TIME_SERIES_WEEKLY_ADJUSTED',
+																															'StocksMonthlyGrowth',
+																															'compact', 250,
+																															beginning, '', symbol)
+																													})
+																											})
+																										// console.log("TA Ingest Done")
+																										// process.exit(1)
 
 																									})
 																							})
@@ -437,13 +509,19 @@ if (process.argv[2]) {
 		Builder.RunDaily('AD&interval=monthly',
 			'ADMonthly',
 			'compact', 1000,
-			beginning, '', symbol)
+			beginning, '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 	}
 	else if ("BuildADDaily" == process.argv[2]) {
 		Builder.RunDaily('AD&interval=daily',
 			'ADDaily',
 			'full', 83000,
-			'2015-01-01', '', '')
+			'2015-01-01', '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 
 	}
 	else if ("Scheduled_DailyIngest_BuildADDaily" == process.argv[2]) {
@@ -457,13 +535,19 @@ if (process.argv[2]) {
 		Builder.RunDaily('AD&interval=daily',
 			'ADDaily',
 			'compact', 1000,
-			beginning, '', symbol)
+			beginning, '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 	}
 	else if ("BuildADWeekly" == process.argv[2]) {
 		Builder.RunDaily('AD&interval=weekly',
 			'ADWeekly',
 			'full', 25000,
-			'2015-01-01', '', '')
+			'2015-01-01', '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 
 	}
 	else if ("Scheduled_DailyIngest_BuildADWeekly" == process.argv[2]) {
@@ -477,7 +561,10 @@ if (process.argv[2]) {
 		Builder.RunDaily('AD&interval=weekly',
 			'ADWeekly',
 			'compact', 1000,
-			beginning, '', symbol)
+			beginning, '',  function(){
+				console.log("done!")
+              process.exit(1);
+			})
 	}
 
 	else if ("BuildCot" == process.argv[2]) {
@@ -506,7 +593,7 @@ if (process.argv[2]) {
 		console.log(beginning + symbol)
 		Builder.RunWeeklyToMonthly('TIME_SERIES_WEEKLY_ADJUSTED',
 			'StocksMonthlyGrowth',
-			'compact', 1000,
+			'compact', 250,
 			beginning, '', symbol)
 	}
 	else if ("HistoricDailyIngest_StocksMonthlyGrowth" == process.argv[2]) {
@@ -551,7 +638,7 @@ if (process.argv[2]) {
 	*/
 	else if ("TransformShortVolume" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		
+
 		HistoricTransformBuilder(355 * 7, 300, input, 100000, ModelRunner.TransformShortVolume, '')
 	}
 

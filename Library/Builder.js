@@ -1029,7 +1029,7 @@ module.exports = {
       dowScore: { '_': dow },
       BondsScore: { '_': bonds }
     }
-    // console.log(task) 
+     console.log(task) 
     dataToAzureTableStorage('COT', tableService, task)
 
 

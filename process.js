@@ -287,7 +287,7 @@ if (process.argv[2]) {
 		Builder.RunDaily('OBV&interval=monthly',
 			'OBVMonthly',
 			'full', 15000,
-			'2015-01-01', '', 'REVERSE')
+			'2015-01-01', '', '')
 
 	}
 	else if ("Scheduled_DailyIngest_BuildOBVMonthly" == process.argv[2]) {

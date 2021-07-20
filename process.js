@@ -580,7 +580,71 @@ if (process.argv[2]) {
 	 Buid Stocks weekly 
 	 
 	*/
-
+  else if ("runallTaDailyIngest" == process.argv[2]) {
+    var input = Number(process.argv[3] != undefined ? process.argv[3] : 0);
+    var symbol = process.argv[4] != undefined ? process.argv[4] : "";
+    var back = dateObj.setDate(dateObj.getDate() - input);
+    var range = dateObj.setDate(dateObj.getDate() - (input + 10));
+    var beginning = new Date(range).toJSON().slice(0, 10);
+    var day = new Date(back).toJSON().slice(0, 10);
+    Builder.RunDaily(
+      "TIME_SERIES_DAILY_ADJUSTED",
+      "StocksDailyBacktester",
+      "compact",
+      250,
+      beginning,
+      "",symbol,
+      function () {
+        Builder.RunDaily(
+          "CCI&interval=daily&time_period=20&series_type=close",
+          "CCI20Day",
+          "compact",
+          250,
+          beginning,
+          "",symbol,
+          function () {
+            Builder.RunDaily(
+              "SMA&interval=daily&time_period=50&series_type=close",
+              "SMA50Day",
+              "compact",
+              250,
+              beginning,
+              "",symbol,
+              function () {
+                Builder.RunDaily(
+                  "SMA&interval=daily&time_period=20&series_type=close",
+                  "SMA20Day",
+                  "compact",
+                  250,
+                  beginning,
+                  "",symbol,
+                  function () {
+                    Builder.RunDaily(
+						"AD&interval=daily",
+						"ADDaily",
+						"compact",
+						250,
+						beginning,
+						"",symbol,
+						function () {
+						  Builder.RunWeeklyToMonthly('TIME_SERIES_WEEKLY_ADJUSTED',
+							'StocksMonthlyGrowth',
+							'compact', 250,
+							beginning, '', symbol,function(){
+								console.log(factor + "Ingest Done!")
+								process.exit(1);
+							})
+						}
+					  );
+                  }
+                );
+              }
+            );
+          }
+        );
+      }
+    ); 
+}
 	else if ("Scheduled_DailyIngest_StocksMonthlyGrowth" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var symbol = (process.argv[4] != (undefined) ? process.argv[4] : '')

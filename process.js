@@ -154,7 +154,7 @@ if (process.argv[2]) {
 		console.log(beginning)
 		Builder.RunDaily('TIME_SERIES_INTRADAY&interval=60min',
 			'StocksHourlyBacktester',
-			'compact', 1000,
+			'compact', 4000,
 			beginning, '',  function(){
 				console.log("done!")
               process.exit(1);
@@ -174,7 +174,7 @@ if (process.argv[2]) {
 		console.log(beginning)
 		Builder.RunDaily('TIME_SERIES_DAILY_ADJUSTED',
 			'StocksDailyBacktester',
-			'compact', 250,
+			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
               process.exit(1);
@@ -213,7 +213,7 @@ if (process.argv[2]) {
 		console.log(beginning + symbol)
 		Builder.RunDaily('CCI&interval=daily&time_period=20&series_type=close',
 			'CCI20Day',
-			'compact', 250,
+			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
               process.exit(1);
@@ -239,7 +239,7 @@ if (process.argv[2]) {
 		console.log(beginning + symbol)
 		Builder.RunDaily('SMA&interval=daily&time_period=50&series_type=close',
 			'SMA50Day',
-			'compact', 250,
+			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
               process.exit(1);
@@ -265,7 +265,7 @@ if (process.argv[2]) {
 		console.log(beginning + symbol)
 		Builder.RunDaily('SMA&interval=daily&time_period=20&series_type=close',
 			'SMA20Day',
-			'compact', 250,
+			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
               process.exit(1);
@@ -532,7 +532,7 @@ if (process.argv[2]) {
 		console.log(beginning + symbol)
 		Builder.RunDaily('AD&interval=daily',
 			'ADDaily',
-			'compact', 250,
+			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
               process.exit(1);
@@ -655,7 +655,7 @@ if (process.argv[2]) {
 		console.log(beginning + symbol)
 		Builder.RunWeeklyToMonthly('TIME_SERIES_WEEKLY_ADJUSTED',
 			'StocksMonthlyGrowth',
-			'compact', 250,
+			'compact', 1000,
 			beginning, '', symbol)
 	}
 	else if ("HistoricDailyIngest_StocksMonthlyGrowth" == process.argv[2]) {

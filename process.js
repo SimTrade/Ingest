@@ -89,7 +89,7 @@ if (process.argv[2]) {
 					Builder.DeleteTable("Growth", function () {
 						Builder.DeleteTable("Income", function () {
 							Builder.DeleteTable("Metrics", function () {
-								console.log(factor + "Delete Done!")
+								console.log( "Delete Done!")
 							})
 						})
 					})
@@ -103,7 +103,7 @@ if (process.argv[2]) {
 						Builder.RunIngest("Income", stock, function () {
 							Builder.RunIngest("Metrics", stock, function () {
 
-								console.log(factor + "Ingest Done!")
+								console.log( "Ingest Done!")
 								process.exit(1);
 							})
 						})
@@ -175,7 +175,7 @@ if (process.argv[2]) {
 		Builder.RunDaily('TIME_SERIES_DAILY_ADJUSTED',
 			'StocksDailyBacktester',
 			'compact', 1000,
-			beginning, '',  function(){
+			beginning, '','',  function(){
 				console.log("done!")
               process.exit(1);
 			})

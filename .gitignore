@@ -3,6 +3,7 @@ Library/Research/*
 Library/Logs/*
 node_modules/*
 Library/Secrets/*
+TaskScheduler/*
 # exception to the rule
 !Library/Research/.gitkeep 
 

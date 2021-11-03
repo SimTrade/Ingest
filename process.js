@@ -113,6 +113,12 @@ if (process.argv[2]) {
 		}
 
 	}
+	else if ("HistoricPicklistTransform" == process.argv[2]) { //take about an hour to transform all 5 fundamentals
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		
+		//                     daysback, days, indexAdder, incrementer, method, factor
+		HistoricTransformBuilder(355 * 7, 300, input, 10000, ModelRunner.Transform_Factor_PickList, process.argv[4])
+	}
 	// daily generic transform
 	else if ("Transform" == process.argv[2]) { //take about an hour to transform all 5 fundamentals
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
@@ -843,8 +849,10 @@ function HistoricTransformBuilder(daysback, days, indexAdder, incrementer, metho
 					throw "*********** DONE **********************"
 				}
 				try {
+					
 					Builder.GetCalendar(day_of_reference, function (isTradingDay) {
 						if (isTradingDay) {
+							console.log("------"+factor)
 							method(day_of_reference, factor)
 							console.log("TRADING TODAY: " + day_of_reference)
 						}

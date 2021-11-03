@@ -628,8 +628,7 @@ function INFLATION() {
 module.exports = {
   RunIngest: function (factor,stock) {
     Ingest(factor,stock, function () {
-      console.log(factor + "Ingest Done!")
-      process.exit(1);
+    
     })
 
   },

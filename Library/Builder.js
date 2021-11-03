@@ -142,6 +142,8 @@ function IsTradingDay(tradingDay, callback) {
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         resolve(this.responseText);
+      }else{
+        console.log(this.responseText)
       }
     };
     xhttp.open("GET", url, false);
@@ -626,8 +628,7 @@ function INFLATION() {
 module.exports = {
   RunIngest: function (factor,stock) {
     Ingest(factor,stock, function () {
-      console.log(factor + "Ingest Done!")
-      process.exit(1);
+    
     })
 
   },

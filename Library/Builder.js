@@ -142,6 +142,8 @@ function IsTradingDay(tradingDay, callback) {
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         resolve(this.responseText);
+      }else{
+        console.log(this.responseText)
       }
     };
     xhttp.open("GET", url, false);

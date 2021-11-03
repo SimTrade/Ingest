@@ -97,11 +97,11 @@ if (process.argv[2]) {
 			})
 		}
 		else if (stock == "REVERSE" || stock == "NORMAL") {
-			Builder.RunIngest("BalanceSheet", stock, function () {
+			Builder.RunIngest("Metrics", stock, function () {
 				Builder.RunIngest("CashFlow", stock, function () {
 					Builder.RunIngest("Growth", stock, function () {
 						Builder.RunIngest("Income", stock, function () {
-							Builder.RunIngest("Metrics", stock, function () {
+							Builder.RunIngest("BalanceSheet", stock, function () {
 
 								console.log( "Ingest Done!")
 								process.exit(1);

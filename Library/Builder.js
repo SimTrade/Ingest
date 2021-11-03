@@ -626,9 +626,9 @@ function INFLATION() {
 
 
 module.exports = {
-  RunIngest: function (factor,stock) {
+  RunIngest: function (factor,stock,callback) {
     Ingest(factor,stock, function () {
-    
+      callback()
     })
 
   },

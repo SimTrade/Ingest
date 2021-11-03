@@ -449,8 +449,9 @@ module.exports = {
     DailyIngest_ShortVolume: function (day, task, symbolStart) {
         DailyIngest_ShortVolume(day, task,symbolStart)
     },
-    Transform_Factor_PickList: function (factor,daysback,callback) {
+    Transform_Factor_PickList: function (daysback,factor,callback) {
         var day = new Date(daysback).toJSON().slice(0, 10)
+        
         Transform_PickList_From_Mongo(day,factor)
         
     }

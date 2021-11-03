@@ -104,7 +104,7 @@ if (process.argv[2]) {
 							Builder.RunIngest("BalanceSheet", stock, function () {
 
 								console.log( "Ingest Done!")
-								process.exit(1);
+								process.exit(0);
 							})
 						})
 					})

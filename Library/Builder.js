@@ -1626,14 +1626,14 @@ module.exports = {
   SectorEtfIngestion: function () {
     AlphaVantageEtfRunner(5000, Analyze.RapidApi, 'TIME_SERIES_WEEKLY_ADJUSTED', 'full','SectorEtfWeekly', function () {
       console.log("RapidApi Done")
-      process.exit(1);  
+      process.exit(0);  
     })
   },
 
   GoogleByLetter: function () {
     googleBuilder(10000, GoogleTrendOld, 'GoogleTrendMonthly', function () {
       console.log("GoogleTrend Done!")
-      // process.exit(1);                  
+      // process.exit(0);                  
     })
   },
   GoogleTrend: function () {
@@ -1659,42 +1659,42 @@ module.exports = {
   RunTimeseries: function () {
     Fundamentals(function () {
       console.log("FUNDAMENTALS Done!")
-      process.exit(1);
+      process.exit(0);
     })
 
   },
   RunGrowthIngest: function () {
     GrowthIngest(function () {
       console.log("GrowthIngest Done!")
-      process.exit(1);
+      process.exit(0);
     })
 
   },
   RunCashFlowIngest: function () {
     CashFlowIngest(function () {
       console.log("CashFlowIngest Done!")
-      process.exit(1);
+      process.exit(0);
     })
 
   },
   RunMetricsIngest: function () {
     MetricsIngest(function () {
       console.log("MetricsIngest Done!")
-      process.exit(1);
+      process.exit(0);
     })
 
   },
   RunBalanceSheetIngest: function () {
     BalanceSheetIngest(function () {
       console.log("BalanceSheetIngest Done!")
-      process.exit(1);
+      process.exit(0);
     })
 
   },
   RunIncomeIngest: function () {
     IncomeIngest(function () {
       console.log("IncomeIngest Done!")
-      process.exit(1);
+      process.exit(0);
     })
 
   },
@@ -3272,7 +3272,7 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
             if (i == length - 1) {
               callback();
               // console.log("done!")
-              // process.exit(1);
+              // process.exit(0);
             }
           }, interval * (i));
         })(i);

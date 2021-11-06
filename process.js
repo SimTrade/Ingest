@@ -101,7 +101,7 @@ if (process.argv[2]) {
 			// 	Builder.RunIngest("CashFlow", stock, function () {
 			// 		Builder.RunIngest("Growth", stock, function () {
 			// 			Builder.RunIngest("Income", stock, function () {
-							Builder.RunIngest("BalanceSheet", stock, function () {
+							Builder.RunIngest(process.argv[4], stock, function () {
 
 								console.log( "Ingest Done!")
 								process.exit(0);
@@ -120,11 +120,12 @@ if (process.argv[2]) {
 		HistoricTransformBuilder(355 * 7, 300, input, 60000, ModelRunner.Transform_Factor_PickList, process.argv[4])
 	}
 	// daily generic transform
-	else if ("Transform" == process.argv[2]) { //take about an hour to transform all 5 fundamentals
+	else if ("Transform" == process.argv[2]) { 
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var back = dateObj.setDate(dateObj.getDate() - input)
 		ModelRunner.Transform_Factor_PickList(back,process.argv[4], function (x) {
-
+			console.log("done!")
+              process.exit(0);
 		})
 		//HistoricTransformBuilder(355 * 7, 300, input, 100000, ModelRunner.Transform_Factor_PickList, process.argv[3])
 	}
@@ -148,7 +149,7 @@ if (process.argv[2]) {
 			'full', 12000,
 			'2015-01-01', '', function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 	}
 	else if ("Scheduled_HourlyIngest_StocksHourlyBacktester" == process.argv[2]) {

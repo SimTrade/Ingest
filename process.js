@@ -67,7 +67,7 @@ if (process.argv[2]) {
 
 	else if ("HistoricMacroTransform" == process.argv[2]) { //take about an hour to transform all 5 fundamentals
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, 300, input, 1000, ModelRunner.Build_Macro, process.argv[3])
+		HistoricTransformBuilder(355 * 7, 100, input, 1000, ModelRunner.Build_Macro, process.argv[3])
 	}
 	/*RUN DAILY*/
 
@@ -117,7 +117,7 @@ if (process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		
 		//                     daysback, days, indexAdder, incrementer, method, factor
-		HistoricTransformBuilder(355 * 7, 300, input, 10000, ModelRunner.Transform_Factor_PickList, process.argv[4])
+		HistoricTransformBuilder(355 * 7, 300, input, 60000, ModelRunner.Transform_Factor_PickList, process.argv[4])
 	}
 	// daily generic transform
 	else if ("Transform" == process.argv[2]) { //take about an hour to transform all 5 fundamentals

@@ -123,7 +123,7 @@ if (process.argv[2]) {
 	else if ("Transform" == process.argv[2]) { //take about an hour to transform all 5 fundamentals
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var back = dateObj.setDate(dateObj.getDate() - input)
-		ModelRunner.Transform_Factor_PickList(process.argv[4], back, function (x) {
+		ModelRunner.Transform_Factor_PickList(back,process.argv[4], function (x) {
 
 		})
 		//HistoricTransformBuilder(355 * 7, 300, input, 100000, ModelRunner.Transform_Factor_PickList, process.argv[3])

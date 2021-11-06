@@ -219,7 +219,7 @@ module.exports = {
                     }
           })
         }
-        console.log("result: "+result.length)
+        console.log("result: "+result? result.length:nan)
       })
 
     });

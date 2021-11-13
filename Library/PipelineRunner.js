@@ -1,4 +1,3 @@
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var AzureStorage = require('./AzureStorage');
 const logging = require('./logging');
 var azure = require('azure-storage');
@@ -7,11 +6,8 @@ const Analyze = require('./Analyze');
 const Stocklist = require('./Stocklist');
 const MongoDb = require('./MongoDb.js')
 const Builder = require('./Builder');
-var jsonquery = require('json-query')
-const mkdirp = require('mkdirp');
 const colors = require('colors/safe');
 const fs = require('fs');
-const { callbackify } = require("util");
 
 async function BuildOBV(input) {
     console.log(input + "Build OBV")
@@ -268,6 +264,23 @@ async function Transform_PickList_From_Mongo(date,factor) {
     }
 }
 
+async function Complete_Ingest_From_Mongo(date,factor,callback) {
+    try {
+        console.log(date,factor)
+        var features = Object.values(FundamentalsFeatures[factor])[1]
+            MongoDb.GetMongoFundamentalsSymbols(date, factor,
+                features, function (data) {
+                   Builder.FinishIngest(process.argv[4],data, function (x) {
+				   process.exit(0);
+                  })
+                     
+                })  
+                
+    } catch (err) {
+        console.error(err);
+    }
+}
+
 const _lastYear = '_lastYear'
 const _lastYear_REPORT_DATE = '_lastYear_REPORT_DATE'
 const _REPORT_DATE = '_REPORT_DATE'
@@ -453,6 +466,12 @@ module.exports = {
         var day = new Date(daysback).toJSON().slice(0, 10)
         
         Transform_PickList_From_Mongo(day,factor)
+        
+    },
+    Complete_Ingest: function (daysback,factor,callback) {
+        var day = new Date(daysback).toJSON().slice(0, 10)
+        
+        Complete_Ingest_From_Mongo(day,factor,callback)
         
     }
 }

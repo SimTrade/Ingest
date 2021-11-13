@@ -13,22 +13,15 @@ const fs = require('fs');
 const csv = require('csv-parser')
 const download = require('download');
 const xlsx = require('node-xlsx').default;
-const alphaAvantageKey = '8LD1A47ZTI6P4Q4J'
 const quandlKey = "gX1f8wse2g2dQjXmZ-dR";
-const request = require("request");
 const cheerio = require("cheerio");
 const rp = require('request-promise');
-const path = require('path');
-const lineReader = require('line-reader');
 var LineByLineReader = require('line-by-line')
 const googleTrends = require('google-trends-api');
 const { ExploreTrendRequest, SearchProviders } = require('g-trends')
 const paca = require('./Secrets/AlpacaCreds').getCreds();
 const KEYID = require('./Secrets/AlpacaCreds').KEYID();
 const SECRETKEY = require('./Secrets/AlpacaCreds').SECRETKEY();
-const { all } = require("bluebird");
-const { forEach, trimEnd } = require("lodash");
-const { objectRecognizer } = require("paralleldots");
 const { Parser } = require('json2csv');
 const { NetworkAccessProfileNetworkInstance } = require("twilio/lib/rest/supersim/v1/networkAccessProfile/networkAccessProfileNetwork");
 const fields = ['symbol', 'qty', 'time'];
@@ -38,7 +31,47 @@ function closeAllPositions() {
     console.log('closed all positions ')
   })
 }////
-function Ingest(factor,stock, callback) {
+function FinishIngest(factor, list, callback) {
+  var factors = {
+    Income: "Income%20Statement",
+    Metrics: "Metrics",
+    Growth: "Growth",
+    CashFlow: "Cash%20Flow",
+    BalanceSheet: "Balance%20Sheet"
+  }
+  var FACTOR = factors[factor]
+
+  Stocklist.SymbolList("FULL",
+    function (symbols) {
+      var stocks=[]
+      symbols.forEach(x=>{
+        if(!list.includes(x)){
+          stocks.push(x)
+        }
+      })
+      console.log(stocks)
+      var length = stocks.length;
+      console.log("length of stocks:"+length)
+      var interval = 10000;
+      for (var i = 0; i < length; i++) {
+
+        (function (i) {
+          setTimeout(function () {
+            console.log(stocks[i])
+            var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section=" + FACTOR + "&sort=desc";
+             unitOfWork(i, length, url, stocks, factor)
+
+            if (i == length - 1) {
+              callback()
+            }
+          }, interval * (i));
+        })(i);
+      }
+    })
+
+}
+
+function Ingest(factor, stock, callback) {
   var factors = {
     Income: "Income%20Statement",
     Metrics: "Metrics",
@@ -49,18 +82,17 @@ function Ingest(factor,stock, callback) {
   var FACTOR = factors[factor]
   Stocklist.SymbolList(stock,
     function (stocks) {
-      
+
       var length = stocks.length;
       var interval = 10000;
-      var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-
+    
       for (var i = 0; i < length; i++) {
 
         (function (i) {
           setTimeout(function () {
             console.log(stocks[i])
             var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section=" + FACTOR + "&sort=desc";
-            unitOfWork(i, length, url, stocks, factor, fileService)
+            unitOfWork(i, length, url, stocks, factor)
 
             if (i == length - 1) {
               callback()
@@ -142,7 +174,7 @@ function IsTradingDay(tradingDay, callback) {
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         resolve(this.responseText);
-      }else{
+      } else {
         console.log(this.responseText)
       }
     };
@@ -626,8 +658,14 @@ function INFLATION() {
 
 
 module.exports = {
-  RunIngest: function (factor,stock,callback) {
-    Ingest(factor,stock, function () {
+  RunIngest: function (factor, stock, callback) {
+    Ingest(factor, stock, function () {
+      callback()
+    })
+
+  },
+  FinishIngest: function (factor, stocks, callback) {
+    FinishIngest(factor, stocks, function () {
       callback()
     })
 
@@ -687,8 +725,8 @@ module.exports = {
     })
 
   },
-  TableIngestRunner: function (interval, analyzeFunction, azureTableName, task, day,symbolStart, callback) {
-    TableIngestRunner(interval, analyzeFunction, day, azureTableName, task,symbolStart, function () { console.log("5000 Done") })
+  TableIngestRunner: function (interval, analyzeFunction, azureTableName, task, day, symbolStart, callback) {
+    TableIngestRunner(interval, analyzeFunction, day, azureTableName, task, symbolStart, function () { console.log("5000 Done") })
 
   },
   ShortVolumeTask: function (data, stock, date) {
@@ -717,10 +755,10 @@ module.exports = {
     MongoIngestRunner(interval, "whatever", analyzeFunction, azureTableName, function () { console.log("Top1000 Done") })
 
   },
-  RunDaily: function (stock_time_series, azureTableName, output_size, interval, begin, end,stock,callback) {
-    AlphaVantageDailyStockRunner(interval, begin, end, Analyze.RapidApi, azureTableName, stock_time_series, output_size,stock,callback)
+  RunDaily: function (stock_time_series, azureTableName, output_size, interval, begin, end, stock, callback) {
+    AlphaVantageDailyStockRunner(interval, begin, end, Analyze.RapidApi, azureTableName, stock_time_series, output_size, stock, callback)
   },
-  RunWeeklyToMonthly: function (stock_time_series, azureTableName, output_size, interval, begin, end,symbol) {
+  RunWeeklyToMonthly: function (stock_time_series, azureTableName, output_size, interval, begin, end, symbol) {
     AlphaVantageWeeklyToMonthlyStockRunner(interval, begin, end, Analyze.RapidApi, azureTableName, stock_time_series, output_size, symbol, function () {
       console.log("RapidApi Done")
       process.exit(1)
@@ -1030,7 +1068,7 @@ module.exports = {
       dowScore: { '_': dow },
       BondsScore: { '_': bonds }
     }
-     console.log(task) 
+    console.log(task)
     dataToAzureTableStorage('COT', tableService, task)
 
 
@@ -1060,7 +1098,7 @@ module.exports = {
     //  console.log(ShortSqueeze('ZTS'))
     AzureTableRunnerNonSeries(60000,
       ShortSqueeze,
-      'ShortSqueeze',stock,
+      'ShortSqueeze', stock,
       function (data, stock) { return ShortSqueezeTargetTask(data, stock) },
       function () { console.log("ShortSqueeze Done") })
 
@@ -1068,14 +1106,14 @@ module.exports = {
   Barcharts: function (stock) {
     AzureTableRunnerNonSeries(5000,
       Barcharts,
-      'Barcharts',stock,
+      'Barcharts', stock,
       function (data, stock) { return BarchartTask(data, stock) },
       function () { console.log("Barcharts Done") })
   },
   WSJ: function (stock) {
     AzureTableRunnerNonSeries(7000,
       WsjTarget,
-      'WsjTarget',stock,
+      'WsjTarget', stock,
       function (data, stock) { return WsjTargetTask(data, stock) },
       function () { console.log("WsjTarget Done") })
 
@@ -1083,7 +1121,7 @@ module.exports = {
   Zacks: function (stock) {
     AzureTableRunnerNonSeries(5000,
       Zacks,
-      'Zacks',stock,
+      'Zacks', stock,
       function (data, stock) { return ZacksTask(data, stock) },
       function () { console.log("Zacks Done") })
 
@@ -1091,7 +1129,7 @@ module.exports = {
   IEX: function (stock) {
     AzureTableRunnerNonSeries(3000,
       Analyze.IEX,
-      'IEX',stock,
+      'IEX', stock,
       function (data, stock) { return IexTask(data, stock) },
       function () { console.log("IEX Done") })
   },
@@ -1624,9 +1662,9 @@ module.exports = {
   },
 
   SectorEtfIngestion: function () {
-    AlphaVantageEtfRunner(5000, Analyze.RapidApi, 'TIME_SERIES_WEEKLY_ADJUSTED', 'full','SectorEtfWeekly', function () {
+    AlphaVantageEtfRunner(5000, Analyze.RapidApi, 'TIME_SERIES_WEEKLY_ADJUSTED', 'full', 'SectorEtfWeekly', function () {
       console.log("RapidApi Done")
-      process.exit(0);  
+      process.exit(0);
     })
   },
 
@@ -2397,7 +2435,7 @@ function CallbackAPIPromise(array, functional, interval, callback) {
 }
 function unitOfWork(i, length, url, stocks, name) {
   download(url).then(data => {
-
+    
     var jsonText = csvToJSON("_" + name, data, stocks[i])
     MongoDb.Upsert(name, stocks[i], jsonText)
   });
@@ -2415,35 +2453,35 @@ function Fundamentals(callback) {
         (function (i) {
           setTimeout(function () {
             var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section=Income%20Statement&sort=desc";
-            unitOfWork(i, length, url, stocks, "Income", fileService)
+            unitOfWork(i, length, url, stocks, "Income")
           }, interval * i);
         })(i);
 
         (function (i) {
           setTimeout(function () {
             var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section=Growth&sort=desc";
-            unitOfWork(i, length, url, stocks, "Growth", fileService)
+            unitOfWork(i, length, url, stocks, "Growth")
           }, interval * (i + length));
         })(i);
 
         (function (i) {
           setTimeout(function () {
             var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section=Metrics&sort=desc";
-            unitOfWork(i, length, url, stocks, "Metrics", fileService)
+            unitOfWork(i, length, url, stocks, "Metrics")
           }, interval * (i + length * 2));
         })(i);
 
         (function (i) {
           setTimeout(function () {
             var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section=Balance%20Sheet&sort=desc";
-            unitOfWork(i, length, url, stocks, "BalanceSheet", fileService)
+            unitOfWork(i, length, url, stocks, "BalanceSheet")
           }, interval * (i + length * 3));
         })(i);
 
         (function (i) {
           setTimeout(function () {
             var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section=Cash%20Flow&sort=desc";
-            unitOfWork(i, length, url, stocks, "CashFlow", fileService)
+            unitOfWork(i, length, url, stocks, "CashFlow")
             if (i == length - 1) {
               callback()
             }
@@ -2457,14 +2495,12 @@ function IncomeIngest(callback) {
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
-      var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-
       for (var i = 0; i < length; i++) {
 
         (function (i) {
           setTimeout(function () {
             var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section=Income%20Statement&sort=desc";
-            unitOfWork(i, length, url, stocks, "Income", fileService)
+            unitOfWork(i, length, url, stocks, "Income")
 
             if (i == length - 1) {
               callback()
@@ -2502,13 +2538,11 @@ function MetricsIngest(callback) {
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
-      var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-
       for (var i = 0; i < length; i++) {
         (function (i) {
           setTimeout(function () {
             var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section=Metrics&sort=desc";
-            unitOfWork(i, length, url, stocks, "Metrics", fileService)
+            unitOfWork(i, length, url, stocks, "Metrics")
 
             if (i == length - 1) {
               callback()
@@ -2523,13 +2557,11 @@ function BalanceSheetIngest(callback) {
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
-      var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-
       for (var i = 0; i < length; i++) {
         (function (i) {
           setTimeout(function () {
             var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section=Balance%20Sheet&sort=desc";
-            unitOfWork(i, length, url, stocks, "BalanceSheet", fileService)
+            unitOfWork(i, length, url, stocks, "BalanceSheet")
             if (i == length - 1) {
               callback()
             }
@@ -2543,13 +2575,11 @@ function CashFlowIngest(callback) {
     function (stocks) {
       var length = stocks.length;
       var interval = 10000;
-      var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-
       for (var i = 0; i < length; i++) {
         (function (i) {
           setTimeout(function () {
             var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section=Cash%20Flow&sort=desc";
-            unitOfWork(i, length, url, stocks, "CashFlow", fileService)
+            unitOfWork(i, length, url, stocks, "CashFlow")
             if (i == length - 1) {
               callback()
             }
@@ -3059,7 +3089,7 @@ async function MongoIngestRunner(interval, universe, analyzer, name, callback) {
       }
     })
 }
-function TableIngestRunner(interval, analyzer, day, azureTableName, task,symbolStart, callback) {
+function TableIngestRunner(interval, analyzer, day, azureTableName, task, symbolStart, callback) {
   Stocklist.SymbolList(symbolStart,
     function (stocks) {
       var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
@@ -3092,7 +3122,7 @@ function TableIngestRunner(interval, analyzer, day, azureTableName, task,symbolS
       }
     })
 }
-function AlphaVantageEtfRunner(interval, analyzer,api, outputSize, name, callback) {
+function AlphaVantageEtfRunner(interval, analyzer, api, outputSize, name, callback) {
   var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
   AzureStorage.GetSectorEtfs(fileService,
     function (stocks) {
@@ -3174,18 +3204,18 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
                   var datum = '{"Meta Data": {"1. Information": "Daily Time Series with Splits and Dividend Events","2. Symbol": "A","3. Last Refreshed": "2021-06-18","4. Output Size": "Full size","5. Time Zone": "US/Eastern"},"Time Series (Daily)":{'
                   data = data.split('\n')
                   data.shift()
-                 
+
                   data.forEach(function (x) {
                     var row = x.replace('\r', '').split(',')
                     if (row[0]) {
-                      datum+='"'+[row[0]]+'":{"'+open+'":"'+row[1]+'","'+high+'":"'+row[2]+'","'+low+'":"'+row[3]+'","'+close+'":"'+row[4]+'"},'
+                      datum += '"' + [row[0]] + '":{"' + open + '":"' + row[1] + '","' + high + '":"' + row[2] + '","' + low + '":"' + row[3] + '","' + close + '":"' + row[4] + '"},'
                     }
 
                   })
                   data = datum.slice(0, -1)
-                  data = data +'}}'
+                  data = data + '}}'
                 }
-               
+
                 var vals = Object.values(JSON.parse(data))[1]
                 var keys = Object.keys(Object.values(JSON.parse(data))[1])
                 var datalength = keys.length
@@ -3198,58 +3228,58 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
                   if (keys[j] < end || end == '') {
                     (function (j) {
                       setTimeout(function () {
-                        if(name.includes("SMA")){
+                        if (name.includes("SMA")) {
                           var task = {
                             PartitionKey: { '_': keys[j] },
                             RowKey: { '_': stocks[i] },
                             SMA: { '_': vals[keys[j]]["SMA"] }
                           };
-                         }
-                      else if(name.includes("OBV")){
-                        var task = {
-                          PartitionKey: { '_': keys[j] },
-                          RowKey: { '_': stocks[i] },
-                          OBV: { '_': vals[keys[j]]["OBV"] }
-                        };
-                       }else if(name.includes("BBands")){
-                        var task = {
-                          PartitionKey: { '_': keys[j] },
-                          RowKey: { '_': stocks[i] },
-                          Real_Middle_Band: { '_': vals[keys[j]]["Real Middle Band"] },
-                          Real_Upper_Band: { '_': vals[keys[j]]["Real Upper Band"] },
-                          Real_Lower_Band: { '_': vals[keys[j]]["Real Lower Band"] }
-                        };
-                       }
-                      
-                       else if(name.includes("AD")){
-                        var task = {
-                          PartitionKey: { '_': keys[j] },
-                          RowKey: { '_': stocks[i] },
-                          AD_Line: { '_': vals[keys[j]]["Chaikin A/D"] }
-                        
-                        };
-                       }
-                       else if(name.includes("CCI")){
-                        var task = {
-                          PartitionKey: { '_': keys[j] },
-                          RowKey: { '_': stocks[i] },
-                          CCI: { '_': vals[keys[j]]["CCI"] }
-                        
-                        };
-                       }
-                       else{
+                        }
+                        else if (name.includes("OBV")) {
+                          var task = {
+                            PartitionKey: { '_': keys[j] },
+                            RowKey: { '_': stocks[i] },
+                            OBV: { '_': vals[keys[j]]["OBV"] }
+                          };
+                        } else if (name.includes("BBands")) {
+                          var task = {
+                            PartitionKey: { '_': keys[j] },
+                            RowKey: { '_': stocks[i] },
+                            Real_Middle_Band: { '_': vals[keys[j]]["Real Middle Band"] },
+                            Real_Upper_Band: { '_': vals[keys[j]]["Real Upper Band"] },
+                            Real_Lower_Band: { '_': vals[keys[j]]["Real Lower Band"] }
+                          };
+                        }
 
-                        var task = {
-                          PartitionKey: { '_': keys[j] },
-                          RowKey: { '_': stocks[i] },
-                          open: { '_': vals[keys[j]][open] },
-                          high: { '_': vals[keys[j]][high] },
-                          low: { '_': vals[keys[j]][low] },
-                          close: { '_': vals[keys[j]][close] },
-                          adjustedClose: { '_': vals[keys[j]][adjustedClose] },
-                          volume: { '_': vals[keys[j]][volume] }
-                        };
-                      }
+                        else if (name.includes("AD")) {
+                          var task = {
+                            PartitionKey: { '_': keys[j] },
+                            RowKey: { '_': stocks[i] },
+                            AD_Line: { '_': vals[keys[j]]["Chaikin A/D"] }
+
+                          };
+                        }
+                        else if (name.includes("CCI")) {
+                          var task = {
+                            PartitionKey: { '_': keys[j] },
+                            RowKey: { '_': stocks[i] },
+                            CCI: { '_': vals[keys[j]]["CCI"] }
+
+                          };
+                        }
+                        else {
+
+                          var task = {
+                            PartitionKey: { '_': keys[j] },
+                            RowKey: { '_': stocks[i] },
+                            open: { '_': vals[keys[j]][open] },
+                            high: { '_': vals[keys[j]][high] },
+                            low: { '_': vals[keys[j]][low] },
+                            close: { '_': vals[keys[j]][close] },
+                            adjustedClose: { '_': vals[keys[j]][adjustedClose] },
+                            volume: { '_': vals[keys[j]][volume] }
+                          };
+                        }
                         var obj = {
                           'symbol': stocks[i],
                           'backtest Date': keys[j]
@@ -3281,7 +3311,7 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
 
     })
 }
-function AlphaVantageWeeklyToMonthlyStockRunner(interval, begin, end, analyzer, name, stock_time_series, output_size,symbol, callback) {
+function AlphaVantageWeeklyToMonthlyStockRunner(interval, begin, end, analyzer, name, stock_time_series, output_size, symbol, callback) {
   var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
 
   Stocklist.SymbolList(symbol,
@@ -3374,7 +3404,7 @@ function AlphaVantageWeeklyToMonthlyStockRunner(interval, begin, end, analyzer, 
                           'backtest Date': keys[j]
                         }
 
-                       // console.log(task)
+                        // console.log(task)
                         AzureStorage.ToTable(name, tableService, task, '-');
                       }
                     }
@@ -3582,7 +3612,7 @@ function AzureTableRunner(interval, analyzer, name, taskCallback, callback) {
     }
   );
 }
-function AzureTableRunnerNonSeries(interval, analyzer, name, stock,taskCallback, callback) {
+function AzureTableRunnerNonSeries(interval, analyzer, name, stock, taskCallback, callback) {
   Stocklist.SymbolList(stock,
     function (stocks) {
       console.log("______________stocks__________")
@@ -3663,24 +3693,24 @@ function AzureTableRunnerForFinnhubListIEX(interval, analyzer, name, taskCallbac
   console.log(" inside AzureTableRunnerForEIX _________________")
   name = "FinnhubList" + name
   stocklist(function (data) {
-    
+
     data = JSON.parse(data)
     data = jsonquery('[*type=Common Stock].symbol', { data: data }).value
-    
+
     var stocks = []
-    
+
     data.forEach(function (row) {
-     
+
       if (row.length < 5 && !(row.includes('/') || row.includes('.'))) {
-        
+
         stocks.push(row)
       }
     })
     stocks = stocks.sort((a, b) =>
-    a > b ? 1 : -1);
+      a > b ? 1 : -1);
     //console.log(stocks)
     var length = stocks.length;
-   
+
     for (var i = 0; i < length; i++) {
 
       (function (i) {

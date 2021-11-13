@@ -5,13 +5,13 @@ process.env.UV_THREADPOOL_SIZE = 1028;
 const TwilioSecrets = require('./Library/Secrets/Twilio').Secrets()
 const twilio = require('twilio')(TwilioSecrets.SID, TwilioSecrets.AUTH);
 var jsdom = require("jsdom");
-var RunAlgo = require('./Library/RunAlgo')
+var Helper = require('./Library/Helper')
 const Analyze = require('./Library/Analyze');
 const { JSDOM } = jsdom;
 const mkdirp = require('mkdirp');
 const { document } = (new JSDOM('')).window;
 global.document = document;
-const ModelRunner = require('./Library/ModelRunner.js')
+const PipelineRunner = require('./Library/PipelineRunner.js')
 const Builder = require('./Library/Builder');
 var dateObj = new Date()//.toJSON().slice(0, 10)
 
@@ -61,13 +61,13 @@ if (process.argv[2]) {
 	else if ("MacroTransform" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var back = dateObj.setDate(dateObj.getDate() - input)
-		ModelRunner.Build_Macro(back)
+		PipelineRunner.Build_Macro(back)
 
 	}
 
 	else if ("HistoricMacroTransform" == process.argv[2]) { //take about an hour to transform all 5 fundamentals
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		HistoricTransformBuilder(355 * 7, 100, input, 1000, ModelRunner.Build_Macro, process.argv[3])
+		HistoricTransformBuilder(355 * 7, 100, input, 1000, PipelineRunner.Build_Macro, process.argv[3])
 	}
 	/*RUN DAILY*/
 
@@ -117,17 +117,25 @@ if (process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		
 		//                     daysback, days, indexAdder, incrementer, method, factor
-		HistoricTransformBuilder(355 * 7, 300, input, 60000, ModelRunner.Transform_Factor_PickList, process.argv[4])
+		HistoricTransformBuilder(355 * 7, 300, input, 60000, PipelineRunner.Transform_Factor_PickList, process.argv[4])
 	}
 	// daily generic transform
 	else if ("Transform" == process.argv[2]) { 
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var back = dateObj.setDate(dateObj.getDate() - input)
-		ModelRunner.Transform_Factor_PickList(back,process.argv[4], function (x) {
+		PipelineRunner.Transform_Factor_PickList(back,process.argv[4], function (x) {
 			console.log("done!")
               process.exit(0);
 		})
-		//HistoricTransformBuilder(355 * 7, 300, input, 100000, ModelRunner.Transform_Factor_PickList, process.argv[3])
+			
+	}
+	else if ("CompleteIngest" == process.argv[2]) { 
+		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
+		var back = dateObj.setDate(dateObj.getDate() - input)
+		PipelineRunner.Complete_Ingest(back,process.argv[4], function (list) {
+				  process.exit(0)
+		})
+			
 	}
 
 
@@ -574,13 +582,13 @@ if (process.argv[2]) {
 
 	else if ("BuildCot" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		RunAlgo.CotTableBuilder(input)
+		Helper.CotTableBuilder(input)
 
 	}
 	else if ("Build_Cot_Backtest" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		//var back = dateObj.setDate(dateObj.getDate() - input)
-		BacktestCot(5000, input, 5000, RunAlgo.CotTableBuilder)
+		BacktestCot(5000, input, 5000, Helper.CotTableBuilder)
 
 	}
 	/** 
@@ -671,8 +679,7 @@ if (process.argv[2]) {
 			'StocksMonthlyGrowth',
 			'full', 83000,
 			'2015-01-01', '')
-		//	BacktestRunBuilder(355 * 7, input, 30000, ModelRunner.Build_Stock_Weekly)
-
+	
 	}
 	/*************end  OHLCV functions*************************** */
 	/***********************************************************************************************************/
@@ -708,7 +715,7 @@ if (process.argv[2]) {
 	else if ("TransformShortVolume" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 
-		HistoricTransformBuilder(355 * 7, 300, input, 100000, ModelRunner.TransformShortVolume, '')
+		HistoricTransformBuilder(355 * 7, 300, input, 100000, PipelineRunner.TransformShortVolume, '')
 	}
 
 	/** 
@@ -723,7 +730,7 @@ if (process.argv[2]) {
 		Builder.GetCalendar(day, function (isTradingDay) {
 			if (isTradingDay) {
 				console.log(" trading today: " + day)
-				ModelRunner.DailyIngest_ShortVolume(day, Builder.ShortVolumeTask, process.argv[4])
+				PipelineRunner.DailyIngest_ShortVolume(day, Builder.ShortVolumeTask, process.argv[4])
 			}
 			else {
 				console.log("not trading today: " + day)
@@ -752,7 +759,7 @@ if (process.argv[2]) {
 		if ("DCFalgo" == process.argv[2]) {
 			var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 			//var back = dateObj.setDate(dateObj.getDate() - input)
-			BacktestDF(5000, input, 5000, RunAlgo.DCFalgo)
+			BacktestDF(5000, input, 5000, Helper.DCFalgo)
 
 		} else
 			if ("GoogleByLetter" == process.argv[2]) {

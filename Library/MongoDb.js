@@ -162,7 +162,6 @@ module.exports = {
 
     });
   },
-
   GetMongoFundamentals: function (date, factor, factorArray, callback) {
 
     var client = new MongoClient(MongoDbUri.URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -218,6 +217,35 @@ module.exports = {
                       client.close();
                     }
           })
+        }
+      //  console.log("result: "+result? result.length:nan)
+      })
+
+    });
+
+  },
+  GetMongoFundamentalsSymbols: function (date, factor, factorArray, callback) {
+
+    var client = new MongoClient(MongoDbUri.URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    client.connect(err => {
+       var list = []
+      client.db("Fundamentals").collection(factor).find({}).toArray((error, result) => {
+        if (!error) {
+         
+          console.log("result: "+result.length)
+          result.forEach(function (entity) {
+            var index = entity.history.length - 1
+                    try {
+                      list.push(Object.keys(entity.history[index])[0])
+                      
+                      
+                    } catch {
+                      client.close();
+                    }
+          })
+          callback(list)
+          client.close();
+         
         }
       //  console.log("result: "+result? result.length:nan)
       })

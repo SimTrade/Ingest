@@ -113,6 +113,9 @@ module.exports = {
               if(symbolStart == "REVERSE"||symbolStart == "NORMAL"){
                 symbols = symbols.slice(0, Math.ceil(symbols.length/2));
               }
+              if(symbolStart=="FULL"){
+                symbols=symbols
+              }
               
               console.log("symbollist length:"+ symbols.length)
               callback(symbols)

@@ -172,7 +172,7 @@ if (process.argv[2]) {
 			'compact', 4000,
 			beginning, '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 	}
 	/** 
@@ -192,7 +192,7 @@ if (process.argv[2]) {
 			'compact', 1000,
 			beginning, '','',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 	}
 	else if ("HistoricDailyIngest_StocksDailyBacktester" == process.argv[2]) {
@@ -201,7 +201,7 @@ if (process.argv[2]) {
 			'full', 83000,
 			'2015-01-01',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 	}
 	//SMA&symbol=IBM&interval=weekly&time_period=10&series_type=open
@@ -212,7 +212,7 @@ if (process.argv[2]) {
 			'full', 40000,
 			'2015-01-01', '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 
 	}
@@ -231,7 +231,7 @@ if (process.argv[2]) {
 			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 	}
 	else if ("Build50DaySMA" == process.argv[2]) {
@@ -240,7 +240,7 @@ if (process.argv[2]) {
 			'full', 83000,
 			'2015-01-01', '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 
 	}
@@ -257,7 +257,7 @@ if (process.argv[2]) {
 			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 	}
 	else if ("Build20DaySMA" == process.argv[2]) {
@@ -266,7 +266,7 @@ if (process.argv[2]) {
 			'full', 83000,
 			'2015-01-01', '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 
 	}
@@ -283,7 +283,7 @@ if (process.argv[2]) {
 			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 	}
 
@@ -293,7 +293,7 @@ if (process.argv[2]) {
 			'full', 83000,
 			'2015-01-01', '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 
 	}
@@ -310,7 +310,7 @@ if (process.argv[2]) {
 			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 	}
 	else if ("BuildBBandsWeekly" == process.argv[2]) {
@@ -319,7 +319,7 @@ if (process.argv[2]) {
 			'full', 25000,
 			'2015-01-01', '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 
 	}
@@ -336,7 +336,7 @@ if (process.argv[2]) {
 			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 	}
 	else if ("BuildOBVMonthly" == process.argv[2]) {
@@ -345,7 +345,7 @@ if (process.argv[2]) {
 			'full', 15000,
 			'2015-01-01', '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 
 	}
@@ -362,7 +362,7 @@ if (process.argv[2]) {
 			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 	}
 
@@ -372,7 +372,7 @@ if (process.argv[2]) {
 			'full', 83000,
 			'2015-01-01', '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 
 	}
@@ -389,7 +389,7 @@ if (process.argv[2]) {
 			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 	}
 	else if ("BuildOBVWeekly" == process.argv[2]) {
@@ -398,7 +398,7 @@ if (process.argv[2]) {
 			'full', 25000,
 			'2015-01-01', '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 
 	}
@@ -415,7 +415,7 @@ if (process.argv[2]) {
 			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 	}
 
@@ -489,7 +489,7 @@ if (process.argv[2]) {
 																													})
 																											})
 																										// console.log("TA Ingest Done")
-																										// process.exit(1)
+																										// process.exit(0)
 
 																									})
 																							})
@@ -524,7 +524,7 @@ if (process.argv[2]) {
 			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 	}
 	else if ("BuildADDaily" == process.argv[2]) {
@@ -533,7 +533,7 @@ if (process.argv[2]) {
 			'full', 83000,
 			'2015-01-01', '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 
 	}
@@ -550,7 +550,7 @@ if (process.argv[2]) {
 			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 	}
 	else if ("BuildADWeekly" == process.argv[2]) {
@@ -559,7 +559,7 @@ if (process.argv[2]) {
 			'full', 25000,
 			'2015-01-01', '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 
 	}
@@ -576,7 +576,7 @@ if (process.argv[2]) {
 			'compact', 1000,
 			beginning, '',  function(){
 				console.log("done!")
-              process.exit(1);
+              process.exit(0);
 			})
 	}
 
@@ -647,7 +647,7 @@ if (process.argv[2]) {
 							'compact', 250,
 							beginning, '', symbol,function(){
 								console.log(factor + "Ingest Done!")
-								process.exit(1);
+								process.exit(0);
 							})
 						}
 					  );

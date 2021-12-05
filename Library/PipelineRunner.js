@@ -460,7 +460,12 @@ module.exports = {
         Transform_DailyOhlcv(day)
     },
     DailyIngest_ShortVolume: function (day, task, symbolStart) {
-        DailyIngest_ShortVolume(day, task,symbolStart)
+        try{
+            DailyIngest_ShortVolume(day, task,symbolStart)
+        }
+       catch(ex){
+           console.log(ex+"shit")
+       }
     },
     Transform_Factor_PickList: function (daysback,factor,callback) {
         var day = new Date(daysback).toJSON().slice(0, 10)

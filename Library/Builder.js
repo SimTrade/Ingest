@@ -1,5 +1,6 @@
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const logging = require('./logging');
+const https = require('https'); 
 var AzureStorage = require('./AzureStorage');
 var azure = require('azure-storage');
 var async = require('async');
@@ -43,15 +44,15 @@ function FinishIngest(factor, list, callback) {
 
   Stocklist.SymbolList("FULL",
     function (symbols) {
-      var stocks=[]
-      symbols.forEach(x=>{
-        if(!list.includes(x)){
+      var stocks = []
+      symbols.forEach(x => {
+        if (!list.includes(x)) {
           stocks.push(x)
         }
       })
       console.log(stocks)
       var length = stocks.length;
-      console.log("length of stocks:"+length)
+      console.log("length of stocks:" + length)
       var interval = 10000;
       for (var i = 0; i < length; i++) {
 
@@ -59,7 +60,7 @@ function FinishIngest(factor, list, callback) {
           setTimeout(function () {
             console.log(stocks[i])
             var url = "https://stockrow.com/api/companies/" + stocks[i] + "/financials.xlsx?dimension=Q&section=" + FACTOR + "&sort=desc";
-             unitOfWork(i, length, url, stocks, factor)
+            unitOfWork(i, length, url, stocks, factor)
 
             if (i == length - 1) {
               callback()
@@ -85,7 +86,7 @@ function Ingest(factor, stock, callback) {
 
       var length = stocks.length;
       var interval = 10000;
-    
+
       for (var i = 0; i < length; i++) {
 
         (function (i) {
@@ -733,12 +734,12 @@ module.exports = {
 
     var obj = JSON.parse(data).dataset.data
 
-    var day1 = obj[0][1] * obj[0][1] / obj[0][3]
-    var day2 = obj[1][1] * obj[1][1] / obj[1][3]
-    var day3 = obj[2][1] * obj[2][1] / obj[2][3]
-    var day4 = obj[3][1] * obj[3][1] / obj[3][3]
-    var day5 = obj[4][1] * obj[4][1] / obj[4][3]
-    var day6 = obj[5][1] * obj[5][1] / obj[5][3]
+    var day1 = obj[0] ? obj[0][1] * obj[0][1] / obj[0][3] : 0
+    var day2 = obj[1] ? obj[1][1] * obj[1][1] / obj[1][3] : 0
+    var day3 = obj[2] ? obj[2][1] * obj[2][1] / obj[2][3] : 0
+    var day4 = obj[3] ? obj[3][1] * obj[3][1] / obj[3][3] : 0
+    var day5 = obj[4] ? obj[4][1] * obj[4][1] / obj[4][3] : 0
+    var day6 = obj[5] ? obj[5][1] * obj[5][1] / obj[5][3] : 0
     var wkAvg = (day2 + day3 + day4 + day5 + day6) / 5
     var task = {
       PartitionKey: { '_': date },
@@ -2434,11 +2435,18 @@ function CallbackAPIPromise(array, functional, interval, callback) {
   }
 }
 function unitOfWork(i, length, url, stocks, name) {
-  download(url).then(data => {
-    
-    var jsonText = csvToJSON("_" + name, data, stocks[i])
-    MongoDb.Upsert(name, stocks[i], jsonText)
+  https.get(url, function(response) {
+    if(response.statusCode==200){
+      download(url).then(data => {
+
+        var jsonText = csvToJSON("_" + name, data, stocks[i])
+        MongoDb.Upsert(name, stocks[i], jsonText)
+      });
+    }else{
+      console.log(stocks[i]+" doesn't exist in stockrow")
+    }
   });
+  
   console.log(name + ": " + i + "_" + stocks[i])
 }
 function Fundamentals(callback) {
@@ -3330,82 +3338,84 @@ function AlphaVantageWeeklyToMonthlyStockRunner(interval, begin, end, analyzer, 
             try {
               analyzer(stocks[i], stock_time_series, output_size).then(data => {
 
-                var vals = Object.values(JSON.parse(data))[1]
-                var keys = Object.keys(Object.values(JSON.parse(data))[1])
-                var datalength = keys.length
+                if (!data.includes("Error Message\": \"Invalid API call.")) {
+                  var vals = Object.values(JSON.parse(data))[1]
+                  var keys = Object.keys(Object.values(JSON.parse(data))[1])
+                  var datalength = keys.length
 
-                var date2 = new Date();
-                var date1 = new Date(begin);
-                var Difference_In_Time = date2.getTime() - date1.getTime();
-                var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+                  var date2 = new Date();
+                  var date1 = new Date(begin);
+                  var Difference_In_Time = date2.getTime() - date1.getTime();
+                  var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
 
-                for (var k = 0; k < Difference_In_Days; k++) {
-                  console.log("***********************")
-                  var d1 = new Date();
-                  d1.setDate(d1.getDate() - k);
-                  var d2 = new Date(d1);
-                  d2.setDate(d2.getDate() - 31);
-                  var unentered1 = true
-                  var unentered2 = true
+                  for (var k = 0; k < Difference_In_Days; k++) {
+                    console.log("***********************")
+                    var d1 = new Date();
+                    d1.setDate(d1.getDate() - k);
+                    var d2 = new Date(d1);
+                    d2.setDate(d2.getDate() - 31);
+                    var unentered1 = true
+                    var unentered2 = true
 
-                  if (keys[j] < begin) {
-                    throw 'date too far back';
-                  }
-                  var startKey = ''
-                  var endKey = ''
-                  var unentered3 = true;
-                  for (var j = 0; j < datalength; j++) {
+                    if (keys[j] < begin) {
+                      throw 'date too far back';
+                    }
+                    var startKey = ''
+                    var endKey = ''
+                    var unentered3 = true;
+                    for (var j = 0; j < datalength; j++) {
 
-                    if (keys[j] < end || end == '') {
-                      if (d1.toJSON().slice(0, 10).toString() > keys[j] && unentered1) {
+                      if (keys[j] < end || end == '') {
+                        if (d1.toJSON().slice(0, 10).toString() > keys[j] && unentered1) {
 
-                        startKey = keys[j]
-                        unentered1 = false
+                          startKey = keys[j]
+                          unentered1 = false
 
-                      } else if (d2.toJSON().slice(0, 10).toString() > keys[j] && unentered2) {
+                        } else if (d2.toJSON().slice(0, 10).toString() > keys[j] && unentered2) {
 
-                        endKey = keys[j]
-                        unentered2 = false
+                          endKey = keys[j]
+                          unentered2 = false
 
-                      } else if (!unentered1 && !unentered2 && unentered3) {
-                        unentered3 = false
-                        var currentAdjOpen = Number(vals[startKey][open])
-                        var currentAdjHigh = Number(vals[startKey][high])
-                        var currentAdjLow = Number(vals[startKey][low])
-                        var currentAdjClose = Number(vals[startKey][adjustedClose])
+                        } else if (!unentered1 && !unentered2 && unentered3) {
+                          unentered3 = false
+                          var currentAdjOpen = Number(vals[startKey][open])
+                          var currentAdjHigh = Number(vals[startKey][high])
+                          var currentAdjLow = Number(vals[startKey][low])
+                          var currentAdjClose = Number(vals[startKey][adjustedClose])
 
-                        var lastAdjOpen = Number(vals[endKey][open])
+                          var lastAdjOpen = Number(vals[endKey][open])
 
-                        var lastAdjClose = Number(vals[endKey][adjustedClose])
+                          var lastAdjClose = Number(vals[endKey][adjustedClose])
 
 
-                        var growth = (currentAdjClose - lastAdjClose) / lastAdjClose
-                        var wkGrowth = currentAdjOpen - currentAdjClose
-                        var lastWkGrowth = lastAdjOpen = lastAdjClose
-                        var monthAvg = (lastWkGrowth + wkGrowth) / 2
-                        var delta = (monthAvg + wkGrowth) / 2
-                        var trend = 0
-                        var date = d1.toJSON().slice(0, 10).toString()
-                        if (wkGrowth > 0) {
-                          trend = currentAdjHigh - currentAdjClose
+                          var growth = (currentAdjClose - lastAdjClose) / lastAdjClose
+                          var wkGrowth = currentAdjOpen - currentAdjClose
+                          var lastWkGrowth = lastAdjOpen = lastAdjClose
+                          var monthAvg = (lastWkGrowth + wkGrowth) / 2
+                          var delta = (monthAvg + wkGrowth) / 2
+                          var trend = 0
+                          var date = d1.toJSON().slice(0, 10).toString()
+                          if (wkGrowth > 0) {
+                            trend = currentAdjHigh - currentAdjClose
+                          }
+                          else {
+                            trend = currentAdjLow - currentAdjClose
+                          }
+                          var direction = delta + trend
+                          var task = {
+                            PartitionKey: { '_': date },
+                            RowKey: { '_': stocks[i] },
+                            direction: { '_': direction },
+                            growth: { '_': growth }
+                          };
+                          var obj = {
+                            'symbol': stocks[i],
+                            'backtest Date': keys[j]
+                          }
+
+                          // console.log(task)
+                          AzureStorage.ToTable(name, tableService, task, '-');
                         }
-                        else {
-                          trend = currentAdjLow - currentAdjClose
-                        }
-                        var direction = delta + trend
-                        var task = {
-                          PartitionKey: { '_': date },
-                          RowKey: { '_': stocks[i] },
-                          direction: { '_': direction },
-                          growth: { '_': growth }
-                        };
-                        var obj = {
-                          'symbol': stocks[i],
-                          'backtest Date': keys[j]
-                        }
-
-                        // console.log(task)
-                        AzureStorage.ToTable(name, tableService, task, '-');
                       }
                     }
                   }

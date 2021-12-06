@@ -42,7 +42,7 @@ function FinishIngest(factor, list, callback) {
   }
   var FACTOR = factors[factor]
 
-  Stocklist.SymbolList("FULL",
+  Stocklist.SymbolList(process.argv[5],
     function (symbols) {
       var stocks = []
       symbols.forEach(x => {

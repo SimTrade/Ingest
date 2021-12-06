@@ -127,15 +127,13 @@ if (process.argv[2]) {
 			console.log("done!")
               process.exit(0);
 		})
-			
 	}
 	else if ("CompleteIngest" == process.argv[2]) { 
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var back = dateObj.setDate(dateObj.getDate() - input)
 		PipelineRunner.Complete_Ingest(back,process.argv[4], function (list) {
 				  process.exit(0)
-		})
-			
+		})		
 	}
 
 

@@ -762,7 +762,7 @@ module.exports = {
   RunWeeklyToMonthly: function (stock_time_series, azureTableName, output_size, interval, begin, end, symbol) {
     AlphaVantageWeeklyToMonthlyStockRunner(interval, begin, end, Analyze.RapidApi, azureTableName, stock_time_series, output_size, symbol, function () {
       console.log("RapidApi Done")
-      process.exit(1)
+      process.exit(0)
     })
   },
   LogBeta: function (data) {

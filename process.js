@@ -20,7 +20,7 @@ if (process.argv[2]) {
 
 
 
-	/** 
+	/**
 	* Builds Top1000, Second1000, Third1000, Fourth1000, Last1000 Universe Tables
 	* in Azure Table storage
 	* RUN QUARTERLY IN TASK SCHEDULER OR MANUALLY
@@ -47,9 +47,9 @@ if (process.argv[2]) {
 		Builder.DeleteTable("PMI", function () {
 			Builder.DeleteTable("VIX", function () {
 				Builder.PmiVixIngestion()
-				Builder.DeleteTable("SectorEtfWeekly", function () {
-					Builder.SectorEtfIngestion()
-				})
+				// Builder.DeleteTable("SectorEtfWeekly", function () {
+				// 	Builder.SectorEtfIngestion()
+				// })
 			})
 		})
 
@@ -115,12 +115,12 @@ if (process.argv[2]) {
 	}
 	else if ("HistoricPicklistTransform" == process.argv[2]) { //take about an hour to transform all 5 fundamentals
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
-		
+
 		//                     daysback, days, indexAdder, incrementer, method, factor
 		HistoricTransformBuilder(355 * 7, 300, input, 60000, PipelineRunner.Transform_Factor_PickList, process.argv[4])
 	}
 	// daily generic transform
-	else if ("Transform" == process.argv[2]) { 
+	else if ("Transform" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var back = dateObj.setDate(dateObj.getDate() - input)
 		PipelineRunner.Transform_Factor_PickList(back,process.argv[4], function (x) {
@@ -128,12 +128,12 @@ if (process.argv[2]) {
               process.exit(0);
 		})
 	}
-	else if ("CompleteIngest" == process.argv[2]) { 
+	else if ("CompleteIngest" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
 		var back = dateObj.setDate(dateObj.getDate() - input)
 		PipelineRunner.Complete_Ingest(back,process.argv[4], function (list) {
 				  process.exit(0)
-		})		
+		})
 	}
 
 
@@ -141,7 +141,7 @@ if (process.argv[2]) {
 	/***********************************************************************************************************/
 
 	/************** OHLC FUNCTIONS ************************ */
-	/** 
+	/**
 	* Builds hourly ohlcv using 5000Universe
 	* in StocksHourlyBacktester Table Storage
 	* RUN IN TASK SCHEDULER
@@ -173,7 +173,7 @@ if (process.argv[2]) {
               process.exit(0);
 			})
 	}
-	/** 
+	/**
 	* Builds daily ohlcv using 5000Universe
 	* in StocksDailyBacktester Table Storage
 	* RUN IN TASK SCHEDULER
@@ -426,8 +426,8 @@ if (process.argv[2]) {
 		var beginning = new Date(range).toJSON().slice(0, 10)
 		var day = new Date(back).toJSON().slice(0, 10)
 		console.log(beginning + symbol)
-		
-		
+
+
 				Builder.RunDaily('CCI&interval=daily&time_period=20&series_type=close',
 					'CCI20Day',
 					'compact', 250,
@@ -500,7 +500,7 @@ if (process.argv[2]) {
 									})
 							})
 					})
-		
+
 	}
 	else if ("BuildADMonthly" == process.argv[2]) {
 		Builder.RunDaily('AD&interval=monthly',
@@ -589,9 +589,9 @@ if (process.argv[2]) {
 		BacktestCot(5000, input, 5000, Helper.CotTableBuilder)
 
 	}
-	/** 
-	 Buid Stocks weekly 
-	 
+	/**
+	 Buid Stocks weekly
+
 	*/
   else if ("runallTaDailyIngest" == process.argv[2]) {
     var input = Number(process.argv[3] != undefined ? process.argv[3] : 0);
@@ -656,7 +656,7 @@ if (process.argv[2]) {
           }
         );
       }
-    ); 
+    );
 }
 	else if ("Scheduled_DailyIngest_StocksMonthlyGrowth" == process.argv[2]) {
 		var input = Number(process.argv[3] != (undefined) ? process.argv[3] : 0)
@@ -677,12 +677,12 @@ if (process.argv[2]) {
 			'StocksMonthlyGrowth',
 			'full', 83000,
 			'2015-01-01', '')
-	
+
 	}
 	/*************end  OHLCV functions*************************** */
 	/***********************************************************************************************************/
 	/************** SHORT VOLUME FUNCTIONS ************************ */
-	/** 
+	/**
 	* Builds mongodb ShortVolume Table using 5000Universe
 	* RUN MANUALLY BEFORE TRANSFORM
 	*/
@@ -705,7 +705,7 @@ if (process.argv[2]) {
 		}
 	}
 
-	/** 
+	/**
 	* Pulls from mongodb ShortVolume using 5000Universe
 	* to historic build ShortVolume Table Storage
 	* RUN MANUALLY AFTER INJEST
@@ -716,7 +716,7 @@ if (process.argv[2]) {
 		HistoricTransformBuilder(355 * 7, 300, input, 100000, PipelineRunner.TransformShortVolume, '')
 	}
 
-	/** 
+	/**
 	* Builds daily using 5000Universe
 	* in ShortVolume Table Storage
 	* RUN IN TASK SCHEDULER
@@ -855,7 +855,7 @@ function HistoricTransformBuilder(daysback, days, indexAdder, incrementer, metho
 					throw "*********** DONE **********************"
 				}
 				try {
-					
+
 					Builder.GetCalendar(day_of_reference, function (isTradingDay) {
 						if (isTradingDay) {
 							console.log("------"+factor)

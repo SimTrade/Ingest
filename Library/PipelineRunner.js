@@ -207,9 +207,9 @@ async function Build_Stock_Weekly(date) {
 async function Transform_Macro(date) {
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
 
-    MongoDb.GetMongoSectorEtf(date, 'SectorEtfWeekly', function (data) {
-        AzureStorage.ToTable("SectorSharpe", tableService, SectorEtfTask(data),'');
-    })
+    // MongoDb.GetMongoSectorEtf(date, 'SectorEtfWeekly', function (data) {
+    //     AzureStorage.ToTable("SectorSharpe", tableService, SectorEtfTask(data),'');
+    // })
 
     setTimeout(function () {
         MongoDb.GetMongoPMI(date, 'PMI', function (data) {

@@ -76,6 +76,7 @@ module.exports = {
   },
 
   SymbolList: function (symbolStart,callback) {
+    console.log(symbolStart)
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
     var symbolDistinct = []
     var query = new azure.TableQuery()
@@ -116,8 +117,13 @@ module.exports = {
               if(symbolStart=="FULL"){
                 symbols=symbols
               }
+              process.argv[2]
               
               console.log("symbollist length:"+ symbols.length)
+              // var hold = []
+              // symbols.forEach(x=>{if(x=="BTWN"){
+              //   hold.push(x)
+              // }})
               callback(symbols)
             }
             )

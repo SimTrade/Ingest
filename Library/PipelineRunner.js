@@ -270,7 +270,7 @@ async function Complete_Ingest_From_Mongo(date,factor,callback) {
         var features = Object.values(FundamentalsFeatures[factor])[1]
             MongoDb.GetMongoFundamentalsSymbols(date, factor,
                 features, function (data) {
-                   Builder.FinishIngest(process.argv[4],data, function (x) {
+                   Builder.FinishIngest(factor,data, function (x) {
 				   process.exit(0);
                   })
                      

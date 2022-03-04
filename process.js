@@ -73,7 +73,7 @@ if (process.argv[2]) {
 
 
 	else if ("TableRun" == process.argv[2]) {
-		var stock = (process.argv[3] != (undefined) ? process.argv[3] : 'REVERSE')
+		var stock = (process.argv[3] != (undefined) ? process.argv[3] : 'FULL')
 		Builder.Barcharts(stock);
 		Builder.WSJ(stock);
 		Builder.Zacks(stock);

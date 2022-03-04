@@ -111,9 +111,9 @@ module.exports = {
                 symbols = symbols.reverse()
                 
               }
-              if(symbolStart == "REVERSE"||symbolStart == "NORMAL"){
-                symbols = symbols.slice(0, Math.ceil(symbols.length/2));
-              }
+              // if(symbolStart == "REVERSE"||symbolStart == "NORMAL"){
+              //   symbols = symbols.slice(0, Math.ceil(symbols.length/2));
+              // }
               if(symbolStart=="FULL"){
                 symbols=symbols
               }

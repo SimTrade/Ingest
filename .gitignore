@@ -15,6 +15,9 @@ Library/js/
 
 # ignore stupid mac file
 **/.DS_Store
+
+# xmlhttprequest sync lock files
+.node-xmlhttprequest-sync-*
 node_modules
 
 package-lock.json

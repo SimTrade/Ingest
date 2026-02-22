@@ -115,20 +115,6 @@ function TopUniverse(tableService, callback) {
     callback(first, second, third, fourth, fifth)
   })
 }
-function TopEtfs(tableService, callback) {
-  GetETFList(tableService, function (list) {
-    var etfs = Object.keys(list).map(function (key) {
-      return [key, list[key]];
-    });
-    etfs.sort(function (first, second) {
-      return second[1] - first[1];
-    });
-
-    var top40 = etfs.slice(0, 40)
-    var top100 = etfs.slice(0, 100)
-    callback(top40, top100)
-  })
-}
 function getOrders() {
 
 

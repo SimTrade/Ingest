@@ -670,20 +670,6 @@ function GetWJSTable(tableService, callback) {
   )
 }
 
-function CallbackAPIPromise(array, functional, interval, callback) {
-
-  for (var i = 0; i < array.length; i++) {
-    (function (i) {
-      setTimeout(function () {
-        var got = functional(array[i]);
-        got.then(function (data) {
-          callback(data)
-        })
-      }, interval * i)
-    }
-    )(i)
-  }
-}
 function unitOfWork(i, length, url, stocks, name) {
   https.get(url, function(response) {
     if(response.statusCode==200){
@@ -699,9 +685,6 @@ function unitOfWork(i, length, url, stocks, name) {
   
   console.log(name + ": " + i + "_" + stocks[i])
 }
-
-
-
 
 function ShortSqueeze(symbol) {
   var options = {

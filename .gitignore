@@ -7,6 +7,12 @@ TaskScheduler/*
 # exception to the rule
 !Library/Research/.gitkeep 
 
+# test coverage reports
+coverage/
+
+# vendored js
+Library/js/
+
 # ignore stupid mac file
 **/.DS_Store
 node_modules

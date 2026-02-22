@@ -364,7 +364,6 @@ module.exports = {
 	},
 	tallySharpe: function(sharpe, algo){
 		try{
-			//console.log("========== tallySharpe ================")
 			
 			var tenDaySharpe = fs.readFileSync('Algorithm/'+algo+'/status/sharpe.txt', 'utf8').split('\n'); 
 				
@@ -413,7 +412,6 @@ module.exports = {
 				var tenDaySharpe = fs.readFileSync('Algorithm/'+algo+'/status/sharpe.txt', 'utf8').split('\n'); 
 				
 				var sum = 0;
-			//	if (tenDaySharpe.length > 1){
 			//		tenDaySharpe.pop();
 			//	}
 				
@@ -424,9 +422,6 @@ module.exports = {
 						}
     				
 					}
-					//console.log(algo)
-					//console.log(sum)
-					//console.log(tenDaySharpe.length)
 				return sum/tenDaySharpe.length;
 		}catch(err)
 		{
@@ -678,7 +673,6 @@ module.exports = {
 	watchOrders: function (orders,algo) {
 	  
 			try{			
-						//console.log(orders)
 					fs.writeFileSync('Algorithm/'+algo+'/watchorders.txt', JSON.stringify(orders));
 					
 			}
@@ -769,8 +763,6 @@ module.exports = {
 	}
 
 
-
-	
 };
 function currentDate()
 {
@@ -786,7 +778,6 @@ function currentDate()
   {
     month = '0' + month;
   }
-//console.log("Date:"+ currentDate.getMonth())
   
   var orderDay = currentDate.getFullYear()+ "-" + month +"-"+ currentDay ;
   return orderDay;

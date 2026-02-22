@@ -21,7 +21,6 @@ NewsSentiment: function(symbol, algo){
                                .replace("(","").replace(')','')
                                .replace("\'", "")
           
-        //console.log(text)                      
      var news = JSON.parse(text)
      for (var i in news)
      {    
@@ -33,31 +32,26 @@ NewsSentiment: function(symbol, algo){
       newsArray.push(entry);
       }
      }
-    //console.log(newsArray)
      var twentydaysOfNews = newsArray.slice(0,15);
     
      var newsResult = JSON.stringify(twentydaysOfNews).replace("'","").replace("(","").replace(')','')
-   // console.log(newsResult)
      logging.News(symbol, twentydaysOfNews, algo);
          var path = 'Algorithm/'+algo+'/info/'+symbol+'/sentiment.txt';    
                fs.open(path, 'wx', (err, fd) => {
                   if (err) {
                     if (err.code === 'EEXIST') {
-                    //  console.log("file exists")
                         var stat = fs.statSync(path).atime;
                         var date = new Date(stat)
                         var now = new Date()
                         
                       if(date.getFullYear() <= now.getFullYear() && date.getMonth() <= now.getMonth()
                          && date.getDay() < now.getDay()){
-                       // console.log("Inside sameday")
                           logging.News(symbol, twentydaysOfNews, algo);
                          getSentiment(newsResult,symbol,algo);                      
                       } 
                       
                       return;
                     } else{
-                    //  console.log("err in Newssentiment")
                       logging.News(symbol, twentydaysOfNews, algo);
                       getSentiment(newsResult,symbol,algo);
                     }         
@@ -79,7 +73,6 @@ NewsSentiment: function(symbol, algo){
   },
 
   Analysis: function(symbol, algo){
-   // console.log("Analysis.")
    var callAnalysis = new Promise(function(resolve,reject){ 
     
   var url2 = 'https://api.polygon.io/v1/meta/symbols/'+symbol+'/analysts?apiKey='+apiKey;
@@ -140,7 +133,6 @@ NewsSentiment: function(symbol, algo){
                "updated": (yy == y && !(1-m>mm))
             }
           }
-         // console.log(analysis)
            logging.Analysis(symbol, analysis,algo)
             return analysis;
         });
@@ -167,7 +159,6 @@ NewsSentiment: function(symbol, algo){
       
         lastQuote.then(function(value) {
           logging.LastQuote(symbol, value,algo)
-          // console.log(value)
             return value;
         });
 
@@ -191,7 +182,6 @@ NewsSentiment: function(symbol, algo){
       
         company.then(function(value) {
              logging.Company(symbol, value,algo)
-          // console.log(value)
             return value;
         });
 
@@ -214,7 +204,6 @@ NewsSentiment: function(symbol, algo){
       
         dividends.then(function(value) {
             logging.Dividends(symbol, value,algo)
-          // console.log(value)
             return value;
         });
 
@@ -237,7 +226,6 @@ NewsSentiment: function(symbol, algo){
       
         splits.then(function(value) {
          logging.Splits(symbol, value,algo)
-           //console.log(value)
             return value;
         });
 
@@ -260,7 +248,6 @@ NewsSentiment: function(symbol, algo){
       
         earnings.then(function(value) {
          logging.Earnings(symbol, value,algo)
-          // console.log(value)
             return value;
         });
 
@@ -283,7 +270,6 @@ NewsSentiment: function(symbol, algo){
       
         financials.then(function(value) {
          logging.Financials(symbol, value,algo)
-           //console.log(value)
             return value;
         });
 
@@ -307,7 +293,6 @@ NewsSentiment: function(symbol, algo){
       
         lastQuote.then(function(value) {
          logging.LastQuote(symbol, value,algo)
-          // console.log(value)
             return value;
         });
 
@@ -320,7 +305,6 @@ function getSentiment(newsResult,symbol,algo){
     pd.sentimentBatch(newsResult,'en')
       .then((response) => {
           
-      // console.log(response)
         var sentiment = JSON.parse(response).sentiment;
       
       if (sentiment != null && sentiment != undefined){
@@ -374,7 +358,6 @@ function getSentiment(newsResult,symbol,algo){
         
         var setAvg =  {Sentiment:{ avg: (positive + (-1*negative)).toFixed(2),
          weight: count, signal: signal,alert: alert}};
-        // console.log(setAvg);
                     logging.Sentiment(symbol, setAvg,algo)
                     return setAvg;
           }

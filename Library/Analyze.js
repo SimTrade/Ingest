@@ -24,9 +24,6 @@ module.exports = {
   },
 
 
-
-
-  
   stats: function (symbol) {
     var url = 'https://api.iextrading.com/1.0/stock/' + symbol + '/stats?token=' + iexToken;
     return ApiCall(url)
@@ -189,7 +186,6 @@ module.exports = {
             .replace("(", "").replace(')', '')
             .replace("\'", "")
 
-          //console.log(text)                      
           var news = JSON.parse(text)
           for (var i in news) {
             var timestamp = new Date(news[i].timestamp);
@@ -200,7 +196,6 @@ module.exports = {
               newsArray.push(entry);
             }
           }
-          //console.log(newsArray)
           var twentydaysOfNews = newsArray.slice(0, 15);
 
           var newsResult = JSON.stringify(twentydaysOfNews).replace("'", "").replace("(", "").replace(')', '')
@@ -208,7 +203,6 @@ module.exports = {
           var result = sentimentGetter(newsResult, function (result) {
             resolve(JSON.stringify(result));
           });
-
 
 
         }
@@ -223,7 +217,6 @@ module.exports = {
   },
 
   Deprecated: function (symbol) {
-    // console.log("Analysis.")
     var callAnalysis = new Promise(function (resolve, reject) {
 
       var url2 = 'https://api.polygon.io/v1/meta/symbols/' + symbol + '/analysts?apiKey=' + apiKey;
@@ -426,7 +419,6 @@ req.end(function (res) {
 
 function ApiCall(url) {
   var run = new Promise(function (resolve, reject) {
-    //console.log(url)
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
@@ -478,7 +470,6 @@ function getSentiment(newsResult, symbol) {
   return pd.sentimentBatch(newsResult, 'en')
     .then((response) => {
 
-      // console.log(response)
       var sentiment = JSON.parse(response).sentiment;
 
       if (sentiment != null && sentiment != undefined) {
@@ -532,7 +523,6 @@ function getSentiment(newsResult, symbol) {
           }
         };
 
-        // console.log(response)
         return setAvg;
       }
 

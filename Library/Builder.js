@@ -721,8 +721,6 @@ module.exports = {
       });
 
 
-
-
     })
 
   },
@@ -835,17 +833,13 @@ module.exports = {
               array.push([company.ticker, unixIpoDate])
 
               unixIpoDate = new Date(unixIpoDate * 1000)
-              //console.log("inside while: " +  unixIpoDate)
               unixIpoDate = new Date(unixIpoDate.getFullYear() + 1, 0, 1)
-              //console.log("inside also : " +  unixIpoDate)
               unixIpoDate = Math.floor(unixIpoDate.getTime() / 1000)
-              //console.log("inside while: " +  unixIpoDate+" vs "+unixToday)
             }
 
             console.log(array)
             console.log("_________________________")
             CallbackAPIPromise(array.reverse().slice(0, 10), Candles, 3000, function (arry) {
-              //console.log(arry)
               mkdirp("Library/Research/" + arry.symbol + "/CandlesAnnually/", function (err) {
                 if (err) return cb("---------------");
                 fs.writeFileSync("Library/Research/" + arry.symbol + "/CandlesAnnually/Annual_60minute_" + arry.date + ".json", arry.data);
@@ -902,12 +896,10 @@ module.exports = {
         'symbol': symbol
       }
       var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
-      // console.log(sharePrice, weight)
       AzureStorage.StoreOrders(data, symbol, fileService)
 
 
     })
-
 
 
   },
@@ -938,11 +930,8 @@ module.exports = {
       CallbackAPIPromise(array, Analyze.FinnTranscriptCall, 1000, function (array) {
         console.log(array)
         // mkdirp("Library/Research/"+symbol+"/Transcripts/", function (err) {
-        //                        if (err) return console.log(er);
         //                      }); 
         //                      fs.writeFileSync("Library/Research/"+symbol+"/Transcripts/"+transcript.time.split(" ")[0]+".json", data);  
-        //                     if(i == array.length-1){
-        //                       console.log("done")
         //                       }
       })
     })
@@ -1021,8 +1010,6 @@ module.exports = {
               //https://www.quandl.com/api/v3/datatables/SHARADAR/SFP?date=2019-12-18&ticker=%5EVIX&api_key=gX1f8wse2g2dQjXmZ-dR
               var sharadarCall = 'https://www.quandl.com/api/v3/datatables/SHARADAR/SFP.csv?ticker='
                 + symbolDistinct[i] + '&api_key=gX1f8wse2g2dQjXmZ-dR'
-              // console.log(sharadarCall);
-
 
 
               console.log(symbolDistinct[i]);//.localeCompare('PGEI'))
@@ -1096,7 +1083,6 @@ module.exports = {
       function () { console.log("IEX Done") })
   },
   ShortSqueeze: function (stock) {
-    //  console.log(ShortSqueeze('ZTS'))
     AzureTableRunnerNonSeries(60000,
       ShortSqueeze,
       'ShortSqueeze', stock,
@@ -1160,7 +1146,6 @@ module.exports = {
               console.log(sharadarCall);
 
 
-
               //.localeCompare('PGEI'))
               if (true) {//symbolDistinct[i].localeCompare('PGEI') > 'PGEI'){
                 ////////////////////
@@ -1199,8 +1184,6 @@ module.exports = {
           //  theStockList.push(row)
         }
       })
-      //   console.log(theStockList)
-      // console.log(theStockList.length)
     })
   },
   RiskToTable: function (table, data) {
@@ -1315,7 +1298,6 @@ module.exports = {
                 if (x == obj.symbol
                   && Number(filter[obj.symbol]) > 0
                 ) {
-                  //   console.log(obj.symbol+': '+Number(filter[obj.symbol]))
                   gStack.push(obj)
                 }
               })
@@ -1323,13 +1305,11 @@ module.exports = {
                 if (x == obj.symbol
                   && Number(filter[obj.symbol]) > -.2 && Number(filter[obj.symbol]) < 1
                 ) {
-                  //   console.log(obj.symbol+': '+Number(filter[obj.symbol]))
                   pStack.push(obj)
                 }
               })
               vlongs.forEach(function (x) {
                 if (x == obj.symbol) {
-                  //   console.log(obj.symbol+': '+Number(filter[obj.symbol]))
                   vStack.push(obj)
                 }
               })
@@ -1338,7 +1318,6 @@ module.exports = {
                 if (x == obj.symbol
                   && Number(filter[obj.symbol]) > -.5
                 ) {
-                  //   console.log(obj.symbol+': '+Number(filter[obj.symbol]))
                   shortStack.push(obj)
                 }
               })
@@ -1436,7 +1415,6 @@ module.exports = {
               SHORTWEIGTHED.push({ 'symbol': [x.symbol], 'weight': -1.5 / shortCount })
             })
 
-            //   console.log(LONGWEIGHTED)
             var MasterResult = []
             var longResult = [];
             var shortResult = [];
@@ -1465,10 +1443,6 @@ module.exports = {
             shortResult.forEach(function (x) {
               MasterResult.push({ 'symbol': x.symbol[0], 'weight': x.weight })
             })
-            // console.log("long: ")
-            // console.log(LONGWEIGHTED)
-            // console.log("short: ")
-            // console.log(SHORTWEIGTHED)
             shortDict = {}
             longDict = {}
             long = 0
@@ -1492,7 +1466,6 @@ module.exports = {
               function (sectorSharpe) {
                 var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
                 AzureStorage.GetEtfDictionary(fileService, function (dictionary) {
-                  // console.log(sectorSharpe[0])
                   etfDict = {}
                   sectorRisk = {}
                   for (const [key, value] of Object.entries(sectorSharpe[0])) {
@@ -1509,7 +1482,6 @@ module.exports = {
 
                     }
                   }
-                  //  console.log(sectorRisk)
                   var items = Object.keys(sectorRisk).map(function (key) {
                     return [key, sectorRisk[key]];
                   });
@@ -1526,8 +1498,6 @@ module.exports = {
                   longRisk.forEach(function (x) {
                     lr.push(x[0])
                   })
-                  // console.log(lr)
-                  //console.log(sr)
 
                   var query2 = new azure.TableQuery()
                   AzureStorage.GetTable('PolygonCompany', tableService, query2, function (PolygonCompany) {
@@ -1631,28 +1601,20 @@ module.exports = {
                       }
                     })
 
-                    // console.log(output)
-                    //console.log(output.length)
-                    // console.log('shortSum: ' + shortSum)
 
                     callback(output.sort((a, b) => (a.weight > b.weight) ? 1 : -1))
                   })
 
                 })
-                //  throw 
-
 
 
               })
             // run sector filterings here 
 
-            // console.log("sort count: "+ shortResult.length)
-            //console.log("long count: "+longResult.length)
 
           })
         })
     })
-
 
 
   },
@@ -1743,8 +1705,6 @@ module.exports = {
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
     AzureStorage.GetTable('FinnhubListIEX', tableService, query1, function (FinnhubListIEX) {
       AzureStorage.GetTable('PolygonCompany', tableService, query2, function (PolygonCompany) {
-        // console.log("PolygonCompany: "+PolygonCompany.length)
-        // console.log("FinnhubListIEX: "+FinnhubListIEX.length)
         polygonArray = []
         polygonDict = {}
         finnhubDict = {}
@@ -1884,7 +1844,6 @@ function GetShortVolumeTableFilterGrowth(tableService, day, callback) {
           stockGrowth.forEach(function (x) {
             filter[objectValues(x.RowKey)] = objectValues(x.growth)
           })
-          //  console.log(filter)
           shortVolume.forEach(function (item) {
             var growthscore = filter[objectValues(item.RowKey)]
 
@@ -2031,11 +1990,9 @@ function GetDCFTable(tableService, day, callback) {
           )
         }
       })
-      //  console.log("LONG PIOTROSKI _________________ ")
       var sortedLongDcf = dcfLong.sort(function (a, b) {
         return a.dcfScore - b.dcfScore
       }).slice(0, dcfShort.length > 10 ? 10 : Math.round(dcfLong.length * .1))
-      //  console.log("LONG PIOTROSKI _________________ ")
       var sortedShortDcf = dcfShort.sort(function (a, b) {
         return a.dcfScore - b.dcfScore
       }).slice(dcfShort.length > 5 ? dcfShort.length - 5 : Math.round(dcfShort.length * .5,), dcfShort.length)
@@ -2082,7 +2039,6 @@ function GetOBVTable(tableService, day, day2, callback) {
         x.weight = x.weight / sumscore
       })
       var top = sorted.slice(0, 50)
-      // console.log(data)
       callback(top)
     })
 }
@@ -2170,43 +2126,27 @@ function GetPickListTable(tableService, day, callback) {
 
       })
 
-      //  console.log("LONG PIOTROSKI _________________ ")
       var sortedLongPiotroski = piotroskiLong.sort(function (a, b) {
         return a.invPeDelta - b.invPeDelta
       }).slice(0, Math.round(piotroskiLong.length * .5))
-      // console.log(sortedLongPiotroski)
-      // console.log(sortedLongPiotroski.length)
 
-      // console.log("SHORT PIOTROSKI _________________ ")
       var sortedShortPiotroski = piotroskiShort.sort(function (a, b) {
         return b.invPeDelta - a.invPeDelta
       }).slice(0, Math.round(piotroskiShort.length * .4))
-      // console.log(sortedShortPiotroski)
-      // console.log(sortedShortPiotroski.length)
-      // console.log("LONG GROWTH _________________ ")
       var sortedLongGrowth = growthLong.sort(function (a, b) {
         return a.invPeDelta - b.invPeDelta
       }).slice(0, Math.round(growthLong.length * .5))
-      // console.log(sortedLongGrowth)
-      // console.log(sortedLongGrowth.length)
-      // console.log("SHORT GROWTH _________________ ")
       var sortedShortGrowth = growthShort.sort(function (a, b) {
         return b.invPeDelta - a.invPeDelta
       }).slice(0, Math.round(growthShort.length * .2))
-      // console.log(sortedShortGrowth)
-      // console.log(sortedShortGrowth.length)
-      // console.log("LONG VALUE _________________ ")
       var sortedLongValue = valueLong.sort(function (a, b) {
         return a.invPeDelta - b.invPeDelta
       }).slice(0, Math.round(valueLong.length * .3))
-      // console.log(sortedLongValue)
       console.log("long value: " + sortedLongValue.length)
       console.log("piootroski long: " + sortedLongPiotroski.length)
       console.log("long growth" + sortedLongGrowth.length)
       console.log("short growth" + sortedShortGrowth.length)
       console.log("short piotrosky" + sortedShortPiotroski.length)
-      // console.log("SHORT ALTMAN  _________________ ")
-      // console.log(altmanShort)
       console.log("altman short: " + altmanShort.length)
 
       var plongs = []
@@ -2369,7 +2309,6 @@ function GetBarchartsTable(tableService, callback) {
     .where('PartitionKey eq ?', day);
   AzureStorage.GetDaily('Barcharts', tableService, query,
     function (data) {
-      //   console.log(data)
       longs = []
       shorts = []
       data.forEach(function (x) {
@@ -2598,9 +2537,6 @@ function CashFlowIngest(callback) {
 }
 
 
-
-
-
 function ShortSqueeze(symbol) {
   var options = {
     uri: 'https://shortsqueeze.com/?symbol=' + symbol + '&submit=Short+Quote',
@@ -2623,7 +2559,6 @@ function ShortSqueeze(symbol) {
       return JSON.stringify(data);//
     })
     .catch(function (err) {
-      //  console.log(err)
     });
 }
 
@@ -2692,10 +2627,7 @@ function numberScore(num) {
 }
 function GoogleTrend(symbol) {
   var explorer = new ExploreTrendRequest()
-  //var name = ''
   ////var company = JSON.parse(logging.GetCompanyProfile(symbol))
-  // if (company != undefined && company != null){
-  //   name = company.name
   // }
 
 
@@ -2704,7 +2636,6 @@ function GoogleTrend(symbol) {
       //.addKeyword(name)
       .addKeyword(symbol)
       .download().then(csv => {
-        //console.log('[✔] Done, take a look at your beautiful CSV formatted data!')
 
 
         var title = csv.shift()
@@ -2714,8 +2645,6 @@ function GoogleTrend(symbol) {
 
         // csv.splice(0,0,title)
         console.log(csv)
-        // console.log(csv)
-        // console.log(csvToJSON("googletrend", csv, symbol))
         resolve(JSON.stringify(csv))
       }).catch(error => {
         console.log('[!] Failed fetching csv data due to an error', error)
@@ -2762,13 +2691,11 @@ function Zacks(symbol) {
 
       // order of operations matter
       var industry = $('#quote_ribbon_v2 .quote_rank_summary .industry_rank :nth-child(3)').text();
-      //    console.log(industry)
 
       industry = industry.substring(industry.indexOf("\n") + 1, industry.length).replace("Zacks Industry Rank", "").replace("         ", "")
       var industryRank = (industry.substring(industry.indexOf("(") + 1, industry.indexOf(")")).replace(" out of ", ",").split(','))
       industry = industry.split('\n')[0]
       var industryRanked = (industryRank[1] - industryRank[0]) / industryRank[1]
-      // console.log(industryRanked)
 
       var value = $('#quote_ribbon_v2 .quote_rank_summary .composite_group .rank_view .composite_val').text()[0];
       var growth = $('#quote_ribbon_v2 .quote_rank_summary .composite_group .rank_view .composite_val').text()[1];
@@ -2799,7 +2726,6 @@ function FinnhubHistorical() {
   //     })                                          
 
 
-
 }
 function FinnhubIpoCalendar(days) {
   var ipoCalendar = Analyze.FinnhubIpoCalendar(days)
@@ -2815,22 +2741,15 @@ function FinnhubIpoCalendar(days) {
         if (x.exchange != null && x.price > 5
           && x.totalSharesValue > 200000000 && x.symbol != '' &&
           x.symbol.length < 5 && !x.symbol.includes('\\') && !x.symbol.includes('.')) {
-          // console.log(x.date)
-          // console.log(x.symbol)
           ipoArray.push(x)
 
         }
 
       })
     })
-    //   console.log(ipoArray)
     ipoArray.forEach(function (x) {
-      //Analyze.FinnhubIPOEarningsCalendar(x.symbol).then(pick=>{
-      // var earnings = JSON.parse(pick)
       // Object.keys(earnings).forEach(function(key){
       //earnings[key].forEach(function(x){
-      //         console.log(x)
-      //       console.log("---------")
       //})
       //})
 
@@ -2840,8 +2759,6 @@ function FinnhubIpoCalendar(days) {
     ipoArray.forEach(function (x) {
       if (true) {
         symbolArray.push(x.symbol)
-        // console.log(x.symbol)
-        //   console.log(x.date)
       }
 
     })
@@ -2850,7 +2767,6 @@ function FinnhubIpoCalendar(days) {
   })
 
   //  array[0].forEach(function(x){
-  //   var timestamp = new Date().getTime() 
 
 
   // date: '2019-12-06',
@@ -2862,11 +2778,8 @@ function FinnhubIpoCalendar(days) {
   // symbol: 'MKD',
   // totalSharesValue: 61870000
   var rate = 1000
-  // var  funct = Analyze.FinnhubEarningsCalendar;
   //       Builder(rate, funct ,funct.name,function(){  
-  //         funct = Analyze.FinnhubMajorDevelopment;
   //          Builder(rate, funct ,funct.name,function(){  
-  //            console.log("Done")                                      
   //         })                                           
   //      }) 
 }
@@ -2933,11 +2846,8 @@ function MasterDailySymbolsEOD(callback) {
       console.log('path was deleted');
     })
   }
-  // if (fs.existsSync(path2)) {
   //   //file exists
   //   fs.unlink(path2, (err) => {
-  // if (err) throw err;
-  // console.log('path2 was deleted');
   // });
   //   
   // }
@@ -2968,11 +2878,8 @@ function MasterDailySymbolsEOD(callback) {
             }
 
             //fs.appendFileSync(path, line+'\n', function (err) {
-            //   if (err) throw err; 
             // });
             var dir = root + line.split(',')[0][0];
-            //  if (!fs.existsSync(dir)){
-            //    console.log(dir)
             //      fs.mkdirSync(dir, {recursive: true}, err => {});
             //    }
             fs.appendFileSync(dir + path2, line.split(',')[0] + '\n', function (err) {
@@ -2994,7 +2901,6 @@ function StockRowPage(symbol) {
   var options = {
     uri: 'https://stockrow.com/' + symbol,
     transform: function (body) {
-      // console.log(body)
       return cheerio.load(body);
     }
   };
@@ -3023,7 +2929,6 @@ function barchartBuysell(signal, amount) {
   } else if (signal == 'Sell') {
     amount = -1 * Number(amount.replace("%", ""));
   } else {
-    // console.log(signal)
     amount = Number(amount.replace("%", "")) / 2 + 50;
   }
   return amount;
@@ -3039,29 +2944,18 @@ function Barcharts(symbol) {
 
   return rp(options)
     .then(function ($) {
-      //console.log("^^^^^^^^^^^^^^^^^^^^^^^")
       var opinion = $('.barchart-content-block .opinion-percent').text();
       var buySell = $('.barchart-content-block .opinion-signal').text();
-      // console.log(buySell)
-      //console.log(opinion)
-      // console.log("^^^^^^^^^^^^^^^^^^^^^^^")
 
       var signal = $('.background-widget .clearfix').children().text();
-      // console.log(signal)
       var wut = signal.match(/Buy|Sell|Hold/g);
-      //  console.log("*************")
-      //  console.log(wut)
       var numbers = signal.match(/\d+/g).map(Number);
-      // console.log(numbers)
-      // console.log("*************")
-      // var overall = barchartBuysell(buySell,opinion)
       var yesterday = barchartBuysell(wut[0], numbers[0])
       var lastWeek = barchartBuysell(wut[1], numbers[1])
       var lastMonth = barchartBuysell(wut[2], numbers[2])
       var data = { "Overall": yesterday, "Yesterday": yesterday, "LastWeek": lastWeek, "LastMonth": lastMonth };
 
 
-      //console.log(JSON.stringify(data))
       return JSON.stringify(data);
 
 
@@ -3135,7 +3029,6 @@ function AlphaVantageEtfRunner(interval, analyzer, api, outputSize, name, callba
   AzureStorage.GetSectorEtfs(fileService,
     function (stocks) {
       var length = stocks.length;
-      // var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
       for (var i = 0; i < length; i++) {
 
         (function (i) {
@@ -3303,13 +3196,11 @@ function AlphaVantageDailyStockRunner(interval, begin, end, analyzer, name, stoc
                 }
               });
             } catch {
-              // var data = analyzer(stocks[i]);
               console.log("tyr/catch for ")
             }
             console.log(name + ": " + i + "_" + stocks[i])
             if (i == length - 1) {
               callback();
-              // console.log("done!")
               // process.exit(0);
             }
           }, interval * (i));
@@ -3413,7 +3304,6 @@ function AlphaVantageWeeklyToMonthlyStockRunner(interval, begin, end, analyzer, 
                             'backtest Date': keys[j]
                           }
 
-                          // console.log(task)
                           AzureStorage.ToTable(name, tableService, task, '-');
                         }
                       }
@@ -3534,7 +3424,6 @@ function CompanyTask(data, stock) {
 function ZacksTask(data, stock) {
 
   var obj = JSON.parse(data)
-  // console.log(obj)
   var day = new Date().toJSON().slice(0, 10)
   var task = {
     PartitionKey: { '_': day },
@@ -3718,7 +3607,6 @@ function AzureTableRunnerForFinnhubListIEX(interval, analyzer, name, taskCallbac
     })
     stocks = stocks.sort((a, b) =>
       a > b ? 1 : -1);
-    //console.log(stocks)
     var length = stocks.length;
 
     for (var i = 0; i < length; i++) {
@@ -3761,7 +3649,6 @@ function Builder(interval, analyzer, name, callback) {
       setTimeout(function () {
         try {
           analyzer(stocks[i]).then(data => {
-            // console.log(data)
             dataToAzureFileStorage(data, stocks[i], name, fileService)
           });
         } catch {
@@ -3793,12 +3680,10 @@ function CsvBuilder(interval, analyzer, name, callback) {
       setTimeout(function () {
         try {
           analyzer(stocks[i]).then(data => {
-            //  console.log(data)
             fs.writeFileSync("Library/Research/" + stocks[i] + "/" + stocks[i] + "_" + name + ".txt", data);
           });
         } catch {
           var data = analyzer(stocks[i]);
-          // console.log(data)
 
           fs.writeFileSync("Library/Research/" + stocks[i] + "/" + stocks[i] + "_" + name + ".txt", data);
         }
@@ -3822,12 +3707,10 @@ function dataToAzureTableStorage(name, tableService, task) {
 }
 
 
-
 function googleBuilder(interval, analyzer, name, callback) {
   Stocklist.SymbolList1000(
     function (stocks) {
       var length = stocks.length;
-      // var fileService = azure.createFileService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
       for (var i = 0; i < length; i++) {
 
         (function (i) {
@@ -3885,7 +3768,6 @@ function LatestBuilder(interval, analyzer, name, callback) {
 }
 
 function PrimeBuilder(interval, analyzer, name, callback) {
-  //  logging.clearPrimeList() //### USE FIRST TIME FOR NEW LIST HACK
   console.log(" inside prime builder")
   var stocks = Stocklist.Prime();
   var length = stocks.length;
@@ -3906,7 +3788,6 @@ function PrimeBuilder(interval, analyzer, name, callback) {
                 data.day200MovingAvg > 5 &&
                 data.day50MovingAvg > 5 &&
                 data.avg30Volume > 5) {
-                // console.log(data.marketcap)
                 //       // console.log(data.peRatio)
                 console.log(stocks[i])
                 data.symbol = stocks[i]
@@ -3917,7 +3798,6 @@ function PrimeBuilder(interval, analyzer, name, callback) {
             if (name == "WJS") {
 
 
-              //  var amount = JSON.parse(data).marketcap                      
               if (data > 0) {
                 stockList.push(stocks[i])
               }
@@ -3933,7 +3813,6 @@ function PrimeBuilder(interval, analyzer, name, callback) {
           console.log("------------------- IN IR ================")
           console.log(stockList.length)
 
-          // logging.SetPrime(stockList);
           callback()
         }
       }, interval * (i));

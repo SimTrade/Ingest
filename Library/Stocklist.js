@@ -31,19 +31,15 @@ module.exports = {
       }
     })
     var list = jQuery.unique(symbolDistinct).sort()
-    //console.log(list)
     console.log("clean list: " + list.length)
     return list;
   },
   CSV2Array: function () {
-    //console.log(logging.getEodCsvs())
-    // console.log(logging.getEodCsvs().length)
     return logging.getEodCsvs()
   },//logging.getEODMaster()
   EODListRunner: function (id) {
 
     var stocklist = logging.getEODMaster()
-    // console.log(logging.getEODMaster())
     var symbolDistinct = []
     stocklist.forEach(function (symbol) {
       if (symbol[0] == id)//symbol[0] != '' )
@@ -64,7 +60,6 @@ module.exports = {
     console.log(logging.getEODMaster())
     var symbolDistinct = []
     stocklist.forEach(function (symbol) {
-      //if(symbol[0] =='A' )//symbol[0] != '' )
       {
         symbolDistinct.push(symbol)
       }
@@ -111,8 +106,6 @@ module.exports = {
                 symbols = symbols.reverse()
                 
               }
-              // if(symbolStart == "REVERSE"||symbolStart == "NORMAL"){
-              //   symbols = symbols.slice(0, Math.ceil(symbols.length/2));
               // }
               if(symbolStart=="FULL"){
                 symbols=symbols
@@ -120,7 +113,6 @@ module.exports = {
               process.argv[2]
               
               console.log("symbollist length:"+ symbols.length)
-              // var hold = []
               // symbols.forEach(x=>{if(x=="BTWN"){
               //   hold.push(x)
               // }})
@@ -199,7 +191,6 @@ module.exports = {
 
 
   TwoSigma: function () {
-    //console.log(logging.GetStockList()[0])
     var stocklist = JSON.parse(logging.GetStockList()).obj//[0].replace('{','').split(/},{/);
     console.log(stocklist)
     var symbolDistinct = []

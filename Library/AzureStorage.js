@@ -6,7 +6,6 @@ const logging = require('./logging');
 *********** set environment variable ******************
 */
 
-//var nextContinuationToken = null;
 var entities = []
 function GetTable(tableName, tableService, query, callback, nextContinuationToken) {
 
@@ -57,10 +56,8 @@ module.exports = {
   ToTable: function (tableName, tableService, task,factor) {
     try{
       tableService.createTableIfNotExists(tableName, function (error, result) { 
-       // console.log(error,result)
        });
       tableService.insertOrMergeEntity(tableName, task, function (error, result, response) {
-        //console.log(error,result)
         if (!error) {
           console.log('inserted',factor,tableName,Object.values(task.RowKey)[0],
           Object.values(task.PartitionKey)[0])
@@ -69,7 +66,6 @@ module.exports = {
         else {
           console.log(error)
             //.createTableIfNotExists(tableName, function (error, result) {
-              //  logging.appendToErrorLog(tableName,
               //                           Object.values(task.RowKey)[0],
               //                           Object.values(task.PartitionKey)[0],
               //                           error)
@@ -122,8 +118,6 @@ module.exports = {
     fileService.createShareIfNotExists('orders', function (error, result, response) {
       if (!error) {
         if (result) {
-          // console.log(response)
-          //  console.log("Share Created")
         } else {
           console.log("Beta Existed")
         }
@@ -135,8 +129,6 @@ module.exports = {
       fileService.createDirectoryIfNotExists('orders', day, function (error, result, response) {
         if (!error) {
           if (result) {
-            // console.log(response)
-            //  console.log("Share Created")
           } else {
             console.log("Beta Existed")
           }
@@ -164,8 +156,6 @@ module.exports = {
     fileService.createShareIfNotExists('factors', function (error, result, response) {
       if (!error) {
         if (result) {
-          // console.log(response)
-          //  console.log("Share Created")
         } else {
           console.log("factors Existed")
         }
@@ -177,8 +167,6 @@ module.exports = {
       fileService.createDirectoryIfNotExists('factors', strategy, function (error, result, response) {
         if (!error) {
           if (result) {
-            // console.log(response)
-            //  console.log("Share Created")
           } else {
             console.log("factors Existed")
           }
@@ -204,8 +192,6 @@ module.exports = {
     fileService.createShareIfNotExists('beta', function (error, result, response) {
       if (!error) {
         if (result) {
-          // console.log(response)
-          //  console.log("Share Created")
         } else {
           console.log("Beta Existed")
         }
@@ -217,8 +203,6 @@ module.exports = {
       fileService.createDirectoryIfNotExists('beta', 'beta', function (error, result, response) {
         if (!error) {
           if (result) {
-            // console.log(response)
-            //  console.log("Share Created")
           } else {
             console.log("Beta Existed")
           }
@@ -245,8 +229,6 @@ module.exports = {
     fileService.createShareIfNotExists('scraper', function (error, result, response) {
       if (!error) {
         if (result) {
-          // console.log(response)
-          //  console.log("Share Created")
         } else {
           console.log("Share Existed")
         }
@@ -257,8 +239,6 @@ module.exports = {
       fileService.createDirectoryIfNotExists('scraper', directory, function (error, result, response) {
         if (!error) {
           if (result) {
-            //console.log(response)
-            //  console.log("Directory Created")
           } else {
             console.log("Directory Existed")
           }
@@ -270,8 +250,6 @@ module.exports = {
         fileService.createDirectoryIfNotExists('scraper', directory, function (error, result, response) {
           if (!error) {
             if (result) {
-              //console.log(response)
-              //   console.log("Directory Created")
             } else {
               console.log("Directory Existed")
             }
@@ -293,9 +271,6 @@ module.exports = {
         });
       });
     });
-
-
-
 
 
   }

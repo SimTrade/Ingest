@@ -5,10 +5,8 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const Builder = require('./Builder');
 const KEYID = require('./Secrets/AlpacaCreds').KEYID();
 const SECRETKEY = require('./Secrets/AlpacaCreds').SECRETKEY();
-//const fs = require('fs');
 const xlsx = require('node-xlsx').default;
 const download = require('download');
-//const { isPlainObject, result, toArray } = require('lodash');
 //FuckMongo
 
 function csvToJSON(type, data, symbol) {
@@ -85,7 +83,6 @@ function parserMethod(entity, stock, factorArray, date, callback) {
     })
 
     var jsonify = '{' + (jsonString.substring(0, jsonString.length - 1)) + '}'
-    // console.log(jsonify)
     jsonify = replaceAll(jsonify, "empty", 'null')
     callback(jsonify)
   } catch (ex) {
@@ -145,10 +142,8 @@ module.exports = {
 
             if (isTradingDay) {
               parserMethod(entity, stock, factorArray, day_of_reference, callback)
-              //   console.log("TRADING TODAY: " + day_of_reference)
             }
             else {
-              //  console.log("NOT TRADING ON: " + day_of_reference)
             }
           })
 
@@ -218,7 +213,6 @@ module.exports = {
                     }
           })
         }
-      //  console.log("result: "+result? result.length:nan)
       })
 
     });
@@ -247,7 +241,6 @@ module.exports = {
           client.close();
          
         }
-      //  console.log("result: "+result? result.length:nan)
       })
 
     });
@@ -297,9 +290,6 @@ module.exports = {
     });
 
   },
-
-
-
 
 
   GetMongoShortVolume: function (date, factor, callback) {
@@ -382,7 +372,6 @@ module.exports = {
 
               })
               var jsonify = '{' + (jsonString.substring(0, jsonString.length - 1)) + '}'
-              // console.log(jsonify)
               var obj = JSON.parse(jsonify)
               var day1 = obj.ShortVolume1 * obj.ShortVolume1 / obj.TotalVolume1
               var day2 = obj.ShortVolume2 * obj.ShortVolume2 / obj.TotalVolume2
@@ -456,12 +445,10 @@ module.exports = {
               client.close();
             } catch {
               console.log("failed")
-              //  console.log(jsonify)
             }
 
           })
 
-          // callback()
         }
       })
 
@@ -509,12 +496,10 @@ module.exports = {
               client.close();
             } catch {
               console.log("failed")
-              //  console.log(jsonify)
             }
 
           })
 
-          // callback()
         }
       })
 
@@ -550,7 +535,6 @@ module.exports = {
               //  jsonString += '"symbol":"' +entity.name + '",'
               var columnName = "Weekly Adjusted Time Series"
               Object.values(Object.keys(entity.history[index][columnName])).forEach(function (x) {
-                // console.log(x)
                 var open = '1. open'//: '151.4300',
                 var high = '2. high'//: '152.0500',
                 var low = '3. low'//: '145.0800',
@@ -604,7 +588,6 @@ module.exports = {
               })
               var jsonify = '{' + (jsonString.substring(0, jsonString.length - 1)) + '}'
               var obj = JSON.parse(jsonify)
-              //  console.log(obj)
               var obj2 = {}
               obj2[entity.name] = Number((obj[entity.name + 'volCurrent'] - obj[entity.name + 'volLast']) / obj[entity.name + 'volLast']).toFixed(2)
               //  + Number(obj[entity.name+ 'sharpeCurrent']).toFixed(2)
@@ -615,13 +598,11 @@ module.exports = {
 
             } catch (ex) {
               console.log(ex)
-              //  console.log(jsonify)
             }
 
           })
           const editedText = '{' + '"backtest Date":"' + d1.toJSON().slice(0, 10).toString() + '",' + jsonCollectionstring.substring(1, jsonCollectionstring.length) + '}'
           var edited = JSON.parse(editedText)
-          //  console.log(jsonCollectionstring)
           callback(edited)
           client.close();
         }
@@ -668,9 +649,6 @@ module.exports = {
                 var volume = '6. volume'
 
                 var reportDate = new Date(x);
-                // console.log("---------------------")
-                // console.log(reportDate +' ==:== '+d1)
-                // console.log(reportDate +' ==:== '+d2)
                 if (d1 > reportDate && unentered1) {
                   unentered1 = false
 
@@ -726,8 +704,6 @@ module.exports = {
               client.close();
 
             } catch (ex) {
-             // console.log(ex)
-              //  console.log(jsonify)
             }
 
           })
@@ -799,7 +775,6 @@ module.exports = {
               }
 
 
-
             } catch (ex) {
               console.log(ex + "/n end catch")
             }
@@ -815,6 +790,5 @@ module.exports = {
 
 
 }
-
 
 

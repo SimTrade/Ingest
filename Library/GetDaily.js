@@ -7,8 +7,6 @@ const mkdirp = require('mkdirp');
 const { window } = new JSDOM();
 const { document } = (new JSDOM('')).window;
 global.document = document;
-// const async = require('async')
-// var $  = require('jquery')(window);
 
 
 const Builder = require('./Builder');
@@ -63,7 +61,6 @@ module.exports = {
 								var symbol = x[0]
 								x[1] = weight * longSplit
 								longBeta += iex[symbol]
-								//	console.log(weight*longSplit)
 								Builder.SubmitOrder(symbol, x[1], function () { })
 							})
 
@@ -72,7 +69,6 @@ module.exports = {
 								var symbol = x[0]
 								x[1] = weight * longSplit
 								shortBeta -= iex[symbol]
-								//	console.log(weight*shortSplit)
 							//	Builder.SubmitOrder(symbol, x[1], function () { }) //
 							})
 						}

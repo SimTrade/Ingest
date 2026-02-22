@@ -78,7 +78,6 @@ async function BuildOBV(input) {
 
 
                     }
-                    // console.log({length:length,
                     //     avgVol:avgVol,sumVol:sumVol,twoDayobv:twoDayobv
                     // })
                     fifteenDaySma = fifteenDaySma/15
@@ -88,7 +87,6 @@ async function BuildOBV(input) {
                     twoDayobv = twoDayobv  / 2
                     var isObvBull = twoDayobv > 0 && twoDayobv > fiveDayobv && fiveDayobv > tenDayobv
                     var isObvBear = twoDayobv < 0 && (fiveDayobv < 0 || tenDayobv < 0) && (fiveDayobv < tenDayobv || twoDayobv < fiveDayobv)
-
 
 
                     var obj = {
@@ -137,7 +135,6 @@ async function BacktestResults(date, callback) {
         boom.forEach(function (x) {
             var push = x.replace('\r', '').split(',')
             if (push[2] != undefined && push[2].slice(0, 10) == date) {
-                // console.log(push)
                 yay.push(push)
             }
 
@@ -145,7 +142,6 @@ async function BacktestResults(date, callback) {
         var returns = 0
 
         yay.forEach(function (ea) {
-            //  console.log(ea)
             var dayReturn = 0
             data.forEach(element => {
                 var weight = Number(ea[1]).toFixed(3)
@@ -207,8 +203,6 @@ async function Build_Stock_Weekly(date) {
 async function Transform_Macro(date) {
     var tableService = azure.createTableService(AzureSecrets.STORAGE_ACCOUNT, AzureSecrets.ACCESS_KEY);
 
-    // MongoDb.GetMongoSectorEtf(date, 'SectorEtfWeekly', function (data) {
-    //     AzureStorage.ToTable("SectorSharpe", tableService, SectorEtfTask(data),'');
     // })
 
     setTimeout(function () {
@@ -257,7 +251,6 @@ async function Transform_PickList_From_Mongo(date,factor) {
             MongoDb.GetMongoFundamentals(date, factor,
                 features, function (data) {
                         AzureStorage.ToTable("PickList5000", tableService, GenericTask(data),factor);
-                        //console.log(factor)
                 })  
     } catch (err) {
         console.error(err);
@@ -407,7 +400,6 @@ function GenericTask(data) {
     }
 
     var task = JSON.parse('{' + (jsonString.substring(0, jsonString.length - 1)) + '}')
-   // console.log(task)
     return task
 }
 module.exports = {

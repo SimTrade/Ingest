@@ -1,0 +1,49 @@
+{
+  "name": "ingest",
+  "version": "1.0.0",
+  "description": "Cloud data pipeline — fetches and transforms market data into Azure Table Storage and MongoDB",
+  "main": "process.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "coverage": "jest --coverage --coverageReporters=html && open coverage/index.html"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "Library/**/*.js"
+    ],
+    "coverageReporters": ["html", "text-summary"]
+  },
+  "dependencies": {
+    "async": "^3.2.6",
+    "aylien_textapi": "*",
+    "azure-storage": "^2.10.7",
+    "cheerio": "^1.0.0",
+    "colors": "^1.4.0",
+    "csv-parser": "^3.0.0",
+    "download": "^8.0.0",
+    "fs-extra": "^11.0.0",
+    "g-trends": "*",
+    "google-trends-api": "^4.9.2",
+    "jquery": "^3.7.1",
+    "jsdom": "^25.0.0",
+    "json-query": "^2.2.2",
+    "json2csv": "^6.0.0",
+    "line-by-line": "^0.1.6",
+    "line-reader-sync": "*",
+    "lodash": "^4.17.21",
+    "minimist": "^1.2.8",
+    "mkdirp": "^3.0.1",
+    "mongodb": "^6.0.0",
+    "ncp": "^2.0.0",
+    "node-xlsx": "^0.23.0",
+    "paralleldots": "*",
+    "request-promise": "^4.2.6",
+    "twilio": "^5.0.0",
+    "unirest": "^0.6.0",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
+}

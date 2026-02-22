@@ -12,6 +12,10 @@
     "collectCoverageFrom": [
       "Library/**/*.js"
     ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "Library/js/"
+    ],
     "coverageReporters": ["html", "text-summary"]
   },
   "dependencies": {
@@ -28,7 +32,7 @@
     "jquery": "^3.7.1",
     "jsdom": "^25.0.0",
     "json-query": "^2.2.2",
-    "json2csv": "^6.0.0",
+    "json2csv": "^5.0.7",
     "line-by-line": "^0.1.6",
     "line-reader-sync": "*",
     "lodash": "^4.17.21",

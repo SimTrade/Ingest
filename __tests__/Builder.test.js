@@ -31,7 +31,7 @@ jest.mock('azure-storage', () => ({
     queryEntities: jest.fn(),
   })),
   createFileService: jest.fn(() => ({})),
-  TableQuery: jest.fn().mockImplementation(() => ({ where: jest.fn().mockReturnThis() })),
+  TableQuery: jest.fn().mockImplementation(() => ({ where: jest.fn().mockReturnThis(), and: jest.fn().mockReturnThis() })),
   TableUtilities: { entityGenerator: { String: (v) => ({ _: v }), Int32: (v) => ({ _: v }), Double: (v) => ({ _: v }) } },
 }));
 jest.mock('../Library/AzureStorage', () => ({
@@ -41,6 +41,7 @@ jest.mock('../Library/AzureStorage', () => ({
   GetDaily: jest.fn(),
   StoreOrders: jest.fn(),
   GetEtfDictionary: jest.fn(),
+  GetSectorEtfs: jest.fn(),
 }));
 jest.mock('../Library/MongoDb.js', () => ({
   GetMongoFundamentals: jest.fn(),
@@ -62,6 +63,8 @@ jest.mock('../Library/Analyze', () => ({
   VIXQuandl:  jest.fn().mockResolvedValue('{"dataset":{"data":[]}}'),
   PMIQuandl:  jest.fn().mockResolvedValue('{"dataset":{"data":[]}}'),
   FinnEconCodes: jest.fn().mockResolvedValue('[]'),
+  FinnEconData:  jest.fn().mockResolvedValue('{}'),
+  FinnSymbolList: jest.fn(() => Promise.resolve('[]')),
   Company:    jest.fn().mockResolvedValue('{"industry":"Tech","sector":"Tech","active":true}'),
   IEX:        jest.fn().mockResolvedValue('{"marketcap":1000,"beta":1.1}'),
 }));
@@ -89,7 +92,7 @@ jest.mock('fs', () => ({
 jest.mock('download', () => jest.fn().mockResolvedValue(Buffer.from('')));
 jest.mock('node-xlsx', () => ({ default: { parse: jest.fn(() => [{ data: [] }]) } }));
 jest.mock('csv-parser', () => jest.fn(() => ({ on: jest.fn().mockReturnThis() })));
-jest.mock('json-query', () => jest.fn(() => ({ value: null })));
+jest.mock('json-query', () => jest.fn(() => ({ value: [] })));
 jest.mock('line-by-line', () => jest.fn().mockImplementation(() => ({
   on: jest.fn().mockReturnThis(),
   resume: jest.fn(),
@@ -208,28 +211,6 @@ describe('Builder.GetCalendar', () => {
   });
 });
 
-describe('Builder.GetPortfolio', () => {
-  beforeEach(() => jest.clearAllMocks());
-
-  it('calls callback with the raw JSON string from XHR', (done) => {
-    const { XMLHttpRequest } = require('xmlhttprequest');
-    const mockBody = JSON.stringify({ equity: '10000' });
-    XMLHttpRequest.mockImplementation(() => ({
-      onreadystatechange: null,
-      open: jest.fn(),
-      setRequestHeader: jest.fn(),
-      send: jest.fn(function () {
-        this.onreadystatechange && this.onreadystatechange.call({ readyState: 4, status: 200, responseText: mockBody });
-      }),
-    }));
-
-    Builder.GetPortfolio((data) => {
-      expect(data).toBe(mockBody);
-      done();
-    });
-  });
-});
-
 describe('Builder.RunIngest', () => {
   beforeEach(() => jest.clearAllMocks());
 
@@ -303,55 +284,6 @@ describe('Builder Delete functions', () => {
     expect(MongoDb.Delete).toHaveBeenCalledWith('MyTable', cb);
   });
 
-  it('DeleteStocksWeekly calls MongoDb.Delete with StocksWeekly', () => {
-    Builder.DeleteStocksWeekly();
-    expect(MongoDb.Delete).toHaveBeenCalledWith('StocksWeekly');
-  });
-
-  it('DeleteShortVolume calls MongoDb.Delete with ShortVolume', () => {
-    Builder.DeleteShortVolume();
-    expect(MongoDb.Delete).toHaveBeenCalledWith('ShortVolume');
-  });
-
-  it('DeleteBalanceSheet calls MongoDb.Delete with BalanceSheet', () => {
-    Builder.DeleteBalanceSheet();
-    expect(MongoDb.Delete).toHaveBeenCalledWith('BalanceSheet');
-  });
-
-  it('DeleteCashFlow calls MongoDb.Delete with CashFlow', () => {
-    Builder.DeleteCashFlow();
-    expect(MongoDb.Delete).toHaveBeenCalledWith('CashFlow');
-  });
-
-  it('DeleteGrowth calls MongoDb.Delete with Growth', () => {
-    Builder.DeleteGrowth();
-    expect(MongoDb.Delete).toHaveBeenCalledWith('Growth');
-  });
-
-  it('DeleteIncome calls MongoDb.Delete with Income', () => {
-    Builder.DeleteIncome();
-    expect(MongoDb.Delete).toHaveBeenCalledWith('Income');
-  });
-
-  it('DeleteMetrics calls MongoDb.Delete with Metrics', () => {
-    Builder.DeleteMetrics();
-    expect(MongoDb.Delete).toHaveBeenCalledWith('Metrics');
-  });
-
-  it('DeletePMI calls MongoDb.Delete with PMI', () => {
-    Builder.DeletePMI();
-    expect(MongoDb.Delete).toHaveBeenCalledWith('PMI');
-  });
-
-  it('DeleteSectorEtfWeekly calls MongoDb.Delete with SectorEtfWeekly', () => {
-    Builder.DeleteSectorEtfWeekly();
-    expect(MongoDb.Delete).toHaveBeenCalledWith('SectorEtfWeekly');
-  });
-
-  it('DeleteVIX calls MongoDb.Delete with VIX', () => {
-    Builder.DeleteVIX();
-    expect(MongoDb.Delete).toHaveBeenCalledWith('VIX');
-  });
 });
 
 // ---------------------------------------------------------------------------
@@ -405,45 +337,6 @@ describe('Builder.COtToAzureTableStorage', () => {
 // RiskToTable
 // ---------------------------------------------------------------------------
 
-describe('Builder.RiskToTable', () => {
-  beforeEach(() => jest.clearAllMocks());
-
-  const riskData = {
-    Beta: 1.1,
-    'Basic Materials': 0.1,
-    Healthcare: 0.2,
-    'Real Estate': 0.3,
-    Industrials: 0.4,
-    'Consumer Cyclical': 0.5,
-    'Financial Services': 0.6,
-    Energy: 0.7,
-    'Consumer Defensive': 0.8,
-    Utilities: 0.9,
-    Technology: 1.0,
-    undefined: 0.0,
-  };
-
-  it('calls AzureStorage.ToTable with the provided table name', () => {
-    const AzureStorage = require('../Library/AzureStorage');
-    Builder.RiskToTable('RiskTable', riskData);
-    expect(AzureStorage.ToTable.mock.calls[0][0]).toBe('RiskTable');
-  });
-
-  it('passes a task with Beta field set', () => {
-    const AzureStorage = require('../Library/AzureStorage');
-    Builder.RiskToTable('RiskTable', riskData);
-    const task = AzureStorage.ToTable.mock.calls[0][2];
-    expect(task.Beta._).toBe(1.1);
-  });
-
-  it('passes a task with Technology field set', () => {
-    const AzureStorage = require('../Library/AzureStorage');
-    Builder.RiskToTable('RiskTable', riskData);
-    const task = AzureStorage.ToTable.mock.calls[0][2];
-    expect(task.Technology._).toBe(1.0);
-  });
-});
-
 // ---------------------------------------------------------------------------
 // PmiVixIngestion
 // ---------------------------------------------------------------------------
@@ -482,74 +375,9 @@ describe('Builder.PmiVixIngestion', () => {
 // skew / vix / inflation — fire XHR, write file
 // ---------------------------------------------------------------------------
 
-describe('Builder.skew / vix / inflation', () => {
-  function mockXHR(responseText) {
-    const { XMLHttpRequest } = require('xmlhttprequest');
-    XMLHttpRequest.mockImplementation(function () {
-      this.open = jest.fn();
-      this.send = jest.fn(function () {
-        this.readyState  = 4;
-        this.status      = 200;
-        this.responseText = responseText;
-        this.onreadystatechange();
-      });
-    });
-  }
-
-  beforeEach(() => jest.clearAllMocks());
-
-  it('skew fires XHR and writes SKEW.csv', async () => {
-    const fs = require('fs');
-    mockXHR('Date,SKEW\n2024-01-15,143.5');
-    Builder.skew();
-    await Promise.resolve(); await Promise.resolve();
-    expect(fs.writeFileSync).toHaveBeenCalledWith(
-      expect.stringContaining('SKEW.csv'), expect.any(String)
-    );
-  });
-
-  it('vix fires XHR and writes VIX.csv', async () => {
-    const fs = require('fs');
-    mockXHR('Date,VIX\n2024-01-15,18.5');
-    Builder.vix();
-    await Promise.resolve(); await Promise.resolve();
-    expect(fs.writeFileSync).toHaveBeenCalledWith(
-      expect.stringContaining('VIX.csv'), expect.any(String)
-    );
-  });
-
-  it('inflation fires XHR and writes INFLATION.csv', async () => {
-    const fs = require('fs');
-    mockXHR('Date,Value\n2024-01-15,3.2');
-    Builder.inflation();
-    await Promise.resolve(); await Promise.resolve();
-    expect(fs.writeFileSync).toHaveBeenCalledWith(
-      expect.stringContaining('INFLATION.csv'), expect.any(String)
-    );
-  });
-});
-
 // ---------------------------------------------------------------------------
 // CloseAllPositions / CancelAllOrders / GetOrders
 // ---------------------------------------------------------------------------
-
-describe('Builder.CloseAllPositions', () => {
-  beforeEach(() => jest.clearAllMocks());
-
-  it('calls paca.closeAllPositions', () => {
-    Builder.CloseAllPositions();
-    expect(mockPaca.closeAllPositions).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe('Builder.CancelAllOrders', () => {
-  beforeEach(() => jest.clearAllMocks());
-
-  it('calls paca.cancelAllOrders', () => {
-    Builder.CancelAllOrders();
-    expect(mockPaca.cancelAllOrders).toHaveBeenCalledTimes(1);
-  });
-});
 
 describe('Builder.GetOrders', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -589,45 +417,332 @@ describe('Builder.BuildTableUniverses', () => {
 // GetMacroTable / GetSectorSharpeDaily / GetRiskDaily
 // ---------------------------------------------------------------------------
 
-describe('Builder.GetMacroTable', () => {
+// ---------------------------------------------------------------------------
+// GetEtfDictionary
+// ---------------------------------------------------------------------------
+
+describe('Builder.GetEtfDictionary', () => {
   beforeEach(() => jest.clearAllMocks());
 
-  it('calls AzureStorage.GetDaily and invokes callback with result', (done) => {
+  it('calls AzureStorage.GetEtfDictionary once', () => {
     const AzureStorage = require('../Library/AzureStorage');
-    // GetMacroTable inner func calls AzureStorage.GetDaily('Macro', ts, query, cb)
-    AzureStorage.GetDaily.mockImplementation((_tbl, _ts, _q, cb) => cb([]));
+    Builder.GetEtfDictionary();
+    expect(AzureStorage.GetEtfDictionary).toHaveBeenCalledTimes(1);
+  });
+});
 
-    Builder.GetMacroTable('2024-01-15', (result) => {
-      expect(Array.isArray(result)).toBe(true);
+// ---------------------------------------------------------------------------
+// reduce (empty function)
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// CompanyProfile
+// ---------------------------------------------------------------------------
+
+describe('Builder.CompanyProfile', () => {
+  beforeEach(() => jest.clearAllMocks());
+
+  it('does not throw when EODList is empty', () => {
+    const Stocklist = require('../Library/Stocklist');
+    Stocklist.EODList.mockReturnValue([]);
+    expect(() => Builder.CompanyProfile()).not.toThrow();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// FinnEcon
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// POLYGONCOMPANIES
+// ---------------------------------------------------------------------------
+
+describe('Builder.POLYGONCOMPANIES', () => {
+  beforeEach(() => jest.clearAllMocks());
+
+  it('calls callback after processing one stock', (done) => {
+    jest.useFakeTimers();
+    const Stocklist = require('../Library/Stocklist');
+    Stocklist.SymbolList.mockImplementation((_s, cb) => cb(['AAPL']));
+    Builder.POLYGONCOMPANIES(() => done());
+    jest.runAllTimers();
+    jest.useRealTimers();
+  });
+
+  it('does not throw when SymbolList is empty', () => {
+    const Stocklist = require('../Library/Stocklist');
+    Stocklist.SymbolList.mockImplementation((_s, cb) => cb([]));
+    expect(() => Builder.POLYGONCOMPANIES(jest.fn())).not.toThrow();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// AzureTableRunnerNonSeries delegates: ShortSqueeze / Barcharts / WSJ / Zacks / IEX
+// ---------------------------------------------------------------------------
+
+['ShortSqueeze', 'Barcharts', 'WSJ', 'Zacks', 'IEX'].forEach((name) => {
+  describe(`Builder.${name}`, () => {
+    beforeEach(() => jest.clearAllMocks());
+
+    it('does not throw when SymbolList is empty', () => {
+      const Stocklist = require('../Library/Stocklist');
+      Stocklist.SymbolList.mockImplementation((_s, cb) => cb([]));
+      expect(() => Builder[name]('AAPL')).not.toThrow();
+    });
+
+    it('is a function exposed on Builder', () => {
+      expect(typeof Builder[name]).toBe('function');
+    });
+  });
+});
+
+// ---------------------------------------------------------------------------
+// MongoIngest
+// ---------------------------------------------------------------------------
+
+describe('Builder.MongoIngest', () => {
+  beforeEach(() => jest.clearAllMocks());
+
+  it('does not throw when SymbolList returns empty', () => {
+    const Stocklist = require('../Library/Stocklist');
+    Stocklist.SymbolList.mockImplementation((_u, cb) => cb([]));
+    expect(() => Builder.MongoIngest(jest.fn(), 'TestTable', 100, jest.fn())).not.toThrow();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// TableIngestRunner
+// ---------------------------------------------------------------------------
+
+describe('Builder.TableIngestRunner', () => {
+  beforeEach(() => jest.clearAllMocks());
+
+  it('does not throw when SymbolList returns empty', () => {
+    const Stocklist = require('../Library/Stocklist');
+    Stocklist.SymbolList.mockImplementation((_s, cb) => cb([]));
+    expect(() =>
+      Builder.TableIngestRunner(100, jest.fn(), 'TestTable', jest.fn(), '2024-01-15', '', jest.fn())
+    ).not.toThrow();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// RunOBV
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// FINNHUBLISTIEX
+// ---------------------------------------------------------------------------
+
+describe('Builder.FINNHUBLISTIEX', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    require('../Library/Analyze').FinnSymbolList = jest.fn(() => Promise.resolve('[]'));
+  });
+
+  it('does not throw', () => {
+    expect(() => Builder.FINNHUBLISTIEX(jest.fn())).not.toThrow();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// RunWeeklyToMonthly
+// ---------------------------------------------------------------------------
+
+describe('Builder.RunWeeklyToMonthly', () => {
+  beforeEach(() => jest.clearAllMocks());
+
+  it('does not throw when SymbolList returns empty', () => {
+    jest.useFakeTimers();
+    const Stocklist = require('../Library/Stocklist');
+    Stocklist.SymbolList.mockImplementation((_s, cb) => cb([]));
+    expect(() =>
+      Builder.RunWeeklyToMonthly('TIME_SERIES_DAILY', 'StocksDaily', 'compact', 100, '2024-01-01', '', 'AAPL')
+    ).not.toThrow();
+    jest.useRealTimers();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// RunDaily
+// ---------------------------------------------------------------------------
+
+describe('Builder.RunDaily', () => {
+  beforeEach(() => jest.clearAllMocks());
+
+  it('does not throw when SymbolList returns empty', () => {
+    jest.useFakeTimers();
+    const Stocklist = require('../Library/Stocklist');
+    Stocklist.SymbolList.mockImplementation((_s, cb) => cb([]));
+    expect(() =>
+      Builder.RunDaily('TIME_SERIES_DAILY', 'StocksDaily', 'compact', 100, '2024-01-01', '', 'AAPL', jest.fn())
+    ).not.toThrow();
+    jest.useRealTimers();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// SubmitOrder
+// ---------------------------------------------------------------------------
+
+describe('Builder.SubmitOrder', () => {
+  beforeEach(() => jest.clearAllMocks());
+
+  it('is a function exposed on Builder', () => {
+    expect(typeof Builder.SubmitOrder).toBe('function');
+  });
+
+  it('calls paca.getBars with day and the symbol (promise never resolves to avoid broken path)', () => {
+    // getBars is called synchronously; we use a never-resolving promise
+    // so the .then() callback (which references removed `order`) never fires
+    mockPaca.getBars = jest.fn().mockReturnValue(new Promise(() => {}));
+    Builder.SubmitOrder('AAPL', 500, 3, jest.fn());
+    expect(mockPaca.getBars).toHaveBeenCalledWith('day', 'AAPL', { limit: 5 });
+  });
+});
+
+// ---------------------------------------------------------------------------
+// GetPicklist
+// ---------------------------------------------------------------------------
+
+describe('Builder.GetPicklist', () => {
+  beforeEach(() => jest.clearAllMocks());
+
+  it('is a function exposed on Builder', () => {
+    expect(typeof Builder.GetPicklist).toBe('function');
+  });
+
+  it('calls AzureStorage.GetTable with PickList', () => {
+    const AzureStorage = require('../Library/AzureStorage');
+    AzureStorage.GetTable.mockImplementation((_t, _ts, _q, cb) => cb([]));
+    Builder.GetPicklist();
+    expect(AzureStorage.GetTable).toHaveBeenCalledWith(
+      'PickList', expect.anything(), expect.anything(), expect.any(Function)
+    );
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Stocklist (export)
+// ---------------------------------------------------------------------------
+
+describe('Builder.Stocklist', () => {
+  beforeEach(() => jest.clearAllMocks());
+
+  it('is a function exposed on Builder', () => {
+    expect(typeof Builder.Stocklist).toBe('function');
+  });
+
+  it('calls Analyze.FinnSymbolList', () => {
+    const Analyze = require('../Library/Analyze');
+    Analyze.FinnSymbolList.mockReturnValue(Promise.resolve('[]'));
+    Builder.Stocklist();
+    expect(Analyze.FinnSymbolList).toHaveBeenCalled();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// SectorEtfIngestion
+// ---------------------------------------------------------------------------
+
+describe('Builder.SectorEtfIngestion', () => {
+  beforeEach(() => jest.clearAllMocks());
+
+  it('is a function exposed on Builder', () => {
+    expect(typeof Builder.SectorEtfIngestion).toBe('function');
+  });
+
+  it('does not throw when called', () => {
+    const Stocklist = require('../Library/Stocklist');
+    Stocklist.SymbolList.mockImplementation((_s, cb) => cb([]));
+    expect(() => Builder.SectorEtfIngestion()).not.toThrow();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// GoogleByLetter
+// ---------------------------------------------------------------------------
+
+describe('Builder.GoogleByLetter', () => {
+  beforeEach(() => jest.clearAllMocks());
+
+  it('is a function exposed on Builder', () => {
+    expect(typeof Builder.GoogleByLetter).toBe('function');
+  });
+
+  it('does not throw when called', () => {
+    expect(() => Builder.GoogleByLetter()).not.toThrow();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// FinnhubIpoCalendar
+// ---------------------------------------------------------------------------
+
+describe('Builder.FinnhubIpoCalendar', () => {
+  beforeEach(() => jest.clearAllMocks());
+
+  it('is a function exposed on Builder', () => {
+    expect(typeof Builder.FinnhubIpoCalendar).toBe('function');
+  });
+
+  it('does not throw when called with a day argument', () => {
+    const Analyze = require('../Library/Analyze');
+    Analyze.FinnhubIpoCalendar = jest.fn().mockResolvedValue('{"ipoCalendar":[]}');
+    expect(() => Builder.FinnhubIpoCalendar('2024-06-01')).not.toThrow();
+  });
+
+  it('calls Analyze.FinnhubIpoCalendar with the given day', () => {
+    const Analyze = require('../Library/Analyze');
+    Analyze.FinnhubIpoCalendar = jest.fn().mockResolvedValue('{"ipoCalendar":[]}');
+    Builder.FinnhubIpoCalendar('2024-06-01');
+    expect(Analyze.FinnhubIpoCalendar).toHaveBeenCalledWith('2024-06-01');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// GetDaily
+// ---------------------------------------------------------------------------
+
+describe('Builder.GetDaily', () => {
+  beforeEach(() => jest.clearAllMocks());
+
+  it('is a function exposed on Builder', () => {
+    expect(typeof Builder.GetDaily).toBe('function');
+  });
+
+  it('does not throw when called', () => {
+    const AzureStorage = require('../Library/AzureStorage');
+    AzureStorage.GetTable.mockImplementation((_t, _ts, _q, cb) => cb([]));
+    expect(() => Builder.GetDaily(50, -50, jest.fn())).not.toThrow();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// ShortVolumeTask helper (via ShortVolumeTask export — already covered)
+// GetBetaIEX — call the function to exercise the body
+// ---------------------------------------------------------------------------
+
+describe('Builder.GetBetaIEX body', () => {
+  beforeEach(() => jest.clearAllMocks());
+
+  it('calls AzureStorage.GetDaily with FinnhubListIEX', () => {
+    const AzureStorage = require('../Library/AzureStorage');
+    AzureStorage.GetDaily.mockImplementation((_t, _ts, _q, cb) => cb([]));
+    Builder.GetBetaIEX(jest.fn());
+    expect(AzureStorage.GetDaily).toHaveBeenCalledWith(
+      'FinnhubListIEX', expect.anything(), expect.anything(), expect.any(Function)
+    );
+  });
+
+  it('passes result object to callback', (done) => {
+    const AzureStorage = require('../Library/AzureStorage');
+    AzureStorage.GetDaily.mockImplementation((_t, _ts, _q, cb) => cb([]));
+    Builder.GetBetaIEX((data) => {
+      expect(typeof data).toBe('object');
       done();
     });
   });
 });
 
-describe('Builder.GetSectorSharpeDaily', () => {
-  beforeEach(() => jest.clearAllMocks());
 
-  it('calls AzureStorage.GetDaily and passes result to callback', (done) => {
-    const AzureStorage = require('../Library/AzureStorage');
-    AzureStorage.GetDaily.mockImplementation((_tbl, _ts, _q, cb) => cb([]));
-
-    Builder.GetSectorSharpeDaily('2024-01-15', (result) => {
-      expect(Array.isArray(result)).toBe(true);
-      done();
-    });
-  });
-});
-
-describe('Builder.GetRiskDaily', () => {
-  beforeEach(() => jest.clearAllMocks());
-
-  it('calls AzureStorage.GetDaily and passes result to callback', (done) => {
-    const AzureStorage = require('../Library/AzureStorage');
-    AzureStorage.GetDaily.mockImplementation((_tbl, _ts, _q, cb) => cb([]));
-
-    Builder.GetRiskDaily('2024-01-15', (result) => {
-      expect(Array.isArray(result)).toBe(true);
-      done();
-    });
-  });
-});

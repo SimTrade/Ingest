@@ -18,6 +18,7 @@ Library/js/
 
 # xmlhttprequest sync lock files
 .node-xmlhttprequest-sync-*
+node
 node_modules
 
 package-lock.json
